@@ -11,8 +11,9 @@
     <AssemblyName>RemeControl</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -75,11 +76,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\ApiConstants.vb" />
-    <Compile Include="Class\JsonConnect.vb" />
-    <Compile Include="Class\LoginIn.vb" />
-    <Compile Include="Class\RegisterLogin.vb" />
-    <Compile Include="Class\SecurityManager.vb" />
+    <Compile Include="Class\System\ApiConstants.vb" />
+    <Compile Include="Class\System\EWTransactionManager.vb" />
+    <Compile Include="Class\System\JsonConnect.vb" />
+    <Compile Include="Class\Login\LoginIn.vb" />
+    <Compile Include="Class\Login\RegisterLogin.vb" />
+    <Compile Include="Class\SalesDate\SalesDateData.vb" />
+    <Compile Include="Class\Login\SecurityManager.vb" />
+    <Compile Include="Class\System\TransactionManager.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -95,7 +99,7 @@
     </Compile>
     <Compile Include="Modules\EntryPoints.vb" />
     <Compile Include="Modules\Global.vb" />
-    <Compile Include="Class\MgrFramework.vb" />
+    <Compile Include="Class\System\MgrFramework.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -112,8 +116,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Class\SalesDate\SalesDateInfo.vb" />
+    <Compile Include="Views\Base\ViewBase.Designer.vb">
+      <DependentUpon>ViewBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Base\ViewBase.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Tasa\ViewTasa.Designer.vb">
+      <DependentUpon>ViewTasa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasa\ViewTasa.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +142,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Base\ViewBase.resx">
+      <DependentUpon>ViewBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tasa\ViewTasa.resx">
+      <DependentUpon>ViewTasa.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -137,5 +163,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

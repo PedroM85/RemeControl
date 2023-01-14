@@ -5,7 +5,7 @@ Imports System.Net
 Public Class JsonConnect
 
     Public Function SendRequest(ByVal url As String, ByVal dataEncoding As String,
-                                         ByVal method As String) As String
+                                         ByVal method As String, Optional oUser As LoginIn = Nothing) As String
 
         Dim request As HttpWebRequest
         Dim response As HttpWebResponse = Nothing
@@ -16,6 +16,9 @@ Public Class JsonConnect
             request = DirectCast(WebRequest.Create(url), HttpWebRequest)
             request.Method = method
             request.ContentType = "application/json"
+            If oUser IsNot Nothing Then
+                request.Headers("Authorization") = "Bearer " & oUser.Token
+            End If
 
             If Not String.IsNullOrEmpty(dataEncoding) Then
                 If (method = WebRequestMethods.Http.Post) Or (method = WebRequestMethods.Http.Put) Then
@@ -35,7 +38,7 @@ Public Class JsonConnect
         Catch ex As WebException
             If ex.Response IsNot Nothing Then
                 Using myreader As New StreamReader(ex.Response.GetResponseStream)
-                    Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd)
+                    Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd + vbCrLf + url)
                     '    Dim weError As eWallet.eWalletError = eWallet.eWalletError.fromString(myreader.ReadToEnd)
                     '    Dim msg As String = ex.Message
                     '    If weError.Status <= eWallet.eWalletError.errcodeCannotInterpret Then
@@ -56,44 +59,6 @@ Public Class JsonConnect
 
     End Function
 
-    'Private Function xGETSendRequest(ByVal url As String, ByVal method As String) As Object
-    '    Dim request As HttpWebRequest
-    '    Dim response As HttpWebResponse = Nothing
-    '    Dim reader As StreamReader
-    '    Dim retval As String = ""
-
-    '    Try
-    '        request = DirectCast(WebRequest.Create(url), HttpWebRequest)
-    '        request.Method = method
-    '        request.ContentType = "application/json"
-
-    '        response = DirectCast(request.GetResponse(), HttpWebResponse)
-    '        reader = New StreamReader(response.GetResponseStream())
-    '        retval = reader.ReadToEnd()
-    '        Return retval
-
-    '    Catch ex As WebException
-    '        Using myreader As New StreamReader(ex.Response.GetResponseStream)
-    '            Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd)
-    '        End Using
-    '    Finally
-    '        If Not response Is Nothing Then response.Close()
-
-    '    End Try
-    '    Return retval
-    'End Function
-
-
-    'Private mURLCallBack As String
-    'Public Property URLCallBack() As String
-    '    Get
-    '        Return mURLCallBack
-    '    End Get
-    '    Set(ByVal value As String)
-    '        mURLCallBack = value
-    '    End Set
-    'End Property
-
     Sub New()
         ServicePointManager.Expect100Continue = True
         ServicePointManager.SecurityProtocol = CType(3072, SecurityProtocolType) ' Tls12
@@ -101,14 +66,14 @@ Public Class JsonConnect
 
     End Sub
 
-    Public Function SendJson(ByVal Url As String, ByVal Method As String, ByVal obj As Object) As String
+    Public Function SendJson(ByVal Url As String, ByVal Method As String, ByVal obj As Object, Optional oUser As LoginIn = Nothing) As String
         Dim str As String
         If TypeOf (obj) Is String Then
             str = CType(obj, String)
         Else
             str = JsonConvert.SerializeObject(obj)
         End If
-        Return SendRequest(Url, str, Method)
+        Return SendRequest(Url, str, Method, oUser)
     End Function
 
     Public Function DeleteJson(ByVal Url As String) As String
@@ -123,8 +88,8 @@ Public Class JsonConnect
         Return SendJson(Url, WebRequestMethods.Http.Put, obj)
     End Function
 
-    Public Function PostJson(ByVal Url As String, ByVal obj As Object) As String
-        Return SendJson(Url, WebRequestMethods.Http.Post, obj)
+    Public Function PostJson(ByVal Url As String, ByVal obj As Object, oUser As LoginIn) As String
+        Return SendJson(Url, WebRequestMethods.Http.Post, obj, oUser)
     End Function
 
 

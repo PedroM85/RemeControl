@@ -15,6 +15,14 @@
 
                 If oApp.RegisterLogin(oApp.CurrentUser) Then
 
+                    oMainForm = New FormMain
+
+
+                    oMainForm.Show()
+
+                    Application.Run(oMainForm)
+
+                    oApp.RegisterLogout
 
                 End If
             Else

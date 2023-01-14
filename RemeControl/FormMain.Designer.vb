@@ -22,10 +22,136 @@ Partial Class FormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        Me.components = New System.ComponentModel.Container()
+        Me.pnlBottom = New System.Windows.Forms.Panel()
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblUser = New System.Windows.Forms.Label()
+        Me.pnlFill = New System.Windows.Forms.Panel()
+        Me.tmrBlinkyBlinky2 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnCalcular = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.pnlBottom.SuspendLayout()
+        Me.pnlLeft.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'pnlBottom
+        '
+        Me.pnlBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.pnlBottom.Controls.Add(Me.lblInfo)
+        Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlBottom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlBottom.Location = New System.Drawing.Point(0, 464)
+        Me.pnlBottom.Name = "pnlBottom"
+        Me.pnlBottom.Size = New System.Drawing.Size(825, 20)
+        Me.pnlBottom.TabIndex = 0
+        '
+        'lblInfo
+        '
+        Me.lblInfo.AutoSize = True
+        Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lblInfo.Location = New System.Drawing.Point(797, 0)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(28, 13)
+        Me.lblInfo.TabIndex = 0
+        Me.lblInfo.Text = "???"
+        Me.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'pnlLeft
+        '
+        Me.pnlLeft.BackColor = System.Drawing.Color.Blue
+        Me.pnlLeft.Controls.Add(Me.Button1)
+        Me.pnlLeft.Controls.Add(Me.btnCalcular)
+        Me.pnlLeft.Controls.Add(Me.Panel1)
+        Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.pnlLeft.Name = "pnlLeft"
+        Me.pnlLeft.Size = New System.Drawing.Size(166, 464)
+        Me.pnlLeft.TabIndex = 1
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.lblUser)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(166, 164)
+        Me.Panel1.TabIndex = 0
+        '
+        'lblUser
+        '
+        Me.lblUser.AutoSize = True
+        Me.lblUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUser.Location = New System.Drawing.Point(38, 116)
+        Me.lblUser.Name = "lblUser"
+        Me.lblUser.Size = New System.Drawing.Size(79, 13)
+        Me.lblUser.TabIndex = 0
+        Me.lblUser.Text = "Usuario: ???"
+        '
+        'pnlFill
+        '
+        Me.pnlFill.BackColor = System.Drawing.Color.White
+        Me.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlFill.Location = New System.Drawing.Point(166, 0)
+        Me.pnlFill.Name = "pnlFill"
+        Me.pnlFill.Size = New System.Drawing.Size(659, 464)
+        Me.pnlFill.TabIndex = 2
+        '
+        'tmrBlinkyBlinky2
+        '
+        Me.tmrBlinkyBlinky2.Interval = 500
+        '
+        'btnCalcular
+        '
+        Me.btnCalcular.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnCalcular.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCalcular.Location = New System.Drawing.Point(0, 164)
+        Me.btnCalcular.Name = "btnCalcular"
+        Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
+        Me.btnCalcular.TabIndex = 1
+        Me.btnCalcular.Text = "Tasa del dia"
+        Me.btnCalcular.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button1.Location = New System.Drawing.Point(0, 209)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(166, 45)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'FormMain
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(825, 484)
+        Me.Controls.Add(Me.pnlFill)
+        Me.Controls.Add(Me.pnlLeft)
+        Me.Controls.Add(Me.pnlBottom)
+        Me.Name = "FormMain"
         Me.Text = "Form1"
+        Me.pnlBottom.ResumeLayout(False)
+        Me.pnlBottom.PerformLayout()
+        Me.pnlLeft.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.ResumeLayout(False)
+
     End Sub
 
+    Friend WithEvents pnlBottom As Panel
+    Friend WithEvents pnlLeft As Panel
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents lblUser As Label
+    Friend WithEvents pnlFill As Panel
+    Friend WithEvents lblInfo As Label
+    Protected WithEvents tmrBlinkyBlinky2 As Timer
+    Friend WithEvents btnCalcular As Button
+    Friend WithEvents Button1 As Button
 End Class

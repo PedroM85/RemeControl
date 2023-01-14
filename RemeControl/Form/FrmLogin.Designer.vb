@@ -34,6 +34,7 @@ Partial Class FrmLogin
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(163, 20)
         Me.txtUserName.TabIndex = 0
+        Me.txtUserName.Text = "Admin"
         '
         'txtPassword
         '
@@ -41,6 +42,7 @@ Partial Class FrmLogin
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(163, 20)
         Me.txtPassword.TabIndex = 1
+        Me.txtPassword.Text = "Admin"
         '
         'btnAceptar
         '

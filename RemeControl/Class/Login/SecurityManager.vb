@@ -20,7 +20,7 @@ Public Class SecurityManager
 
             Dim result = JsonConvert.SerializeObject(UserData)
 
-            Dim result_Post = PostJson(url, result)
+            Dim result_Post = PostJson(url, result, Nothing)
 
             user = JsonConvert.DeserializeObject(Of LoginIn)(result_Post)
 
@@ -42,9 +42,23 @@ Public Class SecurityManager
 
         Dim result = JsonConvert.SerializeObject(UserData)
 
-        Dim result_Post = PostJson(url, result)
+        Dim result_Post = PostJson(url, result, oUser)
 
     End Sub
 
+    Public Sub RegisterLogout(oUser As LoginIn)
+        Dim url As String = ApiConstants.RegisterLogout
 
+        Dim UserData As New RegisterLogin With
+            {
+            .ULO_Id = oUser.USR_Id,
+            .ULO_Name = oUser.USR_Name,
+            .ULO_TRM = "PC",
+            .ULO_Ip = "192.168.0.1"
+            }
+
+        Dim result = JsonConvert.SerializeObject(UserData)
+
+        Dim result_Post = PostJson(url, result, oUser)
+    End Sub
 End Class

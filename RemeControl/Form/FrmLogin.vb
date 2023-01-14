@@ -12,7 +12,7 @@
         mSec = New SecurityManager
     End Sub
 
-    Public ReadOnly Property Token As LoginIn
+    Public ReadOnly Property User As LoginIn
         Get
             Return mUser
         End Get
