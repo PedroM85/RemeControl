@@ -5,7 +5,7 @@
     Public Sub Main()
 
         oApp = New MgrFramework
-
+        Dim TM As New TransactionManager
 
         If oApp.InitConnection() Then
 
@@ -16,7 +16,7 @@
                 If oApp.RegisterLogin(oApp.CurrentUser) Then
 
                     oMainForm = New FormMain
-
+                    oMainForm.TransactionManager = TM
 
                     oMainForm.Show()
 

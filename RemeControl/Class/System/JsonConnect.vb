@@ -66,7 +66,7 @@ Public Class JsonConnect
 
     End Sub
 
-    Public Function SendJson(ByVal Url As String, ByVal Method As String, ByVal obj As Object, Optional oUser As LoginIn = Nothing) As String
+    Public Function SendJson(ByVal Url As String, ByVal Method As String, ByVal obj As Object, oUser As LoginIn) As String
         Dim str As String
         If TypeOf (obj) Is String Then
             str = CType(obj, String)
@@ -76,20 +76,20 @@ Public Class JsonConnect
         Return SendRequest(Url, str, Method, oUser)
     End Function
 
-    Public Function DeleteJson(ByVal Url As String) As String
-        Return SendJson(Url, "DELETE", Nothing)
+    Public Function DeleteJson(ByVal Url As String, oUser As LoginIn) As String
+        Return SendJson(Url, "DELETE", Nothing, oApp.CurrentUser)
     End Function
 
-    Public Function GetJson(ByVal Url As String) As String
-        Return SendJson(Url, WebRequestMethods.Http.Get, Nothing)
+    Public Function GetJson(ByVal Url As String, oUser As LoginIn) As String
+        Return SendJson(Url, WebRequestMethods.Http.Get, Nothing, oApp.CurrentUser)
     End Function
 
-    Public Function PutJson(ByVal Url As String, ByVal obj As Object) As String
-        Return SendJson(Url, WebRequestMethods.Http.Put, obj)
+    Public Function PutJson(ByVal Url As String, ByVal obj As Object, oUser As LoginIn) As String
+        Return SendJson(Url, WebRequestMethods.Http.Put, obj, oApp.CurrentUser)
     End Function
 
     Public Function PostJson(ByVal Url As String, ByVal obj As Object, oUser As LoginIn) As String
-        Return SendJson(Url, WebRequestMethods.Http.Post, obj, oUser)
+        Return SendJson(Url, WebRequestMethods.Http.Post, obj, oApp.CurrentUser)
     End Function
 
 

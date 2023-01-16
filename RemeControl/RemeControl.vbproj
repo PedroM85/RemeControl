@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\System\ApiConstants.vb" />
+    <Compile Include="Class\System\EnvironmentObjects.vb" />
     <Compile Include="Class\System\EWTransactionManager.vb" />
     <Compile Include="Class\System\JsonConnect.vb" />
     <Compile Include="Class\Login\LoginIn.vb" />
@@ -84,6 +85,9 @@
     <Compile Include="Class\SalesDate\SalesDateData.vb" />
     <Compile Include="Class\Login\SecurityManager.vb" />
     <Compile Include="Class\System\TransactionManager.vb" />
+    <Compile Include="Class\Tasa\TasaDataLayer.vb" />
+    <Compile Include="Controller\Controller.vb" />
+    <Compile Include="Controller\ShowTasa.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -117,16 +121,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Class\SalesDate\SalesDateInfo.vb" />
+    <Compile Include="Views\Base\ABMBase.Designer.vb">
+      <DependentUpon>ABMBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Base\ABMBase.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Base\ViewBase.Designer.vb">
       <DependentUpon>ViewBase.vb</DependentUpon>
     </Compile>
     <Compile Include="Views\Base\ViewBase.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Tasa\ViewTasa.Designer.vb">
-      <DependentUpon>ViewTasa.vb</DependentUpon>
+    <Compile Include="Views\Tasa\TasaABM.vb">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Tasa\ViewTasa.vb">
+    <Compile Include="Views\Tasa\TasaManager.vb" />
+    <Compile Include="Views\Tasa\TasaView.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -143,11 +154,14 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Base\ABMBase.resx">
+      <DependentUpon>ABMBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\ViewBase.resx">
       <DependentUpon>ViewBase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Tasa\ViewTasa.resx">
-      <DependentUpon>ViewTasa.vb</DependentUpon>
+    <EmbeddedResource Include="Views\Tasa\TasaABM.resx">
+      <DependentUpon>TasaABM.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

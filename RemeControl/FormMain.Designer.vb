@@ -26,12 +26,12 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnHome = New System.Windows.Forms.Button()
+        Me.btnCalcular = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlFill = New System.Windows.Forms.Panel()
         Me.tmrBlinkyBlinky2 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnCalcular = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.pnlBottom.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -39,7 +39,7 @@ Partial Class FormMain
         '
         'pnlBottom
         '
-        Me.pnlBottom.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.pnlBottom.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.pnlBottom.Controls.Add(Me.lblInfo)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBottom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -61,9 +61,9 @@ Partial Class FormMain
         '
         'pnlLeft
         '
-        Me.pnlLeft.BackColor = System.Drawing.Color.Blue
-        Me.pnlLeft.Controls.Add(Me.Button1)
+        Me.pnlLeft.BackColor = System.Drawing.SystemColors.Highlight
         Me.pnlLeft.Controls.Add(Me.btnCalcular)
+        Me.pnlLeft.Controls.Add(Me.btnHome)
         Me.pnlLeft.Controls.Add(Me.Panel1)
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
@@ -71,9 +71,33 @@ Partial Class FormMain
         Me.pnlLeft.Size = New System.Drawing.Size(166, 464)
         Me.pnlLeft.TabIndex = 1
         '
+        'btnHome
+        '
+        Me.btnHome.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHome.Location = New System.Drawing.Point(0, 164)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Size = New System.Drawing.Size(166, 45)
+        Me.btnHome.TabIndex = 0
+        Me.btnHome.Text = "Inicio"
+        Me.btnHome.UseVisualStyleBackColor = False
+        '
+        'btnCalcular
+        '
+        Me.btnCalcular.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnCalcular.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCalcular.Location = New System.Drawing.Point(0, 209)
+        Me.btnCalcular.Name = "btnCalcular"
+        Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
+        Me.btnCalcular.TabIndex = 1
+        Me.btnCalcular.Text = "Tasa del dia"
+        Me.btnCalcular.UseVisualStyleBackColor = False
+        '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel1.Controls.Add(Me.lblUser)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -104,28 +128,6 @@ Partial Class FormMain
         '
         Me.tmrBlinkyBlinky2.Interval = 500
         '
-        'btnCalcular
-        '
-        Me.btnCalcular.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnCalcular.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCalcular.Location = New System.Drawing.Point(0, 164)
-        Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
-        Me.btnCalcular.TabIndex = 1
-        Me.btnCalcular.Text = "Tasa del dia"
-        Me.btnCalcular.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button1.Location = New System.Drawing.Point(0, 209)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(166, 45)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -134,7 +136,10 @@ Partial Class FormMain
         Me.Controls.Add(Me.pnlFill)
         Me.Controls.Add(Me.pnlLeft)
         Me.Controls.Add(Me.pnlBottom)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.KeyPreview = True
         Me.Name = "FormMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
         Me.pnlBottom.ResumeLayout(False)
         Me.pnlBottom.PerformLayout()
@@ -153,5 +158,5 @@ Partial Class FormMain
     Friend WithEvents lblInfo As Label
     Protected WithEvents tmrBlinkyBlinky2 As Timer
     Friend WithEvents btnCalcular As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnHome As Button
 End Class

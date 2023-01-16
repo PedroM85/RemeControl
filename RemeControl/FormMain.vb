@@ -1,6 +1,28 @@
 ﻿Public Class FormMain
     Private mSalesDateInfo As SalesDateInfo
 
+    Private oView As UserControl
+
+    Private mCurrStep As State
+    Private mControllers(6) As Controller
+    Private WithEvents mTrMgr As EWTransactionManager
+#Region "Keydown"
+    Private Enum State
+        ShowTasa
+    End Enum
+
+#End Region
+    Public Sub New()
+        MyBase.New
+        ' Esta llamada es exigida por el diseñador.
+        InitializeComponent()
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        mControllers(State.ShowTasa) = New ShowTasa(Me)
+
+    End Sub
+
     Public Property SalesDateInfo() As SalesDateInfo
         Get
             Return mSalesDateInfo
@@ -52,4 +74,77 @@
     Private Sub tmrBlinkyBlinky2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrBlinkyBlinky2.Tick
         lblInfo.Visible = Not lblInfo.Visible
     End Sub
+    Public Sub ShowLeftPanel()
+        pnlLeft.Visible = True
+
+        ActiveControl = pnlLeft
+    End Sub
+    Public Sub HideLeftPanel()
+        pnlLeft.Visible = False
+    End Sub
+
+
+#Region "Abrir usercontrol"
+    Public Property TransactionManager As EWTransactionManager
+        Get
+            Return mTrMgr
+        End Get
+        Set(value As EWTransactionManager)
+            mTrMgr = value
+        End Set
+    End Property
+
+    Private Sub mTrMgr_ViewClicked(view As UserControl) Handles mTrMgr.ViewCreated
+        ShowTransaction(view)
+    End Sub
+
+    Public Sub ShowTransaction(oTransView As UserControl)
+        If oTransView Is Nothing Then
+            'MessageBox.Show("Vacio")
+        Else
+            DisposeView()
+
+            oView = oTransView
+            oView.Dock = DockStyle.Fill
+            pnlFill.Controls.Clear()
+            pnlFill.Controls.Add(oView)
+            oView.Focus()
+
+        End If
+    End Sub
+
+    Public Sub DisposeView()
+        If Not oView Is Nothing Then
+            oView.Dispose()
+            oView = Nothing
+        End If
+    End Sub
+
+    Public Sub ShowView(View As UserControl)
+        pnlFill.Controls.Add(View)
+    End Sub
+
+    Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
+        mTrMgr.DoMenuItem("TASA")
+        mCurrStep = State.ShowTasa
+    End Sub
+
+#End Region
+
+    Private Sub FormMain_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If mControllers(mCurrStep).BasicKeysEnabled Then
+
+            If e.KeyCode = Keys.Escape Then
+
+            Else
+                mControllers(mCurrStep).HandleKey(e)
+            End If
+
+        Else
+            mControllers(mCurrStep).HandleKey(e)
+        End If
+    End Sub
+
+
+
 End Class

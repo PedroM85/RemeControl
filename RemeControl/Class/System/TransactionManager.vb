@@ -6,6 +6,9 @@
 
         Select Case sTransation.Trim
 
+            Case "TASA"
+                Dim oTasa As TasaManager = New TasaManager
+                oView = oTasa.CreateTasaView
             Case Else
                 oView = Nothing
         End Select

@@ -23,6 +23,7 @@
         Dim sPassword As String = txtPassword.Text.Trim
 
         'mUser = New LoginIn
+        Cursor = Cursors.WaitCursor
 
         mUser = mSec.Login(sUserName, sPassword)
 

@@ -9,4 +9,6 @@
 
     'Informacion de ventas
     Public Const SalesDateInfo As String = Direc + "SalesDateInfo"
+    'Informacion de tasas
+    Public Const GetTasas As String = Direc + "GetTasas"
 End Class
