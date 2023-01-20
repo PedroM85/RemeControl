@@ -20,6 +20,7 @@ Public Class TasaABM
     Friend WithEvents lblBinance As Label
     Friend WithEvents txtDolarInPais As TextBox
     Friend WithEvents txtTasaVentaCustom As TextBox
+    Friend WithEvents txtIdControl As TextBox
     Friend WithEvents txtBina As TextBox
 
     Private Sub InitializeComponent()
@@ -35,11 +36,13 @@ Public Class TasaABM
         Me.txtTasaVenta = New System.Windows.Forms.TextBox()
         Me.chkCustom = New System.Windows.Forms.CheckBox()
         Me.txtTasaVentaCustom = New System.Windows.Forms.TextBox()
+        Me.txtIdControl = New System.Windows.Forms.TextBox()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.txtIdControl)
         Me.pnlControls0.Controls.Add(Me.chkCustom)
         Me.pnlControls0.Controls.Add(Me.lblTasaVenta)
         Me.pnlControls0.Controls.Add(Me.txtTasaVenta)
@@ -179,6 +182,18 @@ Public Class TasaABM
         Me.txtTasaVentaCustom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTasaVentaCustom.Visible = False
         '
+        'txtIdControl
+        '
+        Me.txtIdControl.BackColor = System.Drawing.Color.White
+        Me.txtIdControl.Location = New System.Drawing.Point(81, 12)
+        Me.txtIdControl.MaxLength = 6
+        Me.txtIdControl.Name = "txtIdControl"
+        Me.txtIdControl.Size = New System.Drawing.Size(100, 20)
+        Me.txtIdControl.TabIndex = 15
+        Me.txtIdControl.Tag = ""
+        Me.txtIdControl.Text = "0"
+        Me.txtIdControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'TasaABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -193,14 +208,15 @@ Public Class TasaABM
 
     Private Expre_Regu As String = "\d{1,3}\.\d{1,2}"
     Private oDataLayer As TasaDataLayer
+    Private IdControl As Int32 = Nothing
 
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
 
-        txtBina.Text = 0.00
-        txtDolarInPais.Text = 0.00
+        'txtBina.Text = 0.00
+        'txtDolarInPais.Text = 0.00
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
           .ForEach(Sub(b)
@@ -208,6 +224,7 @@ Public Class TasaABM
                        AddHandler b.GotFocus, AddressOf b_GotFocus
                        AddHandler b.LostFocus, AddressOf b_LostFocus
                    End Sub)
+
 
 
     End Sub
@@ -351,4 +368,22 @@ Public Class TasaABM
         End Try
 
     End Sub
+    Private Sub TasaABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
+        txtIdControl.DataBindings.Add("Text", row, "TAS_Id")
+        txtBina.DataBindings.Add("Text", row, "TAS_Binance")
+        txtDolarInPais.DataBindings.Add("Text", row, "TAS_DolarPais")
+        txtComision.DataBindings.Add("Text", row, "TAS_Comision")
+        txtTasaFull.DataBindings.Add("Text", row, "TAS_TasaFull")
+        txtTasaVentaCustom.DataBindings.Add("Text", row, "TAS_TasaCliente")
+
+    End Sub
+    Private Sub TasaABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
+
+    End Sub
+
+    Private Sub TasaABM_ValidateControls(Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+
+    End Sub
+
+
 End Class

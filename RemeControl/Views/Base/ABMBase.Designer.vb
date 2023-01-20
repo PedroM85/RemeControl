@@ -46,7 +46,7 @@ Partial Class ABMBase
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
         Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(132, 402)
+        Me.pnlLeft.Size = New System.Drawing.Size(166, 402)
         Me.pnlLeft.TabIndex = 0
         '
         'Panel3
@@ -56,7 +56,7 @@ Partial Class ABMBase
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(132, 36)
+        Me.Panel3.Size = New System.Drawing.Size(166, 36)
         Me.Panel3.TabIndex = 3
         '
         'lblDate
@@ -75,16 +75,16 @@ Partial Class ABMBase
         Me.pnlBottom.Controls.Add(Me.btnCancel)
         Me.pnlBottom.Controls.Add(Me.btnOk)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlBottom.Location = New System.Drawing.Point(132, 353)
+        Me.pnlBottom.Location = New System.Drawing.Point(166, 352)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(556, 49)
+        Me.pnlBottom.Size = New System.Drawing.Size(560, 50)
         Me.pnlBottom.TabIndex = 1
         '
         'lblRequiredFields
         '
-        Me.lblRequiredFields.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblRequiredFields.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblRequiredFields.AutoSize = True
-        Me.lblRequiredFields.Location = New System.Drawing.Point(448, 22)
+        Me.lblRequiredFields.Location = New System.Drawing.Point(452, 23)
         Me.lblRequiredFields.Name = "lblRequiredFields"
         Me.lblRequiredFields.Size = New System.Drawing.Size(104, 13)
         Me.lblRequiredFields.TabIndex = 6
@@ -115,7 +115,7 @@ Partial Class ABMBase
         '
         Me.pnlTitle0.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.pnlTitle0.Controls.Add(Me.lblTitle0)
-        Me.pnlTitle0.Location = New System.Drawing.Point(161, 70)
+        Me.pnlTitle0.Location = New System.Drawing.Point(194, 70)
         Me.pnlTitle0.Name = "pnlTitle0"
         Me.pnlTitle0.Size = New System.Drawing.Size(524, 25)
         Me.pnlTitle0.TabIndex = 2
@@ -132,7 +132,7 @@ Partial Class ABMBase
         'pnlControls0
         '
         Me.pnlControls0.BackColor = System.Drawing.Color.White
-        Me.pnlControls0.Location = New System.Drawing.Point(160, 95)
+        Me.pnlControls0.Location = New System.Drawing.Point(193, 95)
         Me.pnlControls0.Name = "pnlControls0"
         Me.pnlControls0.Size = New System.Drawing.Size(524, 160)
         Me.pnlControls0.TabIndex = 3
@@ -140,13 +140,13 @@ Partial Class ABMBase
         'lblCaption
         '
         Me.lblCaption.AutoSize = True
-        Me.lblCaption.Location = New System.Drawing.Point(158, 41)
+        Me.lblCaption.Location = New System.Drawing.Point(191, 41)
         Me.lblCaption.Name = "lblCaption"
         Me.lblCaption.Size = New System.Drawing.Size(53, 13)
         Me.lblCaption.TabIndex = 4
         Me.lblCaption.Text = "lblCaption"
         '
-        'TasaBase
+        'ABMBase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -156,8 +156,8 @@ Partial Class ABMBase
         Me.Controls.Add(Me.pnlLeft)
         Me.Controls.Add(Me.pnlControls0)
         Me.Controls.Add(Me.pnlTitle0)
-        Me.Name = "TasaBase"
-        Me.Size = New System.Drawing.Size(688, 402)
+        Me.Name = "ABMBase"
+        Me.Size = New System.Drawing.Size(726, 402)
         Me.pnlLeft.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
