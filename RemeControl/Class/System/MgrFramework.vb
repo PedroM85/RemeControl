@@ -1,7 +1,12 @@
-﻿Public Class MgrFramework
+﻿Imports System.IO
+Imports System.Net
+Imports System.Text.RegularExpressions
+
+Public Class MgrFramework
 
     Protected mUser As LoginIn
     Protected mSalesDateInfo As SalesDateInfo
+    Protected mLastAction As Date
 
     Public Function Terminal() As String
         Return "1"
@@ -28,6 +33,7 @@
             Else
                 Return False
             End If
+
         Catch ex As Exception
             Return False
         End Try
@@ -40,18 +46,25 @@
         If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
             mUser = sec.Login(UserName, Password)
         End If
+        Try
 
-        If mUser Is Nothing Then
-            loginDlg = New FrmLogin()
+            If mUser Is Nothing Then
+                loginDlg = New FrmLogin()
 
-            If Not UserName Is Nothing Then
-                loginDlg.txtUserName.Text = UserName
+                If Not UserName Is Nothing Then
+                    loginDlg.txtUserName.Text = UserName
+
+                End If
+
+                loginDlg.ShowDialog()
+                mUser = loginDlg.User
 
             End If
+        Catch ex As Exception
+            mUser = Nothing
+            'Throw New Exception(ex.Message)
+        End Try
 
-            loginDlg.ShowDialog()
-            mUser = loginDlg.User
-        End If
     End Sub
     Public ReadOnly Property CurrentUser() As LoginIn
         Get
@@ -61,6 +74,12 @@
     Public ReadOnly Property SaleDate As SalesDateInfo
         Get
             Return mSalesDateInfo
+        End Get
+    End Property
+
+    Public ReadOnly Property IpPc As String
+        Get
+            Return GetMyExternalIP()
         End Get
     End Property
 
@@ -81,4 +100,28 @@
 
         End If
     End Sub
+
+    Private Function GetMyExternalIP()
+        Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
+        'Dim wq As HttpWebRequest = HttpWebRequest.Create("http://whatismyip.org/")
+
+        Dim wr As HttpWebResponse = wq.GetResponse()
+        Dim sr As New StreamReader(wr.GetResponseStream(), System.Text.Encoding.UTF8)
+        Dim ipa As IPAddress = IPAddress.Parse(sr.ReadToEnd)
+        sr.Close()
+        sr.Close()
+        Dim ip As String = ipa.ToString
+        ip = Replace(ip, "{}", "")
+
+        Return ip.ToString
+    End Function
+
+    Public Property LastAction() As Date
+        Get
+            Return mLastAction
+        End Get
+        Set(value As Date)
+            mLastAction = value
+        End Set
+    End Property
 End Class

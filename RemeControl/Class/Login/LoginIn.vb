@@ -4,6 +4,7 @@
     Private sUSR_Password As String
     Private sToken As String
     Private sMessage As String
+    Private sUSR_IpAddress As String
 
     Public Sub New()
 
@@ -51,6 +52,15 @@
         End Get
         Set(value As String)
             sMessage = value
+        End Set
+    End Property
+
+    Public Property USR_IpAddress As String
+        Get
+            Return sUSR_IpAddress
+        End Get
+        Set(value As String)
+            sUSR_IpAddress = value
         End Set
     End Property
 End Class

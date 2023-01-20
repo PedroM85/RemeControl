@@ -1,9 +1,11 @@
 ﻿Public Class ABMBase
 
+
     Private lAddNew As Boolean
 
     Public Event Cancel()
     Public Event Close()
+    Public Event Save()
 
     Public Property Caption() As String
         Get
@@ -40,6 +42,8 @@
     End Sub
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
 
+        RaiseEvent Save()
+
     End Sub
 
     Public Sub FormatDecimal(sender As Object, cevent As ConvertEventArgs)
@@ -54,5 +58,9 @@
         If e.KeyCode = Keys.F1 Then
             MessageBox.Show("prueba")
         End If
+    End Sub
+
+    Private Sub ABMBase_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        EnvironmentObjects.Framework.LastAction = Now
     End Sub
 End Class

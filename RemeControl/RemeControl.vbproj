@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\System\ApiConstants.vb" />
+    <Compile Include="Class\System\Connection.vb" />
     <Compile Include="Class\System\EnvironmentObjects.vb" />
     <Compile Include="Class\System\EWTransactionManager.vb" />
     <Compile Include="Class\System\JsonConnect.vb" />

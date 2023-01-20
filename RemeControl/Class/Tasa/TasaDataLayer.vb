@@ -3,8 +3,14 @@ Imports Newtonsoft.Json
 Public Class TasaData
     Private iTAS_Id As Int32
     Private dTAS_Date As Date
-    Private doTAS_Amount As Double
-    Private doTAS_Mayorista As Double
+    Private doTAS_Binance As Decimal
+    Private doTAS_DolarPais As Decimal
+    Private doTAS_Comision As Decimal
+    Private doTAS_TasaFull As Decimal
+    Private doTAS_TasaMayorista As Decimal
+    Private doTAS_TasaCliente As Decimal
+    Private sMessage As String
+
 
     Public Property TAS_Id As Integer
         Get
@@ -24,21 +30,66 @@ Public Class TasaData
         End Set
     End Property
 
-    Public Property TAS_Amount As Double
+    Public Property TAS_Binance As Decimal
         Get
-            Return doTAS_Amount
+            Return doTAS_Binance
         End Get
-        Set(value As Double)
-            doTAS_Amount = value
+        Set(value As Decimal)
+            doTAS_Binance = value.ToString("n2")
         End Set
     End Property
 
-    Public Property TAS_Mayorista As Double
+    Public Property TAS_DolarPais As Decimal
         Get
-            Return doTAS_Mayorista
+            Return doTAS_DolarPais
         End Get
-        Set(value As Double)
-            doTAS_Mayorista = value
+        Set(value As Decimal)
+            doTAS_DolarPais = value.ToString("n2")
+        End Set
+    End Property
+
+    Public Property TAS_Comision As Decimal
+        Get
+            Return doTAS_Comision
+        End Get
+        Set(value As Decimal)
+            doTAS_Comision = value.ToString("n2")
+        End Set
+    End Property
+
+    Public Property TAS_TasaFull As Decimal
+        Get
+            Return doTAS_TasaFull
+        End Get
+        Set(value As Decimal)
+            doTAS_TasaFull = value.ToString("n6")
+        End Set
+    End Property
+
+    Public Property TAS_TasaMayorista As Decimal
+        Get
+            Return doTAS_TasaMayorista
+        End Get
+        Set(value As Decimal)
+            doTAS_TasaMayorista = value.ToString("n6")
+        End Set
+    End Property
+
+    Public Property TAS_TasaCliente As Decimal
+        Get
+            Return doTAS_TasaCliente
+        End Get
+        Set(value As Decimal)
+            doTAS_TasaCliente = value.ToString("n4")
+        End Set
+    End Property
+
+    Public Property Message As String
+        Get
+            Return sMessage
+        End Get
+        Set(value As String)
+            sMessage = value
         End Set
     End Property
 End Class
@@ -61,5 +112,20 @@ Public Class TasaDataLayer
         Return table
 
     End Function
+
+    Public Sub CreateTasa(Data As TasaData)
+        Dim tasa As TasaData = Nothing
+        Dim Url As String = ApiConstants.CreateTasa
+
+
+        Dim result = JsonConvert.SerializeObject(Data)
+
+        Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
+
+        Dim coso = JsonConvert.DeserializeObject(Of TasaData)(result_Post)
+
+        tasa = coso
+
+    End Sub
 
 End Class

@@ -26,8 +26,8 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
-        Me.btnHome = New System.Windows.Forms.Button()
         Me.btnCalcular = New System.Windows.Forms.Button()
+        Me.btnHome = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlFill = New System.Windows.Forms.Panel()
@@ -71,18 +71,6 @@ Partial Class FormMain
         Me.pnlLeft.Size = New System.Drawing.Size(166, 464)
         Me.pnlLeft.TabIndex = 1
         '
-        'btnHome
-        '
-        Me.btnHome.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnHome.Location = New System.Drawing.Point(0, 164)
-        Me.btnHome.Name = "btnHome"
-        Me.btnHome.Size = New System.Drawing.Size(166, 45)
-        Me.btnHome.TabIndex = 0
-        Me.btnHome.Text = "Inicio"
-        Me.btnHome.UseVisualStyleBackColor = False
-        '
         'btnCalcular
         '
         Me.btnCalcular.BackColor = System.Drawing.SystemColors.HotTrack
@@ -94,6 +82,18 @@ Partial Class FormMain
         Me.btnCalcular.TabIndex = 1
         Me.btnCalcular.Text = "Tasa del dia"
         Me.btnCalcular.UseVisualStyleBackColor = False
+        '
+        'btnHome
+        '
+        Me.btnHome.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHome.Location = New System.Drawing.Point(0, 164)
+        Me.btnHome.Name = "btnHome"
+        Me.btnHome.Size = New System.Drawing.Size(166, 45)
+        Me.btnHome.TabIndex = 0
+        Me.btnHome.Text = "Inicio"
+        Me.btnHome.UseVisualStyleBackColor = False
         '
         'Panel1
         '

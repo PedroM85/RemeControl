@@ -15,7 +15,8 @@ Public Class SecurityManager
             Dim UserData As New LoginIn With
                 {
                 .USR_Id = Username.Trim,
-                .USR_Password = Password.Trim
+                .USR_Password = Password.Trim,
+                .USR_IpAddress = oApp.IpPc
                 }
 
             Dim result = JsonConvert.SerializeObject(UserData)
@@ -37,7 +38,7 @@ Public Class SecurityManager
             .ULO_Id = oUser.USR_Id,
             .ULO_Name = oUser.USR_Name,
             .ULO_TRM = "PC",
-            .ULO_Ip = "192.168.0.1"
+            .ULO_Ip = oUser.USR_IpAddress
             }
 
         Dim result = JsonConvert.SerializeObject(UserData)
@@ -54,7 +55,7 @@ Public Class SecurityManager
             .ULO_Id = oUser.USR_Id,
             .ULO_Name = oUser.USR_Name,
             .ULO_TRM = "PC",
-            .ULO_Ip = "192.168.0.1"
+            .ULO_Ip = oUser.USR_IpAddress
             }
 
         Dim result = JsonConvert.SerializeObject(UserData)

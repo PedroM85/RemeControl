@@ -38,7 +38,7 @@
         oMainForm.ShowView(oTasaABM)
         oMainForm.HideLeftPanel
 
-
+        Cursor = Cursors.Arrow
     End Sub
 
     Private Sub oTasaABM_Close() Handles oTasaABM.Close

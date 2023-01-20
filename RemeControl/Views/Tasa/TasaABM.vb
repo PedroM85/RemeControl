@@ -1,7 +1,9 @@
-﻿Imports System.Text.RegularExpressions
+﻿Imports System.Globalization
+Imports System.Text.RegularExpressions
 
 Public Class TasaABM
     Inherits ABMBase
+
 
 #Region "Form Designer"
 
@@ -18,10 +20,10 @@ Public Class TasaABM
     Friend WithEvents lblBinance As Label
     Friend WithEvents txtDolarInPais As TextBox
     Friend WithEvents txtTasaVentaCustom As TextBox
-    Friend WithEvents txtBinance As TextBox
+    Friend WithEvents txtBina As TextBox
 
     Private Sub InitializeComponent()
-        Me.txtBinance = New System.Windows.Forms.TextBox()
+        Me.txtBina = New System.Windows.Forms.TextBox()
         Me.txtDolarInPais = New System.Windows.Forms.TextBox()
         Me.lblBinance = New System.Windows.Forms.Label()
         Me.lblDolarInPais = New System.Windows.Forms.Label()
@@ -38,7 +40,6 @@ Public Class TasaABM
         '
         'pnlControls0
         '
-        Me.pnlControls0.Controls.Add(Me.txtTasaVentaCustom)
         Me.pnlControls0.Controls.Add(Me.chkCustom)
         Me.pnlControls0.Controls.Add(Me.lblTasaVenta)
         Me.pnlControls0.Controls.Add(Me.txtTasaVenta)
@@ -49,16 +50,21 @@ Public Class TasaABM
         Me.pnlControls0.Controls.Add(Me.lblDolarInPais)
         Me.pnlControls0.Controls.Add(Me.lblBinance)
         Me.pnlControls0.Controls.Add(Me.txtDolarInPais)
-        Me.pnlControls0.Controls.Add(Me.txtBinance)
+        Me.pnlControls0.Controls.Add(Me.txtBina)
+        Me.pnlControls0.Controls.Add(Me.txtTasaVentaCustom)
+        Me.pnlControls0.TabIndex = 0
         '
-        'txtBinance
+        'txtBina
         '
-        Me.txtBinance.Location = New System.Drawing.Point(81, 38)
-        Me.txtBinance.MaxLength = 6
-        Me.txtBinance.Name = "txtBinance"
-        Me.txtBinance.Size = New System.Drawing.Size(100, 20)
-        Me.txtBinance.TabIndex = 5
-        Me.txtBinance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtBina.BackColor = System.Drawing.Color.White
+        Me.txtBina.Location = New System.Drawing.Point(81, 38)
+        Me.txtBina.MaxLength = 6
+        Me.txtBina.Name = "txtBina"
+        Me.txtBina.Size = New System.Drawing.Size(100, 20)
+        Me.txtBina.TabIndex = 0
+        Me.txtBina.Tag = ""
+        Me.txtBina.Text = "0.00"
+        Me.txtBina.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDolarInPais
         '
@@ -66,7 +72,8 @@ Public Class TasaABM
         Me.txtDolarInPais.MaxLength = 6
         Me.txtDolarInPais.Name = "txtDolarInPais"
         Me.txtDolarInPais.Size = New System.Drawing.Size(100, 20)
-        Me.txtDolarInPais.TabIndex = 6
+        Me.txtDolarInPais.TabIndex = 1
+        Me.txtDolarInPais.Text = "0.00"
         Me.txtDolarInPais.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblBinance
@@ -92,8 +99,11 @@ Public Class TasaABM
         Me.txtComision.Location = New System.Drawing.Point(81, 90)
         Me.txtComision.MaxLength = 4
         Me.txtComision.Name = "txtComision"
+        Me.txtComision.ReadOnly = True
         Me.txtComision.Size = New System.Drawing.Size(100, 20)
-        Me.txtComision.TabIndex = 9
+        Me.txtComision.TabIndex = 2
+        Me.txtComision.TabStop = False
+        Me.txtComision.Text = "0.05"
         Me.txtComision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblComision
@@ -119,8 +129,11 @@ Public Class TasaABM
         Me.txtTasaFull.Location = New System.Drawing.Point(339, 42)
         Me.txtTasaFull.MaxLength = 9
         Me.txtTasaFull.Name = "txtTasaFull"
+        Me.txtTasaFull.ReadOnly = True
         Me.txtTasaFull.Size = New System.Drawing.Size(100, 20)
-        Me.txtTasaFull.TabIndex = 11
+        Me.txtTasaFull.TabIndex = 3
+        Me.txtTasaFull.TabStop = False
+        Me.txtTasaFull.Text = "0.00"
         Me.txtTasaFull.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblTasaVenta
@@ -137,8 +150,11 @@ Public Class TasaABM
         Me.txtTasaVenta.Location = New System.Drawing.Point(339, 71)
         Me.txtTasaVenta.MaxLength = 8
         Me.txtTasaVenta.Name = "txtTasaVenta"
+        Me.txtTasaVenta.ReadOnly = True
         Me.txtTasaVenta.Size = New System.Drawing.Size(100, 20)
-        Me.txtTasaVenta.TabIndex = 13
+        Me.txtTasaVenta.TabIndex = 4
+        Me.txtTasaVenta.TabStop = False
+        Me.txtTasaVenta.Text = "0.00"
         Me.txtTasaVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'chkCustom
@@ -148,17 +164,18 @@ Public Class TasaABM
         Me.chkCustom.Name = "chkCustom"
         Me.chkCustom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.chkCustom.Size = New System.Drawing.Size(93, 17)
-        Me.chkCustom.TabIndex = 15
+        Me.chkCustom.TabIndex = 5
         Me.chkCustom.Text = "Ajuste de tasa"
         Me.chkCustom.UseVisualStyleBackColor = True
         '
         'txtTasaVentaCustom
         '
-        Me.txtTasaVentaCustom.Location = New System.Drawing.Point(339, 120)
+        Me.txtTasaVentaCustom.Location = New System.Drawing.Point(339, 71)
         Me.txtTasaVentaCustom.MaxLength = 8
         Me.txtTasaVentaCustom.Name = "txtTasaVentaCustom"
         Me.txtTasaVentaCustom.Size = New System.Drawing.Size(100, 20)
-        Me.txtTasaVentaCustom.TabIndex = 16
+        Me.txtTasaVentaCustom.TabIndex = 6
+        Me.txtTasaVentaCustom.Text = "0.00"
         Me.txtTasaVentaCustom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTasaVentaCustom.Visible = False
         '
@@ -175,32 +192,163 @@ Public Class TasaABM
 #End Region
 
     Private Expre_Regu As String = "\d{1,3}\.\d{1,2}"
+    Private oDataLayer As TasaDataLayer
 
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
 
+        txtBina.Text = 0.00
+        txtDolarInPais.Text = 0.00
+
+        Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
+          .ForEach(Sub(b)
+                       b.Tag = Tuple.Create(b.ForeColor, b.BackColor)
+                       AddHandler b.GotFocus, AddressOf b_GotFocus
+                       AddHandler b.LostFocus, AddressOf b_LostFocus
+                   End Sub)
+
+
     End Sub
 
-    Public Function Vali(e As KeyPressEventArgs)
-        Dim r As Regex = New Regex(Expre_Regu)
-        'If r.IsMatch() Then
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not e.KeyChar = "." And Not e.KeyChar = "," And Not e.KeyChar = "*" Then
-
-            e.Handled = True
-        End If
-    End Function
     Private Sub chkCustom_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustom.CheckedChanged
         If chkCustom.CheckState Then
             txtTasaVentaCustom.Visible = True
             txtTasaVenta.Visible = False
+            txtTasaVentaCustom.Focus()
         Else
             txtTasaVentaCustom.Visible = False
             txtTasaVenta.Visible = True
         End If
     End Sub
 
+    Private focusedForeColor As Color = Color.Black
+    Private focusedBackColor As Color = Color.Gainsboro
+
+    Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
+        Dim controls = control.Controls.Cast(Of Control)()
+        Return controls.SelectMany(Function(ctrl) GetAllControls(ctrl)).Concat(controls)
+    End Function
+
+    Private Sub b_LostFocus(sender As Object, e As EventArgs)
+        Dim b = DirectCast(sender, TextBox)
+        Dim colors = DirectCast(b.Tag, Tuple(Of Color, Color))
+        b.ForeColor = colors.Item1
+        b.BackColor = colors.Item2
+    End Sub
+
+    Private Sub b_GotFocus(sender As Object, e As EventArgs)
+        Dim b = DirectCast(sender, TextBox)
+        b.SelectAll()
+        b.ForeColor = focusedForeColor
+        b.BackColor = focusedBackColor
+    End Sub
+
+    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
+
+        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not e.KeyChar = "." And Not e.KeyChar = "," And Not e.KeyChar = "*" Then
+            e.Handled = True
+        End If
+
+    End Sub
+    Private Sub Culture(sender As Object)
+        Dim txt = DirectCast(sender, TextBox)
+        Dim esAR As CultureInfo = CultureInfo.CreateSpecificCulture("es-AR")
+        Dim Value As Double = txt.Text
+
+        'txt.Text = String.Format(esAR, "{0:000.00}" + esAR.NumberFormat.CurrencySymbol, Value)
+        txt.Text = String.Format(esAR, "{0:0.00}", Value)
+    End Sub
+    Private Sub txtBina_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBina.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+    Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
+        'Culture(sender)
+    End Sub
+    Private Sub txtDolarInPais_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDolarInPais.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+    Private Sub txtDolarInPais_LostFocus(sender As Object, e As EventArgs) Handles txtDolarInPais.LostFocus
+        'Culture(sender)
+    End Sub
+
+    Private Sub CalcularTasa()
+        Try
+
+            Dim bina As Decimal = 0
+            Dim dolarpais As Decimal = 0
+            Dim TasaFull As Decimal = 0
+            Dim TasaClien As Double = 0
+            Dim comi As Double = txtComision.Text
+
+            If Not txtBina.Text Is Nothing And Not txtDolarInPais.Text Is Nothing Then
+                bina = txtBina.Text
+                dolarpais = txtDolarInPais.Text
+                TasaFull = dolarpais / bina
+            End If
+
+            TasaClien = TasaFull - ((TasaFull / (1 - comi)) - TasaFull)
 
 
+            txtTasaFull.Text = TasaFull.ToString("n6")
+            txtTasaVenta.Text = TasaClien.ToString("n4")
+
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
+    Private Sub txtBina_TextChanged(sender As Object, e As EventArgs) Handles txtBina.TextChanged
+        CalcularTasa()
+    End Sub
+
+    Private Sub txtDolarInPais_TextChanged(sender As Object, e As EventArgs) Handles txtDolarInPais.TextChanged
+        CalcularTasa()
+    End Sub
+
+    Private Sub txtTasaVentaCustom_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTasaVentaCustom.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+    Private Sub txtTasaVentaCustom_LostFocus(sender As Object, e As EventArgs) Handles txtTasaVentaCustom.LostFocus
+        'Culture(sender)
+    End Sub
+
+    Private Sub TasaABM_Save() Handles MyBase.Save
+        Dim oData As TasaData
+
+        Dim tasacliente As Double = 0
+        If chkCustom.Checked Then
+            tasacliente = txtTasaVentaCustom.Text
+        Else
+            tasacliente = txtTasaVenta.Text
+        End If
+
+        oDataLayer = New TasaDataLayer
+
+        oData = New TasaData With
+            {
+            .TAS_Date = Now.ToShortDateString(),
+            .TAS_Binance = txtBina.Text,
+            .TAS_DolarPais = txtDolarInPais.Text,
+            .TAS_Comision = txtComision.Text,
+            .TAS_TasaFull = txtTasaFull.Text,
+            .TAS_TasaMayorista = 0,
+            .TAS_TasaCliente = tasacliente
+            }
+
+        Try
+            oDataLayer.CreateTasa(oData)
+
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 End Class

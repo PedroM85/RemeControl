@@ -24,18 +24,26 @@
 
         'mUser = New LoginIn
         Cursor = Cursors.WaitCursor
+        Try
+            mUser = mSec.Login(sUserName, sPassword)
 
-        mUser = mSec.Login(sUserName, sPassword)
+            If mUser Is Nothing Then
 
-        If mUser Is Nothing Then
+            Else
+                Close()
+            End If
 
-        Else
-            Close()
-        End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Private Sub FrmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Activate()
 
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Close()
     End Sub
 End Class
