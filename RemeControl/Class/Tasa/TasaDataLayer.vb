@@ -9,6 +9,8 @@ Public Class TasaData
     Private doTAS_TasaFull As Decimal
     Private doTAS_TasaMayorista As Decimal
     Private doTAS_TasaCliente As Decimal
+    Private sTAS_ModifiedBy As String
+    Private bTAS_Active As Boolean
     Private sMessage As String
 
 
@@ -92,6 +94,24 @@ Public Class TasaData
             sMessage = value
         End Set
     End Property
+
+    Public Property TAS_Active As Boolean
+        Get
+            Return bTAS_Active
+        End Get
+        Set(value As Boolean)
+            bTAS_Active = value
+        End Set
+    End Property
+
+    Public Property TAS_ModifiedBy As String
+        Get
+            Return sTAS_ModifiedBy
+        End Get
+        Set(value As String)
+            sTAS_ModifiedBy = value
+        End Set
+    End Property
 End Class
 Public Class TasaDataLayer
     Inherits JsonConnect
@@ -126,6 +146,34 @@ Public Class TasaDataLayer
 
         tasa = coso
 
+    End Sub
+
+    Public Sub UpdateTasa(Data As TasaData)
+        Dim tasa As TasaData = Nothing
+        Dim Url As String = ApiConstants.UpdateTasa
+
+
+        Dim result = JsonConvert.SerializeObject(Data)
+
+        Dim result_Post = PutJson(Url, result, oApp.CurrentUser)
+
+        Dim coso = JsonConvert.DeserializeObject(Of TasaData)(result_Post)
+
+        tasa = coso
+    End Sub
+
+    Public Sub DeleteTasa(Data As TasaData)
+        Dim tasa As TasaData = Nothing
+        Dim Url As String = ApiConstants.DeleteTasa
+
+
+        Dim result = JsonConvert.SerializeObject(Data)
+
+        Dim result_Post = PutJson(Url, result, oApp.CurrentUser)
+
+        Dim coso = JsonConvert.DeserializeObject(Of TasaData)(result_Post)
+
+        tasa = coso
     End Sub
 
 End Class

@@ -55,7 +55,7 @@
     End Sub
 
     Public Sub Edit(row As DataRowView)
-        Dim dv As DataView
+        'Dim dv As DataView
 
         If row Is Nothing Then
 

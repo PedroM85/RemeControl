@@ -21,6 +21,7 @@ Public Class TasaABM
     Friend WithEvents txtDolarInPais As TextBox
     Friend WithEvents txtTasaVentaCustom As TextBox
     Friend WithEvents txtIdControl As TextBox
+    Friend WithEvents dtpFecha As DateTimePicker
     Friend WithEvents txtBina As TextBox
 
     Private Sub InitializeComponent()
@@ -37,11 +38,13 @@ Public Class TasaABM
         Me.chkCustom = New System.Windows.Forms.CheckBox()
         Me.txtTasaVentaCustom = New System.Windows.Forms.TextBox()
         Me.txtIdControl = New System.Windows.Forms.TextBox()
+        Me.dtpFecha = New System.Windows.Forms.DateTimePicker()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.dtpFecha)
         Me.pnlControls0.Controls.Add(Me.txtIdControl)
         Me.pnlControls0.Controls.Add(Me.chkCustom)
         Me.pnlControls0.Controls.Add(Me.lblTasaVenta)
@@ -193,6 +196,16 @@ Public Class TasaABM
         Me.txtIdControl.Tag = ""
         Me.txtIdControl.Text = "0"
         Me.txtIdControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtIdControl.Visible = False
+        '
+        'dtpFecha
+        '
+        Me.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpFecha.Location = New System.Drawing.Point(339, 12)
+        Me.dtpFecha.Name = "dtpFecha"
+        Me.dtpFecha.Size = New System.Drawing.Size(100, 20)
+        Me.dtpFecha.TabIndex = 16
+        Me.dtpFecha.Visible = False
         '
         'TasaABM
         '
@@ -206,9 +219,9 @@ Public Class TasaABM
     End Sub
 #End Region
 
-    Private Expre_Regu As String = "\d{1,3}\.\d{1,2}"
     Private oDataLayer As TasaDataLayer
-    Private IdControl As Int32 = Nothing
+    Private TasaFull As Double = 0
+    Private TasaClien As Double = 0
 
     Public Sub New()
         MyBase.New
@@ -269,36 +282,20 @@ Public Class TasaABM
         End If
 
     End Sub
-    Private Sub Culture(sender As Object)
-        Dim txt = DirectCast(sender, TextBox)
-        Dim esAR As CultureInfo = CultureInfo.CreateSpecificCulture("es-AR")
-        Dim Value As Double = txt.Text
 
-        'txt.Text = String.Format(esAR, "{0:000.00}" + esAR.NumberFormat.CurrencySymbol, Value)
-        txt.Text = String.Format(esAR, "{0:0.00}", Value)
-    End Sub
     Private Sub txtBina_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBina.KeyPress
         ValiText(sender, e)
-    End Sub
-
-    Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
-        'Culture(sender)
     End Sub
     Private Sub txtDolarInPais_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDolarInPais.KeyPress
         ValiText(sender, e)
     End Sub
 
-    Private Sub txtDolarInPais_LostFocus(sender As Object, e As EventArgs) Handles txtDolarInPais.LostFocus
-        'Culture(sender)
-    End Sub
 
     Private Sub CalcularTasa()
-        Try
 
+        Try
             Dim bina As Decimal = 0
             Dim dolarpais As Decimal = 0
-            Dim TasaFull As Decimal = 0
-            Dim TasaClien As Double = 0
             Dim comi As Double = txtComision.Text
 
             If Not txtBina.Text Is Nothing And Not txtDolarInPais.Text Is Nothing Then
@@ -309,9 +306,10 @@ Public Class TasaABM
 
             TasaClien = TasaFull - ((TasaFull / (1 - comi)) - TasaFull)
 
-
             txtTasaFull.Text = TasaFull.ToString("n6")
+            txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
             txtTasaVenta.Text = TasaClien.ToString("n4")
+            txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
 
         Catch ex As Exception
 
@@ -332,10 +330,6 @@ Public Class TasaABM
         ValiText(sender, e)
     End Sub
 
-    Private Sub txtTasaVentaCustom_LostFocus(sender As Object, e As EventArgs) Handles txtTasaVentaCustom.LostFocus
-        'Culture(sender)
-    End Sub
-
     Private Sub TasaABM_Save() Handles MyBase.Save
         Dim oData As TasaData
 
@@ -347,8 +341,9 @@ Public Class TasaABM
         End If
 
         oDataLayer = New TasaDataLayer
-
-        oData = New TasaData With
+        Try
+            If IsAddNew Then
+                oData = New TasaData With
             {
             .TAS_Date = Now.ToShortDateString(),
             .TAS_Binance = txtBina.Text,
@@ -356,11 +351,25 @@ Public Class TasaABM
             .TAS_Comision = txtComision.Text,
             .TAS_TasaFull = txtTasaFull.Text,
             .TAS_TasaMayorista = 0,
-            .TAS_TasaCliente = tasacliente
+            .TAS_TasaCliente = tasacliente,
+            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id
             }
-
-        Try
-            oDataLayer.CreateTasa(oData)
+                oDataLayer.CreateTasa(oData)
+            Else
+                oData = New TasaData With
+            {
+            .TAS_Id = txtIdControl.Text,
+            .TAS_Date = dtpFecha.Text,
+            .TAS_Binance = txtBina.Text,
+            .TAS_DolarPais = txtDolarInPais.Text,
+            .TAS_Comision = txtComision.Text,
+            .TAS_TasaFull = txtTasaFull.Text,
+            .TAS_TasaMayorista = 0,
+            .TAS_TasaCliente = tasacliente,
+            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id
+            }
+                oDataLayer.UpdateTasa(oData)
+            End If
 
 
         Catch ex As Exception
@@ -374,16 +383,25 @@ Public Class TasaABM
         txtDolarInPais.DataBindings.Add("Text", row, "TAS_DolarPais")
         txtComision.DataBindings.Add("Text", row, "TAS_Comision")
         txtTasaFull.DataBindings.Add("Text", row, "TAS_TasaFull")
-        txtTasaVentaCustom.DataBindings.Add("Text", row, "TAS_TasaCliente")
+        txtTasaVenta.DataBindings.Add("Text", row, "TAS_TasaCliente")
+        dtpFecha.DataBindings.Add("Text", row, "TAS_Date")
 
     End Sub
     Private Sub TasaABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-
+        txtIdControl.Enabled = False
     End Sub
 
     Private Sub TasaABM_ValidateControls(Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
 
     End Sub
 
+    Private Sub txtDolarInPais_LostFocus(sender As Object, e As EventArgs) Handles txtDolarInPais.LostFocus
+        txtTasaFull.Text = TasaFull.ToString("n6")
+        txtTasaVenta.Text = TasaClien.ToString("n4")
+    End Sub
 
+    Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
+        txtTasaFull.Text = TasaFull.ToString("n6")
+        txtTasaVenta.Text = TasaClien.ToString("n4")
+    End Sub
 End Class

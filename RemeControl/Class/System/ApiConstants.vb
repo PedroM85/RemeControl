@@ -14,4 +14,6 @@
     'Informacion de tasas
     Public Const GetTasas As String = Direc + "GetTasas"
     Public Const CreateTasa As String = Direc + "CreateTasa"
+    Public Const UpdateTasa As String = Direc + "UpdateTasa"
+    Public Const DeleteTasa As String = Direc + "DeleteTasa"
 End Class
