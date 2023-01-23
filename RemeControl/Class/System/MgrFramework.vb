@@ -28,7 +28,7 @@ Public Class MgrFramework
     End Function
     Public Function InitConnection() As Boolean
         Try
-            If My.Computer.Network.Ping("168.181.187.165") Then
+            If My.Computer.Network.Ping("8.8.8.8") Then
                 Return True
             Else
                 Return False

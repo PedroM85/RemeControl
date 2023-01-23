@@ -3,7 +3,7 @@
 
     Private WithEvents Label1 As Label
     Private WithEvents oSocioABM As SocioABM
-    Private dtSocio As DataTable
+
 #Region "Initial"
 
     Private Sub InitializeComponent()
@@ -37,7 +37,7 @@
         MyBase.New
 
         InitializeComponent()
-        dtSocio = New DataTable()
+
 
         LoadGlobalCaptions()
     End Sub

@@ -12,6 +12,10 @@
             Case "SOCIO"
                 Dim oSocio As SocioManager = New SocioManager
                 oView = oSocio.CreateSocioView
+            Case "CLIENTE"
+                Dim oCliente As ClientManager = New ClientManager
+                oView = oCliente.CreateClientView
+
             Case Else
                 oView = Nothing
         End Select

@@ -109,13 +109,7 @@
 #End Region
 
     Private oDataLayer As SocioDataLayer
-    Private oViewDataSet As SocioData
 
-    Public WriteOnly Property ViewDataSet() As SocioData
-        Set(value As SocioData)
-            oViewDataSet = value
-        End Set
-    End Property
 
 
     Public Sub New()

@@ -13,6 +13,7 @@
         ShowBank
         ShowCambio
         ShowSocio
+
     End Enum
 
 #End Region
@@ -25,6 +26,7 @@
 
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
+        mControllers(State.ShowClient) = New ShowClient(Me)
 
     End Sub
 
@@ -157,5 +159,10 @@
     Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
         mTrMgr.DoMenuItem("SOCIO")
         mCurrStep = State.ShowSocio
+    End Sub
+
+    Private Sub btnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
+        mTrMgr.DoMenuItem("CLIENTE")
+        mCurrStep = State.ShowClient
     End Sub
 End Class

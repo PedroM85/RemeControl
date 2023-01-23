@@ -21,4 +21,10 @@
     Public Const CreateSocio As String = Direc + "CreateSocio"
     Public Const UpdateSocio As String = Direc + "UpdateSocio"
     Public Const DeleteSocio As String = Direc + "DeleteSocio"
+    'Informacion de Cliente
+    Public Const GetCliente As String = Direc + "GetClientes"
+    Public Const GetClienteId As String = Direc + "GetCliente"
+    Public Const CreateCliente As String = Direc + "createCliente"
+    Public Const UpdateCliente As String = Direc + "updateCliente"
+    Public Const DeleteCliente As String = Direc + "deleteCliente"
 End Class

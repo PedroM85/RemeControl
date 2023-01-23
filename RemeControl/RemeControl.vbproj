@@ -76,6 +76,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
     <Compile Include="Class\System\Connection.vb" />
@@ -89,6 +90,7 @@
     <Compile Include="Class\System\TransactionManager.vb" />
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />
+    <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
     <Compile Include="FormMain.vb">
@@ -136,6 +138,13 @@
     <Compile Include="Views\Base\ViewBase.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\Cliente\ClientABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Cliente\ClientManager.vb" />
+    <Compile Include="Views\Cliente\ClientView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Socio\SocioABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -169,6 +178,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\ViewBase.resx">
       <DependentUpon>ViewBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cliente\ClientABM.resx">
+      <DependentUpon>ClientABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cliente\ClientView.resx">
+      <DependentUpon>ClientView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Socio\SocioABM.resx">
       <DependentUpon>SocioABM.vb</DependentUpon>
