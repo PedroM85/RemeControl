@@ -392,7 +392,7 @@ Public Class TasaABM
     End Sub
     Private Sub TasaABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
 
-        row("TAS_Id") = Nothing
+        'row("TAS_Id") = Nothing
         'row("TAS_Binance") = Nothing
         'row("TAS_DolarPais") = Nothing
         'row("TAS_Comision") = Nothing

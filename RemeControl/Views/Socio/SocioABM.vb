@@ -42,7 +42,6 @@
         Me.txtId.Size = New System.Drawing.Size(125, 20)
         Me.txtId.TabIndex = 0
         Me.txtId.Text = "0"
-        Me.txtId.Visible = False
         '
         'txtName
         '
@@ -183,12 +182,12 @@
     Private Sub SocioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
         txtId.Enabled = False
     End Sub
-    Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
-        row("SOC_Id") = 0
-        'row("SOC_Name") = not
-        'row("SOC_Telefono") = ""
-        'row("SOC_Active") = True
-    End Sub
+    'Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
+    '    row("SOC_Id") = 0
+    '    'row("SOC_Name") = not
+    '    'row("SOC_Telefono") = ""
+    '    'row("SOC_Active") = True
+    'End Sub
     Private Sub SocioABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
         txtId.DataBindings.Add("Text", row, "SOC_Id")
         txtName.DataBindings.Add("Text", row, "SOC_Name")

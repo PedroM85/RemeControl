@@ -71,16 +71,16 @@
             lAddNew = True
             'row = dv.AddNew()
             ' row.BeginEdit()
-            RaiseEvent SetDefaultValuesOnNew(row)
+            'RaiseEvent SetDefaultValuesOnNew(row)
         Else
             lAddNew = False
             row.BeginEdit()
             RaiseEvent SetDefaultValuesOnEdit(row)
+            oDataRow = row
+            RaiseEvent SetBindings(row)
         End If
 
 
-        oDataRow = row
-        RaiseEvent SetBindings(row)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         RaiseEvent Cancel()
@@ -93,12 +93,12 @@
         RaiseEvent ValidateControls(lCancel, lAddNew)
 
         If Not lCancel Then
-            If Not oDataRow Is Nothing Then
-                oDataRow.EndEdit()
+            'If Not oDataRow Is Nothing Then
+            'oDataRow.EndEdit()
 
-                RaiseEvent Save()
+            RaiseEvent Save()
 
-            End If
+            'End If
         End If
 
     End Sub

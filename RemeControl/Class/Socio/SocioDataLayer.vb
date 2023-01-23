@@ -1,10 +1,10 @@
 ﻿Imports Newtonsoft.Json
 Public Class SocioData
-    Private iSOC_Id As Int32
+    Private iSOC_Id As Integer
     Private sSOC_Name As String
     Private sSOC_Telefono As String
     Private sSOC_ModifiedBy As String
-    Private bSOC_Active As String
+    Private bSOC_Active As Integer
 
     Public Property SOC_Id As Integer
         Get
@@ -42,11 +42,11 @@ Public Class SocioData
         End Set
     End Property
 
-    Public Property SOC_Active As String
+    Public Property SOC_Active As Integer
         Get
             Return bSOC_Active
         End Get
-        Set(value As String)
+        Set(value As Integer)
             bSOC_Active = value
         End Set
     End Property
@@ -75,11 +75,11 @@ Public Class SocioDataLayer
 
     Public Sub CreateSocios(Data As SocioData)
         Dim Socio As SocioData = Nothing
-        Dim Url As String = ApiConstants.CreateTasa
+        Dim Url As String = ApiConstants.CreateSocio
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
-            Dim result_Post = PutJson(Url, result, oApp.CurrentUser)
+            Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
 
             Dim coso = JsonConvert.DeserializeObject(Of SocioData)(result_Post)
 
