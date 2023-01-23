@@ -76,6 +76,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Banco\BancoDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
@@ -126,6 +127,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Class\SalesDate\SalesDateInfo.vb" />
+    <Compile Include="Views\Banco\BancoABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Banco\BancoManager.vb" />
+    <Compile Include="Views\Banco\BancoView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Base\ABMBase.Designer.vb">
       <DependentUpon>ABMBase.vb</DependentUpon>
     </Compile>
@@ -172,6 +180,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Banco\BancoABM.resx">
+      <DependentUpon>BancoABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Banco\BancoView.resx">
+      <DependentUpon>BancoView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\ABMBase.resx">
       <DependentUpon>ABMBase.vb</DependentUpon>

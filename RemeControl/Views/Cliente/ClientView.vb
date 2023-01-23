@@ -33,7 +33,7 @@
 
     End Sub
 
-    Private Sub SocioView_Addnew() Handles MyBase.AddNew
+    Private Sub ClientView_Addnew() Handles MyBase.AddNew
 
         Cursor = Cursors.WaitCursor
 
@@ -55,7 +55,7 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Public Sub SocioView_Edit() Handles MyBase.Edit
+    Public Sub ClientView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
         oClientABM = New ClientABM
@@ -78,7 +78,7 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oSocioABM_Delete() Handles MyBase.Delete
+    Private Sub oClientABM_Delete() Handles MyBase.Delete
         Dim oDataLayer As ClienteDataLayer = New ClienteDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then

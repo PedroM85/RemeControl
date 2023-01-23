@@ -154,7 +154,6 @@
 
     End Sub
 
-    Private focusedForeColor As Color = Color.Black
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
@@ -168,6 +167,7 @@
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
+    Private focusedForeColor As Color = Color.Black
     Private focusedBackColor As Color = Color.Gainsboro
 #End Region
 

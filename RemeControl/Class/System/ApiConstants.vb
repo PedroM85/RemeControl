@@ -24,7 +24,13 @@
     'Informacion de Cliente
     Public Const GetCliente As String = Direc + "GetClientes"
     Public Const GetClienteId As String = Direc + "GetCliente"
-    Public Const CreateCliente As String = Direc + "createCliente"
-    Public Const UpdateCliente As String = Direc + "updateCliente"
-    Public Const DeleteCliente As String = Direc + "deleteCliente"
+    Public Const CreateCliente As String = Direc + "CreateCliente"
+    Public Const UpdateCliente As String = Direc + "UpdateCliente"
+    Public Const DeleteCliente As String = Direc + "DeleteCliente"
+    'Informacion de Bancos
+    Public Const GetBancos As String = Direc + "GetBancos"
+    Public Const GetBancoId As String = Direc + "GetBanco"
+    Public Const CreateBanco As String = Direc + "CreateBanco"
+    Public Const UpdateBanco As String = Direc + "UpdateBanco"
+    Public Const DeleteBanco As String = Direc + "DeleteBanco"
 End Class
