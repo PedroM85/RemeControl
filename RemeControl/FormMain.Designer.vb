@@ -26,7 +26,11 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnSocio = New System.Windows.Forms.Button()
+        Me.btnBank = New System.Windows.Forms.Button()
         Me.btnCalcular = New System.Windows.Forms.Button()
+        Me.btnClients = New System.Windows.Forms.Button()
+        Me.btnCambio = New System.Windows.Forms.Button()
         Me.btnHome = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblUser = New System.Windows.Forms.Label()
@@ -62,7 +66,11 @@ Partial Class FormMain
         'pnlLeft
         '
         Me.pnlLeft.BackColor = System.Drawing.SystemColors.Highlight
+        Me.pnlLeft.Controls.Add(Me.btnSocio)
+        Me.pnlLeft.Controls.Add(Me.btnBank)
         Me.pnlLeft.Controls.Add(Me.btnCalcular)
+        Me.pnlLeft.Controls.Add(Me.btnClients)
+        Me.pnlLeft.Controls.Add(Me.btnCambio)
         Me.pnlLeft.Controls.Add(Me.btnHome)
         Me.pnlLeft.Controls.Add(Me.Panel1)
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
@@ -71,24 +79,72 @@ Partial Class FormMain
         Me.pnlLeft.Size = New System.Drawing.Size(166, 464)
         Me.pnlLeft.TabIndex = 1
         '
+        'btnSocio
+        '
+        Me.btnSocio.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnSocio.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSocio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSocio.Location = New System.Drawing.Point(0, 361)
+        Me.btnSocio.Name = "btnSocio"
+        Me.btnSocio.Size = New System.Drawing.Size(166, 45)
+        Me.btnSocio.TabIndex = 5
+        Me.btnSocio.Text = "Socio | Sucursal"
+        Me.btnSocio.UseVisualStyleBackColor = False
+        '
+        'btnBank
+        '
+        Me.btnBank.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnBank.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBank.Location = New System.Drawing.Point(0, 316)
+        Me.btnBank.Name = "btnBank"
+        Me.btnBank.Size = New System.Drawing.Size(166, 45)
+        Me.btnBank.TabIndex = 2
+        Me.btnBank.Text = "Bancos"
+        Me.btnBank.UseVisualStyleBackColor = False
+        '
         'btnCalcular
         '
         Me.btnCalcular.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnCalcular.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCalcular.Location = New System.Drawing.Point(0, 209)
+        Me.btnCalcular.Location = New System.Drawing.Point(0, 271)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
         Me.btnCalcular.TabIndex = 1
         Me.btnCalcular.Text = "Tasa del dia"
         Me.btnCalcular.UseVisualStyleBackColor = False
         '
+        'btnClients
+        '
+        Me.btnClients.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnClients.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClients.Location = New System.Drawing.Point(0, 226)
+        Me.btnClients.Name = "btnClients"
+        Me.btnClients.Size = New System.Drawing.Size(166, 45)
+        Me.btnClients.TabIndex = 3
+        Me.btnClients.Text = "Clientes"
+        Me.btnClients.UseVisualStyleBackColor = False
+        '
+        'btnCambio
+        '
+        Me.btnCambio.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnCambio.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCambio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCambio.Location = New System.Drawing.Point(0, 181)
+        Me.btnCambio.Name = "btnCambio"
+        Me.btnCambio.Size = New System.Drawing.Size(166, 45)
+        Me.btnCambio.TabIndex = 4
+        Me.btnCambio.Text = "Cambios"
+        Me.btnCambio.UseVisualStyleBackColor = False
+        '
         'btnHome
         '
         Me.btnHome.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnHome.Location = New System.Drawing.Point(0, 164)
+        Me.btnHome.Location = New System.Drawing.Point(0, 136)
         Me.btnHome.Name = "btnHome"
         Me.btnHome.Size = New System.Drawing.Size(166, 45)
         Me.btnHome.TabIndex = 0
@@ -102,14 +158,14 @@ Partial Class FormMain
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(166, 164)
+        Me.Panel1.Size = New System.Drawing.Size(166, 136)
         Me.Panel1.TabIndex = 0
         '
         'lblUser
         '
         Me.lblUser.AutoSize = True
         Me.lblUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUser.Location = New System.Drawing.Point(38, 116)
+        Me.lblUser.Location = New System.Drawing.Point(35, 96)
         Me.lblUser.Name = "lblUser"
         Me.lblUser.Size = New System.Drawing.Size(79, 13)
         Me.lblUser.TabIndex = 0
@@ -159,4 +215,8 @@ Partial Class FormMain
     Protected WithEvents tmrBlinkyBlinky2 As Timer
     Friend WithEvents btnCalcular As Button
     Friend WithEvents btnHome As Button
+    Friend WithEvents btnBank As Button
+    Friend WithEvents btnClients As Button
+    Friend WithEvents btnCambio As Button
+    Friend WithEvents btnSocio As Button
 End Class

@@ -4,6 +4,7 @@ Public Class TasaView
     Inherits ViewBase
 
     Private WithEvents oTasaABM As TasaABM
+    Private dtTasa As DataTable
 
     Public Sub New()
         MyBase.New
@@ -35,6 +36,7 @@ Public Class TasaView
 
         oTasaABM.Caption = "Agregar una tasa"
         oTasaABM.Title = "Datos Generales"
+        oTasaABM.Edit(Nothing)
 
         Me.Visible = False
         oTasaABM.Dock = DockStyle.Fill

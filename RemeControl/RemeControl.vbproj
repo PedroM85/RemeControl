@@ -76,6 +76,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
     <Compile Include="Class\System\Connection.vb" />
     <Compile Include="Class\System\EnvironmentObjects.vb" />
@@ -88,6 +89,7 @@
     <Compile Include="Class\System\TransactionManager.vb" />
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />
+    <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
@@ -134,6 +136,13 @@
     <Compile Include="Views\Base\ViewBase.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\Socio\SocioABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Socio\SocioManager.vb" />
+    <Compile Include="Views\Socio\SocioView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Tasa\TasaABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,6 +169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\ViewBase.resx">
       <DependentUpon>ViewBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Socio\SocioABM.resx">
+      <DependentUpon>SocioABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Socio\SocioView.resx">
+      <DependentUpon>SocioView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Tasa\TasaABM.resx">
       <DependentUpon>TasaABM.vb</DependentUpon>

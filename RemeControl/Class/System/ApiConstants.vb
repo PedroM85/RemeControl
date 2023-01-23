@@ -16,4 +16,9 @@
     Public Const CreateTasa As String = Direc + "CreateTasa"
     Public Const UpdateTasa As String = Direc + "UpdateTasa"
     Public Const DeleteTasa As String = Direc + "DeleteTasa"
+    'Informacion de Socios
+    Public Const GetSocios As String = Direc + "GetSocios"
+    Public Const CreateSocio As String = Direc + "CreateSocio"
+    Public Const UpdateSocio As String = Direc + "UpdateSocio"
+    Public Const DeleteSocio As String = Direc + "DeleteSocio"
 End Class

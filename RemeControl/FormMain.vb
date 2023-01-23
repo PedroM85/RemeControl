@@ -9,6 +9,10 @@
 #Region "Keydown"
     Private Enum State
         ShowTasa
+        ShowClient
+        ShowBank
+        ShowCambio
+        ShowSocio
     End Enum
 
 #End Region
@@ -20,6 +24,7 @@
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
         mControllers(State.ShowTasa) = New ShowTasa(Me)
+        mControllers(State.ShowSocio) = New ShowSocio(Me)
 
     End Sub
 
@@ -124,10 +129,7 @@
         pnlFill.Controls.Add(View)
     End Sub
 
-    Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
-        mTrMgr.DoMenuItem("TASA")
-        mCurrStep = State.ShowTasa
-    End Sub
+
 
 #End Region
 
@@ -144,7 +146,16 @@
             mControllers(mCurrStep).HandleKey(e)
         End If
     End Sub
+    Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
+        mTrMgr.DoMenuItem("TASA")
+        mCurrStep = State.ShowTasa
+    End Sub
+    Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
+        DisposeView()
+    End Sub
 
-
-
+    Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
+        mTrMgr.DoMenuItem("SOCIO")
+        mCurrStep = State.ShowSocio
+    End Sub
 End Class

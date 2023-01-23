@@ -9,6 +9,9 @@
             Case "TASA"
                 Dim oTasa As TasaManager = New TasaManager
                 oView = oTasa.CreateTasaView
+            Case "SOCIO"
+                Dim oSocio As SocioManager = New SocioManager
+                oView = oSocio.CreateSocioView
             Case Else
                 oView = Nothing
         End Select

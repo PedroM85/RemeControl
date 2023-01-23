@@ -242,17 +242,6 @@ Public Class TasaABM
 
     End Sub
 
-    Private Sub chkCustom_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustom.CheckedChanged
-        If chkCustom.CheckState Then
-            txtTasaVentaCustom.Visible = True
-            txtTasaVenta.Visible = False
-            txtTasaVentaCustom.Focus()
-        Else
-            txtTasaVentaCustom.Visible = False
-            txtTasaVenta.Visible = True
-        End If
-    End Sub
-
     Private focusedForeColor As Color = Color.Black
     Private focusedBackColor As Color = Color.Gainsboro
 
@@ -274,6 +263,17 @@ Public Class TasaABM
         b.ForeColor = focusedForeColor
         b.BackColor = focusedBackColor
     End Sub
+    Private Sub chkCustom_CheckedChanged(sender As Object, e As EventArgs) Handles chkCustom.CheckedChanged
+        If chkCustom.CheckState Then
+            txtTasaVentaCustom.Visible = True
+            txtTasaVenta.Visible = False
+            txtTasaVentaCustom.Focus()
+        Else
+            txtTasaVentaCustom.Visible = False
+            txtTasaVenta.Visible = True
+        End If
+    End Sub
+
 
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
@@ -389,6 +389,17 @@ Public Class TasaABM
     End Sub
     Private Sub TasaABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
         txtIdControl.Enabled = False
+    End Sub
+    Private Sub TasaABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
+
+        row("TAS_Id") = Nothing
+        'row("TAS_Binance") = Nothing
+        'row("TAS_DolarPais") = Nothing
+        'row("TAS_Comision") = Nothing
+        'row("TAS_TasaFull") = Nothing
+        'row("TAS_TasaCliente") = Nothing
+        'row("TAS_Date") = Nothing
+
     End Sub
 
     Private Sub TasaABM_ValidateControls(Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls

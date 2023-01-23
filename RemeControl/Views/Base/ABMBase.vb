@@ -1,21 +1,17 @@
 ﻿Public Class ABMBase
-
+    Inherits UserControl
 
     Private oDataRow As DataRowView
-
     Private lAddNew As Boolean
-    Public Event SetBindings(ByVal row As DataRowView)
-    Public Event SetDefaultValuesOnEdit(ByVal row As DataRowView)
-    Public Event ValidateControls(Cancel As Boolean, IsAddNew As Boolean)
-    Public Event Cancel()
-    Public Event Close()
-    Public Event Save()
 
-    Public Sub ExecValidateControl()
-        Dim lCancel As Boolean = False
 
-        RaiseEvent ValidateControls(lCancel, lAddNew)
-    End Sub
+
+
+    Public ReadOnly Property IsAddNew() As Boolean
+        Get
+            Return lAddNew
+        End Get
+    End Property
     Public Property Caption() As String
         Get
             Return lblCaption.Text
@@ -37,11 +33,23 @@
             Return oDataRow
         End Get
     End Property
-    Public ReadOnly Property IsAddNew() As Boolean
-        Get
-            Return lAddNew
-        End Get
-    End Property
+
+#Region "Events"
+
+    Public Event SetBindings(row As DataRowView)
+    Public Event ValidateControls(Cancel As Boolean, IsAddNew As Boolean)
+    Public Event SetDefaultValuesOnNew(row As DataRowView)
+    Public Event SetDefaultValuesOnEdit(row As DataRowView)
+    Public Event Cancel()
+    Public Event Close()
+    Public Event Save()
+
+#End Region
+    Public Sub ExecValidateControl()
+        Dim lCancel As Boolean = False
+
+        RaiseEvent ValidateControls(lCancel, lAddNew)
+    End Sub
 
     Public Sub New()
         MyBase.New
@@ -58,8 +66,12 @@
         'Dim dv As DataView
 
         If row Is Nothing Then
+            ' dv = New DataView(oTable)
 
             lAddNew = True
+            'row = dv.AddNew()
+            ' row.BeginEdit()
+            RaiseEvent SetDefaultValuesOnNew(row)
         Else
             lAddNew = False
             row.BeginEdit()
@@ -78,10 +90,15 @@
         Dim lCancel As Boolean = False
 
 
+        RaiseEvent ValidateControls(lCancel, lAddNew)
 
         If Not lCancel Then
-            RaiseEvent Save()
+            If Not oDataRow Is Nothing Then
+                oDataRow.EndEdit()
 
+                RaiseEvent Save()
+
+            End If
         End If
 
     End Sub
