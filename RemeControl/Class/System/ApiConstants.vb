@@ -33,4 +33,5 @@
     Public Const CreateBanco As String = Direc + "CreateBanco"
     Public Const UpdateBanco As String = Direc + "UpdateBanco"
     Public Const DeleteBanco As String = Direc + "DeleteBanco"
+    Public Const GetAccountType As String = Direc + "GetAccountType"
 End Class

@@ -91,6 +91,7 @@
     <Compile Include="Class\System\TransactionManager.vb" />
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />
+    <Compile Include="Controller\ShowBank.vb" />
     <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />

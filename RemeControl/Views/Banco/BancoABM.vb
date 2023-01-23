@@ -5,51 +5,43 @@
 
 
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents txtPrefix As TextBox
-    Friend WithEvents cboBancoAcc As ComboBox
     Friend WithEvents txtNombre As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents chkActive As CheckBox
     Friend WithEvents txtId As TextBox
 
     Private Sub InitializeComponent()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPrefix = New System.Windows.Forms.TextBox()
-        Me.cboBancoAcc = New System.Windows.Forms.ComboBox()
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.txtId = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.Label6)
+        Me.pnlControls0.Controls.Add(Me.chkActive)
         Me.pnlControls0.Controls.Add(Me.Label3)
-        Me.pnlControls0.Controls.Add(Me.Label2)
         Me.pnlControls0.Controls.Add(Me.Label1)
         Me.pnlControls0.Controls.Add(Me.txtPrefix)
-        Me.pnlControls0.Controls.Add(Me.cboBancoAcc)
         Me.pnlControls0.Controls.Add(Me.txtNombre)
         Me.pnlControls0.Controls.Add(Me.txtId)
+        Me.pnlControls0.Size = New System.Drawing.Size(524, 201)
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(62, 116)
+        Me.Label3.Location = New System.Drawing.Point(62, 89)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 13)
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "Prefijo:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(19, 90)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 13)
-        Me.Label2.TabIndex = 15
-        Me.Label2.Text = "Tipo de cuenta:"
         '
         'Label1
         '
@@ -62,18 +54,10 @@
         '
         'txtPrefix
         '
-        Me.txtPrefix.Location = New System.Drawing.Point(125, 109)
+        Me.txtPrefix.Location = New System.Drawing.Point(125, 82)
         Me.txtPrefix.Name = "txtPrefix"
         Me.txtPrefix.Size = New System.Drawing.Size(121, 20)
         Me.txtPrefix.TabIndex = 13
-        '
-        'cboBancoAcc
-        '
-        Me.cboBancoAcc.FormattingEnabled = True
-        Me.cboBancoAcc.Location = New System.Drawing.Point(125, 82)
-        Me.cboBancoAcc.Name = "cboBancoAcc"
-        Me.cboBancoAcc.Size = New System.Drawing.Size(121, 21)
-        Me.cboBancoAcc.TabIndex = 12
         '
         'txtNombre
         '
@@ -89,6 +73,24 @@
         Me.txtId.Size = New System.Drawing.Size(100, 20)
         Me.txtId.TabIndex = 10
         Me.txtId.Text = "0"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(61, 115)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(40, 13)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Activo:"
+        '
+        'chkActive
+        '
+        Me.chkActive.AutoSize = True
+        Me.chkActive.Location = New System.Drawing.Point(125, 114)
+        Me.chkActive.Name = "chkActive"
+        Me.chkActive.Size = New System.Drawing.Size(15, 14)
+        Me.chkActive.TabIndex = 17
+        Me.chkActive.UseVisualStyleBackColor = True
         '
         'BancoABM
         '
@@ -146,14 +148,14 @@
             If txtId.Text = Nothing Or txtId.Text = "" Then
                 txtId.Text = Nothing
             End If
-            '.SOC_Id = IIf(IsAddNew, 0, txtId.Text),
-            '.SOC_Name = txtName.Text.Trim,
-            '.SOC_Telefono = txtPhone.Text.Trim,
-            '.SOC_ModifiedBy = oApp.CurrentUser.USR_Id,
-            '.SOC_Active = IIf(chkActive.CheckState, 1, 0)
+
             oData = New BancoData With
                 {
-               .BAN_Id = IIf(IsAddNew, 0, txtId.Text)
+               .BAN_Id = IIf(IsAddNew, 0, txtId.Text),
+               .BAN_Name = txtNombre.Text.Trim,
+               .BAN_Prefix = txtPrefix.Text.Trim,
+               .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
+               .BAN_Active = IIf(chkActive.CheckState, 1, 0)
                 }
 
             If IsAddNew Then
@@ -166,7 +168,7 @@
         End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        'txtId.Enabled = False
+        txtId.Enabled = False
     End Sub
     'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -175,16 +177,28 @@
     '    'row("SOC_Active") = True
     'End Sub
     Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        'txtId.DataBindings.Add("Text", row, "SOC_Id")
-        'txtName.DataBindings.Add("Text", row, "SOC_Name")
-        'txtPhone.DataBindings.Add("Text", row, "SOC_Telefono")
-        'chkActive.DataBindings.Add("Checked", row, "SOC_Active")
+        txtId.DataBindings.Add("Text", row, "BAN_Id")
+        txtNombre.DataBindings.Add("Text", row, "BAN_Name")
+        txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
+        chkActive.DataBindings.Add("Checked", row, "BAN_Active")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
-        If Not IsNumeric(e.KeyChar) Then
+        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
 
+    End Sub
+
+    'Private Sub GetTipoAccount()
+    '    Dim oBancoData As BancoDataLayer = Nothing
+
+    '    oBancoData = New BancoDataLayer
+
+    '    cboBancoAcc.DataSource = oBancoData.GetAcountType
+    'End Sub
+
+    Private Sub txtPrefix_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrefix.KeyPress
+        ValiText(sender, e)
     End Sub
 End Class

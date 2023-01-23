@@ -15,6 +15,9 @@
             Case "CLIENTE"
                 Dim oCliente As ClientManager = New ClientManager
                 oView = oCliente.CreateClientView
+            Case "BANCO"
+                Dim oBanco As BancoManager = New BancoManager
+                oView = oBanco.CreateBancoView
 
             Case Else
                 oView = Nothing

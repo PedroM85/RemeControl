@@ -66,7 +66,7 @@ Public Class BancoDataLayer
 
     Public Function GetBancos() As DataTable
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.GetCliente
+        Dim Url As String = ApiConstants.GetBancos
         Dim table As DataTable
         Try
             Banco = New BancoData
@@ -118,7 +118,7 @@ Public Class BancoDataLayer
 
     Public Sub DeleteBanco(Data As BancoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.DeleteCliente
+        Dim Url As String = ApiConstants.DeleteBanco
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -132,4 +132,23 @@ Public Class BancoDataLayer
         End Try
 
     End Sub
+
+    Public Function GetAcountType() As DataTable
+        Dim Banco As BancoData = Nothing
+        Dim Url As String = ApiConstants.GetAccountType
+        Dim table As DataTable
+        Try
+            Banco = New BancoData
+
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+
+
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        Return table
+    End Function
+
 End Class

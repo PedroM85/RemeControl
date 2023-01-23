@@ -27,6 +27,7 @@
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
         mControllers(State.ShowClient) = New ShowClient(Me)
+        mControllers(State.ShowBank) = New ShowBank(Me)
 
     End Sub
 
@@ -165,4 +166,10 @@
         mTrMgr.DoMenuItem("CLIENTE")
         mCurrStep = State.ShowClient
     End Sub
+
+    Private Sub btnBank_Click(sender As Object, e As EventArgs) Handles btnBank.Click
+        mTrMgr.DoMenuItem("BANCO")
+        mCurrStep = State.ShowBank
+    End Sub
+
 End Class

@@ -2,7 +2,7 @@
 
     Private oBancoView As BancoView
 
-    Public Function CreateBancaView() As BancoView
+    Public Function CreateBancoView() As BancoView
         oBancoView = New BancoView
 
         With oBancoView

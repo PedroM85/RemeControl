@@ -143,7 +143,7 @@
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 7
+        dgvView.ColumnCount = 6
 
         dgvView.Columns(0).Name = "BAN_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
@@ -158,45 +158,45 @@
         'dgvView.Columns(1).DefaultCellStyle.Format = "d"
         'dgvView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dgvView.Columns(2).Name = "BAN_Account"
-        dgvView.Columns(2).HeaderText = "Banco"
-        dgvView.Columns(2).DataPropertyName = "BAN_Account"
-        dgvView.Columns(2).Width = 120
+        'dgvView.Columns(2).Name = "BAN_ACC_Name"
+        'dgvView.Columns(2).HeaderText = "Tipo de cuenta"
+        'dgvView.Columns(2).DataPropertyName = "BAN_ACC_Name"
+        'dgvView.Columns(2).Width = 120
         'dgvView.Columns(2).DefaultCellStyle.Format = "{0:N2}"
         'dgvView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
-        dgvView.Columns(3).Name = "BAN_Prefix"
-        dgvView.Columns(3).HeaderText = "Cuenta"
-        dgvView.Columns(3).DataPropertyName = "BAN_Prefix"
+        dgvView.Columns(2).Name = "BAN_Prefix"
+        dgvView.Columns(2).HeaderText = "Prefijo"
+        dgvView.Columns(2).DataPropertyName = "BAN_Prefix"
+        dgvView.Columns(2).Width = 120
+
+
+        dgvView.Columns(3).Name = "BAN_CreatedDateTime"
+        dgvView.Columns(3).HeaderText = "Fecha de alta"
+        dgvView.Columns(3).DataPropertyName = "BAN_CreatedDateTime"
         dgvView.Columns(3).Width = 120
+        dgvView.Columns(3).Visible = False
 
 
-        dgvView.Columns(4).Name = "BAN_CreatedDateTime"
-        dgvView.Columns(4).HeaderText = "Fecha de alta"
-        dgvView.Columns(4).DataPropertyName = "BAN_CreatedDateTime"
-        dgvView.Columns(4).Width = 120
+        dgvView.Columns(4).Name = "BAN_ModifiedDateTime"
+        dgvView.Columns(4).HeaderText = "Fecha de modificacion"
+        dgvView.Columns(4).DataPropertyName = "BAN_ModifiedDateTime"
+        dgvView.Columns(4).Width = 100
         dgvView.Columns(4).Visible = False
 
 
-        dgvView.Columns(5).Name = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).HeaderText = "Fecha de modificacion"
-        dgvView.Columns(5).DataPropertyName = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).Width = 100
+        dgvView.Columns(5).Name = "BAN_ModifiedBy"
+        dgvView.Columns(5).HeaderText = "Modificado por"
+        dgvView.Columns(5).DataPropertyName = "BAN_ModifiedBy"
+        dgvView.Columns(5).Width = 120
         dgvView.Columns(5).Visible = False
-
-
-        dgvView.Columns(6).Name = "BAN_ModifiedBy"
-        dgvView.Columns(6).HeaderText = "Modificado por"
-        dgvView.Columns(6).DataPropertyName = "BAN_ModifiedBy"
-        dgvView.Columns(6).Width = 120
-        dgvView.Columns(6).Visible = False
 
 
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "BAN_Active"
         Check.HeaderText = "Activo"
         Check.DataPropertyName = "BAN_Active"
-        dgvView.Columns.Insert(7, Check)
+        dgvView.Columns.Insert(6, Check)
 
     End Sub
 
