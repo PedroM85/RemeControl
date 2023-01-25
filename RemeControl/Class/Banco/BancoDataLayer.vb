@@ -2,7 +2,7 @@
 Public Class BancoData
     Private iBAN_Id As Integer
     Private sBAN_Name As String
-    Private iBAN_Account As Integer
+    Private iBAN_Type As Integer
     Private sBAN_Prefix As String
     Private sBAN_ModifiedBy As String
     Private iBAN_ACtive As Integer
@@ -25,12 +25,12 @@ Public Class BancoData
         End Set
     End Property
 
-    Public Property BAN_Account As Integer
+    Public Property BAN_Type As Integer
         Get
-            Return iBAN_Account
+            Return iBAN_Type
         End Get
         Set(value As Integer)
-            iBAN_Account = value
+            iBAN_Type = value
         End Set
     End Property
 
@@ -136,6 +136,24 @@ Public Class BancoDataLayer
     Public Function GetAcountType() As DataTable
         Dim Banco As BancoData = Nothing
         Dim Url As String = ApiConstants.GetAccountType
+        Dim table As DataTable
+        Try
+            Banco = New BancoData
+
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+
+
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        Return table
+    End Function
+
+    Public Function GetAcount() As DataTable
+        Dim Banco As BancoData = Nothing
+        Dim Url As String = ApiConstants.GetAccount
         Dim table As DataTable
         Try
             Banco = New BancoData

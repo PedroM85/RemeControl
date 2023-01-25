@@ -34,7 +34,7 @@
         Me.pnlControls0.Controls.Add(Me.cboBanco)
         Me.pnlControls0.Controls.Add(Me.txtNombre)
         Me.pnlControls0.Controls.Add(Me.txtId)
-        Me.pnlControls0.Size = New System.Drawing.Size(524, 220)
+        Me.pnlControls0.Size = New System.Drawing.Size(524, 225)
         '
         'txtId
         '
@@ -43,46 +43,51 @@
         Me.txtId.Size = New System.Drawing.Size(100, 20)
         Me.txtId.TabIndex = 0
         Me.txtId.Text = "0"
+        Me.txtId.Visible = False
         '
         'txtNombre
         '
         Me.txtNombre.Location = New System.Drawing.Point(138, 55)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(121, 20)
+        Me.txtNombre.Size = New System.Drawing.Size(169, 20)
         Me.txtNombre.TabIndex = 1
         '
         'cboBanco
         '
+        Me.cboBanco.DisplayMember = "Banco"
+        Me.cboBanco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboBanco.FormattingEnabled = True
         Me.cboBanco.Location = New System.Drawing.Point(138, 81)
         Me.cboBanco.Name = "cboBanco"
-        Me.cboBanco.Size = New System.Drawing.Size(121, 21)
+        Me.cboBanco.Size = New System.Drawing.Size(169, 21)
         Me.cboBanco.TabIndex = 2
         '
         'txtCuenta
         '
         Me.txtCuenta.Location = New System.Drawing.Point(138, 108)
         Me.txtCuenta.Name = "txtCuenta"
-        Me.txtCuenta.Size = New System.Drawing.Size(121, 20)
+        Me.txtCuenta.Size = New System.Drawing.Size(169, 20)
         Me.txtCuenta.TabIndex = 3
         '
         'txtTitular
         '
         Me.txtTitular.Location = New System.Drawing.Point(138, 134)
         Me.txtTitular.Name = "txtTitular"
-        Me.txtTitular.Size = New System.Drawing.Size(121, 20)
+        Me.txtTitular.Size = New System.Drawing.Size(169, 20)
         Me.txtTitular.TabIndex = 4
         '
         'txtCedula
         '
         Me.txtCedula.Location = New System.Drawing.Point(138, 160)
         Me.txtCedula.Name = "txtCedula"
-        Me.txtCedula.Size = New System.Drawing.Size(121, 20)
+        Me.txtCedula.Size = New System.Drawing.Size(169, 20)
         Me.txtCedula.TabIndex = 5
         '
         'chkActive
         '
         Me.chkActive.AutoSize = True
+        Me.chkActive.Checked = True
+        Me.chkActive.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkActive.Location = New System.Drawing.Point(138, 193)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(15, 14)
@@ -177,6 +182,8 @@
 
         InitializeComponent()
 
+        GetBancos()
+
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
          .ForEach(Sub(b)
                       b.Tag = Tuple.Create(b.ForeColor, b.BackColor)
@@ -241,7 +248,7 @@
         End Try
     End Sub
     Private Sub SocioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        'txtId.Enabled = False
+        txtId.Enabled = True
     End Sub
     'Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -250,16 +257,32 @@
     '    'row("SOC_Active") = True
     'End Sub
     Private Sub SocioABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        'txtId.DataBindings.Add("Text", row, "SOC_Id")
-        'txtName.DataBindings.Add("Text", row, "SOC_Name")
-        'txtPhone.DataBindings.Add("Text", row, "SOC_Telefono")
-        'chkActive.DataBindings.Add("Checked", row, "SOC_Active")
+        txtId.DataBindings.Add("Text", row, "CLI_Id")
+        txtNombre.DataBindings.Add("Text", row, "CLI_Nombre")
+        cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
+        txtCuenta.DataBindings.Add("Text", row, "CLI_Cuenta")
+        txtTitular.DataBindings.Add("Text", row, "CLI_Titular")
+        txtCedula.DataBindings.Add("Text", row, "CLI_Cedula")
+        chkActive.DataBindings.Add("Checked", row, "CLI_Active")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
         If Not IsNumeric(e.KeyChar) Then
             e.Handled = True
         End If
+
+    End Sub
+
+    Private Sub GetBancos()
+        Dim oBancoData As BancoDataLayer = Nothing
+
+        oBancoData = New BancoDataLayer
+
+        cboBanco.DataSource = oBancoData.GetAcount
+        'cboBanco.ValueMember = "BAN_Name2"
+        Me.cboBanco.ValueMember = "CLI_Id"
+        Me.cboBanco.DisplayMember = "CLI_Name"
+
 
     End Sub
 

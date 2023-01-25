@@ -10,6 +10,8 @@
     Friend WithEvents txtNombre As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents chkActive As CheckBox
+    Friend WithEvents cboBankAcc As ComboBox
+    Friend WithEvents Label2 As Label
     Friend WithEvents txtId As TextBox
 
     Private Sub InitializeComponent()
@@ -20,11 +22,15 @@
         Me.txtId = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chkActive = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cboBankAcc = New System.Windows.Forms.ComboBox()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.cboBankAcc)
+        Me.pnlControls0.Controls.Add(Me.Label2)
         Me.pnlControls0.Controls.Add(Me.Label6)
         Me.pnlControls0.Controls.Add(Me.chkActive)
         Me.pnlControls0.Controls.Add(Me.Label3)
@@ -37,7 +43,7 @@
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(62, 89)
+        Me.Label3.Location = New System.Drawing.Point(62, 116)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 13)
         Me.Label3.TabIndex = 16
@@ -54,30 +60,31 @@
         '
         'txtPrefix
         '
-        Me.txtPrefix.Location = New System.Drawing.Point(125, 82)
+        Me.txtPrefix.Location = New System.Drawing.Point(125, 109)
         Me.txtPrefix.Name = "txtPrefix"
         Me.txtPrefix.Size = New System.Drawing.Size(121, 20)
-        Me.txtPrefix.TabIndex = 13
+        Me.txtPrefix.TabIndex = 3
         '
         'txtNombre
         '
         Me.txtNombre.Location = New System.Drawing.Point(125, 56)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(121, 20)
-        Me.txtNombre.TabIndex = 11
+        Me.txtNombre.TabIndex = 1
         '
         'txtId
         '
         Me.txtId.Location = New System.Drawing.Point(125, 30)
         Me.txtId.Name = "txtId"
         Me.txtId.Size = New System.Drawing.Size(100, 20)
-        Me.txtId.TabIndex = 10
+        Me.txtId.TabIndex = 0
         Me.txtId.Text = "0"
+        Me.txtId.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(61, 115)
+        Me.Label6.Location = New System.Drawing.Point(61, 142)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(40, 13)
         Me.Label6.TabIndex = 18
@@ -86,11 +93,33 @@
         'chkActive
         '
         Me.chkActive.AutoSize = True
-        Me.chkActive.Location = New System.Drawing.Point(125, 114)
+        Me.chkActive.Checked = True
+        Me.chkActive.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkActive.Location = New System.Drawing.Point(125, 141)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(15, 14)
-        Me.chkActive.TabIndex = 17
+        Me.chkActive.TabIndex = 4
         Me.chkActive.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(54, 90)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(32, 13)
+        Me.Label2.TabIndex = 19
+        Me.Label2.Text = "TIpo:"
+        '
+        'cboBankAcc
+        '
+        Me.cboBankAcc.DisplayMember = "BAN_ACC_Name"
+        Me.cboBankAcc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboBankAcc.FormattingEnabled = True
+        Me.cboBankAcc.Location = New System.Drawing.Point(125, 82)
+        Me.cboBankAcc.Name = "cboBankAcc"
+        Me.cboBankAcc.Size = New System.Drawing.Size(121, 21)
+        Me.cboBankAcc.TabIndex = 2
+        Me.cboBankAcc.ValueMember = "BAN_ACC_Name"
         '
         'BancoABM
         '
@@ -109,6 +138,8 @@
         MyBase.New
 
         InitializeComponent()
+
+        GetBancos()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
          .ForEach(Sub(b)
@@ -145,6 +176,7 @@
         oDataLayer = New BancoDataLayer
 
         Try
+            'MessageBox.Show(txtId.Text)
             If txtId.Text = Nothing Or txtId.Text = "" Then
                 txtId.Text = Nothing
             End If
@@ -168,7 +200,7 @@
         End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        txtId.Enabled = False
+        txtId.Enabled = True
     End Sub
     'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -181,6 +213,7 @@
         txtNombre.DataBindings.Add("Text", row, "BAN_Name")
         txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
         chkActive.DataBindings.Add("Checked", row, "BAN_Active")
+        cboBankAcc.DataBindings.Add("SelectedValue", row, "BAN_ACC_Name")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
@@ -190,13 +223,14 @@
 
     End Sub
 
-    'Private Sub GetTipoAccount()
-    '    Dim oBancoData As BancoDataLayer = Nothing
+    Private Sub GetBancos()
+        Dim oBancoData As BancoDataLayer = Nothing
 
-    '    oBancoData = New BancoDataLayer
+        oBancoData = New BancoDataLayer
 
-    '    cboBancoAcc.DataSource = oBancoData.GetAcountType
-    'End Sub
+        cboBankAcc.DataSource = oBancoData.GetAcountType
+    End Sub
+
 
     Private Sub txtPrefix_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrefix.KeyPress
         ValiText(sender, e)

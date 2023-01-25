@@ -111,7 +111,7 @@
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 8
+        dgvView.ColumnCount = 9
 
         dgvView.Columns(0).Name = "CLI_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
@@ -126,9 +126,9 @@
         'dgvView.Columns(1).DefaultCellStyle.Format = "d"
         'dgvView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dgvView.Columns(2).Name = "CLI_Banco"
+        dgvView.Columns(2).Name = "BAN_Name"
         dgvView.Columns(2).HeaderText = "Banco"
-        dgvView.Columns(2).DataPropertyName = "CLI_Banco"
+        dgvView.Columns(2).DataPropertyName = "BAN_Name"
         dgvView.Columns(2).Width = 120
         'dgvView.Columns(2).DefaultCellStyle.Format = "{0:N2}"
         'dgvView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -138,37 +138,42 @@
         dgvView.Columns(3).DataPropertyName = "CLI_Cuenta"
         dgvView.Columns(3).Width = 120
 
-        dgvView.Columns(4).Name = "CLI_Cedula"
-        dgvView.Columns(4).HeaderText = "Cedula"
-        dgvView.Columns(4).DataPropertyName = "CLI_Cedula"
+        dgvView.Columns(4).Name = "CLI_Titular"
+        dgvView.Columns(4).HeaderText = "Titular"
+        dgvView.Columns(4).DataPropertyName = "CLI_Titular"
         dgvView.Columns(4).Width = 120
 
-        dgvView.Columns(5).Name = "CLI_CreatedDateTime"
-        dgvView.Columns(5).HeaderText = "Fecha de alta"
-        dgvView.Columns(5).DataPropertyName = "CLI_CreatedDateTime"
+        dgvView.Columns(5).Name = "CLI_Cedula"
+        dgvView.Columns(5).HeaderText = "Cedula"
+        dgvView.Columns(5).DataPropertyName = "CLI_Cedula"
         dgvView.Columns(5).Width = 120
-        dgvView.Columns(5).Visible = False
 
-
-        dgvView.Columns(6).Name = "CLI_ModifiedDateTime"
-        dgvView.Columns(6).HeaderText = "Fecha de modificacion"
-        dgvView.Columns(6).DataPropertyName = "CLI_ModifiedDateTime"
-        dgvView.Columns(6).Width = 100
+        dgvView.Columns(6).Name = "CLI_CreatedDateTime"
+        dgvView.Columns(6).HeaderText = "Fecha de alta"
+        dgvView.Columns(6).DataPropertyName = "CLI_CreatedDateTime"
+        dgvView.Columns(6).Width = 120
         dgvView.Columns(6).Visible = False
 
 
-        dgvView.Columns(7).Name = "CLI_ModifiedBy"
-        dgvView.Columns(7).HeaderText = "Modificado por"
-        dgvView.Columns(7).DataPropertyName = "CLI_ModifiedBy"
-        dgvView.Columns(7).Width = 120
+        dgvView.Columns(7).Name = "CLI_ModifiedDateTime"
+        dgvView.Columns(7).HeaderText = "Fecha de modificacion"
+        dgvView.Columns(7).DataPropertyName = "CLI_ModifiedDateTime"
+        dgvView.Columns(7).Width = 100
         dgvView.Columns(7).Visible = False
+
+
+        dgvView.Columns(8).Name = "CLI_ModifiedBy"
+        dgvView.Columns(8).HeaderText = "Modificado por"
+        dgvView.Columns(8).DataPropertyName = "CLI_ModifiedBy"
+        dgvView.Columns(8).Width = 120
+        dgvView.Columns(8).Visible = False
 
 
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "CLI_Active"
         Check.HeaderText = "Activo"
         Check.DataPropertyName = "CLI_Active"
-        dgvView.Columns.Insert(8, Check)
+        dgvView.Columns.Insert(9, Check)
 
     End Sub
 
