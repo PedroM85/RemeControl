@@ -74,9 +74,9 @@
             'RaiseEvent SetDefaultValuesOnNew(row)
         Else
             lAddNew = False
-            row.BeginEdit()
+            'row.BeginEdit()
             RaiseEvent SetDefaultValuesOnEdit(row)
-            oDataRow = row
+            'oDataRow = row
             RaiseEvent SetBindings(row)
         End If
 

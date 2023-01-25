@@ -16,11 +16,13 @@
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblId = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.lblId)
         Me.pnlControls0.Controls.Add(Me.Label6)
         Me.pnlControls0.Controls.Add(Me.Label5)
         Me.pnlControls0.Controls.Add(Me.Label4)
@@ -40,7 +42,7 @@
         '
         Me.txtId.Location = New System.Drawing.Point(138, 29)
         Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(100, 20)
+        Me.txtId.Size = New System.Drawing.Size(38, 20)
         Me.txtId.TabIndex = 0
         Me.txtId.Text = "0"
         Me.txtId.Visible = False
@@ -148,6 +150,16 @@
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Activo:"
         '
+        'lblId
+        '
+        Me.lblId.AutoSize = True
+        Me.lblId.Location = New System.Drawing.Point(260, 36)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(31, 13)
+        Me.lblId.TabIndex = 13
+        Me.lblId.Text = "????"
+        Me.lblId.Visible = False
+        '
         'ClientABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -174,6 +186,7 @@
     Friend WithEvents Label4 As Label
     Private focusedForeColor As Color = Color.Black
     Private focusedBackColor As Color = Color.Gainsboro
+    Friend WithEvents lblId As Label
 #End Region
 
     Private oDataLayer As ClienteDataLayer
@@ -218,9 +231,7 @@
         oDataLayer = New ClienteDataLayer
 
         Try
-            If txtId.Text = Nothing Or txtId.Text = "" Then
-                txtId.Text = Nothing
-            End If
+
             '.SOC_Id = IIf(IsAddNew, 0, txtId.Text),
             '.SOC_Name = txtName.Text.Trim,
             '.SOC_Telefono = txtPhone.Text.Trim,
@@ -228,15 +239,16 @@
             '.SOC_Active = IIf(chkActive.CheckState, 1, 0)
             oData = New ClienteData With
                 {
-                .CLI_Id = IIf(IsAddNew, 0, txtId.Text),
+                .CLI_Id = IIf(IsAddNew, 0, lblId.Text),
                 .CLI_Nombre = txtNombre.Text.Trim,
-                .CLI_Banco = cboBanco.SelectedIndex,
+                .CLI_Banco = cboBanco.SelectedValue,
                 .CLI_Cuenta = txtCuenta.Text.Trim,
                 .CLI_Titular = txtTitular.Text.Trim,
                 .CLI_Cedula = txtCedula.Text.Trim,
                 .CLI_ModifiedBy = oApp.CurrentUser.USR_Id,
                 .CLI_Active = IIf(chkActive.CheckState, 1, 0)
                 }
+
 
             If IsAddNew Then
                 oDataLayer.CreateCliente(oData)
@@ -248,7 +260,8 @@
         End Try
     End Sub
     Private Sub SocioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        txtId.Enabled = True
+
+        lblId.Visible = True
     End Sub
     'Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -258,12 +271,13 @@
     'End Sub
     Private Sub SocioABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
         txtId.DataBindings.Add("Text", row, "CLI_Id")
+        lblId.DataBindings.Add("Text", row, "CLI_Id")
         txtNombre.DataBindings.Add("Text", row, "CLI_Nombre")
-        cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
         txtCuenta.DataBindings.Add("Text", row, "CLI_Cuenta")
         txtTitular.DataBindings.Add("Text", row, "CLI_Titular")
         txtCedula.DataBindings.Add("Text", row, "CLI_Cedula")
         chkActive.DataBindings.Add("Checked", row, "CLI_Active")
+        cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
@@ -280,8 +294,8 @@
 
         cboBanco.DataSource = oBancoData.GetAcount
         'cboBanco.ValueMember = "BAN_Name2"
-        Me.cboBanco.ValueMember = "CLI_Id"
-        Me.cboBanco.DisplayMember = "CLI_Name"
+        Me.cboBanco.ValueMember = "BAN_Id"
+        Me.cboBanco.DisplayMember = "BAN_Name"
 
 
     End Sub

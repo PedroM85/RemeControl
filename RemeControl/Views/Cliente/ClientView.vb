@@ -111,7 +111,7 @@
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 9
+        dgvView.ColumnCount = 10
 
         dgvView.Columns(0).Name = "CLI_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
@@ -125,6 +125,7 @@
         dgvView.Columns(1).Width = 150
         'dgvView.Columns(1).DefaultCellStyle.Format = "d"
         'dgvView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
 
         dgvView.Columns(2).Name = "BAN_Name"
         dgvView.Columns(2).HeaderText = "Banco"
@@ -168,12 +169,18 @@
         dgvView.Columns(8).Width = 120
         dgvView.Columns(8).Visible = False
 
+        dgvView.Columns(9).Name = "CLI_Banco"
+        dgvView.Columns(9).HeaderText = "IDBAn"
+        dgvView.Columns(9).DataPropertyName = "CLI_Banco"
+        dgvView.Columns(9).Width = 120
+        dgvView.Columns(9).Visible = False
+
 
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "CLI_Active"
         Check.HeaderText = "Activo"
         Check.DataPropertyName = "CLI_Active"
-        dgvView.Columns.Insert(9, Check)
+        dgvView.Columns.Insert(10, Check)
 
     End Sub
 
