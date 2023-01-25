@@ -77,8 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Banco\BancoDataLayer.vb" />
+    <Compile Include="Class\Cambio\CambioDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
+    <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
     <Compile Include="Class\System\Connection.vb" />
     <Compile Include="Class\System\EnvironmentObjects.vb" />
@@ -92,6 +94,7 @@
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />
     <Compile Include="Controller\ShowBank.vb" />
+    <Compile Include="Controller\ShowCambio.vb" />
     <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
@@ -147,6 +150,13 @@
     <Compile Include="Views\Base\ViewBase.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\Cambio\CambioABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Cambio\CambioManager.vb" />
+    <Compile Include="Views\Cambio\CambioView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Cliente\ClientABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -193,6 +203,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\ViewBase.resx">
       <DependentUpon>ViewBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cambio\CambioABM.resx">
+      <DependentUpon>CambioABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Cambio\CambioView.resx">
+      <DependentUpon>CambioView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Cliente\ClientABM.resx">
       <DependentUpon>ClientABM.vb</DependentUpon>

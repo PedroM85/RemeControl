@@ -172,4 +172,8 @@
         mCurrStep = State.ShowBank
     End Sub
 
+    Private Sub btnCambio_Click(sender As Object, e As EventArgs) Handles btnCambio.Click
+        mTrMgr.DoMenuItem("CAMBIO")
+        mCurrStep = State.ShowBank
+    End Sub
 End Class

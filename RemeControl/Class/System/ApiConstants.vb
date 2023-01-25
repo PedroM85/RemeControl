@@ -35,4 +35,6 @@
     Public Const DeleteBanco As String = Direc + "DeleteBanco"
     Public Const GetAccountType As String = Direc + "GetAccountType"
     Public Const GetAccount As String = Direc + "GetAccount"
+    'Informacion de Cambios
+    Public Const GetCambios As String = Direc + "GetCambio"
 End Class
