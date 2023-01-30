@@ -106,9 +106,6 @@
     Private Sub oCambioABM_Save() Handles oCambioABM.Save
         Close_ABM()
     End Sub
-    Private Function CurrentServers_RowCreated(sender As Object, e As DataGridViewRowEventArgs)
-
-    End Function
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
         dgvView.ColumnCount = 18

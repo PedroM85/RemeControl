@@ -104,11 +104,11 @@
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(54, 90)
+        Me.Label2.Location = New System.Drawing.Point(70, 90)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(32, 13)
+        Me.Label2.Size = New System.Drawing.Size(31, 13)
         Me.Label2.TabIndex = 19
-        Me.Label2.Text = "TIpo:"
+        Me.Label2.Text = "Tipo:"
         '
         'cboBankAcc
         '
@@ -184,6 +184,7 @@
             oData = New BancoData With
                 {
                .BAN_Id = IIf(IsAddNew, 0, txtId.Text),
+               .BAN_Type = cboBankAcc.SelectedValue,
                .BAN_Name = txtNombre.Text.Trim,
                .BAN_Prefix = txtPrefix.Text.Trim,
                .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,

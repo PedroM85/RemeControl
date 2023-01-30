@@ -3,6 +3,7 @@ Imports Newtonsoft.Json
 Public Class TasaData
     Private iTAS_Id As Int32
     Private dTAS_Date As Date
+    Private iTAS_Socio As Integer
     Private doTAS_Binance As Decimal
     Private doTAS_DolarPais As Decimal
     Private doTAS_Comision As Decimal
@@ -10,7 +11,7 @@ Public Class TasaData
     Private doTAS_TasaMayorista As Decimal
     Private doTAS_TasaCliente As Decimal
     Private sTAS_ModifiedBy As String
-    Private bTAS_Active As Boolean
+    Private bTAS_Active As Integer
     Private sMessage As String
 
 
@@ -95,11 +96,11 @@ Public Class TasaData
         End Set
     End Property
 
-    Public Property TAS_Active As Boolean
+    Public Property TAS_Active As Integer
         Get
             Return bTAS_Active
         End Get
-        Set(value As Boolean)
+        Set(value As Integer)
             bTAS_Active = value
         End Set
     End Property
@@ -112,10 +113,36 @@ Public Class TasaData
             sTAS_ModifiedBy = value
         End Set
     End Property
+
+    Public Property TAS_Socio As Integer
+        Get
+            Return iTAS_Socio
+        End Get
+        Set(value As Integer)
+            iTAS_Socio = value
+        End Set
+    End Property
 End Class
 Public Class TasaDataLayer
     Inherits JsonConnect
 
+    Public Function GetSocios() As DataTable
+        Dim Socios As SocioData = Nothing
+        Dim Url As String = ApiConstants.GetSocios
+        Dim table As DataTable
+        Try
+            Socios = New SocioData
+
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+
+
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        Return table
+    End Function
     Public Function GetTasas() As DataTable
         Dim tasa As TasaData = Nothing
         Dim url As String = ApiConstants.GetTasas
