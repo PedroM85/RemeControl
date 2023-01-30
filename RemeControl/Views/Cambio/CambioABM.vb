@@ -1,8 +1,14 @@
 ﻿Public Class CambioABM
     Inherits ABMBase
 
+
+    Private oDataLayer As CambioDataLayer
     Public Sub New()
         MyBase.New
+
+        InitializeComponent()
+
+        CargaCBO()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
         .ForEach(Sub(b)
@@ -12,22 +18,10 @@
                  End Sub)
     End Sub
 
+
+
     Private focusedForeColor As Color = Color.Black
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox4 As ComboBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents lblOperacion As Label
+    Friend WithEvents lblId As Label
     Private focusedBackColor As Color = Color.Gainsboro
 
     Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
@@ -49,36 +43,52 @@
         b.BackColor = focusedBackColor
     End Sub
     Private Sub BancoABM_Save() Handles MyBase.Save
-        'Dim oData As BancoData
+        Dim oData As CambioData
+        Dim odate As String
+        oDataLayer = New CambioDataLayer
 
-        ''oDataLayer = New BancoDataLayer
+        Try
+            '.BAN_Id = IIf(IsAddNew, 0, txtId.Text),
+            '   .BAN_Name = txtNombre.Text.Trim,
+            '   .BAN_Prefix = txtPrefix.Text.Trim,
+            '   .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
+            '   .BAN_Active = IIf(chkActive.CheckState, 1, 0)
 
-        'Try
-        '    'MessageBox.Show(txtId.Text)
-        '    If txtId.Text = Nothing Or txtId.Text = "" Then
-        '        txtId.Text = Nothing
-        '    End If
+            odate = Now.ToString("u")
 
-        '    oData = New BancoData With
-        '        {
-        '       .BAN_Id = IIf(IsAddNew, 0, txtId.Text),
-        '       .BAN_Name = txtNombre.Text.Trim,
-        '       .BAN_Prefix = txtPrefix.Text.Trim,
-        '       .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
-        '       .BAN_Active = IIf(chkActive.CheckState, 1, 0)
-        '        }
+            'odate = odate.Replace("Z", "")
 
-        '    If IsAddNew Then
-        '        oDataLayer.CreateBanco(oData)
-        '    Else
-        '        oDataLayer.UpdateBanco(oData)
-        '    End If
-        'Catch ex As Exception
-        '    Throw New Exception(ex.Message)
-        'End Try
+
+
+            oData = New CambioData With
+                {
+                .OP_Id = IIf(IsAddNew, 0, lblId.Text),
+                .OP_Date = Now.ToLocalTime,
+                .OP_Socio = cboSocio.SelectedValue,
+                .OP_Cliente = cboCliente.SelectedValue,
+                .OP_Pesos = txtPesos.Text.Trim,
+                .OP_Tasa_id = DirectCast(cboTasa.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
+                .OP_USTDBuy = txtUSTDBuy.Text.Trim,
+                .OP_USTDSell = txtUSTDSell.Text.Trim,
+                .OP_Status_Id = cboStatus.SelectedValue,
+                .OP_Operation = lblOperacion.Text.Trim,
+                .OP_ModifiedBy = oApp.CurrentUser.USR_Id,
+                .OP_CreatedDateTime = Now.ToLocalTime,
+                .OP_ModifiedDateTime = Now.ToLocalTime,
+                .OP_Active = 1
+                }
+
+            If IsAddNew Then
+                oDataLayer.CreateCambio(oData)
+            Else
+                oDataLayer.UpdateCambio(oData)
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        'txtId.Enabled = True
+        lblId.Enabled = True
     End Sub
     'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -87,11 +97,15 @@
     '    'row("SOC_Active") = True
     'End Sub
     Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        'txtId.DataBindings.Add("Text", row, "BAN_Id")
-        'txtNombre.DataBindings.Add("Text", row, "BAN_Name")
-        'txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
-        'chkActive.DataBindings.Add("Checked", row, "BAN_Active")
-        'cboBankAcc.DataBindings.Add("SelectedValue", row, "BAN_ACC_Name")
+        lblId.DataBindings.Add("Text", row, "OP_Id")
+        cboSocio.DataBindings.Add("SelectedValue", row, "OP_Socio")
+        cboCliente.DataBindings.Add("SelectedValue", row, "OP_Cliente")
+        cboTasa.DataBindings.Add("SelectedValue", row, "TAS_TasaCliente")
+        txtPesos.DataBindings.Add("Text", row, "OP_Pesos")
+        txtUSTDBuy.DataBindings.Add("Text", row, "OP_USTDBuy")
+        txtUSTDSell.DataBindings.Add("Text", row, "OP_USTDSell")
+        cboStatus.DataBindings.Add("SelectedValue", row, "OP_Status_Id")
+        lblOperacion.DataBindings.Add("Text", row, "OP_Operation")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
@@ -101,14 +115,33 @@
 
     End Sub
 
+#Region "Initialize"
+
+
+
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cboStatus As ComboBox
+    Friend WithEvents txtUSTDSell As TextBox
+    Friend WithEvents txtUSTDBuy As TextBox
+    Friend WithEvents cboTasa As ComboBox
+    Friend WithEvents txtPesos As TextBox
+    Friend WithEvents cboCliente As ComboBox
+    Friend WithEvents cboSocio As ComboBox
+    Friend WithEvents lblOperacion As Label
     Private Sub InitializeComponent()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cboSocio = New System.Windows.Forms.ComboBox()
+        Me.cboCliente = New System.Windows.Forms.ComboBox()
+        Me.txtPesos = New System.Windows.Forms.TextBox()
+        Me.cboTasa = New System.Windows.Forms.ComboBox()
+        Me.txtUSTDBuy = New System.Windows.Forms.TextBox()
+        Me.txtUSTDSell = New System.Windows.Forms.TextBox()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -117,11 +150,13 @@
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lblOperacion = New System.Windows.Forms.Label()
+        Me.lblId = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.lblId)
         Me.pnlControls0.Controls.Add(Me.lblOperacion)
         Me.pnlControls0.Controls.Add(Me.Label7)
         Me.pnlControls0.Controls.Add(Me.Label6)
@@ -130,73 +165,77 @@
         Me.pnlControls0.Controls.Add(Me.Label3)
         Me.pnlControls0.Controls.Add(Me.Label2)
         Me.pnlControls0.Controls.Add(Me.Label1)
-        Me.pnlControls0.Controls.Add(Me.TextBox1)
-        Me.pnlControls0.Controls.Add(Me.ComboBox4)
-        Me.pnlControls0.Controls.Add(Me.TextBox3)
-        Me.pnlControls0.Controls.Add(Me.TextBox2)
-        Me.pnlControls0.Controls.Add(Me.ComboBox3)
-        Me.pnlControls0.Controls.Add(Me.ComboBox2)
-        Me.pnlControls0.Controls.Add(Me.ComboBox1)
-        Me.pnlControls0.Size = New System.Drawing.Size(524, 213)
+        Me.pnlControls0.Controls.Add(Me.txtPesos)
+        Me.pnlControls0.Controls.Add(Me.cboStatus)
+        Me.pnlControls0.Controls.Add(Me.txtUSTDSell)
+        Me.pnlControls0.Controls.Add(Me.txtUSTDBuy)
+        Me.pnlControls0.Controls.Add(Me.cboTasa)
+        Me.pnlControls0.Controls.Add(Me.cboCliente)
+        Me.pnlControls0.Controls.Add(Me.cboSocio)
+        Me.pnlControls0.Size = New System.Drawing.Size(524, 251)
         '
-        'ComboBox1
+        'cboSocio
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(68, 31)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(152, 21)
-        Me.ComboBox1.TabIndex = 0
+        Me.cboSocio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSocio.FormattingEnabled = True
+        Me.cboSocio.Location = New System.Drawing.Point(68, 31)
+        Me.cboSocio.Name = "cboSocio"
+        Me.cboSocio.Size = New System.Drawing.Size(152, 21)
+        Me.cboSocio.TabIndex = 0
         '
-        'ComboBox2
+        'cboCliente
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(68, 58)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(152, 21)
-        Me.ComboBox2.TabIndex = 1
+        Me.cboCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCliente.FormattingEnabled = True
+        Me.cboCliente.Location = New System.Drawing.Point(68, 58)
+        Me.cboCliente.Name = "cboCliente"
+        Me.cboCliente.Size = New System.Drawing.Size(152, 21)
+        Me.cboCliente.TabIndex = 1
         '
-        'TextBox1
+        'txtPesos
         '
-        Me.TextBox1.Location = New System.Drawing.Point(68, 112)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(152, 20)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Text = "0"
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtPesos.Location = New System.Drawing.Point(68, 112)
+        Me.txtPesos.Name = "txtPesos"
+        Me.txtPesos.Size = New System.Drawing.Size(152, 20)
+        Me.txtPesos.TabIndex = 3
+        Me.txtPesos.Text = "0"
+        Me.txtPesos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ComboBox3
+        'cboTasa
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(68, 85)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(152, 21)
-        Me.ComboBox3.TabIndex = 3
+        Me.cboTasa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTasa.FormattingEnabled = True
+        Me.cboTasa.Location = New System.Drawing.Point(68, 85)
+        Me.cboTasa.Name = "cboTasa"
+        Me.cboTasa.Size = New System.Drawing.Size(152, 21)
+        Me.cboTasa.TabIndex = 2
         '
-        'TextBox2
+        'txtUSTDBuy
         '
-        Me.TextBox2.Location = New System.Drawing.Point(359, 31)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(152, 20)
-        Me.TextBox2.TabIndex = 4
-        Me.TextBox2.Text = "0"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtUSTDBuy.Location = New System.Drawing.Point(359, 31)
+        Me.txtUSTDBuy.Name = "txtUSTDBuy"
+        Me.txtUSTDBuy.Size = New System.Drawing.Size(152, 20)
+        Me.txtUSTDBuy.TabIndex = 4
+        Me.txtUSTDBuy.Text = "0"
+        Me.txtUSTDBuy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'TextBox3
+        'txtUSTDSell
         '
-        Me.TextBox3.Location = New System.Drawing.Point(359, 57)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(152, 20)
-        Me.TextBox3.TabIndex = 5
-        Me.TextBox3.Text = "0"
-        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtUSTDSell.Location = New System.Drawing.Point(359, 57)
+        Me.txtUSTDSell.Name = "txtUSTDSell"
+        Me.txtUSTDSell.Size = New System.Drawing.Size(152, 20)
+        Me.txtUSTDSell.TabIndex = 5
+        Me.txtUSTDSell.Text = "0"
+        Me.txtUSTDSell.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ComboBox4
+        'cboStatus
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(359, 83)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(152, 21)
-        Me.ComboBox4.TabIndex = 6
+        Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Location = New System.Drawing.Point(359, 83)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(152, 21)
+        Me.cboStatus.TabIndex = 6
         '
         'Label1
         '
@@ -239,18 +278,18 @@
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(259, 38)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(94, 13)
+        Me.Label5.Size = New System.Drawing.Size(90, 13)
         Me.Label5.TabIndex = 11
-        Me.Label5.Text = "USTD comprado:*"
+        Me.Label5.Text = "USTD comprado:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(263, 64)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(90, 13)
+        Me.Label6.Size = New System.Drawing.Size(86, 13)
         Me.Label6.TabIndex = 12
-        Me.Label6.Text = "USTD vendidos:*"
+        Me.Label6.Text = "USTD vendidos:"
         '
         'Label7
         '
@@ -263,12 +302,21 @@
         '
         'lblOperacion
         '
+        Me.lblOperacion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblOperacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblOperacion.Location = New System.Drawing.Point(224, 142)
+        Me.lblOperacion.Location = New System.Drawing.Point(224, 137)
         Me.lblOperacion.Name = "lblOperacion"
-        Me.lblOperacion.Size = New System.Drawing.Size(287, 62)
+        Me.lblOperacion.Size = New System.Drawing.Size(287, 105)
         Me.lblOperacion.TabIndex = 14
-        Me.lblOperacion.Text = "?"
+        '
+        'lblId
+        '
+        Me.lblId.AutoSize = True
+        Me.lblId.Location = New System.Drawing.Point(207, 15)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(13, 13)
+        Me.lblId.TabIndex = 15
+        Me.lblId.Text = "0"
         '
         'CambioABM
         '
@@ -280,18 +328,103 @@
         Me.PerformLayout()
 
     End Sub
+#End Region
+
+    Private Sub CargaCBO()
+        Dim oCambioData As CambioDataLayer = Nothing
+
+        oCambioData = New CambioDataLayer
+
+        cboSocio.DataSource = oCambioData.GetSocios
+        cboSocio.ValueMember = "SOC_Id"
+        cboSocio.DisplayMember = "SOC_Name"
 
 
-    'Private Sub GetBancos()
-    '    Dim oBancoData As BancoDataLayer = Nothing
+        cboCliente.DataSource = oCambioData.GetClientes
+        cboCliente.ValueMember = "CLI_Id"
+        cboCliente.DisplayMember = "CLI_Nombre"
 
-    '    oBancoData = New BancoDataLayer
+        cboTasa.DataSource = oCambioData.GetTasas
+        cboTasa.ValueMember = "TAS_TasaCliente"
+        cboTasa.DisplayMember = "TAS_TasaCli"
+        tasa = cboTasa.SelectedValue
 
-    '    cboBankAcc.DataSource = oBancoData.GetAcountType
-    'End Sub
+        cboStatus.DataSource = oCambioData.GetStatus
+        cboStatus.ValueMember = "STA_Id"
+        cboStatus.DisplayMember = "STA_Name"
 
 
-    'Private Sub txtPrefix_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrefix.KeyPress
-    '    ValiText(sender, e)
-    'End Sub
+    End Sub
+
+    Private Sub txtPesos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPesos.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+
+    Private tasa As String = "0"
+    Private Sub GeneralText()
+        Dim Ope As Decimal = 0
+        Dim pesos As Decimal = 0
+
+        Dim Banco As String = "0"
+        Dim Titular As String = "0"
+        Dim Cuenta As String = "0"
+        Dim Cedula As String = "0"
+
+        If txtPesos.Text = "" Or txtPesos.Text = Nothing Then
+        Else
+            pesos = txtPesos.Text
+        End If
+
+        If cboTasa.SelectedItem Is Nothing Then
+        Else
+            tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
+        End If
+
+
+        Ope = pesos * tasa
+
+
+
+        If Not Ope = 0 Then
+            Banco = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(3)
+            Titular = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(5)
+            Cuenta = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(4)
+            Cedula = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(6)
+
+            lblOperacion.Text = String.Format("Pago movil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
+        End If
+    End Sub
+
+    Private Sub txtUSTDBuy_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSTDBuy.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+    Private Sub txtUSTDSell_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSTDSell.KeyPress
+        ValiText(sender, e)
+    End Sub
+
+    Private Sub lblOperacion_Click(sender As Object, e As EventArgs) Handles lblOperacion.Click
+        If Not String.IsNullOrEmpty(lblOperacion.Text) Then
+            Clipboard.SetText(lblOperacion.Text.Trim)
+        End If
+    End Sub
+
+    Private Sub txtPesos_TextChanged(sender As Object, e As EventArgs) Handles txtPesos.TextChanged
+
+        GeneralText()
+    End Sub
+    Private Sub cboCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedIndexChanged
+
+        GeneralText()
+
+    End Sub
+
+    Private Sub cboTasa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTasa.SelectedIndexChanged
+
+        GeneralText()
+
+    End Sub
+
+
 End Class

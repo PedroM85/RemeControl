@@ -4,10 +4,13 @@
     Private mPassword As String
     Public Sub Main()
 
+
         oApp = New MgrFramework
         Dim TM As New TransactionManager
 
         If oApp.InitConnection() Then
+
+            oApp.SetupLocalizationInfo()
 
             oApp.LoginUser(mUserName, mPassword)
 
@@ -22,7 +25,7 @@
 
                     Application.Run(oMainForm)
 
-                    oApp.RegisterLogout
+                    oApp.RegisterLogout()
 
                 End If
             Else

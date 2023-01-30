@@ -9,7 +9,7 @@
         InitializeComponent()
 
 
-        'LoadGlobalCaptions()
+        LoadGlobalCaptions()
 
     End Sub
 
@@ -31,24 +31,24 @@
 
     End Sub
 
-    Private Sub BancoView_Addnew() Handles MyBase.AddNew
+    Private Sub CambioView_Addnew() Handles MyBase.AddNew
 
         Cursor = Cursors.WaitCursor
 
-        'oBancoABM = New BancoABM
+        oCambioABM = New CambioABM
 
-        'oBancoABM.Caption = "Agregar un banco"
-        'oBancoABM.Title = "Datos Generales"
-        ''oClientABM.chkActive.Checked = True
-        'oBancoABM.Edit(Nothing)
+        oCambioABM.Caption = "Agregar un cambio"
+        oCambioABM.Title = "Datos Generales"
+        'oClientABM.chkActive.Checked = True
+        oCambioABM.Edit(Nothing)
 
-        'Me.Visible = False
-        'oBancoABM.Dock = DockStyle.Fill
-        'oMainForm.ShowView(oBancoABM)
-        'oMainForm.HideLeftPanel()
+        Me.Visible = False
+        oCambioABM.Dock = DockStyle.Fill
+        oMainForm.ShowView(oCambioABM)
+        oMainForm.HideLeftPanel()
 
 
-        'oBancoABM.Select()
+        oCambioABM.Select()
 
         Cursor = Cursors.Arrow
     End Sub
@@ -56,19 +56,19 @@
     Public Sub SocioView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
-        'oBancoABM = New BancoABM
+        oCambioABM = New CambioABM
 
-        'oBancoABM.Caption = "Editar una banco"
-        'oBancoABM.Title = "Datos Generales"
-        'Dim row As DataGridViewRow = dgvView.CurrentRow
-        'oBancoABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
+        oCambioABM.Caption = "Editar una cambio"
+        oCambioABM.Title = "Datos Generales"
+        Dim row As DataGridViewRow = dgvView.CurrentRow
+        oCambioABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
 
-        'Me.Visible = False
-        'oBancoABM.Dock = DockStyle.Fill
-        'oMainForm.ShowView(oBancoABM)
-        'oMainForm.HideLeftPanel()
+        Me.Visible = False
+        oCambioABM.Dock = DockStyle.Fill
+        oMainForm.ShowView(oCambioABM)
+        oMainForm.HideLeftPanel()
 
-        'oBancoABM.Select()
+        oCambioABM.Select()
 
 
 
@@ -77,19 +77,19 @@
     End Sub
 
     Private Sub oSocioABM_Delete() Handles MyBase.Delete
-        Dim oDataLayer As BancoDataLayer = New BancoDataLayer
+        Dim oDataLayer As CambioDataLayer = New CambioDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
             If MessageBox.Show("Desea eliminar " & " '" & Trim(dgvView.CurrentRow.Cells(1).Value) & "'?", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 Try
 
-                    Dim Data As BancoData = New BancoData With
+                    Dim Data As CambioData = New CambioData With
                     {
-                        .BAN_Id = dgvView.CurrentRow.Cells(0).Value,
-                        .BAN_ModifiedBy = oApp.CurrentUser.USR_Id
+                        .OP_Id = dgvView.CurrentRow.Cells(0).Value,
+                        .OP_ModifiedBy = oApp.CurrentUser.USR_Id
                     }
 
-                    oDataLayer.DeleteBanco(Data)
+                    oDataLayer.DeleteCambio(Data)
                 Catch ex As Exception
 
                 End Try
@@ -100,69 +100,137 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oClientABM_Close() Handles oCambioABM.Close
+    Private Sub oCambioABM_Close() Handles oCambioABM.Close
         Close_ABM()
     End Sub
-    Private Sub oClientABM_Save() Handles oCambioABM.Save
+    Private Sub oCambioABM_Save() Handles oCambioABM.Save
         Close_ABM()
     End Sub
+    Private Function CurrentServers_RowCreated(sender As Object, e As DataGridViewRowEventArgs)
 
+    End Function
     Public Sub LoadGlobalCaptions()
-        dgvView.AutoGenerateColumns = true
-        dgvView.ColumnCount = 7
+        dgvView.AutoGenerateColumns = False
+        dgvView.ColumnCount = 18
 
-        dgvView.Columns(0).Name = "BAN_Id"
+        dgvView.Columns(0).Name = "OP_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
-        dgvView.Columns(0).DataPropertyName = "BAN_Id"
+        dgvView.Columns(0).DataPropertyName = "OP_Id"
         dgvView.Columns(0).Width = 100
         dgvView.Columns(0).Visible = False
 
-        dgvView.Columns(1).Name = "BAN_Name"
-        dgvView.Columns(1).HeaderText = "Nombre"
-        dgvView.Columns(1).DataPropertyName = "BAN_Name"
-        dgvView.Columns(1).Width = 150
+        dgvView.Columns(1).Name = "OP_Date"
+        dgvView.Columns(1).HeaderText = "Fecha"
+        dgvView.Columns(1).DataPropertyName = "OP_Date"
+        dgvView.Columns(1).Width = 120
+
+
+
+        dgvView.Columns(2).Name = "OP_Socio"
+        dgvView.Columns(2).HeaderText = "Socio"
+        dgvView.Columns(2).DataPropertyName = "OP_Socio"
+        dgvView.Columns(2).Width = 150
+        dgvView.Columns(2).Visible = False
         'dgvView.Columns(1).DefaultCellStyle.Format = "d"
         'dgvView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dgvView.Columns(2).Name = "BAN_ACC_Name"
-        dgvView.Columns(2).HeaderText = "Tipo de cuenta"
-        dgvView.Columns(2).DataPropertyName = "BAN_ACC_Name"
-        dgvView.Columns(2).Width = 120
-        'dgvView.Columns(2).DefaultCellStyle.Format = "{0:N2}"
-        'dgvView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dgvView.Columns(3).Name = "SOC_Name"
+        dgvView.Columns(3).HeaderText = "Cliente"
+        dgvView.Columns(3).DataPropertyName = "SOC_Name"
+        dgvView.Columns(3).Width = 150
 
-        dgvView.Columns(3).Name = "BAN_Prefix"
-        dgvView.Columns(3).HeaderText = "Prefijo"
-        dgvView.Columns(3).DataPropertyName = "BAN_Prefix"
-        dgvView.Columns(3).Width = 120
-
-
-        dgvView.Columns(4).Name = "BAN_CreatedDateTime"
-        dgvView.Columns(4).HeaderText = "Fecha de alta"
-        dgvView.Columns(4).DataPropertyName = "BAN_CreatedDateTime"
-        dgvView.Columns(4).Width = 120
+        dgvView.Columns(4).Name = "OP_Cliente"
+        dgvView.Columns(4).HeaderText = "Cliente"
+        dgvView.Columns(4).DataPropertyName = "OP_Cliente"
+        dgvView.Columns(4).Width = 150
         dgvView.Columns(4).Visible = False
 
+        dgvView.Columns(5).Name = "CLI_Nombre"
+        dgvView.Columns(5).HeaderText = "Cliente"
+        dgvView.Columns(5).DataPropertyName = "CLI_Nombre"
+        dgvView.Columns(5).Width = 150
 
-        dgvView.Columns(5).Name = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).HeaderText = "Fecha de modificacion"
-        dgvView.Columns(5).DataPropertyName = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).Width = 100
-        dgvView.Columns(5).Visible = False
-
-
-        dgvView.Columns(6).Name = "BAN_ModifiedBy"
-        dgvView.Columns(6).HeaderText = "Modificado por"
-        dgvView.Columns(6).DataPropertyName = "BAN_ModifiedBy"
+        dgvView.Columns(6).Name = "OP_Pesos"
+        dgvView.Columns(6).HeaderText = "Envian"
+        dgvView.Columns(6).DataPropertyName = "OP_Pesos"
         dgvView.Columns(6).Width = 120
-        dgvView.Columns(6).Visible = False
+        dgvView.Columns(6).DefaultCellStyle.Format = "{0:N2}"
+        dgvView.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        dgvView.Columns(7).Name = "OP_Tasa_id"
+        dgvView.Columns(7).HeaderText = "Tasa"
+        dgvView.Columns(7).DataPropertyName = "OP_Tasa_id"
+        dgvView.Columns(7).Width = 120
+        dgvView.Columns(7).Visible = False
+
+        dgvView.Columns(8).Name = "TAS_TasaCliente"
+        dgvView.Columns(8).HeaderText = "Tasa"
+        dgvView.Columns(8).DataPropertyName = "TAS_TasaCliente"
+        dgvView.Columns(8).Width = 150
+        dgvView.Columns(8).DefaultCellStyle.Format = "{0:N2}"
+        dgvView.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        dgvView.Columns(9).Name = "OP_USTDBUY"
+        dgvView.Columns(9).HeaderText = "USTD comprado"
+        dgvView.Columns(9).DataPropertyName = "OP_USTDBUY"
+        dgvView.Columns(9).Width = 150
+        dgvView.Columns(9).DefaultCellStyle.Format = "{0:N2}"
+        dgvView.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        dgvView.Columns(10).Name = "OP_USTDSELL"
+        dgvView.Columns(10).HeaderText = "USTD vendido"
+        dgvView.Columns(10).DataPropertyName = "OP_USTDSELL"
+        dgvView.Columns(10).Width = 150
+        dgvView.Columns(10).DefaultCellStyle.Format = "{0:N2}"
+        dgvView.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        dgvView.Columns(11).Name = "OP_Resta"
+        dgvView.Columns(11).HeaderText = "Ganacia"
+        dgvView.Columns(11).DataPropertyName = "OP_Resta"
+        dgvView.Columns(11).Width = 150
+        dgvView.Columns(11).DefaultCellStyle.Format = "{0:N2}"
+        dgvView.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+
+        dgvView.Columns(12).Name = "OP_Status_Id"
+        dgvView.Columns(12).HeaderText = "Estado"
+        dgvView.Columns(12).DataPropertyName = "OP_Status_Id"
+        dgvView.Columns(12).Width = 150
+        dgvView.Columns(12).Visible = False
+
+        dgvView.Columns(13).Name = "STA_Name"
+        dgvView.Columns(13).HeaderText = "Cliente"
+        dgvView.Columns(13).DataPropertyName = "STA_Name"
+        dgvView.Columns(13).Width = 150
+
+        dgvView.Columns(14).Name = "OP_Operation"
+        dgvView.Columns(14).HeaderText = "Mensaje"
+        dgvView.Columns(14).DataPropertyName = "OP_Operation"
+        dgvView.Columns(14).Width = 150
+
+        dgvView.Columns(15).Name = "OP_CreatedDateTime"
+        dgvView.Columns(15).HeaderText = "Fecha de alta"
+        dgvView.Columns(15).DataPropertyName = "OP_CreatedDateTime"
+        dgvView.Columns(15).Width = 120
+        dgvView.Columns(15).Visible = False
+
+        dgvView.Columns(16).Name = "OP_ModifiedDateTime"
+        dgvView.Columns(16).HeaderText = "Fecha de modificacion"
+        dgvView.Columns(16).DataPropertyName = "OP_ModifiedDateTime"
+        dgvView.Columns(16).Width = 100
+        dgvView.Columns(16).Visible = False
+
+        dgvView.Columns(17).Name = "OP_ModifiedBy"
+        dgvView.Columns(17).HeaderText = "Modificado por"
+        dgvView.Columns(17).DataPropertyName = "OP_ModifiedBy"
+        dgvView.Columns(17).Width = 120
+        dgvView.Columns(17).Visible = False
 
 
         Dim Check As New DataGridViewCheckBoxColumn
-        Check.Name = "BAN_Active"
+        Check.Name = "OP_Active"
         Check.HeaderText = "Activo"
-        Check.DataPropertyName = "BAN_Active"
-        dgvView.Columns.Insert(7, Check)
+        Check.DataPropertyName = "OP_Active"
+        dgvView.Columns.Insert(18, Check)
 
     End Sub
 

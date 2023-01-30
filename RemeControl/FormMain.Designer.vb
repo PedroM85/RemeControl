@@ -192,8 +192,9 @@ Partial Class FormMain
         Me.Controls.Add(Me.pnlFill)
         Me.Controls.Add(Me.pnlLeft)
         Me.Controls.Add(Me.pnlBottom)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
+        Me.MaximizeBox = False
         Me.Name = "FormMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"

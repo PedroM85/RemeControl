@@ -11,6 +11,8 @@ Public Class CambioData
     Private iOP_Status_Id As Integer
     Private sOP_Operation As String
     Private sOP_ModifiedBy As String
+    Private dOP_CreatedDateTime As DateTime
+    Private dOP_ModifiedDateTime As DateTime
     Private bOP_Active As Integer
 
     Public Property OP_Id As Integer
@@ -120,6 +122,24 @@ Public Class CambioData
             bOP_Active = value
         End Set
     End Property
+
+    Public Property OP_ModifiedDateTime As Date
+        Get
+            Return dOP_ModifiedDateTime
+        End Get
+        Set(value As Date)
+            dOP_ModifiedDateTime = value
+        End Set
+    End Property
+
+    Public Property OP_CreatedDateTime As Date
+        Get
+            Return dOP_CreatedDateTime
+        End Get
+        Set(value As Date)
+            dOP_CreatedDateTime = value
+        End Set
+    End Property
 End Class
 Public Class CambioDataLayer
     Inherits JsonConnect
@@ -143,7 +163,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetClientes() As DataTable
         Dim Clientes As ClienteData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = ApiConstants.GetCliente
         Dim table As DataTable
         Try
             Clientes = New ClienteData
@@ -161,7 +181,7 @@ Public Class CambioDataLayer
 
     Public Function GetTasas() As DataTable
         Dim Tasa As TasaData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = ApiConstants.GetTasaCliente
         Dim table As DataTable
         Try
             Tasa = New TasaData
@@ -178,7 +198,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetStatus() As DataTable
         Dim Status As StatusData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = ApiConstants.GetStatus
         Dim table As DataTable
         Try
             Status = New StatusData
@@ -213,11 +233,45 @@ Public Class CambioDataLayer
 
     Public Sub CreateCambio(Data As CambioData)
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.CreateBanco
+        Dim Url As String = ApiConstants.CreateCambio
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
             Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
+
+            Dim coso = JsonConvert.DeserializeObject(Of CambioData)(result_Post)
+
+            Cambio = coso
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub UpdateCambio(Data As CambioData)
+        Dim Cambio As CambioData = Nothing
+        Dim Url As String = ApiConstants.UpdateCambio
+        Try
+            Dim result = JsonConvert.SerializeObject(Data)
+
+            Dim result_Post = PutJson(Url, result, oApp.CurrentUser)
+
+            Dim coso = JsonConvert.DeserializeObject(Of CambioData)(result_Post)
+
+            Cambio = coso
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub DeleteCambio(Data As CambioData)
+        Dim Cambio As CambioData = Nothing
+        Dim Url As String = ApiConstants.CreateBanco
+        Try
+            Dim result = JsonConvert.SerializeObject(Data)
+
+            Dim result_Post = DeleteJson(Url, oApp.CurrentUser)
 
             Dim coso = JsonConvert.DeserializeObject(Of CambioData)(result_Post)
 

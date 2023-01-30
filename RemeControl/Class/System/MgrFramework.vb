@@ -124,4 +124,47 @@ Public Class MgrFramework
             mLastAction = value
         End Set
     End Property
+
+    Public Sub SetupLocalizationInfo()
+        Dim oCulture As New System.Globalization.CultureInfo("es-AR")
+        Dim oNumberFormat As New System.Globalization.NumberFormatInfo
+        Dim oDateFormat As New System.Globalization.DateTimeFormatInfo
+        Dim oAbbrDays As String() = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"}
+        Dim oDays As String() = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"}
+        Dim oAbbrMonths As String() = {"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic", ""}
+        Dim oMonths As String() = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", ""}
+        Dim nSize() As Integer = {0}
+
+        With oNumberFormat
+            .CurrencyDecimalDigits = 2 'mParams.GetValue("NUMDEC")
+            .CurrencyDecimalSeparator = "." 'mParams.GetValue("DECSEP")
+            .CurrencyGroupSeparator = " "
+            .CurrencyGroupSizes = nSize
+            .CurrencyNegativePattern = 1
+            .CurrencyPositivePattern = 0
+            .CurrencySymbol = "$" 'mParams.GetValue("CURRSYM")
+            .NumberDecimalDigits = 2 'mParams.GetValue("NUMDEC")
+            .NumberDecimalSeparator() = "." 'mParams.GetValue("DECSEP")
+            .NumberGroupSeparator = " "
+            .NumberGroupSizes = nSize
+            .NumberNegativePattern = 1
+        End With
+
+        With oDateFormat
+            .AbbreviatedDayNames = oAbbrDays
+            .AbbreviatedMonthNames = oAbbrMonths
+            .DayNames = oDays
+            .MonthNames = oMonths
+            .ShortDatePattern = "dd/MM/yyyy"
+            .LongDatePattern = "dddd, dd \de MMMM \de yyyy"
+            .ShortTimePattern = IIf("S" = "S", "h:mm tt", "HH:mm") 'IIf(mParams.GetValue("TIMEAMPM") = "S", "h:mm tt", "HH:mm")
+            .LongTimePattern = IIf("S" = "S", "h:mm:ss tt", "HH:mm:ss") 'IIf(mParams.GetValue("TIMEAMPM") = "S", "h:mm:ss tt", "HH:mm:ss")
+
+        End With
+
+        oCulture.NumberFormat = oNumberFormat
+        oCulture.DateTimeFormat = oDateFormat
+
+        System.Threading.Thread.CurrentThread.CurrentCulture = oCulture
+    End Sub
 End Class
