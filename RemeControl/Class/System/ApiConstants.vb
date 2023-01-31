@@ -13,6 +13,8 @@
     Public Const SalesDateInfo As String = Direc + "SalesDateInfo"
     'Informacion de tasas
     Public Const GetTasas As String = Direc + "GetTasas"
+    Public Const GetTasaCliente As String = Direc + "GetTasaCliente"
+    Public Const GetTasaMayo As String = Direc + "GetTasaMayo"
     Public Const CreateTasa As String = Direc + "CreateTasa"
     Public Const UpdateTasa As String = Direc + "UpdateTasa"
     Public Const DeleteTasa As String = Direc + "DeleteTasa"
@@ -35,4 +37,11 @@
     Public Const DeleteBanco As String = Direc + "DeleteBanco"
     Public Const GetAccountType As String = Direc + "GetAccountType"
     Public Const GetAccount As String = Direc + "GetAccount"
+    'Informacion de Cambios
+    Public Const GetCambios As String = Direc + "GetCambio"
+    Public Const GetStatus As String = Direc + "GetStatus"
+    Public Const CreateCambio As String = Direc + "CreateCambio"
+    Public Const UpdateCambio As String = Direc + "UpdateCambio"
+    Public Const DeleteCambio As String = Direc + "DeleteCambio"
+
 End Class

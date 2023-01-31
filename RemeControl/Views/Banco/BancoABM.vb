@@ -11,24 +11,25 @@
     Friend WithEvents Label6 As Label
     Friend WithEvents chkActive As CheckBox
     Friend WithEvents cboBankAcc As ComboBox
+    Friend WithEvents lblId As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents txtId As TextBox
 
     Private Sub InitializeComponent()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPrefix = New System.Windows.Forms.TextBox()
         Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.txtId = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboBankAcc = New System.Windows.Forms.ComboBox()
+        Me.lblId = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.lblId)
         Me.pnlControls0.Controls.Add(Me.cboBankAcc)
         Me.pnlControls0.Controls.Add(Me.Label2)
         Me.pnlControls0.Controls.Add(Me.Label6)
@@ -37,7 +38,6 @@
         Me.pnlControls0.Controls.Add(Me.Label1)
         Me.pnlControls0.Controls.Add(Me.txtPrefix)
         Me.pnlControls0.Controls.Add(Me.txtNombre)
-        Me.pnlControls0.Controls.Add(Me.txtId)
         Me.pnlControls0.Size = New System.Drawing.Size(524, 201)
         '
         'Label3
@@ -72,15 +72,6 @@
         Me.txtNombre.Size = New System.Drawing.Size(121, 20)
         Me.txtNombre.TabIndex = 1
         '
-        'txtId
-        '
-        Me.txtId.Location = New System.Drawing.Point(125, 30)
-        Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(100, 20)
-        Me.txtId.TabIndex = 0
-        Me.txtId.Text = "0"
-        Me.txtId.Visible = False
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -104,11 +95,11 @@
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(54, 90)
+        Me.Label2.Location = New System.Drawing.Point(70, 90)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(32, 13)
+        Me.Label2.Size = New System.Drawing.Size(31, 13)
         Me.Label2.TabIndex = 19
-        Me.Label2.Text = "TIpo:"
+        Me.Label2.Text = "Tipo:"
         '
         'cboBankAcc
         '
@@ -120,6 +111,16 @@
         Me.cboBankAcc.Size = New System.Drawing.Size(121, 21)
         Me.cboBankAcc.TabIndex = 2
         Me.cboBankAcc.ValueMember = "BAN_ACC_Name"
+        '
+        'lblId
+        '
+        Me.lblId.AutoSize = True
+        Me.lblId.ForeColor = System.Drawing.Color.White
+        Me.lblId.Location = New System.Drawing.Point(197, 28)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(13, 13)
+        Me.lblId.TabIndex = 20
+        Me.lblId.Text = "0"
         '
         'BancoABM
         '
@@ -177,13 +178,14 @@
 
         Try
             'MessageBox.Show(txtId.Text)
-            If txtId.Text = Nothing Or txtId.Text = "" Then
-                txtId.Text = Nothing
+            If lblId.Text = Nothing Or lblId.Text = "" Then
+                lblId.Text = Nothing
             End If
 
             oData = New BancoData With
                 {
-               .BAN_Id = IIf(IsAddNew, 0, txtId.Text),
+               .BAN_Id = IIf(IsAddNew, 0, lblId.Text),
+               .BAN_Type = cboBankAcc.SelectedIndex + 1,
                .BAN_Name = txtNombre.Text.Trim,
                .BAN_Prefix = txtPrefix.Text.Trim,
                .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
@@ -200,7 +202,7 @@
         End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        txtId.Enabled = True
+        lblId.Enabled = True
     End Sub
     'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
     '    row("SOC_Id") = 0
@@ -209,7 +211,7 @@
     '    'row("SOC_Active") = True
     'End Sub
     Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        txtId.DataBindings.Add("Text", row, "BAN_Id")
+        lblId.DataBindings.Add("Text", row, "BAN_Id")
         txtNombre.DataBindings.Add("Text", row, "BAN_Name")
         txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
         chkActive.DataBindings.Add("Checked", row, "BAN_Active")

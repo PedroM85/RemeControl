@@ -77,7 +77,6 @@ Partial Class ViewBase
         Me.dgvView.ReadOnly = True
         Me.dgvView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgvView.RowHeadersVisible = False
-        Me.dgvView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvView.Size = New System.Drawing.Size(533, 281)
         Me.dgvView.TabIndex = 0
@@ -140,7 +139,7 @@ Partial Class ViewBase
         Me.lblCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCaption.Location = New System.Drawing.Point(27, 19)
         Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.Size = New System.Drawing.Size(39, 16)
+        Me.lblCaption.Size = New System.Drawing.Size(40, 16)
         Me.lblCaption.TabIndex = 2
         Me.lblCaption.Text = "????"
         '

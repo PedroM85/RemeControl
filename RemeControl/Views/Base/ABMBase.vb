@@ -4,9 +4,6 @@
     Private oDataRow As DataRowView
     Private lAddNew As Boolean
 
-
-
-
     Public ReadOnly Property IsAddNew() As Boolean
         Get
             Return lAddNew

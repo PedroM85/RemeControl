@@ -22,6 +22,9 @@ Public Class TasaABM
     Friend WithEvents txtTasaVentaCustom As TextBox
     Friend WithEvents txtIdControl As TextBox
     Friend WithEvents dtpFecha As DateTimePicker
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cboSocio As ComboBox
     Friend WithEvents txtBina As TextBox
 
     Private Sub InitializeComponent()
@@ -39,11 +42,17 @@ Public Class TasaABM
         Me.txtTasaVentaCustom = New System.Windows.Forms.TextBox()
         Me.txtIdControl = New System.Windows.Forms.TextBox()
         Me.dtpFecha = New System.Windows.Forms.DateTimePicker()
+        Me.cboSocio = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.Label2)
+        Me.pnlControls0.Controls.Add(Me.Label1)
+        Me.pnlControls0.Controls.Add(Me.cboSocio)
         Me.pnlControls0.Controls.Add(Me.dtpFecha)
         Me.pnlControls0.Controls.Add(Me.txtIdControl)
         Me.pnlControls0.Controls.Add(Me.chkCustom)
@@ -63,10 +72,10 @@ Public Class TasaABM
         'txtBina
         '
         Me.txtBina.BackColor = System.Drawing.Color.White
-        Me.txtBina.Location = New System.Drawing.Point(81, 38)
+        Me.txtBina.Location = New System.Drawing.Point(92, 62)
         Me.txtBina.MaxLength = 6
         Me.txtBina.Name = "txtBina"
-        Me.txtBina.Size = New System.Drawing.Size(100, 20)
+        Me.txtBina.Size = New System.Drawing.Size(129, 20)
         Me.txtBina.TabIndex = 0
         Me.txtBina.Tag = ""
         Me.txtBina.Text = "0.00"
@@ -74,10 +83,10 @@ Public Class TasaABM
         '
         'txtDolarInPais
         '
-        Me.txtDolarInPais.Location = New System.Drawing.Point(81, 64)
+        Me.txtDolarInPais.Location = New System.Drawing.Point(92, 88)
         Me.txtDolarInPais.MaxLength = 6
         Me.txtDolarInPais.Name = "txtDolarInPais"
-        Me.txtDolarInPais.Size = New System.Drawing.Size(100, 20)
+        Me.txtDolarInPais.Size = New System.Drawing.Size(129, 20)
         Me.txtDolarInPais.TabIndex = 1
         Me.txtDolarInPais.Text = "0.00"
         Me.txtDolarInPais.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -85,7 +94,7 @@ Public Class TasaABM
         'lblBinance
         '
         Me.lblBinance.AutoSize = True
-        Me.lblBinance.Location = New System.Drawing.Point(26, 45)
+        Me.lblBinance.Location = New System.Drawing.Point(26, 69)
         Me.lblBinance.Name = "lblBinance"
         Me.lblBinance.Size = New System.Drawing.Size(49, 13)
         Me.lblBinance.TabIndex = 7
@@ -94,7 +103,7 @@ Public Class TasaABM
         'lblDolarInPais
         '
         Me.lblDolarInPais.AutoSize = True
-        Me.lblDolarInPais.Location = New System.Drawing.Point(40, 71)
+        Me.lblDolarInPais.Location = New System.Drawing.Point(40, 95)
         Me.lblDolarInPais.Name = "lblDolarInPais"
         Me.lblDolarInPais.Size = New System.Drawing.Size(35, 13)
         Me.lblDolarInPais.TabIndex = 8
@@ -102,11 +111,11 @@ Public Class TasaABM
         '
         'txtComision
         '
-        Me.txtComision.Location = New System.Drawing.Point(81, 90)
+        Me.txtComision.Location = New System.Drawing.Point(92, 114)
         Me.txtComision.MaxLength = 4
         Me.txtComision.Name = "txtComision"
         Me.txtComision.ReadOnly = True
-        Me.txtComision.Size = New System.Drawing.Size(100, 20)
+        Me.txtComision.Size = New System.Drawing.Size(129, 20)
         Me.txtComision.TabIndex = 2
         Me.txtComision.TabStop = False
         Me.txtComision.Text = "0.05"
@@ -115,7 +124,7 @@ Public Class TasaABM
         'lblComision
         '
         Me.lblComision.AutoSize = True
-        Me.lblComision.Location = New System.Drawing.Point(23, 97)
+        Me.lblComision.Location = New System.Drawing.Point(23, 121)
         Me.lblComision.Name = "lblComision"
         Me.lblComision.Size = New System.Drawing.Size(52, 13)
         Me.lblComision.TabIndex = 10
@@ -124,7 +133,7 @@ Public Class TasaABM
         'lblTFull
         '
         Me.lblTFull.AutoSize = True
-        Me.lblTFull.Location = New System.Drawing.Point(274, 45)
+        Me.lblTFull.Location = New System.Drawing.Point(274, 69)
         Me.lblTFull.Name = "lblTFull"
         Me.lblTFull.Size = New System.Drawing.Size(59, 13)
         Me.lblTFull.TabIndex = 12
@@ -132,11 +141,11 @@ Public Class TasaABM
         '
         'txtTasaFull
         '
-        Me.txtTasaFull.Location = New System.Drawing.Point(339, 42)
+        Me.txtTasaFull.Location = New System.Drawing.Point(339, 66)
         Me.txtTasaFull.MaxLength = 9
         Me.txtTasaFull.Name = "txtTasaFull"
         Me.txtTasaFull.ReadOnly = True
-        Me.txtTasaFull.Size = New System.Drawing.Size(100, 20)
+        Me.txtTasaFull.Size = New System.Drawing.Size(129, 20)
         Me.txtTasaFull.TabIndex = 3
         Me.txtTasaFull.TabStop = False
         Me.txtTasaFull.Text = "0.00"
@@ -145,7 +154,7 @@ Public Class TasaABM
         'lblTasaVenta
         '
         Me.lblTasaVenta.AutoSize = True
-        Me.lblTasaVenta.Location = New System.Drawing.Point(260, 74)
+        Me.lblTasaVenta.Location = New System.Drawing.Point(260, 98)
         Me.lblTasaVenta.Name = "lblTasaVenta"
         Me.lblTasaVenta.Size = New System.Drawing.Size(73, 13)
         Me.lblTasaVenta.TabIndex = 14
@@ -153,11 +162,11 @@ Public Class TasaABM
         '
         'txtTasaVenta
         '
-        Me.txtTasaVenta.Location = New System.Drawing.Point(339, 71)
+        Me.txtTasaVenta.Location = New System.Drawing.Point(339, 95)
         Me.txtTasaVenta.MaxLength = 8
         Me.txtTasaVenta.Name = "txtTasaVenta"
         Me.txtTasaVenta.ReadOnly = True
-        Me.txtTasaVenta.Size = New System.Drawing.Size(100, 20)
+        Me.txtTasaVenta.Size = New System.Drawing.Size(129, 20)
         Me.txtTasaVenta.TabIndex = 4
         Me.txtTasaVenta.TabStop = False
         Me.txtTasaVenta.Text = "0.00"
@@ -166,20 +175,19 @@ Public Class TasaABM
         'chkCustom
         '
         Me.chkCustom.AutoSize = True
-        Me.chkCustom.Location = New System.Drawing.Point(346, 97)
+        Me.chkCustom.Location = New System.Drawing.Point(339, 127)
         Me.chkCustom.Name = "chkCustom"
         Me.chkCustom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.chkCustom.Size = New System.Drawing.Size(93, 17)
+        Me.chkCustom.Size = New System.Drawing.Size(15, 14)
         Me.chkCustom.TabIndex = 5
-        Me.chkCustom.Text = "Ajuste de tasa"
         Me.chkCustom.UseVisualStyleBackColor = True
         '
         'txtTasaVentaCustom
         '
-        Me.txtTasaVentaCustom.Location = New System.Drawing.Point(339, 71)
+        Me.txtTasaVentaCustom.Location = New System.Drawing.Point(339, 95)
         Me.txtTasaVentaCustom.MaxLength = 8
         Me.txtTasaVentaCustom.Name = "txtTasaVentaCustom"
-        Me.txtTasaVentaCustom.Size = New System.Drawing.Size(100, 20)
+        Me.txtTasaVentaCustom.Size = New System.Drawing.Size(129, 20)
         Me.txtTasaVentaCustom.TabIndex = 6
         Me.txtTasaVentaCustom.Text = "0.00"
         Me.txtTasaVentaCustom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -188,7 +196,7 @@ Public Class TasaABM
         'txtIdControl
         '
         Me.txtIdControl.BackColor = System.Drawing.Color.White
-        Me.txtIdControl.Location = New System.Drawing.Point(81, 12)
+        Me.txtIdControl.Location = New System.Drawing.Point(121, 12)
         Me.txtIdControl.MaxLength = 6
         Me.txtIdControl.Name = "txtIdControl"
         Me.txtIdControl.Size = New System.Drawing.Size(100, 20)
@@ -203,9 +211,35 @@ Public Class TasaABM
         Me.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpFecha.Location = New System.Drawing.Point(339, 12)
         Me.dtpFecha.Name = "dtpFecha"
-        Me.dtpFecha.Size = New System.Drawing.Size(100, 20)
+        Me.dtpFecha.Size = New System.Drawing.Size(129, 20)
         Me.dtpFecha.TabIndex = 16
         Me.dtpFecha.Visible = False
+        '
+        'cboSocio
+        '
+        Me.cboSocio.FormattingEnabled = True
+        Me.cboSocio.Location = New System.Drawing.Point(92, 35)
+        Me.cboSocio.Name = "cboSocio"
+        Me.cboSocio.Size = New System.Drawing.Size(129, 21)
+        Me.cboSocio.TabIndex = 17
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(38, 43)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
+        Me.Label1.TabIndex = 18
+        Me.Label1.Text = "Socio:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(256, 127)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(77, 13)
+        Me.Label2.TabIndex = 19
+        Me.Label2.Text = "Ajuste de tasa:"
         '
         'TasaABM
         '
@@ -230,6 +264,7 @@ Public Class TasaABM
 
         'txtBina.Text = 0.00
         'txtDolarInPais.Text = 0.00
+        CargaBOX()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
           .ForEach(Sub(b)
@@ -347,12 +382,14 @@ Public Class TasaABM
             {
             .TAS_Date = Now.ToShortDateString(),
             .TAS_Binance = txtBina.Text,
+            .TAS_Socio = cboSocio.SelectedValue,
             .TAS_DolarPais = txtDolarInPais.Text,
             .TAS_Comision = txtComision.Text,
             .TAS_TasaFull = txtTasaFull.Text,
             .TAS_TasaMayorista = 0,
             .TAS_TasaCliente = tasacliente,
-            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id
+            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id,
+            .TAS_Active = 1
             }
                 oDataLayer.CreateTasa(oData)
             Else
@@ -361,12 +398,14 @@ Public Class TasaABM
             .TAS_Id = txtIdControl.Text,
             .TAS_Date = dtpFecha.Text,
             .TAS_Binance = txtBina.Text,
+            .TAS_Socio = cboSocio.SelectedValue,
             .TAS_DolarPais = txtDolarInPais.Text,
             .TAS_Comision = txtComision.Text,
             .TAS_TasaFull = txtTasaFull.Text,
             .TAS_TasaMayorista = 0,
             .TAS_TasaCliente = tasacliente,
-            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id
+            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id,
+            .TAS_Active = 1
             }
                 oDataLayer.UpdateTasa(oData)
             End If
@@ -379,6 +418,7 @@ Public Class TasaABM
     End Sub
     Private Sub TasaABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
         txtIdControl.DataBindings.Add("Text", row, "TAS_Id")
+        cboSocio.DataBindings.Add("SelectedValue", row, "TAS_Socio")
         txtBina.DataBindings.Add("Text", row, "TAS_Binance")
         txtDolarInPais.DataBindings.Add("Text", row, "TAS_DolarPais")
         txtComision.DataBindings.Add("Text", row, "TAS_Comision")
@@ -414,5 +454,13 @@ Public Class TasaABM
     Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
         txtTasaFull.Text = TasaFull.ToString("n6")
         txtTasaVenta.Text = TasaClien.ToString("n4")
+    End Sub
+
+    Private Sub CargaBOX()
+        oDataLayer = New TasaDataLayer
+
+        cboSocio.DataSource = oDataLayer.GetSocios
+        cboSocio.ValueMember = "SOC_Id"
+        cboSocio.DisplayMember = "SOC_Name"
     End Sub
 End Class
