@@ -6,6 +6,8 @@
     Private mCurrStep As State
     Private mControllers(6) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
+
+
 #Region "Keydown"
     Private Enum State
         ShowTasa
@@ -17,6 +19,23 @@
     End Enum
 
 #End Region
+
+    Private Function SessionActive() As Boolean
+        Dim a As DateTime = oApp.CurrentUser.USR_SessionEnd
+        Dim b As DateTime = DateTime.Now
+        Try
+            If a > b Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+
+        End Try
+    End Function
+
+
     Public Sub New()
         MyBase.New
         ' Esta llamada es exigida por el diseñador.
@@ -150,30 +169,56 @@
         End If
     End Sub
     Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
-        mTrMgr.DoMenuItem("TASA")
-        mCurrStep = State.ShowTasa
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("TASA")
+            mCurrStep = State.ShowTasa
+        Else
+            Me.Close()
+        End If
+
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         DisposeView()
     End Sub
 
     Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
-        mTrMgr.DoMenuItem("SOCIO")
-        mCurrStep = State.ShowSocio
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("SOCIO")
+            mCurrStep = State.ShowSocio
+        Else
+            oApp.LoginUser()
+        End If
+
     End Sub
 
     Private Sub btnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
-        mTrMgr.DoMenuItem("CLIENTE")
-        mCurrStep = State.ShowClient
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("CLIENTE")
+            mCurrStep = State.ShowClient
+        Else
+            oApp.LoginUser()
+        End If
+
     End Sub
 
     Private Sub btnBank_Click(sender As Object, e As EventArgs) Handles btnBank.Click
-        mTrMgr.DoMenuItem("BANCO")
-        mCurrStep = State.ShowBank
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("BANCO")
+            mCurrStep = State.ShowBank
+        Else
+            oApp.LoginUser()
+        End If
+
     End Sub
 
     Private Sub btnCambio_Click(sender As Object, e As EventArgs) Handles btnCambio.Click
-        mTrMgr.DoMenuItem("CAMBIO")
-        mCurrStep = State.ShowBank
+
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("CAMBIO")
+            mCurrStep = State.ShowBank
+        Else
+            oApp.LoginUser()
+        End If
+
     End Sub
 End Class

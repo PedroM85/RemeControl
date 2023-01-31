@@ -5,6 +5,7 @@
     Private sToken As String
     Private sMessage As String
     Private sUSR_IpAddress As String
+    Private dUSR_SessionEnd As DateTime
 
     Public Sub New()
 
@@ -61,6 +62,15 @@
         End Get
         Set(value As String)
             sUSR_IpAddress = value
+        End Set
+    End Property
+
+    Public Property USR_SessionEnd As Date
+        Get
+            Return dUSR_SessionEnd
+        End Get
+        Set(value As Date)
+            dUSR_SessionEnd = value
         End Set
     End Property
 End Class

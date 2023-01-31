@@ -267,11 +267,11 @@ Public Class CambioDataLayer
 
     Public Sub DeleteCambio(Data As CambioData)
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.CreateBanco
+        Dim Url As String = ApiConstants.DeleteCambio
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
-            Dim result_Post = DeleteJson(Url, oApp.CurrentUser)
+            Dim result_Post = PutJson(Url, result, oApp.CurrentUser)
 
             Dim coso = JsonConvert.DeserializeObject(Of CambioData)(result_Post)
 

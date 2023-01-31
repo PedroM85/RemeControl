@@ -22,6 +22,7 @@
 
     Private focusedForeColor As Color = Color.Black
     Friend WithEvents lblId As Label
+    Private components As System.ComponentModel.IContainer
     Private focusedBackColor As Color = Color.Gainsboro
 
     Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
@@ -186,6 +187,7 @@
         'cboCliente
         '
         Me.cboCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCliente.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cboCliente.FormattingEnabled = True
         Me.cboCliente.Location = New System.Drawing.Point(68, 58)
         Me.cboCliente.Name = "cboCliente"
@@ -312,7 +314,7 @@
         'lblId
         '
         Me.lblId.AutoSize = True
-        Me.lblId.Location = New System.Drawing.Point(207, 15)
+        Me.lblId.Location = New System.Drawing.Point(207, 13)
         Me.lblId.Name = "lblId"
         Me.lblId.Size = New System.Drawing.Size(13, 13)
         Me.lblId.TabIndex = 15
