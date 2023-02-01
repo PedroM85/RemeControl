@@ -22,6 +22,10 @@
                 Dim oCambio As CambioManager = New CambioManager
                 oView = oCambio.CreateCambioView
 
+            Case "DASH"
+                Dim oDash As DashManager = New DashManager
+                oView = oDash.CreateDashView
+
             Case Else
                 oView = Nothing
         End Select

@@ -15,6 +15,8 @@
         ShowBank
         ShowCambio
         ShowSocio
+        ShowDash
+
 
     End Enum
 
@@ -47,6 +49,7 @@
         mControllers(State.ShowSocio) = New ShowSocio(Me)
         mControllers(State.ShowClient) = New ShowClient(Me)
         mControllers(State.ShowBank) = New ShowBank(Me)
+        mControllers(State.ShowDash) = New ShowDash(Me)
 
     End Sub
 
@@ -67,6 +70,8 @@
         lblUser.Text = String.Format("Usuario: {0}", oApp.CurrentUser.USR_Name)
 
         Me.SalesDateInfo = oApp.GetSalesDateInfo
+
+        btnHome_Click(Nothing, Nothing)
 
         Application.DoEvents()
 
@@ -178,7 +183,12 @@
 
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        DisposeView()
+        If SessionActive() Then
+            mTrMgr.DoMenuItem("DASH")
+            mCurrStep = State.ShowDash
+        Else
+            Me.Close()
+        End If
     End Sub
 
     Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
