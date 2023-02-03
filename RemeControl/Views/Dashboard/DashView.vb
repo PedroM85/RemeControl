@@ -15,6 +15,17 @@ Public Class DashView
         SetDateMenuButtons(btnLast7)
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        LoadLeyendaSerie
+
+    End Sub
+
+    Private Sub LoadLeyendaSerie()
+        oDashData = New DashboardDataLayer
+        Dim Data As DataTable
+
+        Data = oDashData.GetSocios()
+        Chart1.Series.Add(Data.Rows(0).ItemArray(1))
+
 
     End Sub
 
@@ -26,14 +37,30 @@ Public Class DashView
         lblEndDate.Text = dtpEndDate.Value.ToString("yyyy-MM-dd")
 
         Chart()
-
+        TotalInfo()
 
 
 
     End Sub
+    Public Sub TotalInfo()
+
+        Dim Data As DataTable
+
+        Data = oDashData.GetTotalInfo
+
+
+        If Data IsNot Nothing Then
+            lblNCambios.Text = String.Format("Clientes: {0}", Data.Rows(0).ItemArray(2))
+            lblTotalCambios.Text = String.Format("Cambios: {0}", Data.Rows(0).ItemArray(3))
+            lblOrdenReady.Text = Data.Rows(0).ItemArray(1)
+            lblTotalMensual.Text = String.Format("${0}", Data.Rows(0).ItemArray(0))
+
+        End If
+
+    End Sub
     Public Sub Chart()
         Dim oDash As DashboardData
-
+        Dim Data As DataTable
         oDash = New DashboardData With
             {
             .OP_DateStart = lblStartDate.Text,
@@ -42,11 +69,17 @@ Public Class DashView
 
 
         Chart1.DataSource = Nothing
-        Chart1.DataSource = oDashData.GetCambios(oDash)
-        Chart1.Series.Add("OP_Socio")
-        Chart1.Series(0).XValueMember = "OP_Fecha"
-        Chart1.Series(0).YValueMembers = "OP_Pesos"
-        Chart1.DataBind()
+        Data = oDashData.GetCambios(oDash)
+        If Data IsNot Nothing Then
+            Chart1.DataSource = Data
+            Chart1.Series(0).XValueMember = "OP_Fecha"
+            Chart1.Series(0).YValueMembers = "OP_Pesos"
+            Chart1.DataBind()
+        Else
+            Chart1.Series(0).Points.Clear()
+
+            Console.WriteLine("No hay datos")
+        End If
 
 
     End Sub
@@ -144,4 +177,6 @@ Public Class DashView
     Private Sub btnCustomDate_Click(sender As Object, e As EventArgs) Handles btnCustomDate.Click
         LoadData()
     End Sub
+
+
 End Class

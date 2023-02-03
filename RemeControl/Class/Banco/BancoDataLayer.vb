@@ -71,7 +71,7 @@ Public Class BancoDataLayer
         Try
             Banco = New BancoData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -140,7 +140,7 @@ Public Class BancoDataLayer
         Try
             Banco = New BancoData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -158,7 +158,7 @@ Public Class BancoDataLayer
         Try
             Banco = New BancoData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)

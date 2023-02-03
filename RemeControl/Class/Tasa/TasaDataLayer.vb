@@ -133,7 +133,7 @@ Public Class TasaDataLayer
         Try
             Socios = New SocioData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -151,7 +151,7 @@ Public Class TasaDataLayer
 
         'Dim result = JsonConvert.SerializeObject(UserData)
 
-        Dim result_Post = GetJson(url, Nothing, oApp.CurrentUser)
+        Dim result_Post = GetJson(url, oApp.CurrentUser)
 
         'tasa = JsonConvert.DeserializeObject(Of TasaData)(result_Post)
         Dim table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)

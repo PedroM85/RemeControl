@@ -55,4 +55,37 @@ Public Class DashboardDataLayer
         Return table
     End Function
 
+    Public Function GetSocios() As DataTable
+        Dim Url As String = ApiConstants.GetSocios
+        Dim table As DataTable
+        Try
+
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+
+
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        Return table
+    End Function
+
+    Public Function GetTotalInfo() As DataTable
+        Dim Url As String = ApiConstants.GetTotalInfo
+        Dim table As DataTable
+        Try
+
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+
+
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        Return table
+    End Function
+
+
 End Class

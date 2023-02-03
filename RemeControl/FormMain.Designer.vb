@@ -83,7 +83,9 @@ Partial Class FormMain
         '
         Me.btnSocio.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnSocio.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSocio.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnSocio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSocio.ForeColor = System.Drawing.Color.White
         Me.btnSocio.Location = New System.Drawing.Point(0, 361)
         Me.btnSocio.Name = "btnSocio"
         Me.btnSocio.Size = New System.Drawing.Size(166, 45)
@@ -95,7 +97,9 @@ Partial Class FormMain
         '
         Me.btnBank.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnBank.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnBank.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBank.ForeColor = System.Drawing.Color.White
         Me.btnBank.Location = New System.Drawing.Point(0, 316)
         Me.btnBank.Name = "btnBank"
         Me.btnBank.Size = New System.Drawing.Size(166, 45)
@@ -107,7 +111,9 @@ Partial Class FormMain
         '
         Me.btnCalcular.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnCalcular.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCalcular.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCalcular.ForeColor = System.Drawing.Color.White
         Me.btnCalcular.Location = New System.Drawing.Point(0, 271)
         Me.btnCalcular.Name = "btnCalcular"
         Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
@@ -119,7 +125,9 @@ Partial Class FormMain
         '
         Me.btnClients.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnClients.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnClients.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClients.ForeColor = System.Drawing.Color.White
         Me.btnClients.Location = New System.Drawing.Point(0, 226)
         Me.btnClients.Name = "btnClients"
         Me.btnClients.Size = New System.Drawing.Size(166, 45)
@@ -131,7 +139,9 @@ Partial Class FormMain
         '
         Me.btnCambio.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnCambio.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCambio.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnCambio.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCambio.ForeColor = System.Drawing.Color.White
         Me.btnCambio.Location = New System.Drawing.Point(0, 181)
         Me.btnCambio.Name = "btnCambio"
         Me.btnCambio.Size = New System.Drawing.Size(166, 45)
@@ -143,7 +153,9 @@ Partial Class FormMain
         '
         Me.btnHome.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btnHome.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnHome.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnHome.ForeColor = System.Drawing.Color.White
         Me.btnHome.Location = New System.Drawing.Point(0, 136)
         Me.btnHome.Name = "btnHome"
         Me.btnHome.Size = New System.Drawing.Size(166, 45)
@@ -188,6 +200,7 @@ Partial Class FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.HotTrack
         Me.ClientSize = New System.Drawing.Size(825, 484)
         Me.Controls.Add(Me.pnlFill)
         Me.Controls.Add(Me.pnlLeft)

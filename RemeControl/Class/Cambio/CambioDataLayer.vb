@@ -151,7 +151,7 @@ Public Class CambioDataLayer
         Try
             Socios = New SocioData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -168,7 +168,7 @@ Public Class CambioDataLayer
         Try
             Clientes = New ClienteData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -186,7 +186,7 @@ Public Class CambioDataLayer
         Try
             Tasa = New TasaData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -203,7 +203,7 @@ Public Class CambioDataLayer
         Try
             Status = New StatusData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
@@ -220,7 +220,7 @@ Public Class CambioDataLayer
         Try
             Cambio = New CambioData
 
-            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)

@@ -3,6 +3,8 @@
 
     Private oView As UserControl
 
+    Private CurrentButton As Button
+
     Private mCurrStep As State
     Private mControllers(6) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
@@ -39,11 +41,14 @@
 
 
     Public Sub New()
-        MyBase.New
+        'MyBase.New
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+        btnHome.Select()
+        SetDateMenuButtons(btnHome)
 
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
@@ -64,6 +69,7 @@
     End Property
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadData()
+
     End Sub
 
     Public Sub LoadData()
@@ -71,8 +77,7 @@
 
         Me.SalesDateInfo = oApp.GetSalesDateInfo
 
-        btnHome_Click(Nothing, Nothing)
-
+        'btnHome_Click(Nothing, Nothing)
         Application.DoEvents()
 
     End Sub
@@ -160,6 +165,21 @@
 
 #End Region
 
+    Private Sub SetDateMenuButtons(button As Object)
+
+        Dim btn = CType(button, Button)
+
+        btn.BackColor = btnBank.FlatAppearance.BorderColor
+        btn.ForeColor = Color.Black
+
+        If CurrentButton IsNot Nothing And CurrentButton IsNot btn Then
+            CurrentButton.BackColor = Me.BackColor
+            CurrentButton.ForeColor = Color.White
+        End If
+
+        CurrentButton = btn
+
+    End Sub
     Private Sub FormMain_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If mControllers(mCurrStep).BasicKeysEnabled Then
 
@@ -175,6 +195,7 @@
     End Sub
     Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("TASA")
             mCurrStep = State.ShowTasa
         Else
@@ -184,6 +205,7 @@
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("DASH")
             mCurrStep = State.ShowDash
         Else
@@ -193,6 +215,7 @@
 
     Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("SOCIO")
             mCurrStep = State.ShowSocio
         Else
@@ -203,6 +226,7 @@
 
     Private Sub btnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("CLIENTE")
             mCurrStep = State.ShowClient
         Else
@@ -213,6 +237,7 @@
 
     Private Sub btnBank_Click(sender As Object, e As EventArgs) Handles btnBank.Click
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCO")
             mCurrStep = State.ShowBank
         Else
@@ -224,6 +249,7 @@
     Private Sub btnCambio_Click(sender As Object, e As EventArgs) Handles btnCambio.Click
 
         If SessionActive() Then
+            SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("CAMBIO")
             mCurrStep = State.ShowBank
         Else
