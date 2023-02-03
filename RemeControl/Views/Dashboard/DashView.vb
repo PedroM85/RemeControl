@@ -1,13 +1,16 @@
-﻿Public Class DashView
+﻿Imports System.Security.Policy
+
+Public Class DashView
 
     Private CurrentButton As Button
+    Private oDashData As DashboardDataLayer
 
     Public Sub New()
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
         dtpStartDate.Value = DateTime.Today.AddDays(-7)
-        dtpEndDate.Value = DateTime.Now
+        dtpEndDate.Value = DateTime.Now.ToString("d")
         btnLast7.Select()
         SetDateMenuButtons(btnLast7)
 
@@ -16,28 +19,36 @@
     End Sub
 
     Public Sub LoadData()
-        'Dim oClientData As ClienteDataLayer = Nothing
+        oDashData = New DashboardDataLayer
 
-        'oClientData = New ClienteDataLayer
 
-        'dgvView.DataSource = Nothing
+        lblStartDate.Text = dtpStartDate.Value.ToString("yyyy-MM-dd")
+        lblEndDate.Text = dtpEndDate.Value.ToString("yyyy-MM-dd")
 
-        'If oClientData.GetClientes Is Nothing Then
-        '    Label1.Visible = True
-
-        'Else
-        '    'pnlVacio.Visible = False
-        '    dgvView.DataSource = oClientData.GetClientes
-        'End If
         Chart()
 
-        lblStartDate.Text = dtpStartDate.Text
-        lblEndDate.Text = dtpEndDate.Text
+
+
 
     End Sub
-
     Public Sub Chart()
-        Chart1.Series(0).Points.AddXY("sss", 60)
+        Dim oDash As DashboardData
+
+        oDash = New DashboardData With
+            {
+            .OP_DateStart = lblStartDate.Text,
+            .OP_DateEnd = lblEndDate.Text
+        }
+
+
+        Chart1.DataSource = Nothing
+        Chart1.DataSource = oDashData.GetCambios(oDash)
+        Chart1.Series.Add("OP_Socio")
+        Chart1.Series(0).XValueMember = "OP_Fecha"
+        Chart1.Series(0).YValueMembers = "OP_Pesos"
+        Chart1.DataBind()
+
+
     End Sub
 
     Private Sub SetDateMenuButtons(button As Object)
@@ -115,7 +126,7 @@
         End If
     End Sub
 
-    Private Sub lblEndDate_Click(sender As Object, e As EventArgs) Handles lblEndDate.Click
+    Private Sub lblEndDate_Click(sender As Object, e As EventArgs)
         If CurrentButton Is btnCustom Then
             dtpEndDate.Select()
             SendKeys.Send("%{DOWN}")
@@ -123,10 +134,14 @@
     End Sub
 
     Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
-        lblStartDate.Text = dtpStartDate.Text
+        lblStartDate.Text = dtpStartDate.Value
     End Sub
 
     Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
-        lblEndDate.Text = dtpEndDate.Text
+        lblEndDate.Text = dtpEndDate.Value
+    End Sub
+
+    Private Sub btnCustomDate_Click(sender As Object, e As EventArgs) Handles btnCustomDate.Click
+        LoadData()
     End Sub
 End Class

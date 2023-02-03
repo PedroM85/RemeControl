@@ -62,7 +62,7 @@ Public Class SocioDataLayer
         Try
             Socio = New SocioData
 
-            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)

@@ -214,10 +214,10 @@ Partial Class DashView
         Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
+        'Series1.ChartArea = "ChartArea1"
+        'Series1.Legend = "Legend1"
+        'Series1.Name = "Series1"
+        'Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(612, 213)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
@@ -243,7 +243,7 @@ Partial Class DashView
         Me.btnLast7.Name = "btnLast7"
         Me.btnLast7.Size = New System.Drawing.Size(77, 23)
         Me.btnLast7.TabIndex = 8
-        Me.btnLast7.Text = "Ultimos 7 dias"
+        Me.btnLast7.Text = "Ultimos 7"
         Me.btnLast7.UseVisualStyleBackColor = True
         '
         'btnLast30
@@ -255,7 +255,7 @@ Partial Class DashView
         Me.btnLast30.Name = "btnLast30"
         Me.btnLast30.Size = New System.Drawing.Size(77, 23)
         Me.btnLast30.TabIndex = 9
-        Me.btnLast30.Text = "Ultimos 30 dias"
+        Me.btnLast30.Text = "Ultimos 30"
         Me.btnLast30.UseVisualStyleBackColor = True
         '
         'btnThisMonth
@@ -297,30 +297,34 @@ Partial Class DashView
         '
         'dtpStartDate
         '
+        Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpStartDate.Location = New System.Drawing.Point(16, 45)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(120, 20)
         Me.dtpStartDate.TabIndex = 12
+        Me.dtpStartDate.Value = New Date(2023, 2, 2, 0, 0, 0, 0)
         '
         'dtpEndDate
         '
+        Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpEndDate.Location = New System.Drawing.Point(159, 45)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.Size = New System.Drawing.Size(125, 20)
         Me.dtpEndDate.TabIndex = 13
+        Me.dtpEndDate.Value = New Date(2023, 2, 2, 0, 0, 0, 0)
         '
         'lblStartDate
         '
-        Me.lblStartDate.Location = New System.Drawing.Point(13, 42)
+        Me.lblStartDate.Location = New System.Drawing.Point(13, 41)
         Me.lblStartDate.Name = "lblStartDate"
         Me.lblStartDate.Size = New System.Drawing.Size(125, 19)
         Me.lblStartDate.TabIndex = 14
         Me.lblStartDate.Text = "Feb 01 2023"
-        Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblEndDate
         '
-        Me.lblEndDate.Location = New System.Drawing.Point(159, 42)
+        Me.lblEndDate.Location = New System.Drawing.Point(159, 41)
         Me.lblEndDate.Name = "lblEndDate"
         Me.lblEndDate.Size = New System.Drawing.Size(125, 19)
         Me.lblEndDate.TabIndex = 15

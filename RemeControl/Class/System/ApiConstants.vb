@@ -43,5 +43,7 @@
     Public Const CreateCambio As String = Direc + "CreateCambio"
     Public Const UpdateCambio As String = Direc + "UpdateCambio"
     Public Const DeleteCambio As String = Direc + "DeleteCambio"
+    'Informacion de dashboard
+    Public Const GetCambiosDiarios As String = Direc + "GetDashboard"
 
 End Class

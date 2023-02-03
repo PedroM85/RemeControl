@@ -80,6 +80,7 @@
     <Compile Include="Class\Banco\BancoDataLayer.vb" />
     <Compile Include="Class\Cambio\CambioDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
+    <Compile Include="Class\Dashboard\DashboardDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />

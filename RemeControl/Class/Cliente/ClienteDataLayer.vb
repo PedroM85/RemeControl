@@ -92,7 +92,7 @@ Public Class ClienteDataLayer
         Try
             Cliente = New ClienteData
 
-            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+            Dim result_Get = GetJson(Url, Nothing, oApp.CurrentUser)
 
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)

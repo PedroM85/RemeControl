@@ -80,8 +80,8 @@ Public Class JsonConnect
         Return SendJson(Url, "DELETE", Nothing, oApp.CurrentUser)
     End Function
 
-    Public Function GetJson(ByVal Url As String, oUser As LoginIn) As String
-        Return SendJson(Url, WebRequestMethods.Http.Get, Nothing, oApp.CurrentUser)
+    Public Function GetJson(ByVal Url As String, obj As Object, oUser As LoginIn) As String
+        Return SendJson(Url, WebRequestMethods.Http.Get, obj, oApp.CurrentUser)
     End Function
 
     Public Function PutJson(ByVal Url As String, ByVal obj As Object, oUser As LoginIn) As String
