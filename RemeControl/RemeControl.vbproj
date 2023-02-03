@@ -56,6 +56,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -79,6 +80,7 @@
     <Compile Include="Class\Banco\BancoDataLayer.vb" />
     <Compile Include="Class\Cambio\CambioDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
+    <Compile Include="Class\Dashboard\DashboardDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
@@ -96,6 +98,7 @@
     <Compile Include="Controller\ShowBank.vb" />
     <Compile Include="Controller\ShowCambio.vb" />
     <Compile Include="Controller\ShowClient.vb" />
+    <Compile Include="Controller\ShowDash.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
     <Compile Include="FormMain.vb">
@@ -164,6 +167,13 @@
     <Compile Include="Views\Cliente\ClientView.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\Dashboard\DashManager.vb" />
+    <Compile Include="Views\Dashboard\DashView.Designer.vb">
+      <DependentUpon>DashView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboard\DashView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Socio\SocioABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -216,6 +226,9 @@
     <EmbeddedResource Include="Views\Cliente\ClientView.resx">
       <DependentUpon>ClientView.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Dashboard\DashView.resx">
+      <DependentUpon>DashView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Socio\SocioABM.resx">
       <DependentUpon>SocioABM.vb</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +252,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="resources\done_48px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
