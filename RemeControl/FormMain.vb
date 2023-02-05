@@ -273,4 +273,14 @@
         End If
 
     End Sub
+
+    Private Sub btnBancoSo_Click(sender As Object, e As EventArgs) Handles btnBancoSo.Click
+        If SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("BANCOSO")
+            mCurrStep = State.ShowBank
+        Else
+            oApp.LoginUser()
+        End If
+    End Sub
 End Class

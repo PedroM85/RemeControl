@@ -135,6 +135,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Class\SalesDate\SalesDateInfo.vb" />
+    <Compile Include="Views\BancoSo\BancoSoABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\BancoSo\BancoSoManager.vb" />
+    <Compile Include="Views\BancoSo\BancoSoView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Banco\BancoABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,6 +216,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BancoSo\BancoSoView.resx">
+      <DependentUpon>BancoSoView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Banco\BancoABM.resx">
       <DependentUpon>BancoABM.vb</DependentUpon>
