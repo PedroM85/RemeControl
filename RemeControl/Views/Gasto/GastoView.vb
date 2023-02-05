@@ -2,7 +2,7 @@
     Inherits ViewBase
 
     Private WithEvents Label1 As Label
-    Private WithEvents oClientABM As ClientABM
+    Private WithEvents oGastoABM As GastoABM
 
     Public Sub New()
         MyBase.New
@@ -11,66 +11,69 @@
         InitializeComponent()
 
 
-        LoadGlobalCaptions()
+        'LoadGlobalCaptions()
 
     End Sub
 
     Public Sub LoadData()
-        Dim oClientData As ClienteDataLayer = Nothing
+        'Dim oClientData As ClienteDataLayer = Nothing
+        Dim oGastoData As GastoDataLayer = Nothing
 
-        oClientData = New ClienteDataLayer
+        'oClientData = New ClienteDataLayer
+        oGastoData = New GastoDataLayer
 
         dgvView.DataSource = Nothing
 
-        If oClientData.GetClientes Is Nothing Then
-            Label1.Visible = True
+        'If oClientData.GetClientes Is Nothing Then
+        Label1.Visible = True
+        dgvView.DataSource = oGastoData.GetTest()
 
-        Else
-            'pnlVacio.Visible = False
-            dgvView.DataSource = oClientData.GetClientes
-        End If
+        'Else
+        'pnlVacio.Visible = False
+        'dgvView.DataSource = oClientData.GetClientes
+        'End If
 
 
     End Sub
 
-    Private Sub ClientView_Addnew() Handles MyBase.AddNew
+    Private Sub GastoView_Addnew() Handles MyBase.AddNew
 
         Cursor = Cursors.WaitCursor
 
-        oClientABM = New ClientABM
+        oGastoABM = New GastoABM
 
-        oClientABM.Caption = "Agregar una cliente"
-        oClientABM.Title = "Datos Generales"
+        oGastoABM.Caption = "Agregar un gasto"
+        oGastoABM.Title = "Datos Generales"
         'oClientABM.chkActive.Checked = True
-        oClientABM.Edit(Nothing)
+        oGastoABM.Edit(Nothing)
 
         Me.Visible = False
-        oClientABM.Dock = DockStyle.Fill
-        oMainForm.ShowView(oClientABM)
+        oGastoABM.Dock = DockStyle.Fill
+        oMainForm.ShowView(oGastoABM)
         oMainForm.HideLeftPanel()
 
 
-        oClientABM.Select()
+        oGastoABM.Select()
 
         Cursor = Cursors.Arrow
     End Sub
 
-    Public Sub ClientView_Edit() Handles MyBase.Edit
+    Public Sub GastoView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
-        oClientABM = New ClientABM
+        oGastoABM = New GastoABM
 
-        oClientABM.Caption = "Editar una cliente"
-        oClientABM.Title = "Datos Generales"
+        oGastoABM.Caption = "Editar un gasto"
+        oGastoABM.Title = "Datos Generales"
         Dim row As DataGridViewRow = dgvView.CurrentRow
-        oClientABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
+        oGastoABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
 
         Me.Visible = False
-        oClientABM.Dock = DockStyle.Fill
-        oMainForm.ShowView(oClientABM)
+        oGastoABM.Dock = DockStyle.Fill
+        oMainForm.ShowView(oGastoABM)
         oMainForm.HideLeftPanel()
 
-        oClientABM.Select()
+        oGastoABM.Select()
 
 
 
@@ -78,7 +81,7 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oClientABM_Delete() Handles MyBase.Delete
+    Private Sub oGastoABM_Delete() Handles MyBase.Delete
         Dim oDataLayer As ClienteDataLayer = New ClienteDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
@@ -102,10 +105,10 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oClientABM_Close() Handles oClientABM.Close
+    Private Sub oGastoABM_Close() Handles oGastoABM.Close
         Close_ABM()
     End Sub
-    Private Sub oClientABM_Save() Handles oClientABM.Save
+    Private Sub oGastoABM_Save() Handles oGastoABM.Save
         Close_ABM()
     End Sub
 
@@ -187,8 +190,8 @@
     Private Sub Close_ABM()
         oMainForm.ShowLeftPanel()
 
-        oClientABM.Dispose()
-        oClientABM = Nothing
+        oGastoABM.Dispose()
+        oGastoABM = Nothing
 
         LoadData()
         Me.Visible = True
