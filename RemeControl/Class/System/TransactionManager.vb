@@ -21,11 +21,12 @@
             Case "CAMBIO"
                 Dim oCambio As CambioManager = New CambioManager
                 oView = oCambio.CreateCambioView
-
             Case "DASH"
                 Dim oDash As DashManager = New DashManager
                 oView = oDash.CreateDashView
-
+            Case "GASTO"
+                Dim oGasto As GastoManager = New GastoManager
+                oView = oGasto.CreateGastoView
             Case Else
                 oView = Nothing
         End Select

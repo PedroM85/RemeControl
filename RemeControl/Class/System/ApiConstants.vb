@@ -46,5 +46,7 @@
     'Informacion de dashboard
     Public Const GetCambiosDiarios As String = Direc + "PostDashboard"
     Public Const GetTotalInfo As String = Direc + "TotalInfo"
+    'Informacion de Gasto
+    Public Const Pong As String = Direc + "pong"
 
 End Class

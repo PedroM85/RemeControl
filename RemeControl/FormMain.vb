@@ -47,8 +47,10 @@
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
 
+
         btnHome.Select()
         SetDateMenuButtons(btnHome)
+
 
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
@@ -77,7 +79,9 @@
 
         Me.SalesDateInfo = oApp.GetSalesDateInfo
 
-        'btnHome_Click(Nothing, Nothing)
+        mTrMgr.DoMenuItem("DASH")
+        mCurrStep = State.ShowDash
+
         Application.DoEvents()
 
     End Sub
@@ -251,6 +255,18 @@
         If SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("CAMBIO")
+            mCurrStep = State.ShowBank
+        Else
+            oApp.LoginUser()
+        End If
+
+    End Sub
+
+    Private Sub btnGasto_Click(sender As Object, e As EventArgs) Handles btnGasto.Click
+
+        If SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("GASTO")
             mCurrStep = State.ShowBank
         Else
             oApp.LoginUser()

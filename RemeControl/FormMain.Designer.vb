@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.pnlBottom = New System.Windows.Forms.Panel()
@@ -36,6 +36,7 @@ Partial Class FormMain
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlFill = New System.Windows.Forms.Panel()
         Me.tmrBlinkyBlinky2 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnGasto = New System.Windows.Forms.Button()
         Me.pnlBottom.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -49,14 +50,14 @@ Partial Class FormMain
         Me.pnlBottom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pnlBottom.Location = New System.Drawing.Point(0, 464)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(825, 20)
+        Me.pnlBottom.Size = New System.Drawing.Size(908, 20)
         Me.pnlBottom.TabIndex = 0
         '
         'lblInfo
         '
         Me.lblInfo.AutoSize = True
         Me.lblInfo.Dock = System.Windows.Forms.DockStyle.Right
-        Me.lblInfo.Location = New System.Drawing.Point(797, 0)
+        Me.lblInfo.Location = New System.Drawing.Point(880, 0)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(28, 13)
         Me.lblInfo.TabIndex = 0
@@ -65,7 +66,9 @@ Partial Class FormMain
         '
         'pnlLeft
         '
+        Me.pnlLeft.AutoScroll = True
         Me.pnlLeft.BackColor = System.Drawing.SystemColors.Highlight
+        Me.pnlLeft.Controls.Add(Me.btnGasto)
         Me.pnlLeft.Controls.Add(Me.btnSocio)
         Me.pnlLeft.Controls.Add(Me.btnBank)
         Me.pnlLeft.Controls.Add(Me.btnCalcular)
@@ -76,7 +79,7 @@ Partial Class FormMain
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
         Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(166, 464)
+        Me.pnlLeft.Size = New System.Drawing.Size(202, 464)
         Me.pnlLeft.TabIndex = 1
         '
         'btnSocio
@@ -88,7 +91,7 @@ Partial Class FormMain
         Me.btnSocio.ForeColor = System.Drawing.Color.White
         Me.btnSocio.Location = New System.Drawing.Point(0, 361)
         Me.btnSocio.Name = "btnSocio"
-        Me.btnSocio.Size = New System.Drawing.Size(166, 45)
+        Me.btnSocio.Size = New System.Drawing.Size(202, 45)
         Me.btnSocio.TabIndex = 5
         Me.btnSocio.Text = "Socio | Sucursal"
         Me.btnSocio.UseVisualStyleBackColor = False
@@ -102,7 +105,7 @@ Partial Class FormMain
         Me.btnBank.ForeColor = System.Drawing.Color.White
         Me.btnBank.Location = New System.Drawing.Point(0, 316)
         Me.btnBank.Name = "btnBank"
-        Me.btnBank.Size = New System.Drawing.Size(166, 45)
+        Me.btnBank.Size = New System.Drawing.Size(202, 45)
         Me.btnBank.TabIndex = 2
         Me.btnBank.Text = "Bancos"
         Me.btnBank.UseVisualStyleBackColor = False
@@ -116,7 +119,7 @@ Partial Class FormMain
         Me.btnCalcular.ForeColor = System.Drawing.Color.White
         Me.btnCalcular.Location = New System.Drawing.Point(0, 271)
         Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(166, 45)
+        Me.btnCalcular.Size = New System.Drawing.Size(202, 45)
         Me.btnCalcular.TabIndex = 1
         Me.btnCalcular.Text = "Tasa del dia"
         Me.btnCalcular.UseVisualStyleBackColor = False
@@ -130,7 +133,7 @@ Partial Class FormMain
         Me.btnClients.ForeColor = System.Drawing.Color.White
         Me.btnClients.Location = New System.Drawing.Point(0, 226)
         Me.btnClients.Name = "btnClients"
-        Me.btnClients.Size = New System.Drawing.Size(166, 45)
+        Me.btnClients.Size = New System.Drawing.Size(202, 45)
         Me.btnClients.TabIndex = 3
         Me.btnClients.Text = "Clientes"
         Me.btnClients.UseVisualStyleBackColor = False
@@ -144,7 +147,7 @@ Partial Class FormMain
         Me.btnCambio.ForeColor = System.Drawing.Color.White
         Me.btnCambio.Location = New System.Drawing.Point(0, 181)
         Me.btnCambio.Name = "btnCambio"
-        Me.btnCambio.Size = New System.Drawing.Size(166, 45)
+        Me.btnCambio.Size = New System.Drawing.Size(202, 45)
         Me.btnCambio.TabIndex = 4
         Me.btnCambio.Text = "Cambios"
         Me.btnCambio.UseVisualStyleBackColor = False
@@ -158,7 +161,7 @@ Partial Class FormMain
         Me.btnHome.ForeColor = System.Drawing.Color.White
         Me.btnHome.Location = New System.Drawing.Point(0, 136)
         Me.btnHome.Name = "btnHome"
-        Me.btnHome.Size = New System.Drawing.Size(166, 45)
+        Me.btnHome.Size = New System.Drawing.Size(202, 45)
         Me.btnHome.TabIndex = 0
         Me.btnHome.Text = "Inicio"
         Me.btnHome.UseVisualStyleBackColor = False
@@ -170,7 +173,7 @@ Partial Class FormMain
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(166, 136)
+        Me.Panel1.Size = New System.Drawing.Size(202, 136)
         Me.Panel1.TabIndex = 0
         '
         'lblUser
@@ -187,21 +190,35 @@ Partial Class FormMain
         '
         Me.pnlFill.BackColor = System.Drawing.Color.White
         Me.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlFill.Location = New System.Drawing.Point(166, 0)
+        Me.pnlFill.Location = New System.Drawing.Point(202, 0)
         Me.pnlFill.Name = "pnlFill"
-        Me.pnlFill.Size = New System.Drawing.Size(659, 464)
+        Me.pnlFill.Size = New System.Drawing.Size(706, 464)
         Me.pnlFill.TabIndex = 2
         '
         'tmrBlinkyBlinky2
         '
         Me.tmrBlinkyBlinky2.Interval = 500
         '
+        'btnGasto
+        '
+        Me.btnGasto.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnGasto.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnGasto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnGasto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGasto.ForeColor = System.Drawing.Color.White
+        Me.btnGasto.Location = New System.Drawing.Point(0, 406)
+        Me.btnGasto.Name = "btnGasto"
+        Me.btnGasto.Size = New System.Drawing.Size(202, 45)
+        Me.btnGasto.TabIndex = 6
+        Me.btnGasto.Text = "Gasto"
+        Me.btnGasto.UseVisualStyleBackColor = False
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.ClientSize = New System.Drawing.Size(825, 484)
+        Me.ClientSize = New System.Drawing.Size(908, 484)
         Me.Controls.Add(Me.pnlFill)
         Me.Controls.Add(Me.pnlLeft)
         Me.Controls.Add(Me.pnlBottom)
@@ -233,4 +250,5 @@ Partial Class FormMain
     Friend WithEvents btnClients As Button
     Friend WithEvents btnCambio As Button
     Friend WithEvents btnSocio As Button
+    Friend WithEvents btnGasto As Button
 End Class

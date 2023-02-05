@@ -81,6 +81,7 @@
     <Compile Include="Class\Cambio\CambioDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
     <Compile Include="Class\Dashboard\DashboardDataLayer.vb" />
+    <Compile Include="Class\Gasto\GastoDataLayer.vb" />
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
@@ -174,6 +175,13 @@
     <Compile Include="Views\Dashboard\DashView.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\Gasto\GastoABM.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Gasto\GastoManager.vb" />
+    <Compile Include="Views\Gasto\GastoView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\Socio\SocioABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Dashboard\DashView.resx">
       <DependentUpon>DashView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Gasto\GastoABM.resx">
+      <DependentUpon>GastoABM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Socio\SocioABM.resx">
       <DependentUpon>SocioABM.vb</DependentUpon>
