@@ -100,7 +100,20 @@ Public Class MgrFramework
 
         End If
     End Sub
+    Public Function SessionActive() As Boolean
+        Dim a As DateTime = oApp.CurrentUser.USR_SessionEnd
+        Dim b As DateTime = DateTime.Now
+        Try
+            If a > b Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
 
+        End Try
+    End Function
     Private Function GetMyExternalIP()
         Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
         'Dim wq As HttpWebRequest = HttpWebRequest.Create("http://whatismyip.org/")

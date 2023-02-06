@@ -26,6 +26,8 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnBancoSo = New System.Windows.Forms.Button()
+        Me.btnGasto = New System.Windows.Forms.Button()
         Me.btnSocio = New System.Windows.Forms.Button()
         Me.btnBank = New System.Windows.Forms.Button()
         Me.btnCalcular = New System.Windows.Forms.Button()
@@ -36,7 +38,6 @@ Partial Class FormMain
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlFill = New System.Windows.Forms.Panel()
         Me.tmrBlinkyBlinky2 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnGasto = New System.Windows.Forms.Button()
         Me.pnlBottom.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -68,6 +69,7 @@ Partial Class FormMain
         '
         Me.pnlLeft.AutoScroll = True
         Me.pnlLeft.BackColor = System.Drawing.SystemColors.Highlight
+        Me.pnlLeft.Controls.Add(Me.btnBancoSo)
         Me.pnlLeft.Controls.Add(Me.btnGasto)
         Me.pnlLeft.Controls.Add(Me.btnSocio)
         Me.pnlLeft.Controls.Add(Me.btnBank)
@@ -82,6 +84,34 @@ Partial Class FormMain
         Me.pnlLeft.Size = New System.Drawing.Size(202, 464)
         Me.pnlLeft.TabIndex = 1
         '
+        'btnBancoSo
+        '
+        Me.btnBancoSo.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnBancoSo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnBancoSo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnBancoSo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBancoSo.ForeColor = System.Drawing.Color.White
+        Me.btnBancoSo.Location = New System.Drawing.Point(0, 451)
+        Me.btnBancoSo.Name = "btnBancoSo"
+        Me.btnBancoSo.Size = New System.Drawing.Size(185, 45)
+        Me.btnBancoSo.TabIndex = 7
+        Me.btnBancoSo.Text = "Banco Socios"
+        Me.btnBancoSo.UseVisualStyleBackColor = False
+        '
+        'btnGasto
+        '
+        Me.btnGasto.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnGasto.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnGasto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnGasto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGasto.ForeColor = System.Drawing.Color.White
+        Me.btnGasto.Location = New System.Drawing.Point(0, 406)
+        Me.btnGasto.Name = "btnGasto"
+        Me.btnGasto.Size = New System.Drawing.Size(185, 45)
+        Me.btnGasto.TabIndex = 6
+        Me.btnGasto.Text = "Gasto"
+        Me.btnGasto.UseVisualStyleBackColor = False
+        '
         'btnSocio
         '
         Me.btnSocio.BackColor = System.Drawing.SystemColors.HotTrack
@@ -91,7 +121,7 @@ Partial Class FormMain
         Me.btnSocio.ForeColor = System.Drawing.Color.White
         Me.btnSocio.Location = New System.Drawing.Point(0, 361)
         Me.btnSocio.Name = "btnSocio"
-        Me.btnSocio.Size = New System.Drawing.Size(202, 45)
+        Me.btnSocio.Size = New System.Drawing.Size(185, 45)
         Me.btnSocio.TabIndex = 5
         Me.btnSocio.Text = "Socio | Sucursal"
         Me.btnSocio.UseVisualStyleBackColor = False
@@ -105,7 +135,7 @@ Partial Class FormMain
         Me.btnBank.ForeColor = System.Drawing.Color.White
         Me.btnBank.Location = New System.Drawing.Point(0, 316)
         Me.btnBank.Name = "btnBank"
-        Me.btnBank.Size = New System.Drawing.Size(202, 45)
+        Me.btnBank.Size = New System.Drawing.Size(185, 45)
         Me.btnBank.TabIndex = 2
         Me.btnBank.Text = "Bancos"
         Me.btnBank.UseVisualStyleBackColor = False
@@ -119,7 +149,7 @@ Partial Class FormMain
         Me.btnCalcular.ForeColor = System.Drawing.Color.White
         Me.btnCalcular.Location = New System.Drawing.Point(0, 271)
         Me.btnCalcular.Name = "btnCalcular"
-        Me.btnCalcular.Size = New System.Drawing.Size(202, 45)
+        Me.btnCalcular.Size = New System.Drawing.Size(185, 45)
         Me.btnCalcular.TabIndex = 1
         Me.btnCalcular.Text = "Tasa del dia"
         Me.btnCalcular.UseVisualStyleBackColor = False
@@ -133,7 +163,7 @@ Partial Class FormMain
         Me.btnClients.ForeColor = System.Drawing.Color.White
         Me.btnClients.Location = New System.Drawing.Point(0, 226)
         Me.btnClients.Name = "btnClients"
-        Me.btnClients.Size = New System.Drawing.Size(202, 45)
+        Me.btnClients.Size = New System.Drawing.Size(185, 45)
         Me.btnClients.TabIndex = 3
         Me.btnClients.Text = "Clientes"
         Me.btnClients.UseVisualStyleBackColor = False
@@ -147,7 +177,7 @@ Partial Class FormMain
         Me.btnCambio.ForeColor = System.Drawing.Color.White
         Me.btnCambio.Location = New System.Drawing.Point(0, 181)
         Me.btnCambio.Name = "btnCambio"
-        Me.btnCambio.Size = New System.Drawing.Size(202, 45)
+        Me.btnCambio.Size = New System.Drawing.Size(185, 45)
         Me.btnCambio.TabIndex = 4
         Me.btnCambio.Text = "Cambios"
         Me.btnCambio.UseVisualStyleBackColor = False
@@ -161,7 +191,7 @@ Partial Class FormMain
         Me.btnHome.ForeColor = System.Drawing.Color.White
         Me.btnHome.Location = New System.Drawing.Point(0, 136)
         Me.btnHome.Name = "btnHome"
-        Me.btnHome.Size = New System.Drawing.Size(202, 45)
+        Me.btnHome.Size = New System.Drawing.Size(185, 45)
         Me.btnHome.TabIndex = 0
         Me.btnHome.Text = "Inicio"
         Me.btnHome.UseVisualStyleBackColor = False
@@ -173,7 +203,7 @@ Partial Class FormMain
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(202, 136)
+        Me.Panel1.Size = New System.Drawing.Size(185, 136)
         Me.Panel1.TabIndex = 0
         '
         'lblUser
@@ -198,20 +228,6 @@ Partial Class FormMain
         'tmrBlinkyBlinky2
         '
         Me.tmrBlinkyBlinky2.Interval = 500
-        '
-        'btnGasto
-        '
-        Me.btnGasto.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.btnGasto.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnGasto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnGasto.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGasto.ForeColor = System.Drawing.Color.White
-        Me.btnGasto.Location = New System.Drawing.Point(0, 406)
-        Me.btnGasto.Name = "btnGasto"
-        Me.btnGasto.Size = New System.Drawing.Size(202, 45)
-        Me.btnGasto.TabIndex = 6
-        Me.btnGasto.Text = "Gasto"
-        Me.btnGasto.UseVisualStyleBackColor = False
         '
         'FormMain
         '
@@ -251,4 +267,5 @@ Partial Class FormMain
     Friend WithEvents btnCambio As Button
     Friend WithEvents btnSocio As Button
     Friend WithEvents btnGasto As Button
+    Friend WithEvents btnBancoSo As Button
 End Class

@@ -19,20 +19,41 @@
 
 
     Private Sub ExecEdit()
-        RaiseEvent Edit()
+        If oApp.SessionActive Then
+            RaiseEvent Edit()
+        Else
+            MessageBox.Show("La session caduco", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Application.Exit()
+        End If
+
     End Sub
 
     Private Sub ExecAddNew()
-        RaiseEvent AddNew()
+        If oApp.SessionActive Then
+            RaiseEvent AddNew()
+        Else
+            MessageBox.Show("La session caduco", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Application.Exit()
+        End If
+
     End Sub
     Private Sub ExecDelete()
-        If dgvView.RowCount > 0 Then
-            RaiseEvent Delete(dgvView.CurrentRow().DataBoundItem)
+        If oApp.SessionActive Then
+
+            If dgvView.RowCount > 0 Then
+                RaiseEvent Delete(dgvView.CurrentRow().DataBoundItem)
+            End If
+        Else
+            MessageBox.Show("La session caduco", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+            Application.Exit()
         End If
     End Sub
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+
         ExecAddNew()
+
     End Sub
 
 

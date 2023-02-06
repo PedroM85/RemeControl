@@ -48,5 +48,10 @@
     Public Const GetTotalInfo As String = Direc + "TotalInfo"
     'Informacion de Gasto
     Public Const Pong As String = Direc + "pong"
-
+    'Informacion BancoSocio
+    Public Const GetBancoSocio As String = Direc + "GetBancoSo"
+    Public Const GetBancoSoType As String = Direc + "GetBancoSoType"
+    Public Const CreateBancoSo As String = Direc + "CreateBancoSo"
+    Public Const UpdateBancoSo As String = Direc + "UpdateBancoSo"
+    Public Const DeleteBancoSocio As String = Direc + "DeleteBancoSo"
 End Class

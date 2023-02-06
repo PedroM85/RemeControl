@@ -18,6 +18,9 @@
             Case "BANCO"
                 Dim oBanco As BancoManager = New BancoManager
                 oView = oBanco.CreateBancoView
+            Case "BANCOSO"
+                Dim oBancoSO As BancoSoManager = New BancoSoManager
+                oView = oBancoSO.CreateBancoSoView
             Case "CAMBIO"
                 Dim oCambio As CambioManager = New CambioManager
                 oView = oCambio.CreateCambioView
