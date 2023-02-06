@@ -16,22 +16,18 @@
     End Sub
 
     Public Sub LoadData()
-        'Dim oClientData As ClienteDataLayer = Nothing
         Dim oGastoData As GastoDataLayer = Nothing
-
-        'oClientData = New ClienteDataLayer
         oGastoData = New GastoDataLayer
+
 
         dgvView.DataSource = Nothing
 
-        'If oClientData.GetClientes Is Nothing Then
-        Label1.Visible = True
-        dgvView.DataSource = oGastoData.GetTest()
-
-        'Else
-        'pnlVacio.Visible = False
-        'dgvView.DataSource = oClientData.GetClientes
-        'End If
+        If oGastoData.GetGastos Is Nothing Then
+            Label1.Visible = True
+            dgvView.DataSource = oGastoData.GetGastos()
+        Else
+            dgvView.DataSource = oGastoData.GetGastos
+        End If
 
 
     End Sub
@@ -82,19 +78,19 @@
     End Sub
 
     Private Sub oGastoABM_Delete() Handles MyBase.Delete
-        Dim oDataLayer As ClienteDataLayer = New ClienteDataLayer
+        Dim oDataLayer As GastoDataLayer = New GastoDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
             If MessageBox.Show("Desea eliminar " & " '" & Trim(dgvView.CurrentRow.Cells(1).Value) & "'?", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 Try
 
-                    Dim Data As ClienteData = New ClienteData With
+                    Dim Data As GastoData = New GastoData With
                     {
-                        .CLI_Id = dgvView.CurrentRow.Cells(0).Value,
-                        .CLI_ModifiedBy = oApp.CurrentUser.USR_Id
+                        .GAT_Id = dgvView.CurrentRow.Cells(0).Value,
+                        .GAT_ModifiedBy = oApp.CurrentUser.USR_Id
                     }
 
-                    oDataLayer.DeleteCliente(Data)
+                    oDataLayer.DeleteGasto(Data)
                 Catch ex As Exception
 
                 End Try
