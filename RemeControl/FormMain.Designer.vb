@@ -26,6 +26,7 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnBancoSo = New System.Windows.Forms.Button()
         Me.btnGasto = New System.Windows.Forms.Button()
         Me.btnSocio = New System.Windows.Forms.Button()
         Me.btnBank = New System.Windows.Forms.Button()
@@ -37,7 +38,6 @@ Partial Class FormMain
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlFill = New System.Windows.Forms.Panel()
         Me.tmrBlinkyBlinky2 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnBancoSo = New System.Windows.Forms.Button()
         Me.pnlBottom.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -83,6 +83,20 @@ Partial Class FormMain
         Me.pnlLeft.Name = "pnlLeft"
         Me.pnlLeft.Size = New System.Drawing.Size(202, 464)
         Me.pnlLeft.TabIndex = 1
+        '
+        'btnBancoSo
+        '
+        Me.btnBancoSo.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnBancoSo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnBancoSo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnBancoSo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBancoSo.ForeColor = System.Drawing.Color.White
+        Me.btnBancoSo.Location = New System.Drawing.Point(0, 451)
+        Me.btnBancoSo.Name = "btnBancoSo"
+        Me.btnBancoSo.Size = New System.Drawing.Size(185, 45)
+        Me.btnBancoSo.TabIndex = 7
+        Me.btnBancoSo.Text = "Banco Socios"
+        Me.btnBancoSo.UseVisualStyleBackColor = False
         '
         'btnGasto
         '
@@ -214,20 +228,6 @@ Partial Class FormMain
         'tmrBlinkyBlinky2
         '
         Me.tmrBlinkyBlinky2.Interval = 500
-        '
-        'btnBancoSo
-        '
-        Me.btnBancoSo.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.btnBancoSo.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnBancoSo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnBancoSo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBancoSo.ForeColor = System.Drawing.Color.White
-        Me.btnBancoSo.Location = New System.Drawing.Point(0, 451)
-        Me.btnBancoSo.Name = "btnBancoSo"
-        Me.btnBancoSo.Size = New System.Drawing.Size(185, 45)
-        Me.btnBancoSo.TabIndex = 7
-        Me.btnBancoSo.Text = "Banco Socios"
-        Me.btnBancoSo.UseVisualStyleBackColor = False
         '
         'FormMain
         '

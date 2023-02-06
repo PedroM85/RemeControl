@@ -18,7 +18,7 @@
         ShowCambio
         ShowSocio
         ShowDash
-
+        ShowBankSo
 
     End Enum
 
@@ -57,6 +57,7 @@
         mControllers(State.ShowClient) = New ShowClient(Me)
         mControllers(State.ShowBank) = New ShowBank(Me)
         mControllers(State.ShowDash) = New ShowDash(Me)
+        mControllers(State.ShowBankSo) = New ShowBankSo(Me)
 
     End Sub
 

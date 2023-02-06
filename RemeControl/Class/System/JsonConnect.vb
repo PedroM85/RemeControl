@@ -7,55 +7,56 @@ Public Class JsonConnect
     Public Function SendRequest(ByVal url As String, ByVal dataEncoding As String,
                                          ByVal method As String, Optional oUser As LoginIn = Nothing) As String
 
+
         Dim request As HttpWebRequest
-        Dim response As HttpWebResponse = Nothing
-        Dim reader As StreamReader
-        Dim retval As String = String.Empty
+            Dim response As HttpWebResponse = Nothing
+            Dim reader As StreamReader
+            Dim retval As String = String.Empty
 
-        Try
-            request = DirectCast(WebRequest.Create(url), HttpWebRequest)
-            request.Method = method
-            request.ContentType = "application/json"
-            If oUser IsNot Nothing Then
-                request.Headers("Authorization") = "Bearer " & oUser.Token
-            End If
-
-            If Not String.IsNullOrEmpty(dataEncoding) Then
-                If (method = WebRequestMethods.Http.Post) Or (method = WebRequestMethods.Http.Put) Then
-                    Dim strPost As String = dataEncoding
-                    Dim data As Byte() = Encoding.UTF8.GetBytes(strPost)
-                    request.ContentLength = data.Length
-                    Dim stream As Stream = request.GetRequestStream()
-                    stream.Write(data, 0, data.Length)
-                    stream.Close()
+            Try
+                request = DirectCast(WebRequest.Create(url), HttpWebRequest)
+                request.Method = method
+                request.ContentType = "application/json"
+                If oUser IsNot Nothing Then
+                    request.Headers("Authorization") = "Bearer " & oUser.Token
                 End If
-            End If
 
-            response = DirectCast(request.GetResponse(), HttpWebResponse)
-            reader = New StreamReader(response.GetResponseStream())
-            retval = reader.ReadToEnd()
+                If Not String.IsNullOrEmpty(dataEncoding) Then
+                    If (method = WebRequestMethods.Http.Post) Or (method = WebRequestMethods.Http.Put) Then
+                        Dim strPost As String = dataEncoding
+                        Dim data As Byte() = Encoding.UTF8.GetBytes(strPost)
+                        request.ContentLength = data.Length
+                        Dim stream As Stream = request.GetRequestStream()
+                        stream.Write(data, 0, data.Length)
+                        stream.Close()
+                    End If
+                End If
+
+                response = DirectCast(request.GetResponse(), HttpWebResponse)
+                reader = New StreamReader(response.GetResponseStream())
+                retval = reader.ReadToEnd()
+                Return retval
+            Catch ex As WebException
+                If ex.Response IsNot Nothing Then
+                    Using myreader As New StreamReader(ex.Response.GetResponseStream)
+                        Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd + vbCrLf + url)
+                        '    Dim weError As eWallet.eWalletError = eWallet.eWalletError.fromString(myreader.ReadToEnd)
+                        '    Dim msg As String = ex.Message
+                        '    If weError.Status <= eWallet.eWalletError.errcodeCannotInterpret Then
+                        '        msg = weError.errorMsg + vbCrLf + weError.message
+                        '    End If
+
+                        '    Throw New eWallet.eWalletException(msg, ex, weError)
+                    End Using
+                Else
+                    Throw New Exception(ex.Message)
+                End If
+
+            Finally
+                If Not response Is Nothing Then response.Close()
+
+            End Try
             Return retval
-        Catch ex As WebException
-            If ex.Response IsNot Nothing Then
-                Using myreader As New StreamReader(ex.Response.GetResponseStream)
-                    Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd + vbCrLf + url)
-                    '    Dim weError As eWallet.eWalletError = eWallet.eWalletError.fromString(myreader.ReadToEnd)
-                    '    Dim msg As String = ex.Message
-                    '    If weError.Status <= eWallet.eWalletError.errcodeCannotInterpret Then
-                    '        msg = weError.errorMsg + vbCrLf + weError.message
-                    '    End If
-
-                    '    Throw New eWallet.eWalletException(msg, ex, weError)
-                End Using
-            Else
-                Throw New Exception(ex.Message)
-            End If
-
-        Finally
-            If Not response Is Nothing Then response.Close()
-
-        End Try
-        Return retval
 
     End Function
 

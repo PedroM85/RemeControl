@@ -77,6 +77,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\BancoSo\BancoSoDataLayer.vb" />
     <Compile Include="Class\Banco\BancoDataLayer.vb" />
     <Compile Include="Class\Cambio\CambioDataLayer.vb" />
     <Compile Include="Class\Cliente\ClienteDataLayer.vb" />
@@ -97,6 +98,7 @@
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />
     <Compile Include="Controller\ShowBank.vb" />
+    <Compile Include="Controller\ShowBankSo.vb" />
     <Compile Include="Controller\ShowCambio.vb" />
     <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowDash.vb" />
@@ -216,6 +218,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\BancoSo\BancoSoABM.resx">
+      <DependentUpon>BancoSoABM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\BancoSo\BancoSoView.resx">
       <DependentUpon>BancoSoView.vb</DependentUpon>

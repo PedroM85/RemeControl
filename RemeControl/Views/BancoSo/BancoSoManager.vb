@@ -1,7 +1,7 @@
 ﻿Public Class BancoSoManager
     Private oBancoSoView As BancoSoView
 
-    Public Function CreateBancoView() As BancoSoView
+    Public Function CreateBancoSoView() As BancoSoView
         oBancoSoView = New BancoSoView
 
         With oBancoSoView

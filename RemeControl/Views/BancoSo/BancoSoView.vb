@@ -30,7 +30,7 @@
 
     End Sub
 
-    Private WithEvents oBancoABM As BancoABM
+    Private WithEvents oBancoSoABM As BancoSoABM
 
     Public Sub New()
         MyBase.New
@@ -44,61 +44,63 @@
     End Sub
 
     Public Sub LoadData()
-        Dim oBancoData As BancoDataLayer = Nothing
+        Dim oBancoSoData As BancoSoDataLayer = Nothing
 
-        oBancoData = New BancoDataLayer
+        oBancoSoData = New BancoSoDataLayer
 
         dgvView.DataSource = Nothing
 
-        If oBancoData.GetBancos Is Nothing Then
+        If oBancoSoData.GetBancoSo Is Nothing Then
             Label1.Visible = True
 
         Else
             'pnlVacio.Visible = False
-            dgvView.DataSource = oBancoData.GetBancos
+            dgvView.DataSource = oBancoSoData.GetBancoSo
         End If
 
 
     End Sub
 
-    Private Sub BancoView_Addnew() Handles MyBase.AddNew
+    Private Sub BancoSoView_Addnew() Handles MyBase.AddNew
 
         Cursor = Cursors.WaitCursor
 
-        oBancoABM = New BancoABM
 
-        oBancoABM.Caption = "Agregar un banco"
-        oBancoABM.Title = "Datos Generales"
-        'oClientABM.chkActive.Checked = True
-        oBancoABM.Edit(Nothing)
+        oBancoSoABM = New BancoSoABM
 
-        Me.Visible = False
-        oBancoABM.Dock = DockStyle.Fill
-        oMainForm.ShowView(oBancoABM)
-        oMainForm.HideLeftPanel()
+            oBancoSoABM.Caption = "Agregar un banco socio"
+            oBancoSoABM.Title = "Datos Generales"
+            'oClientABM.chkActive.Checked = True
+            oBancoSoABM.Edit(Nothing)
+
+            Me.Visible = False
+            oBancoSoABM.Dock = DockStyle.Fill
+            oMainForm.ShowView(oBancoSoABM)
+            oMainForm.HideLeftPanel()
 
 
-        oBancoABM.Select()
+            oBancoSoABM.Select()
+
 
         Cursor = Cursors.Arrow
     End Sub
 
-    Public Sub SocioView_Edit() Handles MyBase.Edit
+    Public Sub BancoSoView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
-        oBancoABM = New BancoABM
+        oBancoSoABM = New BancoSoABM
 
-        oBancoABM.Caption = "Editar una banco"
-        oBancoABM.Title = "Datos Generales"
+        oBancoSoABM.Caption = "Editar una banco socio"
+        oBancoSoABM.Title = "Datos Generales"
         Dim row As DataGridViewRow = dgvView.CurrentRow
-        oBancoABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
+        oBancoSoABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
 
         Me.Visible = False
-        oBancoABM.Dock = DockStyle.Fill
-        oMainForm.ShowView(oBancoABM)
+        oBancoSoABM.Dock = DockStyle.Fill
+        oMainForm.ShowView(oBancoSoABM)
         oMainForm.HideLeftPanel()
 
-        oBancoABM.Select()
+        oBancoSoABM.Select()
 
 
 
@@ -106,20 +108,20 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oSocioABM_Delete() Handles MyBase.Delete
-        Dim oDataLayer As BancoDataLayer = New BancoDataLayer
+    Private Sub oBancoSoABM_Delete() Handles MyBase.Delete
+        Dim oDataLayer As BancoSoDataLayer = New BancoSoDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
             If MessageBox.Show("Desea eliminar " & " '" & Trim(dgvView.CurrentRow.Cells(1).Value) & "'?", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 Try
 
-                    Dim Data As BancoData = New BancoData With
+                    Dim Data As BancoSoData = New BancoSoData With
                     {
-                        .BAN_Id = dgvView.CurrentRow.Cells(0).Value,
-                        .BAN_ModifiedBy = oApp.CurrentUser.USR_Id
+                        .OSB_Id = dgvView.CurrentRow.Cells(0).Value,
+                        .OSB_ModifiedBy = oApp.CurrentUser.USR_Id
                     }
 
-                    oDataLayer.DeleteBanco(Data)
+                    oDataLayer.DeleteBancoSo(Data)
                 Catch ex As Exception
 
                 End Try
@@ -130,77 +132,95 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oClientABM_Close() Handles oBancoABM.Close
+    Private Sub oBancoSoABM_Close() Handles oBancoSoABM.Close
         Close_ABM()
     End Sub
-    Private Sub oClientABM_Save() Handles oBancoABM.Save
+    Private Sub oBancoSoABM_Save() Handles oBancoSoABM.Save
         Close_ABM()
     End Sub
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 7
+        dgvView.ColumnCount = 11
 
-        dgvView.Columns(0).Name = "BAN_Id"
+        dgvView.Columns(0).Name = "OSB_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
-        dgvView.Columns(0).DataPropertyName = "BAN_Id"
+        dgvView.Columns(0).DataPropertyName = "OSB_Id"
         dgvView.Columns(0).Width = 100
         dgvView.Columns(0).Visible = False
 
-        dgvView.Columns(1).Name = "BAN_Name"
+        dgvView.Columns(1).Name = "OSB_Nombre"
         dgvView.Columns(1).HeaderText = "Nombre"
-        dgvView.Columns(1).DataPropertyName = "BAN_Name"
+        dgvView.Columns(1).DataPropertyName = "OSB_Nombre"
         dgvView.Columns(1).Width = 150
-        'dgvView.Columns(1).DefaultCellStyle.Format = "d"
-        'dgvView.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        dgvView.Columns(2).Name = "BAN_ACC_Name"
+        dgvView.Columns(2).Name = "OSB_Type"
         dgvView.Columns(2).HeaderText = "Tipo de cuenta"
-        dgvView.Columns(2).DataPropertyName = "BAN_ACC_Name"
+        dgvView.Columns(2).DataPropertyName = "OSB_Type"
         dgvView.Columns(2).Width = 120
-        'dgvView.Columns(2).DefaultCellStyle.Format = "{0:N2}"
-        'dgvView.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        dgvView.Columns(2).Visible = False
 
-        dgvView.Columns(3).Name = "BAN_Prefix"
-        dgvView.Columns(3).HeaderText = "Prefijo"
-        dgvView.Columns(3).DataPropertyName = "BAN_Prefix"
+
+        dgvView.Columns(3).Name = "OSBT_Nombre"
+        dgvView.Columns(3).HeaderText = "Tipo de cuenta"
+        dgvView.Columns(3).DataPropertyName = "OSBT_Nombre"
         dgvView.Columns(3).Width = 120
 
-
-        dgvView.Columns(4).Name = "BAN_CreatedDateTime"
-        dgvView.Columns(4).HeaderText = "Fecha de alta"
-        dgvView.Columns(4).DataPropertyName = "BAN_CreatedDateTime"
+        dgvView.Columns(4).Name = "OSB_Account"
+        dgvView.Columns(4).HeaderText = "Numero de cuenta"
+        dgvView.Columns(4).DataPropertyName = "OSB_Account"
         dgvView.Columns(4).Width = 120
-        dgvView.Columns(4).Visible = False
+
+        dgvView.Columns(5).Name = "OSB_InitialBalance"
+        dgvView.Columns(5).HeaderText = "Saldo"
+        dgvView.Columns(5).DataPropertyName = "OSB_InitialBalance"
+        dgvView.Columns(5).Width = 120
 
 
-        dgvView.Columns(5).Name = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).HeaderText = "Fecha de modificacion"
-        dgvView.Columns(5).DataPropertyName = "BAN_ModifiedDateTime"
-        dgvView.Columns(5).Width = 100
-        dgvView.Columns(5).Visible = False
-
-
-        dgvView.Columns(6).Name = "BAN_ModifiedBy"
-        dgvView.Columns(6).HeaderText = "Modificado por"
-        dgvView.Columns(6).DataPropertyName = "BAN_ModifiedBy"
+        dgvView.Columns(6).Name = "OSB_BeginninBalanceDate"
+        dgvView.Columns(6).HeaderText = "Fecha de inicio"
+        dgvView.Columns(6).DataPropertyName = "OSB_BeginninBalanceDate"
         dgvView.Columns(6).Width = 120
         dgvView.Columns(6).Visible = False
 
+        dgvView.Columns(7).Name = "OSB_Description"
+        dgvView.Columns(7).HeaderText = "Descripción"
+        dgvView.Columns(7).DataPropertyName = "OSB_Description"
+        dgvView.Columns(7).Width = 120
+        dgvView.Columns(7).Visible = False
+
+        dgvView.Columns(8).Name = "OSB_CreatedDateTime"
+        dgvView.Columns(8).HeaderText = "Fecha de alta"
+        dgvView.Columns(8).DataPropertyName = "OSB_CreatedDateTime"
+        dgvView.Columns(8).Width = 120
+        dgvView.Columns(8).Visible = False
+
+        dgvView.Columns(9).Name = "OSB_ModifiedDateTime"
+        dgvView.Columns(9).HeaderText = "Fecha de modificacion"
+        dgvView.Columns(9).DataPropertyName = "OSB_ModifiedDateTime"
+        dgvView.Columns(9).Width = 100
+        dgvView.Columns(9).Visible = False
+
+        dgvView.Columns(10).Name = "OSB_ModifiedBy"
+        dgvView.Columns(10).HeaderText = "Modificado por"
+        dgvView.Columns(10).DataPropertyName = "OSB_ModifiedBy"
+        dgvView.Columns(10).Width = 120
+        dgvView.Columns(10).Visible = False
+
 
         Dim Check As New DataGridViewCheckBoxColumn
-        Check.Name = "BAN_Active"
+        Check.Name = "OSB_Active"
         Check.HeaderText = "Activo"
-        Check.DataPropertyName = "BAN_Active"
-        dgvView.Columns.Insert(7, Check)
+        Check.DataPropertyName = "OSB_Active"
+        dgvView.Columns.Insert(11, Check)
 
     End Sub
 
     Private Sub Close_ABM()
         oMainForm.ShowLeftPanel()
 
-        oBancoABM.Dispose()
-        oBancoABM = Nothing
+        oBancoSoABM.Dispose()
+        oBancoSoABM = Nothing
 
         LoadData()
         Me.Visible = True
