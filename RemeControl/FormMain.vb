@@ -24,21 +24,6 @@
 
 #End Region
 
-    Private Function SessionActive() As Boolean
-        Dim a As DateTime = oApp.CurrentUser.USR_SessionEnd
-        Dim b As DateTime = DateTime.Now
-        Try
-            If a > b Then
-                Return True
-            Else
-                Return False
-            End If
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-
-        End Try
-    End Function
-
 
     Public Sub New()
         'MyBase.New
@@ -199,53 +184,58 @@
         End If
     End Sub
     Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("TASA")
             mCurrStep = State.ShowTasa
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
 
     End Sub
     Private Sub btnHome_Click(sender As Object, e As EventArgs) Handles btnHome.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("DASH")
             mCurrStep = State.ShowDash
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
     End Sub
 
     Private Sub btnSocio_Click(sender As Object, e As EventArgs) Handles btnSocio.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("SOCIO")
             mCurrStep = State.ShowSocio
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
 
     End Sub
 
     Private Sub btnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("CLIENTE")
             mCurrStep = State.ShowClient
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
 
     End Sub
 
     Private Sub btnBank_Click(sender As Object, e As EventArgs) Handles btnBank.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCO")
             mCurrStep = State.ShowBank
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
 
@@ -253,11 +243,12 @@
 
     Private Sub btnCambio_Click(sender As Object, e As EventArgs) Handles btnCambio.Click
 
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("CAMBIO")
             mCurrStep = State.ShowBank
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
 
@@ -265,22 +256,24 @@
 
     Private Sub btnGasto_Click(sender As Object, e As EventArgs) Handles btnGasto.Click
 
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("GASTO")
             mCurrStep = State.ShowBank
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
 
     End Sub
 
     Private Sub btnBancoSo_Click(sender As Object, e As EventArgs) Handles btnBancoSo.Click
-        If SessionActive() Then
+        If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCOSO")
             mCurrStep = State.ShowBank
         Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()
         End If
     End Sub
