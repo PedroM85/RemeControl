@@ -249,18 +249,17 @@
     End Sub
 
     Private Sub GastoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        'txtId.DataBindings.Add("Text", row, "CLI_Id")
-        'lblId.DataBindings.Add("Text", row, "CLI_Id")
-        'txtNombre.DataBindings.Add("Text", row, "CLI_Nombre")
-        'txtCuenta.DataBindings.Add("Text", row, "CLI_Cuenta")
-        'txtTitular.DataBindings.Add("Text", row, "CLI_Titular")
-        'txtCedula.DataBindings.Add("Text", row, "CLI_Cedula")
-        'chkActive.DataBindings.Add("Checked", row, "CLI_Active")
-        'cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
+        lblId.DataBindings.Add("Text", row, "GAT_Id")
+        dtpFecha.DataBindings.Add("Text", row, "GAT_Date")
+        cboNombre.DataBindings.Add("SelectedValue", row, "GAT_SOC_Id")
+        cboCuenta.DataBindings.Add("SelectedValue", row, "GAT_OSB_Id")
+        cboMetPago.DataBindings.Add("SelectedValue", row, "GAT_OSBT_Id")
+        txtConcepto.DataBindings.Add("Text", row, "GAT_Reason")
+        txtMonto.DataBindings.Add("Text", row, "GAT_Amount")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
-        If Not IsNumeric(e.KeyChar) Then
+        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
 
