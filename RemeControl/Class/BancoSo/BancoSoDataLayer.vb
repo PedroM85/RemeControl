@@ -111,15 +111,11 @@ Public Class BancoSoDataLayer
     End Function
 
     Public Function GetAcountType() As DataTable
-        Dim Banco As BancoSoData = Nothing
         Dim Url As String = ApiConstants.GetBancoSoType
         Dim table As DataTable
 
         Try
-            Banco = New BancoSoData
-
             Dim result_Get = GetJson(Url, oApp.CurrentUser)
-
 
             table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
         Catch ex As Exception

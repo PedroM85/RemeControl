@@ -304,7 +304,5 @@
     End Sub
 
 
-    'Private Sub txtPrefix_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrefix.KeyPress
-    '    ValiText(sender, e)
-    'End Sub
+
 End Class

@@ -1,8 +1,13 @@
 ﻿Public Class GastoABM
     Inherits ABMBase
 
-    Private oDataLayer As ClienteDataLayer
+    Private oDataLayer As GastoDataLayer
     Private focusedForeColor As Color = Color.Black
+    Private focusedBackColor As Color = Color.Gainsboro
+
+#Region "InitializeComponent"
+
+
     Friend WithEvents lblMonto As Label
     Friend WithEvents lblConcepto As Label
     Friend WithEvents lblMetPago As Label
@@ -13,12 +18,11 @@
     Friend WithEvents txtConcepto As TextBox
     Friend WithEvents cboMetPago As ComboBox
     Friend WithEvents cboCuenta As ComboBox
-    Friend WithEvents dtpFecha As DateTimePicker
     Friend WithEvents cboNombre As ComboBox
-    Private focusedBackColor As Color = Color.Gainsboro
+    Friend WithEvents lblId As Label
+    Friend WithEvents dtpFecha As DateTimePicker
 
     Private Sub InitializeComponent()
-        Me.dtpFecha = New System.Windows.Forms.DateTimePicker()
         Me.cboCuenta = New System.Windows.Forms.ComboBox()
         Me.cboMetPago = New System.Windows.Forms.ComboBox()
         Me.txtConcepto = New System.Windows.Forms.TextBox()
@@ -30,11 +34,15 @@
         Me.lblConcepto = New System.Windows.Forms.Label()
         Me.lblMonto = New System.Windows.Forms.Label()
         Me.cboNombre = New System.Windows.Forms.ComboBox()
+        Me.dtpFecha = New System.Windows.Forms.DateTimePicker()
+        Me.lblId = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.lblId)
+        Me.pnlControls0.Controls.Add(Me.dtpFecha)
         Me.pnlControls0.Controls.Add(Me.cboNombre)
         Me.pnlControls0.Controls.Add(Me.lblMonto)
         Me.pnlControls0.Controls.Add(Me.lblConcepto)
@@ -46,18 +54,7 @@
         Me.pnlControls0.Controls.Add(Me.txtConcepto)
         Me.pnlControls0.Controls.Add(Me.cboMetPago)
         Me.pnlControls0.Controls.Add(Me.cboCuenta)
-        Me.pnlControls0.Controls.Add(Me.dtpFecha)
         Me.pnlControls0.Size = New System.Drawing.Size(524, 205)
-        '
-        'dtpFecha
-        '
-        Me.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpFecha.Location = New System.Drawing.Point(182, 28)
-        Me.dtpFecha.Name = "dtpFecha"
-        Me.dtpFecha.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.dtpFecha.Size = New System.Drawing.Size(200, 20)
-        Me.dtpFecha.TabIndex = 0
-        Me.dtpFecha.Value = New Date(2023, 2, 5, 0, 0, 0, 0)
         '
         'cboCuenta
         '
@@ -153,6 +150,23 @@
         Me.cboNombre.Size = New System.Drawing.Size(200, 21)
         Me.cboNombre.TabIndex = 12
         '
+        'dtpFecha
+        '
+        Me.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpFecha.Location = New System.Drawing.Point(182, 27)
+        Me.dtpFecha.Name = "dtpFecha"
+        Me.dtpFecha.Size = New System.Drawing.Size(200, 20)
+        Me.dtpFecha.TabIndex = 13
+        '
+        'lblId
+        '
+        Me.lblId.AutoSize = True
+        Me.lblId.Location = New System.Drawing.Point(403, 64)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(13, 13)
+        Me.lblId.TabIndex = 14
+        Me.lblId.Text = "0"
+        '
         'GastoABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -163,13 +177,15 @@
         Me.PerformLayout()
 
     End Sub
-
+#End Region
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
 
-        'GetBancos()
+        GetSocios()
+        GetBancoSo()
+        GetBancoType()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
          .ForEach(Sub(b)
@@ -200,78 +216,98 @@
         b.BackColor = focusedBackColor
     End Sub
     Private Sub GastoABM_Save() Handles MyBase.Save
-        Dim oData As ClienteData
+        Dim oData As GastoData
 
-        oDataLayer = New ClienteDataLayer
+        oDataLayer = New GastoDataLayer
 
         Try
 
-            '.SOC_Id = IIf(IsAddNew, 0, txtId.Text),
-            '.SOC_Name = txtName.Text.Trim,
-            '.SOC_Telefono = txtPhone.Text.Trim,
-            '.SOC_ModifiedBy = oApp.CurrentUser.USR_Id,
-            '.SOC_Active = IIf(chkActive.CheckState, 1, 0)
-            'oData = New ClienteData With
-            '    {
-            '    .CLI_Id = IIf(IsAddNew, 0, lblId.Text),
-            '    .CLI_Nombre = txtNombre.Text.Trim,
-            '    .CLI_Banco = cboBanco.SelectedValue,
-            '    .CLI_Cuenta = txtCuenta.Text.Trim,
-            '    .CLI_Titular = txtTitular.Text.Trim,
-            '    .CLI_Cedula = txtCedula.Text.Trim,
-            '    .CLI_ModifiedBy = oApp.CurrentUser.USR_Id,
-            '    .CLI_Active = IIf(chkActive.CheckState, 1, 0)
-            '    }
+            oData = New GastoData With
+                {
+                .GAT_Id = IIf(IsAddNew, 0, lblId.Text),
+                .GAT_Date = dtpFecha.Text,
+                .GAT_SOC_Id = cboNombre.SelectedValue,
+                .GAT_OSB_Id = cboCuenta.SelectedValue,
+                .GAT_OSBT_Id = cboMetPago.SelectedValue,
+                .GAT_Reason = txtConcepto.Text.Trim,
+                .GAT_Amount = txtMonto.Text.Trim,
+                .GAT_ModifiedBy = oApp.CurrentUser.USR_Id,
+                .GAT_Active = 1'            
+                }
 
-
-            'If IsAddNew Then
-            '    oDataLayer.CreateCliente(oData)
-            'Else
-            '    oDataLayer.UpdateCliente(oData)
-            'End If
+            If IsAddNew Then
+                oDataLayer.CreateGasto(oData)
+            Else
+                oDataLayer.UpdateGasto(oData)
+            End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
     End Sub
     Private Sub GastoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-
         'lblId.Visible = True
     End Sub
-    'Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
-    '    row("SOC_Id") = 0
-    '    'row("SOC_Name") = not
-    '    'row("SOC_Telefono") = ""
-    '    'row("SOC_Active") = True
-    'End Sub
+
     Private Sub GastoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        'txtId.DataBindings.Add("Text", row, "CLI_Id")
-        'lblId.DataBindings.Add("Text", row, "CLI_Id")
-        'txtNombre.DataBindings.Add("Text", row, "CLI_Nombre")
-        'txtCuenta.DataBindings.Add("Text", row, "CLI_Cuenta")
-        'txtTitular.DataBindings.Add("Text", row, "CLI_Titular")
-        'txtCedula.DataBindings.Add("Text", row, "CLI_Cedula")
-        'chkActive.DataBindings.Add("Checked", row, "CLI_Active")
-        'cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
+        lblId.DataBindings.Add("Text", row, "GAT_Id")
+        dtpFecha.DataBindings.Add("Text", row, "GAT_Date")
+        cboNombre.DataBindings.Add("SelectedValue", row, "GAT_SOC_Id")
+        cboCuenta.DataBindings.Add("SelectedValue", row, "GAT_OSB_Id")
+        cboMetPago.DataBindings.Add("SelectedValue", row, "GAT_OSBT_Id")
+        txtConcepto.DataBindings.Add("Text", row, "GAT_Reason")
+        txtMonto.DataBindings.Add("Text", row, "GAT_Amount")
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
-        If Not IsNumeric(e.KeyChar) Then
+        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
 
     End Sub
 
-    'Private Sub GetBancos()
-    '    Dim oBancoData As BancoDataLayer = Nothing
-
-    '    oBancoData = New BancoDataLayer
-
-    '    'cboBanco.DataSource = oBancoData.GetAcount
-    '    ''cboBanco.ValueMember = "BAN_Name2"
-    '    'Me.cboBanco.ValueMember = "BAN_Id"
-    '    'Me.cboBanco.DisplayMember = "BAN_Name"
+    Private Sub GetSocios()
+        Dim oGastoData As GastoDataLayer = Nothing
 
 
-    'End Sub
+        oGastoData = New GastoDataLayer
 
+        cboNombre.DataSource = oGastoData.GetSocios
+        Me.cboNombre.ValueMember = "SOC_Id"
+        Me.cboNombre.DisplayMember = "SOC_Name"
+        Me.cboNombre.DropDownStyle = ComboBoxStyle.DropDownList
+
+
+    End Sub
+    Private Sub GetBancoSo()
+        Dim oBancoSoData As BancoSoDataLayer = Nothing
+
+
+        oBancoSoData = New BancoSoDataLayer
+
+        cboCuenta.DataSource = oBancoSoData.GetBancoSo
+        Me.cboCuenta.ValueMember = "OSB_Id"
+        Me.cboCuenta.DisplayMember = "OSB_Nombre"
+        Me.cboCuenta.DropDownStyle = ComboBoxStyle.DropDownList
+
+
+    End Sub
+
+    Private Sub GetBancoType()
+        Dim oBancoSoData As BancoSoDataLayer = Nothing
+
+
+        oBancoSoData = New BancoSoDataLayer
+
+        cboMetPago.DataSource = oBancoSoData.GetAcountType
+
+        Me.cboMetPago.ValueMember = "OSBT_Id"
+        Me.cboMetPago.DisplayMember = "OSBT_Nombre"
+        Me.cboMetPago.DropDownStyle = ComboBoxStyle.DropDownList
+
+
+    End Sub
+
+    Private Sub txtMonto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMonto.KeyPress
+        ValiText(sender, e)
+    End Sub
 End Class

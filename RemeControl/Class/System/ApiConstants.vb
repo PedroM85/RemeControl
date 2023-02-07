@@ -47,7 +47,10 @@
     Public Const GetCambiosDiarios As String = Direc + "PostDashboard"
     Public Const GetTotalInfo As String = Direc + "TotalInfo"
     'Informacion de Gasto
-    Public Const Pong As String = Direc + "pong"
+    Public Const GetGasto As String = Direc + "GetGasto"
+    Public Const CreateGasto As String = Direc + "CreateGasto"
+    Public Const UpdateGasto As String = Direc + "UpdateGasto"
+    Public Const DeleteGasto As String = Direc + "DeleteGasto"
     'Informacion BancoSocio
     Public Const GetBancoSocio As String = Direc + "GetBancoSo"
     Public Const GetBancoSoType As String = Direc + "GetBancoSoType"
