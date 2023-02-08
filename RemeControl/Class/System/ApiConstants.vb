@@ -12,6 +12,8 @@
     'Informacion de ventas in Openning
     Public Const GetSalesDateInfo As String = Direc + "SalesDateInfo"
     Public Const GetSessionSaleDate As String = Direc + "GetSessionSalesDate"
+    Public Const PostOpenSalesDate As String = Direc + "PostOpenSalesDate"
+
     'Informacion de tasas
     Public Const GetTasas As String = Direc + "GetTasas"
     Public Const GetTasaCliente As String = Direc + "GetTasaCliente"

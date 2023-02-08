@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ABMBase
     Inherits System.Windows.Forms.UserControl
 
     'UserControl reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ABMBase
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pnlLeft = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -131,7 +131,7 @@ Partial Class ABMBase
         '
         'pnlControls0
         '
-        Me.pnlControls0.BackColor = System.Drawing.Color.White
+        Me.pnlControls0.BackColor = System.Drawing.Color.Transparent
         Me.pnlControls0.Location = New System.Drawing.Point(193, 95)
         Me.pnlControls0.Name = "pnlControls0"
         Me.pnlControls0.Size = New System.Drawing.Size(524, 160)
@@ -150,11 +150,12 @@ Partial Class ABMBase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
+        Me.BackColor = System.Drawing.Color.Transparent
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Controls.Add(Me.pnlControls0)
         Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.pnlBottom)
         Me.Controls.Add(Me.pnlLeft)
-        Me.Controls.Add(Me.pnlControls0)
         Me.Controls.Add(Me.pnlTitle0)
         Me.Name = "ABMBase"
         Me.Size = New System.Drawing.Size(726, 402)

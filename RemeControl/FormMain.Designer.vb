@@ -235,6 +235,8 @@ Partial Class FormMain
         'pnlFill
         '
         Me.pnlFill.BackColor = System.Drawing.Color.White
+        Me.pnlFill.BackgroundImage = Global.RemeControl.My.Resources.Resources.a121da0d53673528f12400465d0dfb71
+        Me.pnlFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlFill.Location = New System.Drawing.Point(202, 0)
         Me.pnlFill.Name = "pnlFill"

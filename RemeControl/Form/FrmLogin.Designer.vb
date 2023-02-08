@@ -26,6 +26,8 @@ Partial Class FrmLogin
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtUserName
@@ -62,6 +64,16 @@ Partial Class FrmLogin
         Me.btnCancel.Text = "Cancelar"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.RemeControl.My.Resources.Resources.Login
+        Me.PictureBox1.Location = New System.Drawing.Point(-75, -77)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(563, 317)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 4
+        Me.PictureBox1.TabStop = False
+        '
         'FrmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -71,10 +83,12 @@ Partial Class FrmLogin
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUserName)
+        Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FrmLogin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FrmLogin"
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -84,4 +98,5 @@ Partial Class FrmLogin
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents btnAceptar As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

@@ -147,7 +147,7 @@ Public Class SalesDateData
     Public Function PostOpenSalesDate(Optional dDate As DateTime = Nothing) As DataTable
         Dim dt As New DataTable
         Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.GetSessionSaleDate
+        Dim url As String = ApiConstants.PostOpenSalesDate
 
         Try
             Dim OpenningDate As New SalesDateInfo With
