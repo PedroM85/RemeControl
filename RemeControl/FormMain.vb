@@ -6,7 +6,7 @@
     Private CurrentButton As Button
 
     Private mCurrStep As State
-    Private mControllers(6) As Controller
+    Private mControllers(10) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
 
 
@@ -19,6 +19,7 @@
         ShowSocio
         ShowDash
         ShowBankSo
+        ShowSession
 
     End Enum
 
@@ -36,13 +37,13 @@
         btnHome.Select()
         SetDateMenuButtons(btnHome)
 
-
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
         mControllers(State.ShowClient) = New ShowClient(Me)
         mControllers(State.ShowBank) = New ShowBank(Me)
         mControllers(State.ShowDash) = New ShowDash(Me)
         mControllers(State.ShowBankSo) = New ShowBankSo(Me)
+        mControllers(State.ShowSession) = New ShowSession(Me)
 
     End Sub
 
@@ -272,6 +273,17 @@
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCOSO")
             mCurrStep = State.ShowBank
+        Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            oApp.LoginUser()
+        End If
+    End Sub
+
+    Private Sub btnSession_Click(sender As Object, e As EventArgs) Handles btnSesion.Click
+        If oApp.SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("SESION")
+            mCurrStep = State.ShowSession
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             oApp.LoginUser()

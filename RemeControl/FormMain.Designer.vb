@@ -26,6 +26,7 @@ Partial Class FormMain
         Me.pnlBottom = New System.Windows.Forms.Panel()
         Me.lblInfo = New System.Windows.Forms.Label()
         Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnSesion = New System.Windows.Forms.Button()
         Me.btnBancoSo = New System.Windows.Forms.Button()
         Me.btnGasto = New System.Windows.Forms.Button()
         Me.btnSocio = New System.Windows.Forms.Button()
@@ -69,6 +70,7 @@ Partial Class FormMain
         '
         Me.pnlLeft.AutoScroll = True
         Me.pnlLeft.BackColor = System.Drawing.SystemColors.Highlight
+        Me.pnlLeft.Controls.Add(Me.btnSesion)
         Me.pnlLeft.Controls.Add(Me.btnBancoSo)
         Me.pnlLeft.Controls.Add(Me.btnGasto)
         Me.pnlLeft.Controls.Add(Me.btnSocio)
@@ -83,6 +85,20 @@ Partial Class FormMain
         Me.pnlLeft.Name = "pnlLeft"
         Me.pnlLeft.Size = New System.Drawing.Size(202, 464)
         Me.pnlLeft.TabIndex = 1
+        '
+        'btnSesion
+        '
+        Me.btnSesion.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnSesion.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSesion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSesion.ForeColor = System.Drawing.Color.White
+        Me.btnSesion.Location = New System.Drawing.Point(0, 496)
+        Me.btnSesion.Name = "btnSesion"
+        Me.btnSesion.Size = New System.Drawing.Size(185, 45)
+        Me.btnSesion.TabIndex = 8
+        Me.btnSesion.Text = "Sesiones"
+        Me.btnSesion.UseVisualStyleBackColor = False
         '
         'btnBancoSo
         '
@@ -268,4 +284,5 @@ Partial Class FormMain
     Friend WithEvents btnSocio As Button
     Friend WithEvents btnGasto As Button
     Friend WithEvents btnBancoSo As Button
+    Friend WithEvents btnSesion As Button
 End Class

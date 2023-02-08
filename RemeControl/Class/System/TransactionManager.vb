@@ -30,6 +30,9 @@
             Case "GASTO"
                 Dim oGasto As GastoManager = New GastoManager
                 oView = oGasto.CreateGastoView
+            Case "SESION"
+                Dim oGasto As SessionManager = New SessionManager
+                oView = oGasto.CreateoSessionDate
             Case Else
                 oView = Nothing
         End Select

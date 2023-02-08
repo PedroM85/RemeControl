@@ -102,6 +102,7 @@
     <Compile Include="Controller\ShowCambio.vb" />
     <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowDash.vb" />
+    <Compile Include="Controller\ShowSession.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
     <Compile Include="FormMain.vb">
@@ -136,7 +137,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Class\SalesDate\SalesDateInfo.vb" />
     <Compile Include="Views\BancoSo\BancoSoABM.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -189,6 +189,19 @@
     </Compile>
     <Compile Include="Views\Gasto\GastoManager.vb" />
     <Compile Include="Views\Gasto\GastoView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Session\SessionDetails.Designer.vb">
+      <DependentUpon>SessionDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Session\SessionDetails.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Session\SessionManager.vb" />
+    <Compile Include="Views\Session\SessionDate.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Session\SessionView.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Socio\SocioABM.vb">
@@ -255,6 +268,15 @@
     <EmbeddedResource Include="Views\Gasto\GastoABM.resx">
       <DependentUpon>GastoABM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Session\SessionDate.resx">
+      <DependentUpon>SessionDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Session\SessionDetails.resx">
+      <DependentUpon>SessionDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Session\SessionView.resx">
+      <DependentUpon>SessionView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Socio\SocioABM.resx">
       <DependentUpon>SocioABM.vb</DependentUpon>
     </EmbeddedResource>
@@ -281,5 +303,6 @@
   <ItemGroup>
     <None Include="resources\done_48px.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

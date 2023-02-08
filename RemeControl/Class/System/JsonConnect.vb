@@ -9,31 +9,31 @@ Public Class JsonConnect
 
 
         Dim request As HttpWebRequest
-            Dim response As HttpWebResponse = Nothing
-            Dim reader As StreamReader
-            Dim retval As String = String.Empty
+        Dim response As HttpWebResponse = Nothing
+        Dim reader As StreamReader
+        Dim retval As String = String.Empty
 
-            Try
-                request = DirectCast(WebRequest.Create(url), HttpWebRequest)
-                request.Method = method
-                request.ContentType = "application/json"
-                If oUser IsNot Nothing Then
-                    request.Headers("Authorization") = "Bearer " & oUser.Token
+        Try
+            request = DirectCast(WebRequest.Create(url), HttpWebRequest)
+            request.Method = method
+            request.ContentType = "application/json"
+            If oUser IsNot Nothing Then
+                request.Headers("Authorization") = "Bearer " & oUser.Token
+            End If
+
+            If Not String.IsNullOrEmpty(dataEncoding) Then
+                If (method = WebRequestMethods.Http.Post) Or (method = WebRequestMethods.Http.Put) Then
+                    Dim strPost As String = dataEncoding
+                    Dim data As Byte() = Encoding.UTF8.GetBytes(strPost)
+                    request.ContentLength = data.Length
+                    Dim stream As Stream = request.GetRequestStream()
+                    stream.Write(data, 0, data.Length)
+                    stream.Close()
                 End If
+            End If
 
-                If Not String.IsNullOrEmpty(dataEncoding) Then
-                    If (method = WebRequestMethods.Http.Post) Or (method = WebRequestMethods.Http.Put) Then
-                        Dim strPost As String = dataEncoding
-                        Dim data As Byte() = Encoding.UTF8.GetBytes(strPost)
-                        request.ContentLength = data.Length
-                        Dim stream As Stream = request.GetRequestStream()
-                        stream.Write(data, 0, data.Length)
-                        stream.Close()
-                    End If
-                End If
-
-                response = DirectCast(request.GetResponse(), HttpWebResponse)
-                reader = New StreamReader(response.GetResponseStream())
+            response = DirectCast(request.GetResponse(), HttpWebResponse)
+            reader = New StreamReader(response.GetResponseStream())
                 retval = reader.ReadToEnd()
                 Return retval
             Catch ex As WebException

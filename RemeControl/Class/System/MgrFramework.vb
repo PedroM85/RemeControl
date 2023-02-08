@@ -14,10 +14,6 @@ Public Class MgrFramework
     Public Function GetSalesDateInfo()
         Dim oDataLayer As SalesDateData = New SalesDateData
 
-
-        'With _SalesDateInfo
-        '    oDataLayer.GetGeneralInfo(.SalesDateId, .OpeningDate, .UsersLoggedOn)
-        'End With
         If Not oDataLayer Is Nothing Then
             mSalesDateInfo = oDataLayer.GetGeneralInfo
         End If
