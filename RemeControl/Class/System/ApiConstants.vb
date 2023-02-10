@@ -10,7 +10,7 @@
     'Informacion de Online
     Public Const ServiceOn As String = Direc + "ServiceOn"
     'Informacion de ventas in Openning
-    Public Const GetSalesDateInfo As String = Direc + "SalesDateInfo"
+    Public Const GetSalesDateInfo As String = Direc + "GetSalesDateInfo"
     Public Const GetSessionSaleDate As String = Direc + "GetSessionSalesDate"
     Public Const PostOpenSalesDate As String = Direc + "PostOpenSalesDate"
 

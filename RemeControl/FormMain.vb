@@ -57,14 +57,16 @@
         End Set
     End Property
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         LoadData()
+        RefreshInfo()
 
     End Sub
 
     Public Sub LoadData()
         lblUser.Text = String.Format("Usuario: {0}", oApp.CurrentUser.USR_Name)
 
-        Me.SalesDateInfo = oApp.GetSalesDateInfo
+        mSalesDateInfo = oApp.GetSalesDateInfo
 
         mTrMgr.DoMenuItem("DASH")
         mCurrStep = State.ShowDash
@@ -190,7 +192,7 @@
             mTrMgr.DoMenuItem("TASA")
             mCurrStep = State.ShowTasa
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
 
@@ -201,7 +203,7 @@
             mTrMgr.DoMenuItem("DASH")
             mCurrStep = State.ShowDash
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
     End Sub
@@ -212,8 +214,8 @@
             mTrMgr.DoMenuItem("SOCIO")
             mCurrStep = State.ShowSocio
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -224,8 +226,8 @@
             mTrMgr.DoMenuItem("CLIENTE")
             mCurrStep = State.ShowClient
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -236,8 +238,8 @@
             mTrMgr.DoMenuItem("BANCO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -249,8 +251,8 @@
             mTrMgr.DoMenuItem("CAMBIO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -262,8 +264,8 @@
             mTrMgr.DoMenuItem("GASTO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -274,8 +276,8 @@
             mTrMgr.DoMenuItem("BANCOSO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
     End Sub
 
@@ -285,8 +287,8 @@
             mTrMgr.DoMenuItem("SESION")
             mCurrStep = State.ShowSession
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
     End Sub
 End Class

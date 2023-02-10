@@ -333,6 +333,14 @@
                 oDataLayer.PostOpenSalesDate()
             Catch oEx As Exception
                 bError = True
+                Dim Message As String = "{" + ""
+                Message += "message"":""No se ha cerrado el último día de venta""}"
+                Message += "}"
+
+
+                If oEx.Message = Message Then
+                    MessageBox.Show(Me, Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
                 MessageBox.Show(Me, oEx.Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 UpdateData()
@@ -346,7 +354,7 @@
     Public Sub UpdateData()
         Dim oDataLayer As New SalesDateData
         Dim dOpeningDate As DateTime
-        Dim nBOCSessions, nCOMSessions As Integer
+        'Dim nBOCSessions, nCOMSessions As Integer
         Dim nUsers As Integer
 
         'oSalesDataLayer.GetGeneralInfo(dCurrSalesDate, dOpeningDate, nBOCSessions, nCOMSessions, nUsers)
@@ -360,7 +368,7 @@
             lblOpeningDateValue.Text = Msg_lblCurrSalesDateValue2 & " " & dOpeningDate
         End If
 
-        lblSessionsValue.Text = String.Format("{0} " & lblSessionsValue1 & " {1} " & lblSessionsValue2, nBOCSessions, nCOMSessions)
+        lblSessionsValue.Text = String.Format("{0} ", "Remesa")
         lblUsersValue.Text = nUsers
     End Sub
 
