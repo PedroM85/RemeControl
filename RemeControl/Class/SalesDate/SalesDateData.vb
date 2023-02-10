@@ -1,16 +1,19 @@
 ﻿Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 Imports System.Security.Policy
 Public Class SalesDateInfo
-    Public SalesDateId As Date
     Public SDT_Id As DateTime
     Public SDT_DateOpened As DateTime
-    Private sSDT_USR_OpenedBy As String
-    Private dSDT_DateCreated As DateTime
+
+    'Private sSDT_USR_OpenedBy As String
+    'Private dSDT_DateCreated As DateTime
     Private dSDT_DateClosed As DateTime
-    Private sSDT_USR_ClosedBy As String
-    Public USersLoggedOn As Integer
-    Private sMessage As String
+    'Private sSDT_USR_ClosedBy As String
     Private sSDT_ModifiedBy As String
+
+    Public SalesDateId As Date
+    Public Message As String
+    Public USersLoggedOn As Integer
 
     'Public Property SDT_Id As DateTime
     '    Get
@@ -30,23 +33,23 @@ Public Class SalesDateInfo
     '    End Set
     'End Property
 
-    Public Property SDT_USR_OpenedBy As String
-        Get
-            Return sSDT_USR_OpenedBy
-        End Get
-        Set(value As String)
-            sSDT_USR_OpenedBy = value
-        End Set
-    End Property
+    'Public Property SDT_USR_OpenedBy As String
+    '    Get
+    '        Return sSDT_USR_OpenedBy
+    '    End Get
+    '    Set(value As String)
+    '        sSDT_USR_OpenedBy = value
+    '    End Set
+    'End Property
 
-    Public Property SDT_DateCreated As DateTime
-        Get
-            Return dSDT_DateCreated
-        End Get
-        Set(value As DateTime)
-            dSDT_DateCreated = value
-        End Set
-    End Property
+    'Public Property SDT_DateCreated As DateTime
+    '    Get
+    '        Return dSDT_DateCreated
+    '    End Get
+    '    Set(value As DateTime)
+    '        dSDT_DateCreated = value
+    '    End Set
+    'End Property
 
     Public Property SDT_DateClosed As DateTime
         Get
@@ -57,14 +60,14 @@ Public Class SalesDateInfo
         End Set
     End Property
 
-    Public Property SDT_USR_ClosedBy As String
-        Get
-            Return sSDT_USR_ClosedBy
-        End Get
-        Set(value As String)
-            sSDT_USR_ClosedBy = value
-        End Set
-    End Property
+    'Public Property SDT_USR_ClosedBy As String
+    '    Get
+    '        Return sSDT_USR_ClosedBy
+    '    End Get
+    '    Set(value As String)
+    '        sSDT_USR_ClosedBy = value
+    '    End Set
+    'End Property
 
     Public Property SDT_ModifiedBy As String
         Get
@@ -84,36 +87,47 @@ Public Class SalesDateInfo
     '    End Set
     'End Property
 
-    Public Property Message As String
-        Get
-            Return sMessage
-        End Get
-        Set(value As String)
-            sMessage = value
-        End Set
-    End Property
+    'Public Property Message As String
+    '    Get
+    '        Return sMessage
+    '    End Get
+    '    Set(value As String)
+    '        sMessage = value
+    '    End Set
+    'End Property
 End Class
 Public Class SalesDateData
     Inherits JsonConnect
 
     'Ver dia de ventas activo 
-    Public Sub GetGeneralInfo(ByRef dOpenedSaleDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer)
+    Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer)
         Dim dt As New DataTable
+        Dim _SalesDate As New SalesDateInfo
         Dim url As String = ApiConstants.GetSalesDateInfo
 
 
         Try
+
             Dim result_post = GetJson(url, oApp.CurrentUser)
+            'Dim tempPost = Message.
+            'Dim results = JsonConvert.DeserializeAnonymousType(result_post, tempPost)
 
-            dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+            _SalesDate = JsonConvert.DeserializeObject(Of SalesDateInfo)(result_post)
 
 
-            dOpenedSaleDate = dt.Rows.Item(0).ItemArray(0)
-            dOpeningDate = dt.Rows.Item(0).ItemArray(1)
-            nUsersLoggedOn = dt.Rows.Item(0).ItemArray(2)
+            If _SalesDate.Message = "No hay dia aperturado" Then
+                dOpenedSalesDate = New Date(9999, 12, 31)
+                dOpeningDate = dOpenedSalesDate
+                nUsersLoggedOn = 0
+            Else
+                dOpenedSalesDate = _SalesDate.SDT_Id 'dt.Rows.Item(0).ItemArray(0)
+                dOpeningDate = _SalesDate.SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
+                nUsersLoggedOn = _SalesDate.USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
+            End If
+
 
         Catch ex As Exception
-
+            Throw New Exception(ex.Message)
         End Try
 
 
@@ -172,10 +186,10 @@ Public Class SalesDateData
 
     End Sub
 
-    Public Function postCloseSalesDate(dDate As DateTime) As DataTable
+    Public Sub postCloseSalesDate(dDate As DateTime)
         Dim dt As New DataTable
         Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.GetSessionSaleDate
+        Dim url As String = ApiConstants.CreateCloseSalesDate
 
         Try
             Dim OpenningDate As New SalesDateInfo With
@@ -192,10 +206,10 @@ Public Class SalesDateData
 
             'Return Openning
         Catch ex As Exception
-            Return Nothing
+            Throw New Exception(ex.Message)
         End Try
 
-        Return dt
-    End Function
+
+    End Sub
 
 End Class

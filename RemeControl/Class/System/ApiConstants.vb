@@ -62,5 +62,6 @@
     Public Const DeleteBancoSocio As String = Direc + "DeleteBancoSo"
     'Informacion SalesSAssion
     Public Const CreateOpenSalesDate As String = Direc + "PostOpenSalesDate"
+    Public Const CreateCloseSalesDate As String = Direc + "PostCloseSalesDate"
 
 End Class

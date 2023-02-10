@@ -1,7 +1,7 @@
 ﻿Public Class SessionDate
     Inherits UserControl
 
-    Private dCurrSalesDate As Date = New Date(9999, 12, 31)
+    Private dCurrSalesDate As New Date(9999, 12, 31)
 
 #Region "InitializeComponent"
 
@@ -300,9 +300,9 @@
         pnlRestoreSales.Focus()
     End Sub
 
-    Private Sub pnlCloseSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlCloseSales.DoubleClick
+    Private Sub pnlCloseSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlCloseSales.DoubleClick, Label5.DoubleClick, Label6.DoubleClick
         If MessageBox.Show(Me, Msg_CloseSalesDate, "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
-            'UpdateSummaries()
+            'UpdateSummaries()s
 
             Try
                 Dim oDataLayer As New SalesDateData
@@ -324,7 +324,7 @@
             End Try
         End If
     End Sub
-    Private Sub pnlOpenSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlOpenSales.DoubleClick, Label3.Click, Label4.Click
+    Private Sub pnlOpenSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlOpenSales.DoubleClick, Label3.DoubleClick, Label4.DoubleClick
         Dim bError As Boolean = False
 
         If MessageBox.Show(Me, MSg_OpenSalesDate, "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then

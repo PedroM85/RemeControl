@@ -5,6 +5,7 @@ Public Class SalesDate
     Public SalesDateId As Date
     Public OpeningDate As Date
     Public UsersLoggedOn As Int32
+    Public message As String
 End Class
 Public Class MgrFramework
 
