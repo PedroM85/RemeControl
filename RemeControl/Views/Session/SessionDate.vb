@@ -302,7 +302,7 @@ Public Class SessionDate
     Private Sub pnlRestoreSales_Click(sender As Object, e As EventArgs) Handles pnlRestoreSales.Click, Label7.Click, Label8.Click
         pnlRestoreSales.Focus()
     End Sub
-    Private Sub pnlCloseSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlCloseSales.DoubleClick, Label5.DoubleClick, Label6.DoubleClick
+    Private Sub pnlCloseSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlCloseSales.DoubleClick, Label1.DoubleClick, Label2.DoubleClick
         If MessageBox.Show(Me, Msg_CloseSalesDate, "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
             'UpdateSummaries()s
 

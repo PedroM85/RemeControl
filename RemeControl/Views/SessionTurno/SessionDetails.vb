@@ -49,12 +49,12 @@
 
     End Sub
     Private Sub SetupDepositsData()
-        'Dim oDataLayer As New SalesSession
-        'oBSources = New BindingSource
+        Dim oDataLayer As New SalesDateData
+        oBSources = New BindingSource
 
-        'oBSources.DataSource = oDataLayer.SSS_PaymentTypePerSession(nSessionId)
+        oBSources.DataSource = oDataLayer.PostSessionPaymentType(nSessionId)
 
-        'dgvInfo.DataSource = oBSources
+        dgvView.DataSource = oBSources
 
     End Sub
 

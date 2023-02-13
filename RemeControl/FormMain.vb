@@ -259,7 +259,7 @@
         End If
 
     End Sub
-
+    <Obsolete("Mcurrstep compartido/ crear uno")>
     Private Sub btnGasto_Click(sender As Object, e As EventArgs) Handles btnGasto.Click
 
         If oApp.SessionActive() Then
@@ -277,7 +277,7 @@
         If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCOSO")
-            mCurrStep = State.ShowBank
+            mCurrStep = State.ShowBankSo
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()

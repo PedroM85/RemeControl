@@ -297,4 +297,26 @@ Public Class SalesDateData
         End Try
     End Sub
 
+    Public Function PostSessionPaymentType(nSessionId As Integer) As DataTable
+        Dim Url As String = ApiConstants.PostSessionPaymentType
+        Dim dt As New DataTable
+        Try
+            Dim Openning As New SalesDateInfo With
+                {
+                .SSS_Id = nSessionId
+                }
+
+            Dim result = JsonConvert.SerializeObject(Openning)
+
+            Dim result_post = PostJson(Url, result, oApp.CurrentUser)
+
+            dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+
+        Catch ex As Exception
+            dt = Nothing
+            Throw New Exception(ex.Message)
+        End Try
+        Return dt
+    End Function
+
 End Class

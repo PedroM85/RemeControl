@@ -339,12 +339,11 @@ Public Class SessionView
         End If
     End Sub
 
-    Private Sub btnDetails_DoubleClick(sender As Object, e As EventArgs) Handles btnDetails.DoubleClick
+    Private Sub dgvView_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvView.CellContentDoubleClick
         If dgvView.SelectedRows.Count > 0 Then
             ShowDetails(dgvView.CurrentRow)
         End If
     End Sub
-
     Private Sub ShowDetails(Row As DataGridViewRow)
         Cursor = Cursors.WaitCursor
 
@@ -357,7 +356,9 @@ Public Class SessionView
         oMainForm.ShowView(oSaleDateDetails)
         oMainForm.HideLeftPanel()
 
-        'oSaleDateDetails.
+        oSaleDateDetails.SessionDate = dDate
+        oSaleDateDetails.SetupDate(oBSource, DirectCast(Row.DataBoundItem, DataRowView))
+
 
         Cursor = Cursors.Default
     End Sub
@@ -401,4 +402,6 @@ Public Class SessionView
 
         End With
     End Sub
+
+
 End Class

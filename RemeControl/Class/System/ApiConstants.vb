@@ -22,6 +22,8 @@
 
     Public Const PostSessionInfo As String = Direc + "PostSessionInfo"
 
+    Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
+
 #End Region
 #Region "Informacion SalesSession in Salessession.controller"
 

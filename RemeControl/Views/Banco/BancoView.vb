@@ -175,7 +175,7 @@
         dgvView.Columns(4).HeaderText = "Fecha de alta"
         dgvView.Columns(4).DataPropertyName = "BAN_CreatedDateTime"
         dgvView.Columns(4).Width = 120
-        dgvView.Columns(4).Visible = False
+        dgvView.Columns(4).Visible = True
 
 
         dgvView.Columns(5).Name = "BAN_ModifiedDateTime"

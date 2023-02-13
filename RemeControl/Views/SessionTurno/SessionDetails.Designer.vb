@@ -22,7 +22,9 @@ Partial Class SessionDetails
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.dgvView = New System.Windows.Forms.DataGridView()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lblClosed = New System.Windows.Forms.Label()
         Me.lblOpenedValue = New System.Windows.Forms.Label()
         Me.lblOpened = New System.Windows.Forms.Label()
@@ -38,22 +40,9 @@ Partial Class SessionDetails
         Me.btnCloseSession = New System.Windows.Forms.Button()
         Me.btnModify = New System.Windows.Forms.Button()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.dgvView = New System.Windows.Forms.DataGridView()
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'dgvView
-        '
-        Me.dgvView.AllowUserToAddRows = False
-        Me.dgvView.AllowUserToDeleteRows = False
-        Me.dgvView.AllowUserToResizeColumns = False
-        Me.dgvView.AllowUserToResizeRows = False
-        Me.dgvView.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvView.Location = New System.Drawing.Point(23, 118)
-        Me.dgvView.Name = "dgvView"
-        Me.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvView.Size = New System.Drawing.Size(714, 215)
-        Me.dgvView.TabIndex = 39
         '
         'lblClosed
         '
@@ -126,7 +115,7 @@ Partial Class SessionDetails
         Me.lblCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(157, Byte), Integer))
         Me.lblCaption.Location = New System.Drawing.Point(12, 13)
         Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.Size = New System.Drawing.Size(504, 24)
+        Me.lblCaption.Size = New System.Drawing.Size(374, 24)
         Me.lblCaption.TabIndex = 30
         Me.lblCaption.Text = "Detalle de turnos por usuario"
         '
@@ -158,7 +147,7 @@ Partial Class SessionDetails
         Me.btnReOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnReOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(205, Byte), Integer))
         Me.btnReOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReOpen.Location = New System.Drawing.Point(478, 438)
+        Me.btnReOpen.Location = New System.Drawing.Point(310, 438)
         Me.btnReOpen.Name = "btnReOpen"
         Me.btnReOpen.Size = New System.Drawing.Size(88, 21)
         Me.btnReOpen.TabIndex = 45
@@ -171,7 +160,7 @@ Partial Class SessionDetails
         Me.btnSessionReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSessionReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(205, Byte), Integer))
         Me.btnSessionReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSessionReport.Location = New System.Drawing.Point(622, 438)
+        Me.btnSessionReport.Location = New System.Drawing.Point(454, 438)
         Me.btnSessionReport.Name = "btnSessionReport"
         Me.btnSessionReport.Size = New System.Drawing.Size(144, 21)
         Me.btnSessionReport.TabIndex = 46
@@ -184,7 +173,7 @@ Partial Class SessionDetails
         Me.btnCloseSession.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCloseSession.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(205, Byte), Integer))
         Me.btnCloseSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCloseSession.Location = New System.Drawing.Point(382, 438)
+        Me.btnCloseSession.Location = New System.Drawing.Point(214, 438)
         Me.btnCloseSession.Name = "btnCloseSession"
         Me.btnCloseSession.Size = New System.Drawing.Size(88, 21)
         Me.btnCloseSession.TabIndex = 44
@@ -197,7 +186,7 @@ Partial Class SessionDetails
         Me.btnModify.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnModify.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(217, Byte), Integer), CType(CType(205, Byte), Integer))
         Me.btnModify.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnModify.Location = New System.Drawing.Point(206, 438)
+        Me.btnModify.Location = New System.Drawing.Point(131, 438)
         Me.btnModify.Name = "btnModify"
         Me.btnModify.Size = New System.Drawing.Size(72, 21)
         Me.btnModify.TabIndex = 42
@@ -218,17 +207,62 @@ Partial Class SessionDetails
         Me.btnBack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'dgvView
+        '
+        Me.dgvView.AllowUserToAddRows = False
+        Me.dgvView.AllowUserToDeleteRows = False
+        Me.dgvView.AllowUserToResizeColumns = False
+        Me.dgvView.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+        Me.dgvView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvView.BackgroundColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvView.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle3.NullValue = Nothing
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvView.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvView.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.dgvView.Location = New System.Drawing.Point(23, 99)
+        Me.dgvView.MultiSelect = False
+        Me.dgvView.Name = "dgvView"
+        Me.dgvView.ReadOnly = True
+        Me.dgvView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvView.RowHeadersVisible = False
+        Me.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvView.Size = New System.Drawing.Size(548, 281)
+        Me.dgvView.TabIndex = 48
+        '
         'SessionDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.dgvView)
         Me.Controls.Add(Me.btnAccept)
         Me.Controls.Add(Me.btnReOpen)
         Me.Controls.Add(Me.btnSessionReport)
         Me.Controls.Add(Me.btnCloseSession)
         Me.Controls.Add(Me.btnModify)
         Me.Controls.Add(Me.btnBack)
-        Me.Controls.Add(Me.dgvView)
         Me.Controls.Add(Me.lblClosed)
         Me.Controls.Add(Me.lblOpenedValue)
         Me.Controls.Add(Me.lblOpened)
@@ -239,13 +273,11 @@ Partial Class SessionDetails
         Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.lblClosedValue)
         Me.Name = "SessionDetails"
-        Me.Size = New System.Drawing.Size(776, 479)
+        Me.Size = New System.Drawing.Size(646, 479)
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents dgvView As DataGridView
     Friend WithEvents lblClosed As Label
     Friend WithEvents lblOpenedValue As Label
     Friend WithEvents lblOpened As Label
@@ -261,4 +293,5 @@ Partial Class SessionDetails
     Friend WithEvents btnCloseSession As Button
     Friend WithEvents btnModify As Button
     Friend WithEvents btnBack As Button
+    Protected WithEvents dgvView As DataGridView
 End Class
