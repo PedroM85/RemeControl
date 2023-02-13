@@ -5,11 +5,14 @@ Public Class SalesDateInfo
     Public SDT_Id As DateTime
     Public SDT_DateOpened As DateTime
 
+    Public SSS_Id As Integer
+
     'Private sSDT_USR_OpenedBy As String
     'Private dSDT_DateCreated As DateTime
     Private dSDT_DateClosed As DateTime
     'Private sSDT_USR_ClosedBy As String
     Private sSDT_ModifiedBy As String
+
 
     Public SalesDateId As Date
     Public Message As String
@@ -96,12 +99,27 @@ Public Class SalesDateInfo
     '    End Set
     'End Property
 End Class
+'Public Class SalesDateList
+'    Private _SalesDateMovi As List(Of SalesDateInfo)
+
+'    Public Property SalesDateMovi As List(Of SalesDateInfo)
+'        Get
+'            Return _SalesDateMovi
+'        End Get
+'        Set(value As List(Of SalesDateInfo))
+'            _SalesDateMovi = value
+'        End Set
+'    End Property
+'End Class
 Public Class SalesDateData
     Inherits JsonConnect
 
-    'Ver dia de ventas activo 
     Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer)
+        'Ver dia de ventas activo 
+
+
         Dim dt As New DataTable
+
         Dim _SalesDate As New SalesDateInfo
         Dim url As String = ApiConstants.GetSalesDateInfo
 
@@ -112,18 +130,26 @@ Public Class SalesDateData
             'Dim tempPost = Message.
             'Dim results = JsonConvert.DeserializeAnonymousType(result_post, tempPost)
 
-            _SalesDate = JsonConvert.DeserializeObject(Of SalesDateInfo)(result_post)
+            '_SalesDate = JsonConvert.DeserializeObject(Of SalesDateInfo)(result_post)
+            Dim objSalesDateList = JsonConvert.DeserializeObject(Of List(Of SalesDateInfo))(result_post)
 
-
-            If _SalesDate.Message = "No hay dia aperturado" Then
+            'MessageBox.Show(objSalesDateList.ToString)
+            If objSalesDateList(0).Message = "No hay dia aperturado" Then
                 dOpenedSalesDate = New Date(9999, 12, 31)
                 dOpeningDate = dOpenedSalesDate
                 nUsersLoggedOn = 0
             Else
-                dOpenedSalesDate = _SalesDate.SDT_Id 'dt.Rows.Item(0).ItemArray(0)
-                dOpeningDate = _SalesDate.SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
-                nUsersLoggedOn = _SalesDate.USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
+                dOpenedSalesDate = objSalesDateList(0).SDT_Id 'dt.Rows.Item(0).ItemArray(0)
+                dOpeningDate = objSalesDateList(0).SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
+                nUsersLoggedOn = objSalesDateList(0).USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
             End If
+            'If _SalesDate.Message = "No hay dia aperturado" Then
+            '   
+            'Else
+            '    dOpenedSalesDate = _SalesDate.SDT_Id 'dt.Rows.Item(0).ItemArray(0)
+            '    dOpeningDate = _SalesDate.SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
+            '    nUsersLoggedOn = _SalesDate.USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
+            'End If
 
 
         Catch ex As Exception
@@ -134,10 +160,10 @@ Public Class SalesDateData
 
     End Sub
 
-    Public Function GetSessionsPerSalesDate(dDate As DateTime) As DataTable
+    Public Function PostSessionsPerSalesDate(dDate As DateTime) As DataTable
         Dim dt As New DataTable
         Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.GetSessionSaleDate
+        Dim url As String = ApiConstants.PostSessionPerSaleDate
 
         Try
             Dim OpenningDate As New SalesDateInfo With
@@ -162,7 +188,7 @@ Public Class SalesDateData
 
     Public Sub PostOpenSalesDate()
         Dim dt As New DataTable
-        Dim Openning As SalesDateInfo = Nothing
+        ' Dim Openning As SalesDateInfo = Nothing
         Dim url As String = ApiConstants.PostOpenSalesDate
 
         Try
@@ -188,7 +214,7 @@ Public Class SalesDateData
 
     Public Sub postCloseSalesDate(dDate As DateTime)
         Dim dt As New DataTable
-        Dim Openning As SalesDateInfo = Nothing
+        'Dim Openning As SalesDateInfo = Nothing
         Dim url As String = ApiConstants.CreateCloseSalesDate
 
         Try
@@ -210,6 +236,65 @@ Public Class SalesDateData
         End Try
 
 
+    End Sub
+
+    Public Sub PostCloseSession(nSessionId As Integer)
+
+        Dim Url As String = ApiConstants.PostCloseSession
+
+        Try
+            Dim Openning As New SalesDateInfo With
+                {
+                .SDT_ModifiedBy = oApp.CurrentUser.USR_Id,
+                .SSS_Id = nSessionId
+                }
+
+            Dim result = JsonConvert.SerializeObject(Openning)
+
+            Dim result_post = PostJson(Url, result, oApp.CurrentUser)
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
+
+    Public Sub PostSessionInfo(nSessionId As Integer, dCreated As DateTime, dClosed As DateTime)
+        Dim Url As String = ApiConstants.PostSessionInfo
+
+        Try
+            Dim Openning As New SalesDateInfo With
+                {
+                .SSS_Id = nSessionId
+                }
+
+            Dim result = JsonConvert.SerializeObject(Openning)
+
+            Dim result_post = PostJson(Url, result, oApp.CurrentUser)
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
+
+    Public Sub PostReOpenSession(nSessionId As Integer)
+        Dim Url As String = ApiConstants.PostSessionInfo
+
+        Try
+            Dim Openning As New SalesDateInfo With
+                {
+                .SSS_Id = nSessionId
+                }
+
+            Dim result = JsonConvert.SerializeObject(Openning)
+
+            Dim result_post = PostJson(Url, result, oApp.CurrentUser)
+
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
 End Class

@@ -6,7 +6,7 @@
     Private CurrentButton As Button
 
     Private mCurrStep As State
-    Private mControllers(10) As Controller
+    Private mControllers(15) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
 
 
@@ -20,6 +20,7 @@
         ShowDash
         ShowBankSo
         ShowSession
+        showTurnos
 
     End Enum
 
@@ -44,6 +45,7 @@
         mControllers(State.ShowDash) = New ShowDash(Me)
         mControllers(State.ShowBankSo) = New ShowBankSo(Me)
         mControllers(State.ShowSession) = New ShowSession(Me)
+        mControllers(State.showTurnos) = New ShowTurnos(Me)
 
     End Sub
 
@@ -178,6 +180,7 @@
 
             If e.KeyCode = Keys.Escape Then
 
+
             Else
                 mControllers(mCurrStep).HandleKey(e)
             End If
@@ -286,6 +289,17 @@
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("SESION")
             mCurrStep = State.ShowSession
+        Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub btnTurno_Click(sender As Object, e As EventArgs) Handles btnTurno.Click
+        If oApp.SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("TURNOS")
+            mCurrStep = State.ShowTurnos
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()

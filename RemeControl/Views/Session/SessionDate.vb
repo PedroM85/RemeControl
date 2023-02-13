@@ -1,4 +1,6 @@
-﻿Public Class SessionDate
+﻿Imports System.Windows.Forms.AxHost
+
+Public Class SessionDate
     Inherits UserControl
 
     Private dCurrSalesDate As New Date(9999, 12, 31)
@@ -248,6 +250,7 @@
         '
         'SessionDate
         '
+        Me.AutoSize = True
         Me.Controls.Add(Me.pnlRestoreSales)
         Me.Controls.Add(Me.pnlCloseOpenSales)
         Me.Controls.Add(Me.pnlOpenSales)
@@ -299,7 +302,6 @@
     Private Sub pnlRestoreSales_Click(sender As Object, e As EventArgs) Handles pnlRestoreSales.Click, Label7.Click, Label8.Click
         pnlRestoreSales.Focus()
     End Sub
-
     Private Sub pnlCloseSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlCloseSales.DoubleClick, Label5.DoubleClick, Label6.DoubleClick
         If MessageBox.Show(Me, Msg_CloseSalesDate, "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.Yes Then
             'UpdateSummaries()s
@@ -324,6 +326,7 @@
             End Try
         End If
     End Sub
+
     Private Sub pnlOpenSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlOpenSales.DoubleClick, Label3.DoubleClick, Label4.DoubleClick
         Dim bError As Boolean = False
 
@@ -351,6 +354,7 @@
             End Try
         End If
     End Sub
+
     Public Sub UpdateData()
         Dim oDataLayer As New SalesDateData
         Dim dOpeningDate As DateTime

@@ -126,11 +126,18 @@
     <Compile Include="Controller\ShowSession.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />
+    <Compile Include="Controller\ShowTurnos.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\AuthorizationForm.Designer.vb">
+      <DependentUpon>AuthorizationForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\AuthorizationForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\FrmLogin.Designer.vb">
@@ -212,17 +219,18 @@
     <Compile Include="Views\Gasto\GastoView.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Session\SessionDetails.Designer.vb">
+    <Compile Include="Views\SessionTurno\SessionDetails.Designer.vb">
       <DependentUpon>SessionDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="Views\Session\SessionDetails.vb">
+    <Compile Include="Views\SessionTurno\SessionDetails.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\SessionTurno\TurnoManager.vb" />
     <Compile Include="Views\Session\SessionManager.vb" />
     <Compile Include="Views\Session\SessionDate.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Session\SessionView.vb">
+    <Compile Include="Views\SessionTurno\SessionView.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Socio\SocioABM.vb">
@@ -243,6 +251,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\AuthorizationForm.resx">
+      <DependentUpon>AuthorizationForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
@@ -292,10 +303,10 @@
     <EmbeddedResource Include="Views\Session\SessionDate.resx">
       <DependentUpon>SessionDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Session\SessionDetails.resx">
+    <EmbeddedResource Include="Views\SessionTurno\SessionDetails.resx">
       <DependentUpon>SessionDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Session\SessionView.resx">
+    <EmbeddedResource Include="Views\SessionTurno\SessionView.resx">
       <DependentUpon>SessionView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Socio\SocioABM.resx">
