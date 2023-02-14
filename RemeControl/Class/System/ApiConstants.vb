@@ -9,8 +9,29 @@
 
     'Informacion de Online
     Public Const ServiceOn As String = Direc + "ServiceOn"
-    'Informacion de ventas
-    Public Const SalesDateInfo As String = Direc + "SalesDateInfo"
+
+#Region "Informacion de ventas in Openning.controller"
+
+    Public Const GetSalesDateInfo As String = Direc + "GetSalesDateInfo"
+
+    Public Const PostSessionPerSaleDate As String = Direc + "PostSessionPerSalesDate"
+
+    Public Const PostOpenSalesDate As String = Direc + "PostOpenSalesDate"
+
+    Public Const PostCloseSession As String = Direc + "PostCloseSession"
+
+    Public Const PostSessionInfo As String = Direc + "PostSessionInfo"
+
+    Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
+
+#End Region
+#Region "Informacion SalesSession in Salessession.controller"
+
+    Public Const CreateOpenSalesDate As String = Direc + "PostOpenSalesDate"
+
+    Public Const CreateCloseSalesDate As String = Direc + "PostCloseSalesDate"
+
+#End Region
     'Informacion de tasas
     Public Const GetTasas As String = Direc + "GetTasas"
     Public Const GetTasaCliente As String = Direc + "GetTasaCliente"
@@ -57,4 +78,6 @@
     Public Const CreateBancoSo As String = Direc + "CreateBancoSo"
     Public Const UpdateBancoSo As String = Direc + "UpdateBancoSo"
     Public Const DeleteBancoSocio As String = Direc + "DeleteBancoSo"
+
+
 End Class

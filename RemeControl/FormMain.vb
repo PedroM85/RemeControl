@@ -6,7 +6,7 @@
     Private CurrentButton As Button
 
     Private mCurrStep As State
-    Private mControllers(6) As Controller
+    Private mControllers(15) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
 
 
@@ -19,6 +19,8 @@
         ShowSocio
         ShowDash
         ShowBankSo
+        ShowSession
+        showTurnos
 
     End Enum
 
@@ -36,13 +38,14 @@
         btnHome.Select()
         SetDateMenuButtons(btnHome)
 
-
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
         mControllers(State.ShowClient) = New ShowClient(Me)
         mControllers(State.ShowBank) = New ShowBank(Me)
         mControllers(State.ShowDash) = New ShowDash(Me)
         mControllers(State.ShowBankSo) = New ShowBankSo(Me)
+        mControllers(State.ShowSession) = New ShowSession(Me)
+        mControllers(State.showTurnos) = New ShowTurnos(Me)
 
     End Sub
 
@@ -56,15 +59,18 @@
         End Set
     End Property
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Me.SalesDateInfo = Nothing
         LoadData()
+        RefreshInfo()
 
     End Sub
 
     Public Sub LoadData()
         lblUser.Text = String.Format("Usuario: {0}", oApp.CurrentUser.USR_Name)
 
-        Me.SalesDateInfo = oApp.GetSalesDateInfo
-
+        mSalesDateInfo = oApp.GetSalesDateInfo
+        RefreshInfo()
         mTrMgr.DoMenuItem("DASH")
         mCurrStep = State.ShowDash
 
@@ -82,13 +88,14 @@
             lblInfo.Visible = False
         Else
 
-            If mSalesDateInfo.SalesDateId = New Date(1, 1, 1) Then
+
+            If mSalesDateInfo.SDT_Id = New Date(1, 1, 1) Then
                 lblInfo.Text = String.Format("Dia de cambios:  Ninguno |Hora: {0} ", Date.Now.ToShortTimeString)
             Else
-                lblInfo.Text = String.Format("Dia de cambios: {0} |Hora: {1} ", mSalesDateInfo.SalesDateId.ToString("dd MMM yyyy"), Date.Now.ToShortTimeString)
+                lblInfo.Text = String.Format("Dia de cambios: {0} | Hora: {1} ", mSalesDateInfo.SDT_Id.ToString("dd MMM yyyy"), Date.Now.ToShortTimeString)
             End If
 
-            If mSalesDateInfo.SalesDateId <> Date.Now.Date Then
+            If mSalesDateInfo.SDT_Id <> Date.Now.Date Then
                 tmrBlinkyBlinky2.Enabled = True
             Else
                 tmrBlinkyBlinky2.Enabled = False
@@ -175,6 +182,7 @@
 
             If e.KeyCode = Keys.Escape Then
 
+
             Else
                 mControllers(mCurrStep).HandleKey(e)
             End If
@@ -189,7 +197,7 @@
             mTrMgr.DoMenuItem("TASA")
             mCurrStep = State.ShowTasa
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
 
@@ -200,7 +208,7 @@
             mTrMgr.DoMenuItem("DASH")
             mCurrStep = State.ShowDash
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()
         End If
     End Sub
@@ -211,8 +219,8 @@
             mTrMgr.DoMenuItem("SOCIO")
             mCurrStep = State.ShowSocio
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -223,8 +231,8 @@
             mTrMgr.DoMenuItem("CLIENTE")
             mCurrStep = State.ShowClient
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -235,8 +243,8 @@
             mTrMgr.DoMenuItem("BANCO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -248,12 +256,12 @@
             mTrMgr.DoMenuItem("CAMBIO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
-
+    <Obsolete("Mcurrstep compartido/ crear uno")>
     Private Sub btnGasto_Click(sender As Object, e As EventArgs) Handles btnGasto.Click
 
         If oApp.SessionActive() Then
@@ -261,8 +269,8 @@
             mTrMgr.DoMenuItem("GASTO")
             mCurrStep = State.ShowBank
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
 
     End Sub
@@ -271,10 +279,32 @@
         If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("BANCOSO")
-            mCurrStep = State.ShowBank
+            mCurrStep = State.ShowBankSo
         Else
-            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            oApp.LoginUser()
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub btnSession_Click(sender As Object, e As EventArgs) Handles btnSesion.Click
+        If oApp.SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("SESION")
+            mCurrStep = State.ShowSession
+        Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub btnTurno_Click(sender As Object, e As EventArgs) Handles btnTurno.Click
+        If oApp.SessionActive() Then
+            SetDateMenuButtons(sender)
+            mTrMgr.DoMenuItem("TURNOS")
+            mCurrStep = State.ShowTurnos
+        Else
+            MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Me.Close()
         End If
     End Sub
 End Class

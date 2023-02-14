@@ -37,7 +37,7 @@ Public Class SecurityManager
             {
             .ULO_Id = oUser.USR_Id,
             .ULO_Name = oUser.USR_Name,
-            .ULO_TRM = "PC",
+            .ULO_TRM = SystemInformation.ComputerName,
             .ULO_Ip = oUser.USR_IpAddress
             }
 
@@ -54,7 +54,7 @@ Public Class SecurityManager
             {
             .ULO_Id = oUser.USR_Id,
             .ULO_Name = oUser.USR_Name,
-            .ULO_TRM = "PC",
+            .ULO_TRM = SystemInformation.ComputerName,
             .ULO_Ip = oUser.USR_IpAddress
             }
 

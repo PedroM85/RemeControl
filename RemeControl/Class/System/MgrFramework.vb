@@ -1,7 +1,12 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text.RegularExpressions
-
+Public Class SalesDate
+    Public SalesDateId As Date
+    Public OpeningDate As Date
+    Public UsersLoggedOn As Int32
+    Public message As String
+End Class
 Public Class MgrFramework
 
     Protected mUser As LoginIn
@@ -11,20 +16,17 @@ Public Class MgrFramework
     Public Function Terminal() As String
         Return "1"
     End Function
-    Public Function GetSalesDateInfo()
-        Dim oDataLayer As SalesDateData = New SalesDateData
 
+    Public Function GetSalesDateInfo() As SalesDateInfo
+        'openning routes
+        Dim oDataLayer As New SalesDateData
+        Dim _SalesDateInfo As New SalesDateInfo
 
-        'With _SalesDateInfo
-        '    oDataLayer.GetGeneralInfo(.SalesDateId, .OpeningDate, .UsersLoggedOn)
-        'End With
-        If Not oDataLayer Is Nothing Then
-            mSalesDateInfo = oDataLayer.GetGeneralInfo
-        End If
+        With _SalesDateInfo
+            oDataLayer.GetGeneralInfo(.SDT_Id, .SDT_DateOpened, .UsersLoggedOn)
+        End With
 
-        mSalesDateInfo = oDataLayer.GetGeneralInfo
-
-        Return mSalesDateInfo
+        Return _SalesDateInfo
     End Function
     Public Function InitConnection() As Boolean
         Try
