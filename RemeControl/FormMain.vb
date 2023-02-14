@@ -60,6 +60,7 @@
     End Property
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.SalesDateInfo = Nothing
         LoadData()
         RefreshInfo()
 
@@ -69,7 +70,7 @@
         lblUser.Text = String.Format("Usuario: {0}", oApp.CurrentUser.USR_Name)
 
         mSalesDateInfo = oApp.GetSalesDateInfo
-
+        RefreshInfo()
         mTrMgr.DoMenuItem("DASH")
         mCurrStep = State.ShowDash
 
@@ -87,13 +88,14 @@
             lblInfo.Visible = False
         Else
 
-            If mSalesDateInfo.SalesDateId = New Date(1, 1, 1) Then
+
+            If mSalesDateInfo.SDT_Id = New Date(1, 1, 1) Then
                 lblInfo.Text = String.Format("Dia de cambios:  Ninguno |Hora: {0} ", Date.Now.ToShortTimeString)
             Else
-                lblInfo.Text = String.Format("Dia de cambios: {0} |Hora: {1} ", mSalesDateInfo.SalesDateId.ToString("dd MMM yyyy"), Date.Now.ToShortTimeString)
+                lblInfo.Text = String.Format("Dia de cambios: {0} | Hora: {1} ", mSalesDateInfo.SDT_Id.ToString("dd MMM yyyy"), Date.Now.ToShortTimeString)
             End If
 
-            If mSalesDateInfo.SalesDateId <> Date.Now.Date Then
+            If mSalesDateInfo.SDT_Id <> Date.Now.Date Then
                 tmrBlinkyBlinky2.Enabled = True
             Else
                 tmrBlinkyBlinky2.Enabled = False
