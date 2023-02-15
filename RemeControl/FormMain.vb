@@ -172,6 +172,7 @@
         If CurrentButton IsNot Nothing And CurrentButton IsNot btn Then
             CurrentButton.BackColor = Me.BackColor
             CurrentButton.ForeColor = Color.White
+            'CurrentButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         End If
 
         CurrentButton = btn
