@@ -23,7 +23,7 @@ Public Class MgrFramework
         Dim _SalesDateInfo As New SalesDateInfo
 
         With _SalesDateInfo
-            oDataLayer.GetGeneralInfo(.SDT_Id, .SDT_DateOpened, .UsersLoggedOn)
+            oDataLayer.GetGeneralInfo(.SDT_Id, .SDT_DateOpened, .USersLoggedOn, .SSS_Id)
         End With
 
         Return _SalesDateInfo
@@ -113,22 +113,24 @@ Public Class MgrFramework
     End Function
     Public Function IsSaleDateOpened() As SalesDateData.IsOpen
         Dim oDataLayer As New SalesDateData
+        Dim Value As Boolean = False
         Try
 
             Dim values As SalesDateData.IsOpen = oDataLayer.IsOpenning()
 
             If values = SalesDateData.IsOpen.Abierto Then
-                Return True
+                Value = True
             ElseIf values = SalesDateData.IsOpen.Desfase Then
                 MessageBox.Show("No hay turno aperturado en el dia")
-                Return False
+                Value = False
             ElseIf values = SalesDateData.IsOpen.Cerrado Then
-                Return False
+                Value = False
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            Value = False
         End Try
-
+        Return Value
     End Function
     Private Function GetMyExternalIP()
         Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")

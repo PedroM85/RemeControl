@@ -26,7 +26,6 @@ Public Class SalesDateInfo
     'Private sSDT_USR_ClosedBy As String
     Private sSDT_ModifiedBy As String
 
-
     Public SalesDateId As Date
     Public Message As String
     Public USersLoggedOn As Integer
@@ -134,7 +133,7 @@ Public Class SalesDateData
     End Enum
 
 
-    Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer)
+    Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer, ByRef nSessionId As Int32)
         'Ver dia de ventas activo 
 
 
@@ -162,6 +161,7 @@ Public Class SalesDateData
                 dOpenedSalesDate = objSalesDateList(0).SDT_Id 'dt.Rows.Item(0).ItemArray(0)
                 dOpeningDate = objSalesDateList(0).SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
                 nUsersLoggedOn = objSalesDateList(0).USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
+                nSessionId = objSalesDateList(0).SSS_Id
             End If
             'If _SalesDate.Message = "No hay dia aperturado" Then
             '   

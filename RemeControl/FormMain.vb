@@ -46,6 +46,7 @@
         mControllers(State.ShowBankSo) = New ShowBankSo(Me)
         mControllers(State.ShowSession) = New ShowSession(Me)
         mControllers(State.showTurnos) = New ShowTurnos(Me)
+        mControllers(State.ShowCambio) = New ShowCambio(Me)
 
     End Sub
 
@@ -162,7 +163,7 @@
 
 #End Region
 
-    Private Sub SetDateMenuButtons(button As Object)
+    Public Sub SetDateMenuButtons(button As Object)
 
         Dim btn = CType(button, Button)
 
@@ -192,7 +193,7 @@
             mControllers(mCurrStep).HandleKey(e)
         End If
     End Sub
-    Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
+    Public Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
         If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("TASA")

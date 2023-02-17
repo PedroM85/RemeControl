@@ -1,4 +1,6 @@
-﻿Public Class CambioView
+﻿Imports System.Windows.Forms.AxHost
+
+Public Class CambioView
     Inherits ViewBase
 
     Private WithEvents Label1 As Label
@@ -17,12 +19,20 @@
         Dim oCambioData As CambioDataLayer = Nothing
 
         oCambioData = New CambioDataLayer
-
+        Dim Tasas As New BindingSource
+        Tasas.DataSource = oCambioData.GetTasas
         dgvView.DataSource = Nothing
+
+        If Tasas.Item(0).Row.ItemArray(0) = -9999 Then
+            MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+            btnNew.Enabled = False
+            'cboTasa.Items.Add("No hay registros")
+            Exit Sub
+
+        End If
 
         If oCambioData.GetCambios Is Nothing Then
             Label1.Visible = True
-
         Else
             'pnlVacio.Visible = False
             dgvView.DataSource = oCambioData.GetCambios
@@ -231,7 +241,7 @@
 
     End Sub
 
-    Private Sub Close_ABM()
+    Private Sub Close_ABM() Handles oCambioABM.Close
         oMainForm.ShowLeftPanel()
 
         oCambioABM.Dispose()

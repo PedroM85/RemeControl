@@ -23,6 +23,8 @@
     Private focusedForeColor As Color = Color.Black
     Friend WithEvents lblId As Label
     Private components As System.ComponentModel.IContainer
+    Friend WithEvents Label8 As Label
+    Friend WithEvents cboBanco As ComboBox
     Private focusedBackColor As Color = Color.Gainsboro
 
     Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
@@ -49,13 +51,9 @@
         oDataLayer = New CambioDataLayer
 
         Try
-
-            odate = Now.ToString("u")
-
             oData = New CambioData With
                 {
                 .OP_Id = IIf(IsAddNew, 0, lblId.Text),
-                .OP_Date = Now.ToLocalTime,
                 .OP_Socio = cboSocio.SelectedValue,
                 .OP_Cliente = cboCliente.SelectedValue,
                 .OP_Pesos = txtPesos.Text.Trim,
@@ -65,8 +63,6 @@
                 .OP_Status_Id = cboStatus.SelectedValue,
                 .OP_Operation = lblOperacion.Text.Trim,
                 .OP_ModifiedBy = oApp.CurrentUser.USR_Id,
-                .OP_CreatedDateTime = Now.ToLocalTime,
-                .OP_ModifiedDateTime = Now.ToLocalTime,
                 .OP_Active = 1
                 }
 
@@ -75,6 +71,7 @@
             Else
                 oDataLayer.UpdateCambio(oData)
             End If
+
         Catch ex As Exception
             Throw New Exception(ex.Message)
         End Try
@@ -101,7 +98,7 @@
     End Sub
     Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not e.KeyChar = "." And Not e.KeyChar = "," Then
             e.Handled = True
         End If
 
@@ -143,11 +140,15 @@
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lblOperacion = New System.Windows.Forms.Label()
         Me.lblId = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cboBanco = New System.Windows.Forms.ComboBox()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.Label8)
+        Me.pnlControls0.Controls.Add(Me.cboBanco)
         Me.pnlControls0.Controls.Add(Me.lblId)
         Me.pnlControls0.Controls.Add(Me.lblOperacion)
         Me.pnlControls0.Controls.Add(Me.Label7)
@@ -205,7 +206,7 @@
         '
         'txtUSTDBuy
         '
-        Me.txtUSTDBuy.Location = New System.Drawing.Point(359, 31)
+        Me.txtUSTDBuy.Location = New System.Drawing.Point(359, 59)
         Me.txtUSTDBuy.Name = "txtUSTDBuy"
         Me.txtUSTDBuy.Size = New System.Drawing.Size(152, 20)
         Me.txtUSTDBuy.TabIndex = 4
@@ -214,7 +215,7 @@
         '
         'txtUSTDSell
         '
-        Me.txtUSTDSell.Location = New System.Drawing.Point(359, 57)
+        Me.txtUSTDSell.Location = New System.Drawing.Point(359, 85)
         Me.txtUSTDSell.Name = "txtUSTDSell"
         Me.txtUSTDSell.Size = New System.Drawing.Size(152, 20)
         Me.txtUSTDSell.TabIndex = 5
@@ -225,7 +226,7 @@
         '
         Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboStatus.FormattingEnabled = True
-        Me.cboStatus.Location = New System.Drawing.Point(359, 83)
+        Me.cboStatus.Location = New System.Drawing.Point(359, 111)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(152, 21)
         Me.cboStatus.TabIndex = 6
@@ -269,7 +270,7 @@
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(259, 38)
+        Me.Label5.Location = New System.Drawing.Point(259, 66)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(90, 13)
         Me.Label5.TabIndex = 11
@@ -278,7 +279,7 @@
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(263, 64)
+        Me.Label6.Location = New System.Drawing.Point(263, 92)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(86, 13)
         Me.Label6.TabIndex = 12
@@ -287,7 +288,7 @@
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(309, 91)
+        Me.Label7.Location = New System.Drawing.Point(309, 119)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(44, 13)
         Me.Label7.TabIndex = 13
@@ -311,6 +312,24 @@
         Me.lblId.TabIndex = 15
         Me.lblId.Text = "0"
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(304, 39)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(45, 13)
+        Me.Label8.TabIndex = 17
+        Me.Label8.Text = "Banco:*"
+        '
+        'cboBanco
+        '
+        Me.cboBanco.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboBanco.FormattingEnabled = True
+        Me.cboBanco.Location = New System.Drawing.Point(359, 31)
+        Me.cboBanco.Name = "cboBanco"
+        Me.cboBanco.Size = New System.Drawing.Size(152, 21)
+        Me.cboBanco.TabIndex = 16
+        '
         'CambioABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -327,6 +346,7 @@
         Dim oCambioData As CambioDataLayer = Nothing
 
         oCambioData = New CambioDataLayer
+        Dim Tasas As New BindingSource
 
         cboSocio.DataSource = oCambioData.GetSocios
         cboSocio.ValueMember = "SOC_Id"
@@ -337,10 +357,18 @@
         cboCliente.ValueMember = "CLI_Id"
         cboCliente.DisplayMember = "CLI_Nombre"
 
-        cboTasa.DataSource = oCambioData.GetTasas
-        cboTasa.ValueMember = "TAS_TasaCliente"
-        cboTasa.DisplayMember = "TAS_TasaCli"
-        tasa = cboTasa.SelectedValue
+
+        Tasas.DataSource = oCambioData.GetTasas
+
+        If Tasas.Item(0).Row.ItemArray(0) = -9999 Then
+
+        Else
+            cboTasa.DataSource = Tasas.DataSource
+            cboTasa.ValueMember = "TAS_TasaCliente"
+            cboTasa.DisplayMember = "TAS_TasaCli"
+            tasa = cboTasa.SelectedValue
+
+        End If
 
         cboStatus.DataSource = oCambioData.GetStatus
         cboStatus.ValueMember = "STA_Id"
@@ -370,6 +398,7 @@
         End If
 
         If cboTasa.SelectedItem Is Nothing Then
+
         Else
             tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
         End If

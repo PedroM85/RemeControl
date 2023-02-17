@@ -14,6 +14,10 @@ Public Class CambioData
     Private dOP_CreatedDateTime As DateTime
     Private dOP_ModifiedDateTime As DateTime
     Private bOP_Active As Integer
+    Private iSSS_Id As Integer
+    Private iSSS_SOB_Id As Integer
+    Private dSSS_SalesAmount As Decimal
+
 
     Public Property OP_Id As Integer
         Get
