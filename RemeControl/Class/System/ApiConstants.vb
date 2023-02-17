@@ -24,6 +24,8 @@
 
     Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
 
+    Public Const GetIsOpenning As String = Direc + "isopen"
+
 #End Region
 #Region "Informacion SalesSession in Salessession.controller"
 

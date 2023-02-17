@@ -40,8 +40,6 @@ Public Class MgrFramework
             Return False
         End Try
     End Function
-
-
     Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
         Dim sec As SecurityManager = New SecurityManager
         Dim loginDlg As FrmLogin
@@ -78,13 +76,11 @@ Public Class MgrFramework
             Return mSalesDateInfo
         End Get
     End Property
-
     Public ReadOnly Property IpPc As String
         Get
             Return GetMyExternalIP()
         End Get
     End Property
-
     Public Function RegisterLogin(oUser As LoginIn) As Boolean
         Try
             Dim oSec As New SecurityManager
@@ -94,7 +90,6 @@ Public Class MgrFramework
             Return False
         End Try
     End Function
-
     Public Sub RegisterLogout()
         If Not mUser Is Nothing Then
             Dim oSec As New SecurityManager
@@ -116,6 +111,25 @@ Public Class MgrFramework
 
         End Try
     End Function
+    Public Function IsSaleDateOpened() As SalesDateData.IsOpen
+        Dim oDataLayer As New SalesDateData
+        Try
+
+            Dim values As SalesDateData.IsOpen = oDataLayer.IsOpenning()
+
+            If values = SalesDateData.IsOpen.Abierto Then
+                Return True
+            ElseIf values = SalesDateData.IsOpen.Desfase Then
+                MessageBox.Show("No hay turno aperturado en el dia")
+                Return False
+            ElseIf values = SalesDateData.IsOpen.Cerrado Then
+                Return False
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+    End Function
     Private Function GetMyExternalIP()
         Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
         'Dim wq As HttpWebRequest = HttpWebRequest.Create("http://whatismyip.org/")
@@ -124,7 +138,7 @@ Public Class MgrFramework
         Dim sr As New StreamReader(wr.GetResponseStream(), System.Text.Encoding.UTF8)
         Dim ipa As IPAddress = IPAddress.Parse(sr.ReadToEnd)
         sr.Close()
-        sr.Close()
+
         Dim ip As String = ipa.ToString
         ip = Replace(ip, "{}", "")
 

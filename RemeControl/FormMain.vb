@@ -253,9 +253,11 @@
     Private Sub btnCambio_Click(sender As Object, e As EventArgs) Handles btnCambio.Click
 
         If oApp.SessionActive() Then
-            SetDateMenuButtons(sender)
-            mTrMgr.DoMenuItem("CAMBIO")
-            mCurrStep = State.ShowBank
+            If oApp.IsSaleDateOpened Then
+                SetDateMenuButtons(sender)
+                mTrMgr.DoMenuItem("CAMBIO")
+                mCurrStep = State.ShowCambio
+            End If
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()

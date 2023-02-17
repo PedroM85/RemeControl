@@ -49,17 +49,8 @@
         oDataLayer = New CambioDataLayer
 
         Try
-            '.BAN_Id = IIf(IsAddNew, 0, txtId.Text),
-            '   .BAN_Name = txtNombre.Text.Trim,
-            '   .BAN_Prefix = txtPrefix.Text.Trim,
-            '   .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
-            '   .BAN_Active = IIf(chkActive.CheckState, 1, 0)
 
             odate = Now.ToString("u")
-
-            'odate = odate.Replace("Z", "")
-
-
 
             oData = New CambioData With
                 {

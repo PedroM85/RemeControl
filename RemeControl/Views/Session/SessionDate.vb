@@ -315,6 +315,7 @@ Public Class SessionDate
 
                 'ExecuteCounter()
 
+                'Me esta generando un error al cerrar el dia de venta. Verificar
                 oDataLayer.postCloseSalesDate(dCurrSalesDate)
                 'oDataLayer.DeleteOffLineTransactions()
                 'oApp.AuditLogWriter.AddEntry(AccessController.AuditLogWriter.EventType.DayClosed, oApp.CurrentUser.Id, oApp.TerminalId, sSalesDate)
@@ -336,14 +337,7 @@ Public Class SessionDate
                 oDataLayer.PostOpenSalesDate()
             Catch oEx As Exception
                 bError = True
-                Dim Message As String = "{" + ""
-                Message += "message"":""No se ha cerrado el último día de venta""}"
-                Message += "}"
 
-
-                If oEx.Message = Message Then
-                    MessageBox.Show(Me, Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
                 MessageBox.Show(Me, oEx.Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
                 UpdateData()

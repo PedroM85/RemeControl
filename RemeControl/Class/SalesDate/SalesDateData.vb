@@ -1,6 +1,19 @@
 ﻿Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Security.Policy
+
+Public Class MiClaseTest
+    Private _dSSS_DateClosed As DateTime?
+
+    Public Property SSS_DateClosed As DateTime?
+        Get
+            Return _dSSS_DateClosed
+        End Get
+        Set(value As DateTime?)
+            _dSSS_DateClosed = value
+        End Set
+    End Property
+End Class
 Public Class SalesDateInfo
     Public SDT_Id As DateTime
     Public SDT_DateOpened As DateTime
@@ -113,6 +126,13 @@ End Class
 'End Class
 Public Class SalesDateData
     Inherits JsonConnect
+
+    Public Enum IsOpen
+        Abierto
+        Cerrado
+        Desfase
+    End Enum
+
 
     Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer)
         'Ver dia de ventas activo 
@@ -272,6 +292,20 @@ Public Class SalesDateData
 
             Dim result_post = PostJson(Url, result, oApp.CurrentUser)
 
+            Dim objSalesDateList = JsonConvert.DeserializeObject(Of List(Of SalesDateInfo))(result_post)
+
+            'Usa esto de ejemplo para fix este error
+
+            'MessageBox.Show(objSalesDateList.ToString)
+            'If objSalesDateList(0).Message = "No hay dia aperturado" Then
+            '    dOpenedSalesDate = New Date(9999, 12, 31)
+            '    dOpeningDate = dOpenedSalesDate
+            '    nUsersLoggedOn = 0
+            'Else
+            '    dOpenedSalesDate = objSalesDateList(0).SDT_Id 'dt.Rows.Item(0).ItemArray(0)
+            '    dOpeningDate = objSalesDateList(0).SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
+            '    nUsersLoggedOn = objSalesDateList(0).USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
+            'End If
 
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -319,4 +353,28 @@ Public Class SalesDateData
         Return dt
     End Function
 
+    Public Function IsOpenning() As IsOpen
+        Dim Url As String = ApiConstants.GetIsOpenning
+        Dim ValueDate As New DateTime(1999, 12, 31, 0, 0, 0, 0)
+        Dim Hoy As Date = Date.Now.ToString("yyyy-MM-dd")
+        Try
+        Dim result_get = GetJson(Url, oApp.CurrentUser)
+
+            Dim varObj As MiClaseTest = JsonConvert.DeserializeObject(Of MiClaseTest)(result_get)
+
+            'MessageBox.Show(varObj.SDT_DateClosed.ToString)
+            If varObj.SSS_DateClosed Is Nothing Then
+                Return IsOpen.Abierto
+            ElseIf varObj.SSS_DateClosed = Hoy Then
+                Return IsOpen.Desfase
+            Else
+                Return IsOpen.Cerrado
+            End If
+
+        Catch ex As Exception
+            'No hay salesDate aperturados
+            Return False
+        End Try
+
+    End Function
 End Class
