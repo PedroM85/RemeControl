@@ -3,14 +3,14 @@ Imports Newtonsoft.Json.Linq
 Imports System.Security.Policy
 
 Public Class MiClaseTest
-    Private _dSSS_DateClosed As DateTime?
+    Private _dSDT_DateClosed As DateTime?
 
-    Public Property SSS_DateClosed As DateTime?
+    Public Property SDT_DateClosed As DateTime?
         Get
-            Return _dSSS_DateClosed
+            Return _dSDT_DateClosed
         End Get
         Set(value As DateTime?)
-            _dSSS_DateClosed = value
+            _dSDT_DateClosed = value
         End Set
     End Property
 End Class
@@ -363,9 +363,9 @@ Public Class SalesDateData
             Dim varObj As MiClaseTest = JsonConvert.DeserializeObject(Of MiClaseTest)(result_get)
 
             'MessageBox.Show(varObj.SDT_DateClosed.ToString)
-            If varObj.SSS_DateClosed Is Nothing Then
+            If varObj.SDT_DateClosed Is Nothing Then
                 Return IsOpen.Abierto
-            ElseIf varObj.SSS_DateClosed = Hoy Then
+            ElseIf varObj.SDT_DateClosed = Hoy Then
                 Return IsOpen.Desfase
             Else
                 Return IsOpen.Cerrado

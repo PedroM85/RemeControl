@@ -4,6 +4,7 @@ Imports System.Windows.Forms.AxHost
 Public Class SessionView
     Inherits UserControl
 
+
     Private Shared sDays() As String = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}
     Private Shared sMonths() As String = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}
 
@@ -11,6 +12,8 @@ Public Class SessionView
     Private DisabledColor As Color = Color.FromArgb(239, 235, 232)
     Private dDate As DateTime
     Private oBSource As BindingSource
+
+    Private WithEvents oSessionView As SessionDetails
 
     Friend WithEvents lblInfo As Windows.Forms.Label
     Friend WithEvents lblDate As Windows.Forms.Label
@@ -363,6 +366,18 @@ Public Class SessionView
         Cursor = Cursors.Default
     End Sub
 
+    Private Sub oSessionView_Close() Handles oSessionView.Close
+        Close_ABM()
+    End Sub
+    Private Sub Close_ABM()
+        oMainForm.ShowLeftPanel()
+
+        oSessionView.Dispose()
+        oSessionView = Nothing
+
+        LoadData()
+        Me.Visible = True
+    End Sub
     Private Sub LoadCaptions()
         dgvView.AutoGenerateColumns = False
         dgvView.ColumnCount = 6
