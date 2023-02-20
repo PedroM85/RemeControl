@@ -47,7 +47,6 @@
     End Sub
     Private Sub BancoABM_Save() Handles MyBase.Save
         Dim oData As CambioData
-        Dim odate As String
         oDataLayer = New CambioDataLayer
 
         Try
@@ -57,11 +56,13 @@
                 .OP_Socio = cboSocio.SelectedValue,
                 .OP_Cliente = cboCliente.SelectedValue,
                 .OP_Pesos = txtPesos.Text.Trim,
+                .OP_Bank_Id = DirectCast(cboBanco.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
                 .OP_Tasa_id = DirectCast(cboTasa.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
                 .OP_USTDBuy = txtUSTDBuy.Text.Trim,
                 .OP_USTDSell = txtUSTDSell.Text.Trim,
                 .OP_Status_Id = cboStatus.SelectedValue,
                 .OP_Operation = lblOperacion.Text.Trim,
+                .OP_Session = oApp.GetSalesDateInfo.SSS_Id,
                 .OP_ModifiedBy = oApp.CurrentUser.USR_Id,
                 .OP_Active = 1
                 }
@@ -343,9 +344,9 @@
 #End Region
 
     Private Sub CargaCBO()
-        Dim oCambioData As CambioDataLayer = Nothing
+        Dim oCambioData As New CambioDataLayer
+        Dim oBancosoData As New BancoSoDataLayer
 
-        oCambioData = New CambioDataLayer
         Dim Tasas As New BindingSource
 
         cboSocio.DataSource = oCambioData.GetSocios
@@ -374,6 +375,9 @@
         cboStatus.ValueMember = "STA_Id"
         cboStatus.DisplayMember = "STA_Name"
 
+        cboBanco.DataSource = oBancosoData.GetBancoSo
+        cboBanco.ValueMember = "OSB_Id"
+        cboBanco.DisplayMember = "OSB_Nombre"
 
     End Sub
 

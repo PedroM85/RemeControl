@@ -144,19 +144,18 @@ Public Class TasaDataLayer
         Return table
     End Function
     Public Function GetTasas() As DataTable
-        Dim tasa As TasaData = Nothing
+        Dim Table As DataTable = Nothing
         Dim url As String = ApiConstants.GetTasas
+        Try
 
-        tasa = New TasaData
+            Dim result_Post = GetJson(url, oApp.CurrentUser)
 
-        'Dim result = JsonConvert.SerializeObject(UserData)
+            Table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
+        Catch ex As Exception
 
-        Dim result_Post = GetJson(url, oApp.CurrentUser)
+        End Try
 
-        'tasa = JsonConvert.DeserializeObject(Of TasaData)(result_Post)
-        Dim table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
-
-        Return table
+        Return Table
 
     End Function
 

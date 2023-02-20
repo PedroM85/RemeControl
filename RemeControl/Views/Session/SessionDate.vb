@@ -313,7 +313,7 @@ Public Class SessionDate
 
                 'GenerateAllSalesMovements()
 
-                'ExecuteCounter()
+                ExecuteCounter()
 
                 'Me esta generando un error al cerrar el dia de venta. Verificar
                 oDataLayer.postCloseSalesDate(dCurrSalesDate)
@@ -326,6 +326,32 @@ Public Class SessionDate
 
             End Try
         End If
+    End Sub
+
+    Private Sub ExecuteCounter()
+        Dim WF As New WaitForm
+        Dim oDataLayer As New SalesDateData
+
+        Try
+
+            With WF
+                .Message = "Actualizando contadores" + vbCrLf + "Un momento por favor..."
+                .show()
+                .ShowAnimation()
+                .Refresh()
+            End With
+
+            Me.Enabled = False
+
+            oDataLayer.GetCounter()
+            WF.Hide()
+        Catch ex As Exception
+            MessageBox.Show(Me, ex.Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            Me.Enabled = True
+            WF.Hide()
+            WF.Dispose()
+        End Try
     End Sub
 
     Private Sub pnlOpenSales_DoubleClick(sender As Object, e As EventArgs) Handles pnlOpenSales.DoubleClick, Label3.DoubleClick, Label4.DoubleClick

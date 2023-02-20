@@ -146,6 +146,12 @@
     <Compile Include="Form\FrmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\WaitForm.Designer.vb">
+      <DependentUpon>WaitForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\WaitForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\EntryPoints.vb" />
     <Compile Include="Modules\Global.vb" />
     <Compile Include="Class\System\MgrFramework.vb" />
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\WaitForm.resx">
+      <DependentUpon>WaitForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

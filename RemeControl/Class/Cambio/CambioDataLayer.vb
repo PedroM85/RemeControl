@@ -5,18 +5,18 @@ Public Class CambioData
     Private iOP_Socio As Integer
     Private iOP_Cliente As Integer
     Private dOP_Pesos As Decimal
+    Private dOP_Bank_Id As Integer
     Private iOP_Tasa_id As Integer
     Private dOP_USTDBuy As Decimal
     Private dOP_USTDSell As Decimal
     Private iOP_Status_Id As Integer
     Private sOP_Operation As String
+    Private iOP_Session As Integer
     Private sOP_ModifiedBy As String
     Private dOP_CreatedDateTime As DateTime
     Private dOP_ModifiedDateTime As DateTime
     Private bOP_Active As Integer
-    Private iSSS_Id As Integer
-    Private iSSS_SOB_Id As Integer
-    Private dSSS_SalesAmount As Decimal
+
 
 
     Public Property OP_Id As Integer
@@ -142,6 +142,24 @@ Public Class CambioData
         End Get
         Set(value As Date)
             dOP_CreatedDateTime = value
+        End Set
+    End Property
+
+    Public Property OP_Bank_Id As Integer
+        Get
+            Return dOP_Bank_Id
+        End Get
+        Set(value As Integer)
+            dOP_Bank_Id = value
+        End Set
+    End Property
+
+    Public Property OP_Session As Integer
+        Get
+            Return iOP_Session
+        End Get
+        Set(value As Integer)
+            iOP_Session = value
         End Set
     End Property
 End Class
