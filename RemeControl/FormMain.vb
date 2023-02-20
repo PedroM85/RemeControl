@@ -109,6 +109,14 @@
     Private Sub tmrBlinkyBlinky2_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrBlinkyBlinky2.Tick
         lblInfo.Visible = Not lblInfo.Visible
     End Sub
+    Public Sub ExitView(View As UserControl)
+        Try
+            pnlLeft.Controls.Remove(View)
+
+        Catch ex As System.IndexOutOfRangeException
+
+        End Try
+    End Sub
     Public Sub ShowLeftPanel()
         pnlLeft.Visible = True
 

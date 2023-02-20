@@ -350,33 +350,35 @@ Public Class SessionView
     Private Sub ShowDetails(Row As DataGridViewRow)
         Cursor = Cursors.WaitCursor
 
-        Dim oSaleDateDetails As New SessionDetails
-
+        'Dim oSaleDateDetails As New SessionDetails
+        oSessionView = New SessionDetails
 
         Me.Visible = False
 
-        oSaleDateDetails.Dock = DockStyle.Fill
-        oMainForm.ShowView(oSaleDateDetails)
+        oSessionView.Dock = DockStyle.Fill
+        oMainForm.ShowView(oSessionView)
         oMainForm.HideLeftPanel()
 
-        oSaleDateDetails.SessionDate = dDate
-        oSaleDateDetails.SetupDate(oBSource, DirectCast(Row.DataBoundItem, DataRowView))
+        oSessionView.SessionDate = dDate
+        oSessionView.SetupDate(oBSource, DirectCast(Row.DataBoundItem, DataRowView))
 
 
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub oSessionView_Close() Handles oSessionView.Close
+    Public Sub oSessionView_Close() Handles oSessionView.Close
         Close_ABM()
     End Sub
     Private Sub Close_ABM()
+        oMainForm.ExitView(oSessionView)
         oMainForm.ShowLeftPanel()
 
         oSessionView.Dispose()
         oSessionView = Nothing
 
-        LoadData()
         Me.Visible = True
+        LoadData()
+
     End Sub
     Private Sub LoadCaptions()
         dgvView.AutoGenerateColumns = False

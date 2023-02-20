@@ -9,8 +9,6 @@ Public Class TasaView
     Public Sub New()
         MyBase.New
 
-
-
         LoadGlobalCaptions()
     End Sub
     Public Sub LoadData()
@@ -19,8 +17,6 @@ Public Class TasaView
         oTasaData = New TasaDataLayer
 
         'oTasaData.GetTasas()
-
-
 
         dgvView.DataSource = Nothing
 

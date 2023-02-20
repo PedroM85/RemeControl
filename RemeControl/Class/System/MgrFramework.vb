@@ -6,6 +6,7 @@ Public Class SalesDate
     Public OpeningDate As Date
     Public UsersLoggedOn As Int32
     Public message As String
+    'Public 
 End Class
 Public Class MgrFramework
 
@@ -21,7 +22,7 @@ Public Class MgrFramework
         'openning routes
         Dim oDataLayer As New SalesDateData
         Dim _SalesDateInfo As New SalesDateInfo
-
+        _SalesDateInfo.SSS_Id = -9999
         With _SalesDateInfo
             oDataLayer.GetGeneralInfo(.SDT_Id, .SDT_DateOpened, .USersLoggedOn, .SSS_Id)
         End With
@@ -121,9 +122,10 @@ Public Class MgrFramework
             If values = SalesDateData.IsOpen.Abierto Then
                 Value = True
             ElseIf values = SalesDateData.IsOpen.Desfase Then
-                MessageBox.Show("No hay turno aperturado en el dia")
+                MessageBox.Show("No hay turno aperturado en el dia " + DateTime.Today.ToString("dd-MM-yyyy"))
                 Value = False
             ElseIf values = SalesDateData.IsOpen.Cerrado Then
+                MessageBox.Show("No hay turno aperturado para el dia " + DateTime.Today.ToString("dd-MM-yyyy"))
                 Value = False
             End If
         Catch ex As Exception

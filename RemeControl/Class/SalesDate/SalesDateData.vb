@@ -18,7 +18,7 @@ Public Class SalesDateInfo
     Public SDT_Id As DateTime
     Public SDT_DateOpened As DateTime
 
-    Public SSS_Id As Integer
+    Public SSS_Id As Integer?
 
     'Private sSDT_USR_OpenedBy As String
     'Private dSDT_DateCreated As DateTime
@@ -141,7 +141,7 @@ Public Class SalesDateData
 
         Dim _SalesDate As New SalesDateInfo
         Dim url As String = ApiConstants.GetSalesDateInfo
-
+        nSessionId = 0
 
         Try
 
@@ -161,7 +161,11 @@ Public Class SalesDateData
                 dOpenedSalesDate = objSalesDateList(0).SDT_Id 'dt.Rows.Item(0).ItemArray(0)
                 dOpeningDate = objSalesDateList(0).SDT_DateOpened 'dt.Rows.Item(0).ItemArray(1)
                 nUsersLoggedOn = objSalesDateList(0).USersLoggedOn 'dt.Rows.Item(0).ItemArray(2)
-                nSessionId = objSalesDateList(0).SSS_Id
+                If objSalesDateList(0).SSS_Id Is Nothing Then
+                    nSessionId = -1
+                Else
+                    nSessionId = objSalesDateList(0).SSS_Id
+                End If
             End If
             'If _SalesDate.Message = "No hay dia aperturado" Then
             '   
@@ -358,7 +362,7 @@ Public Class SalesDateData
         Dim ValueDate As New DateTime(1999, 12, 31, 0, 0, 0, 0)
         Dim Hoy As Date = Date.Now.ToString("yyyy-MM-dd")
         Try
-        Dim result_get = GetJson(Url, oApp.CurrentUser)
+            Dim result_get = GetJson(Url, oApp.CurrentUser)
 
             Dim varObj As MiClaseTest = JsonConvert.DeserializeObject(Of MiClaseTest)(result_get)
 
@@ -377,4 +381,14 @@ Public Class SalesDateData
         End Try
 
     End Function
+
+    Public Sub GetCounter()
+        Dim Url As String = ApiConstants.GetCounter
+        Try
+            Dim result_get = GetJson(Url, oApp.CurrentUser)
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
 End Class

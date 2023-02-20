@@ -17,8 +17,8 @@ Public Class CambioView
 
     Public Sub LoadData()
         Dim oCambioData As CambioDataLayer = Nothing
-
         oCambioData = New CambioDataLayer
+
         Dim Tasas As New BindingSource
         Tasas.DataSource = oCambioData.GetTasas
         dgvView.DataSource = Nothing

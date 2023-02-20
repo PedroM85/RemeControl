@@ -22,8 +22,6 @@
 
     Public Const PostSessionInfo As String = Direc + "PostSessionInfo"
 
-    Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
-
     Public Const GetIsOpenning As String = Direc + "isopen"
 
 #End Region
@@ -32,6 +30,10 @@
     Public Const CreateOpenSalesDate As String = Direc + "PostOpenSalesDate"
 
     Public Const CreateCloseSalesDate As String = Direc + "PostCloseSalesDate"
+
+    Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
+
+    Public Const GetCounter As String = Direc + "GetCounter"
 
 #End Region
     'Informacion de tasas
