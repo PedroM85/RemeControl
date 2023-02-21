@@ -24,7 +24,12 @@ Public Class DashView
         Dim Data As DataTable
         Try
             Data = oDashData.GetSocios()
-            Chart1.Series.Add(Data.Rows(0).ItemArray(1))
+            If Data.Rows.Item(0).ItemArray(0) = -9999 Then
+
+            Else
+                Chart1.Series.Add(Data.Rows(0).ItemArray(1))
+
+            End If
 
         Catch ex As Exception
 

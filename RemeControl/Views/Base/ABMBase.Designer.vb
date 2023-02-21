@@ -46,7 +46,7 @@ Partial Class ABMBase
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
         Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(166, 402)
+        Me.pnlLeft.Size = New System.Drawing.Size(166, 535)
         Me.pnlLeft.TabIndex = 0
         '
         'Panel3
@@ -75,16 +75,16 @@ Partial Class ABMBase
         Me.pnlBottom.Controls.Add(Me.btnCancel)
         Me.pnlBottom.Controls.Add(Me.btnOk)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlBottom.Location = New System.Drawing.Point(166, 352)
+        Me.pnlBottom.Location = New System.Drawing.Point(166, 485)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(560, 50)
+        Me.pnlBottom.Size = New System.Drawing.Size(610, 50)
         Me.pnlBottom.TabIndex = 1
         '
         'lblRequiredFields
         '
         Me.lblRequiredFields.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblRequiredFields.AutoSize = True
-        Me.lblRequiredFields.Location = New System.Drawing.Point(452, 23)
+        Me.lblRequiredFields.Location = New System.Drawing.Point(502, 23)
         Me.lblRequiredFields.Name = "lblRequiredFields"
         Me.lblRequiredFields.Size = New System.Drawing.Size(104, 13)
         Me.lblRequiredFields.TabIndex = 6
@@ -158,7 +158,7 @@ Partial Class ABMBase
         Me.Controls.Add(Me.pnlLeft)
         Me.Controls.Add(Me.pnlTitle0)
         Me.Name = "ABMBase"
-        Me.Size = New System.Drawing.Size(726, 402)
+        Me.Size = New System.Drawing.Size(776, 535)
         Me.pnlLeft.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
