@@ -1,27 +1,40 @@
 ﻿Imports System.Globalization
+Imports System.Reflection.Emit
 
 Public Class TasaView
     Inherits ViewBase
 
     Private WithEvents oTasaABM As TasaABM
-    Private dtTasa As DataTable
+    Private WithEvents Label1 As Windows.Forms.Label
+    Private oBsourse As BindingSource
 
     Public Sub New()
         MyBase.New
 
+        InitializeComponent()
+
         LoadGlobalCaptions()
     End Sub
     Public Sub LoadData()
-        Dim oTasaData As TasaDataLayer = Nothing
+        Dim oTasaData As New TasaDataLayer
+        oBsourse = New BindingSource
+        Try
 
-        oTasaData = New TasaDataLayer
+            oBsourse.DataSource = oTasaData.GetTasas
+            If oBsourse.List.Item(0).Row.ItemArray(0) = -9999 Then
+                Label1.Visible = True
 
-        'oTasaData.GetTasas()
+            Else
+                Label1.Visible = False
+                With dgvView
+                    .DataSource = Nothing
+                    .DataSource = oBsourse.DataSource
+                End With
+            End If
 
-        dgvView.DataSource = Nothing
-
-        dgvView.DataSource = oTasaData.GetTasas
-
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub TasaView_Addnew() Handles MyBase.AddNew
@@ -169,4 +182,30 @@ Public Class TasaView
         Me.Visible = True
     End Sub
 
+    Private Sub InitializeComponent()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(162, 24)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "No hay registros"
+        Me.Label1.Visible = False
+        '
+        'TasaView
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.Label1)
+        Me.Name = "TasaView"
+        Me.Controls.SetChildIndex(Me.Label1, 0)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
 End Class

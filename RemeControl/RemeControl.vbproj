@@ -107,6 +107,7 @@
     <Compile Include="Class\Socio\SocioDataLayer.vb" />
     <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
+    <Compile Include="Class\System\CommonFunction.vb" />
     <Compile Include="Class\System\Connection.vb" />
     <Compile Include="Class\System\EnvironmentObjects.vb" />
     <Compile Include="Class\System\EWTransactionManager.vb" />
@@ -326,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Tasa\TasaABM.resx">
       <DependentUpon>TasaABM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tasa\TasaView.resx">
+      <DependentUpon>TasaView.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -110,8 +110,6 @@
 
     Private oDataLayer As SocioDataLayer
 
-
-
     Public Sub New()
         MyBase.New
 

@@ -20,11 +20,11 @@ Public Class TasaABM
     Friend WithEvents lblBinance As Label
     Friend WithEvents txtDolarInPais As TextBox
     Friend WithEvents txtTasaVentaCustom As TextBox
-    Friend WithEvents txtIdControl As TextBox
     Friend WithEvents dtpFecha As DateTimePicker
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents cboSocio As ComboBox
+    Friend WithEvents lblIdControl As Label
     Friend WithEvents txtBina As TextBox
 
     Private Sub InitializeComponent()
@@ -40,21 +40,21 @@ Public Class TasaABM
         Me.txtTasaVenta = New System.Windows.Forms.TextBox()
         Me.chkCustom = New System.Windows.Forms.CheckBox()
         Me.txtTasaVentaCustom = New System.Windows.Forms.TextBox()
-        Me.txtIdControl = New System.Windows.Forms.TextBox()
         Me.dtpFecha = New System.Windows.Forms.DateTimePicker()
         Me.cboSocio = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblIdControl = New System.Windows.Forms.Label()
         Me.pnlControls0.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControls0
         '
+        Me.pnlControls0.Controls.Add(Me.lblIdControl)
         Me.pnlControls0.Controls.Add(Me.Label2)
         Me.pnlControls0.Controls.Add(Me.Label1)
         Me.pnlControls0.Controls.Add(Me.cboSocio)
         Me.pnlControls0.Controls.Add(Me.dtpFecha)
-        Me.pnlControls0.Controls.Add(Me.txtIdControl)
         Me.pnlControls0.Controls.Add(Me.chkCustom)
         Me.pnlControls0.Controls.Add(Me.lblTasaVenta)
         Me.pnlControls0.Controls.Add(Me.txtTasaVenta)
@@ -76,7 +76,7 @@ Public Class TasaABM
         Me.txtBina.MaxLength = 6
         Me.txtBina.Name = "txtBina"
         Me.txtBina.Size = New System.Drawing.Size(129, 20)
-        Me.txtBina.TabIndex = 0
+        Me.txtBina.TabIndex = 1
         Me.txtBina.Tag = ""
         Me.txtBina.Text = "0.00"
         Me.txtBina.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -87,7 +87,7 @@ Public Class TasaABM
         Me.txtDolarInPais.MaxLength = 6
         Me.txtDolarInPais.Name = "txtDolarInPais"
         Me.txtDolarInPais.Size = New System.Drawing.Size(129, 20)
-        Me.txtDolarInPais.TabIndex = 1
+        Me.txtDolarInPais.TabIndex = 2
         Me.txtDolarInPais.Text = "0.00"
         Me.txtDolarInPais.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -116,7 +116,7 @@ Public Class TasaABM
         Me.txtComision.Name = "txtComision"
         Me.txtComision.ReadOnly = True
         Me.txtComision.Size = New System.Drawing.Size(129, 20)
-        Me.txtComision.TabIndex = 2
+        Me.txtComision.TabIndex = 3
         Me.txtComision.TabStop = False
         Me.txtComision.Text = "0.05"
         Me.txtComision.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -146,9 +146,9 @@ Public Class TasaABM
         Me.txtTasaFull.Name = "txtTasaFull"
         Me.txtTasaFull.ReadOnly = True
         Me.txtTasaFull.Size = New System.Drawing.Size(129, 20)
-        Me.txtTasaFull.TabIndex = 3
+        Me.txtTasaFull.TabIndex = 9
         Me.txtTasaFull.TabStop = False
-        Me.txtTasaFull.Text = "0.00"
+        Me.txtTasaFull.Text = "0.000000"
         Me.txtTasaFull.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblTasaVenta
@@ -169,7 +169,7 @@ Public Class TasaABM
         Me.txtTasaVenta.Size = New System.Drawing.Size(129, 20)
         Me.txtTasaVenta.TabIndex = 4
         Me.txtTasaVenta.TabStop = False
-        Me.txtTasaVenta.Text = "0.00"
+        Me.txtTasaVenta.Text = "0.0000"
         Me.txtTasaVenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'chkCustom
@@ -179,7 +179,7 @@ Public Class TasaABM
         Me.chkCustom.Name = "chkCustom"
         Me.chkCustom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.chkCustom.Size = New System.Drawing.Size(15, 14)
-        Me.chkCustom.TabIndex = 5
+        Me.chkCustom.TabIndex = 3
         Me.chkCustom.UseVisualStyleBackColor = True
         '
         'txtTasaVentaCustom
@@ -189,22 +189,9 @@ Public Class TasaABM
         Me.txtTasaVentaCustom.Name = "txtTasaVentaCustom"
         Me.txtTasaVentaCustom.Size = New System.Drawing.Size(129, 20)
         Me.txtTasaVentaCustom.TabIndex = 6
-        Me.txtTasaVentaCustom.Text = "0.00"
+        Me.txtTasaVentaCustom.Text = "0.0000"
         Me.txtTasaVentaCustom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTasaVentaCustom.Visible = False
-        '
-        'txtIdControl
-        '
-        Me.txtIdControl.BackColor = System.Drawing.Color.White
-        Me.txtIdControl.Location = New System.Drawing.Point(121, 12)
-        Me.txtIdControl.MaxLength = 6
-        Me.txtIdControl.Name = "txtIdControl"
-        Me.txtIdControl.Size = New System.Drawing.Size(100, 20)
-        Me.txtIdControl.TabIndex = 15
-        Me.txtIdControl.Tag = ""
-        Me.txtIdControl.Text = "0"
-        Me.txtIdControl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.txtIdControl.Visible = False
         '
         'dtpFecha
         '
@@ -217,11 +204,12 @@ Public Class TasaABM
         '
         'cboSocio
         '
+        Me.cboSocio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSocio.FormattingEnabled = True
         Me.cboSocio.Location = New System.Drawing.Point(92, 35)
         Me.cboSocio.Name = "cboSocio"
         Me.cboSocio.Size = New System.Drawing.Size(129, 21)
-        Me.cboSocio.TabIndex = 17
+        Me.cboSocio.TabIndex = 0
         '
         'Label1
         '
@@ -241,6 +229,16 @@ Public Class TasaABM
         Me.Label2.TabIndex = 19
         Me.Label2.Text = "Ajuste de tasa:"
         '
+        'lblIdControl
+        '
+        Me.lblIdControl.AutoSize = True
+        Me.lblIdControl.ForeColor = System.Drawing.Color.White
+        Me.lblIdControl.Location = New System.Drawing.Point(191, 12)
+        Me.lblIdControl.Name = "lblIdControl"
+        Me.lblIdControl.Size = New System.Drawing.Size(13, 13)
+        Me.lblIdControl.TabIndex = 20
+        Me.lblIdControl.Text = "0"
+        '
         'TasaABM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -254,16 +252,19 @@ Public Class TasaABM
 #End Region
 
     Private oDataLayer As TasaDataLayer
+    Private FuntionCon As New CommonFunction
     Private TasaFull As Double = 0
     Private TasaClien As Double = 0
+
+    Private focusedForeColor As Color = Color.Black
+    Private focusedBackColor As Color = Color.Gainsboro
+
 
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
 
-        'txtBina.Text = 0.00
-        'txtDolarInPais.Text = 0.00
         CargaBOX()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
@@ -274,24 +275,17 @@ Public Class TasaABM
                    End Sub)
 
 
-
     End Sub
-
-    Private focusedForeColor As Color = Color.Black
-    Private focusedBackColor As Color = Color.Gainsboro
-
     Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
         Dim controls = control.Controls.Cast(Of Control)()
         Return controls.SelectMany(Function(ctrl) GetAllControls(ctrl)).Concat(controls)
     End Function
-
     Private Sub b_LostFocus(sender As Object, e As EventArgs)
         Dim b = DirectCast(sender, TextBox)
         Dim colors = DirectCast(b.Tag, Tuple(Of Color, Color))
         b.ForeColor = colors.Item1
         b.BackColor = colors.Item2
     End Sub
-
     Private Sub b_GotFocus(sender As Object, e As EventArgs)
         Dim b = DirectCast(sender, TextBox)
         b.SelectAll()
@@ -309,20 +303,13 @@ Public Class TasaABM
         End If
     End Sub
 
-
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not e.KeyChar = "." And Not e.KeyChar = "," And Not e.KeyChar = "*" Then
-            e.Handled = True
-        End If
-
-    End Sub
-
     Private Sub txtBina_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBina.KeyPress
-        ValiText(sender, e)
+        'ValiText(sender, e)
+        FuntionCon.ManejarDecimalEnTextBox(sender, e)
     End Sub
     Private Sub txtDolarInPais_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDolarInPais.KeyPress
-        ValiText(sender, e)
+        'ValiText(sender, e)
+        FuntionCon.ManejarDecimalEnTextBox(sender, e)
     End Sub
 
 
@@ -362,62 +349,45 @@ Public Class TasaABM
     End Sub
 
     Private Sub txtTasaVentaCustom_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTasaVentaCustom.KeyPress
-        ValiText(sender, e)
+        FuntionCon.ManejarDecimalEnTextBox(sender, e)
     End Sub
 
     Private Sub TasaABM_Save() Handles MyBase.Save
-        Dim oData As TasaData
-
-        Dim tasacliente As Double = 0
-        If chkCustom.Checked Then
-            tasacliente = txtTasaVentaCustom.Text
-        Else
-            tasacliente = txtTasaVenta.Text
-        End If
-
         oDataLayer = New TasaDataLayer
+        Dim oData As New TasaData
+        Dim tasacliente As Double = 0
+
         Try
-            If IsAddNew Then
-                oData = New TasaData With
-            {
-            .TAS_Date = Now.ToShortDateString(),
+
+            oData = New TasaData With {
+            .TAS_Id = IIf(IsAddNew, 0, lblIdControl.Text),
             .TAS_Binance = txtBina.Text,
             .TAS_Socio = cboSocio.SelectedValue,
             .TAS_DolarPais = txtDolarInPais.Text,
             .TAS_Comision = txtComision.Text,
             .TAS_TasaFull = txtTasaFull.Text,
             .TAS_TasaMayorista = 0,
-            .TAS_TasaCliente = tasacliente,
+            .TAS_TasaCliente = IIf(chkCustom.Checked, txtTasaVentaCustom.Text, txtTasaVenta.Text),
             .TAS_ModifiedBy = oApp.CurrentUser.USR_Id,
             .TAS_Active = 1
             }
+
+            If IsAddNew Then
                 oDataLayer.CreateTasa(oData)
             Else
-                oData = New TasaData With
-            {
-            .TAS_Id = txtIdControl.Text,
-            .TAS_Date = dtpFecha.Text,
-            .TAS_Binance = txtBina.Text,
-            .TAS_Socio = cboSocio.SelectedValue,
-            .TAS_DolarPais = txtDolarInPais.Text,
-            .TAS_Comision = txtComision.Text,
-            .TAS_TasaFull = txtTasaFull.Text,
-            .TAS_TasaMayorista = 0,
-            .TAS_TasaCliente = tasacliente,
-            .TAS_ModifiedBy = oApp.CurrentUser.USR_Id,
-            .TAS_Active = 1
-            }
                 oDataLayer.UpdateTasa(oData)
             End If
 
 
         Catch ex As Exception
-
+            Throw New Exception(ex.Message)
         End Try
 
     End Sub
+
+
     Private Sub TasaABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        txtIdControl.DataBindings.Add("Text", row, "TAS_Id")
+        lblIdControl.DataBindings.Add("Text", row, "TAS_Id")
         cboSocio.DataBindings.Add("SelectedValue", row, "TAS_Socio")
         txtBina.DataBindings.Add("Text", row, "TAS_Binance")
         txtDolarInPais.DataBindings.Add("Text", row, "TAS_DolarPais")
@@ -428,21 +398,28 @@ Public Class TasaABM
 
     End Sub
     Private Sub TasaABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        txtIdControl.Enabled = False
+        lblIdControl.Enabled = False
     End Sub
     Private Sub TasaABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
 
-        'row("TAS_Id") = Nothing
-        'row("TAS_Binance") = Nothing
-        'row("TAS_DolarPais") = Nothing
-        'row("TAS_Comision") = Nothing
-        'row("TAS_TasaFull") = Nothing
-        'row("TAS_TasaCliente") = Nothing
-        'row("TAS_Date") = Nothing
 
     End Sub
 
-    Private Sub TasaABM_ValidateControls(Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+    Private Sub TasaABM_ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtBina.Text = String.Empty Or txtBina.Text = "0.00" Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtBina.Select()
+            Exit Sub
+        End If
+        If txtDolarInPais.Text = String.Empty Or txtDolarInPais.Text = "0.00" Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtDolarInPais.Select()
+            Exit Sub
+        End If
 
     End Sub
 
@@ -458,7 +435,6 @@ Public Class TasaABM
 
     Private Sub CargaBOX()
         oDataLayer = New TasaDataLayer
-
         cboSocio.DataSource = oDataLayer.GetSocios
         cboSocio.ValueMember = "SOC_Id"
         cboSocio.DisplayMember = "SOC_Name"

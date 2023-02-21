@@ -38,10 +38,8 @@
 
         InitializeComponent()
 
-
         LoadGlobalCaptions()
     End Sub
-
 
     Public Sub LoadData()
         Dim oSocioData As SocioDataLayer = Nothing
@@ -57,7 +55,6 @@
             'pnlVacio.Visible = False
             dgvView.DataSource = oSocioData.GetSocios
         End If
-
 
     End Sub
 

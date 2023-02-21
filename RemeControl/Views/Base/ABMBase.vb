@@ -4,6 +4,7 @@
     Private oDataRow As DataRowView
     Private lAddNew As Boolean
 
+
     Public ReadOnly Property IsAddNew() As Boolean
         Get
             Return lAddNew
@@ -34,7 +35,7 @@
 #Region "Events"
 
     Public Event SetBindings(row As DataRowView)
-    Public Event ValidateControls(Cancel As Boolean, IsAddNew As Boolean)
+    Public Event ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean)
     Public Event SetDefaultValuesOnNew(row As DataRowView)
     Public Event SetDefaultValuesOnEdit(row As DataRowView)
     Public Event Cancel()
@@ -118,4 +119,7 @@
         EnvironmentObjects.Framework.LastAction = Now
     End Sub
 
+    Private Sub ABMBase_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
