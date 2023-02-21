@@ -79,7 +79,7 @@ Partial Class ViewBase
         Me.dgvView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgvView.RowHeadersVisible = False
         Me.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvView.Size = New System.Drawing.Size(533, 281)
+        Me.dgvView.Size = New System.Drawing.Size(732, 428)
         Me.dgvView.TabIndex = 0
         '
         'pnlBottom
@@ -90,9 +90,9 @@ Partial Class ViewBase
         Me.pnlBottom.Controls.Add(Me.btnNew)
         Me.pnlBottom.Controls.Add(Me.btnView)
         Me.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlBottom.Location = New System.Drawing.Point(0, 338)
+        Me.pnlBottom.Location = New System.Drawing.Point(0, 485)
         Me.pnlBottom.Name = "pnlBottom"
-        Me.pnlBottom.Size = New System.Drawing.Size(577, 50)
+        Me.pnlBottom.Size = New System.Drawing.Size(776, 50)
         Me.pnlBottom.TabIndex = 1
         '
         'btnDelete
@@ -153,7 +153,7 @@ Partial Class ViewBase
         Me.Controls.Add(Me.pnlBottom)
         Me.Controls.Add(Me.dgvView)
         Me.Name = "ViewBase"
-        Me.Size = New System.Drawing.Size(577, 388)
+        Me.Size = New System.Drawing.Size(776, 535)
         CType(Me.dgvView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlBottom.ResumeLayout(False)
         Me.ResumeLayout(False)
