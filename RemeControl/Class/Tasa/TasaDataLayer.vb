@@ -152,7 +152,7 @@ Public Class TasaDataLayer
 
             Table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         Catch ex As Exception
-
+            Throw New Exception(ex.Message)
         End Try
 
         Return Table

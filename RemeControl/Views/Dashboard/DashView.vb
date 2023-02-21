@@ -22,9 +22,13 @@ Public Class DashView
     Private Sub LoadLeyendaSerie()
         oDashData = New DashboardDataLayer
         Dim Data As DataTable
+        Try
+            Data = oDashData.GetSocios()
+            Chart1.Series.Add(Data.Rows(0).ItemArray(1))
 
-        Data = oDashData.GetSocios()
-        Chart1.Series.Add(Data.Rows(0).ItemArray(1))
+        Catch ex As Exception
+
+        End Try
 
 
     End Sub
@@ -53,7 +57,7 @@ Public Class DashView
             lblNCambios.Text = String.Format("Clientes: {0}", Data.Rows(0).ItemArray(2))
             lblTotalCambios.Text = String.Format("Cambios: {0}", Data.Rows(0).ItemArray(3))
             lblOrdenReady.Text = Data.Rows(0).ItemArray(1)
-            lblTotalMensual.Text = String.Format("${0}", Data.Rows(0).ItemArray(0))
+            lblTotalMensual.Text = String.Format("Total: ${0}", Data.Rows(0).ItemArray(0))
 
         End If
 
@@ -67,19 +71,24 @@ Public Class DashView
             .OP_DateEnd = lblEndDate.Text
         }
 
+        Try
 
-        Chart1.DataSource = Nothing
-        Data = oDashData.GetCambios(oDash)
-        If Data IsNot Nothing Then
-            Chart1.DataSource = Data
-            Chart1.Series(0).XValueMember = "OP_Fecha"
-            Chart1.Series(0).YValueMembers = "OP_Pesos"
-            Chart1.DataBind()
-        Else
-            Chart1.Series(0).Points.Clear()
+            Chart1.DataSource = Nothing
+            Data = oDashData.GetCambios(oDash)
+            If Data IsNot Nothing Then
+                Chart1.DataSource = Data
+                Chart1.Series(0).XValueMember = "OP_Fecha"
+                Chart1.Series(0).YValueMembers = "OP_Pesos"
+                Chart1.DataBind()
+            Else
+                Chart1.Series(0).Points.Clear()
 
-            Console.WriteLine("No hay datos")
-        End If
+                Console.WriteLine("No hay datos")
+            End If
+
+        Catch ex As Exception
+
+        End Try
 
 
     End Sub
