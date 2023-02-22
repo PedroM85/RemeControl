@@ -15,7 +15,7 @@
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 4
@@ -35,6 +35,7 @@
 #End Region
 
     Private WithEvents oBancoABM As BancoABM
+    Private oBsource As BindingSource
 
     Public Sub New()
         MyBase.New
@@ -49,18 +50,27 @@
 
     Public Sub LoadData()
         Dim oBancoData As BancoDataLayer = Nothing
-
         oBancoData = New BancoDataLayer
 
+        oBsource = New BindingSource
         dgvView.DataSource = Nothing
 
-        If oBancoData.GetBancos Is Nothing Then
-            Label1.Visible = True
+        oBsource.DataSource = oBancoData.GetBancos
+        Try
 
-        Else
-            'pnlVacio.Visible = False
-            dgvView.DataSource = oBancoData.GetBancos
-        End If
+            If oBsource.List.Item(0).Row.ItemArray(0) = -1 Then
+                Label1.Visible = True
+
+            Else
+                Label1.Visible = False
+                With dgvView
+                    .DataSource = Nothing
+                    .DataSource = oBsource.DataSource
+                End With
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
 
     End Sub
@@ -73,7 +83,6 @@
 
         oBancoABM.Caption = "Agregar un banco"
         oBancoABM.Title = "Datos Generales"
-        'oClientABM.chkActive.Checked = True
         oBancoABM.Edit(Nothing)
 
         Me.Visible = False
@@ -87,11 +96,10 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Public Sub SocioView_Edit() Handles MyBase.Edit
+    Public Sub BancoView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
         oBancoABM = New BancoABM
-
         oBancoABM.Caption = "Editar una banco"
         oBancoABM.Title = "Datos Generales"
         Dim row As DataGridViewRow = dgvView.CurrentRow
@@ -105,12 +113,10 @@
         oBancoABM.Select()
 
 
-
-
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oSocioABM_Delete() Handles MyBase.Delete
+    Private Sub BancoABM_Delete() Handles MyBase.Delete
         Dim oDataLayer As BancoDataLayer = New BancoDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
@@ -134,16 +140,16 @@
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oClientABM_Close() Handles oBancoABM.Close
+    Private Sub BancoABM_Close() Handles oBancoABM.Close
         Close_ABM()
     End Sub
-    Private Sub oClientABM_Save() Handles oBancoABM.Save
+    Private Sub BancoABM_Save() Handles oBancoABM.Save
         Close_ABM()
     End Sub
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 7
+        dgvView.ColumnCount = 8
 
         dgvView.Columns(0).Name = "BAN_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
@@ -175,7 +181,7 @@
         dgvView.Columns(4).HeaderText = "Fecha de alta"
         dgvView.Columns(4).DataPropertyName = "BAN_CreatedDateTime"
         dgvView.Columns(4).Width = 120
-        dgvView.Columns(4).Visible = True
+        dgvView.Columns(4).Visible = False
 
 
         dgvView.Columns(5).Name = "BAN_ModifiedDateTime"
@@ -191,12 +197,17 @@
         dgvView.Columns(6).Width = 120
         dgvView.Columns(6).Visible = False
 
+        dgvView.Columns(7).Name = "BAN_ACC_Id"
+        dgvView.Columns(7).DataPropertyName = "BAN_ACC_Id"
+        dgvView.Columns(7).Visible = False
+
+
 
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "BAN_Active"
         Check.HeaderText = "Activo"
         Check.DataPropertyName = "BAN_Active"
-        dgvView.Columns.Insert(7, Check)
+        dgvView.Columns.Insert(8, Check)
 
     End Sub
 
