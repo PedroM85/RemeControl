@@ -61,15 +61,18 @@
         'txtPrefix
         '
         Me.txtPrefix.Location = New System.Drawing.Point(125, 109)
+        Me.txtPrefix.MaxLength = 4
         Me.txtPrefix.Name = "txtPrefix"
-        Me.txtPrefix.Size = New System.Drawing.Size(121, 20)
+        Me.txtPrefix.Size = New System.Drawing.Size(158, 20)
         Me.txtPrefix.TabIndex = 3
+        Me.txtPrefix.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtNombre
         '
         Me.txtNombre.Location = New System.Drawing.Point(125, 56)
+        Me.txtNombre.MaxLength = 50
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(121, 20)
+        Me.txtNombre.Size = New System.Drawing.Size(209, 20)
         Me.txtNombre.TabIndex = 1
         '
         'Label6
@@ -108,7 +111,7 @@
         Me.cboBankAcc.FormattingEnabled = True
         Me.cboBankAcc.Location = New System.Drawing.Point(125, 82)
         Me.cboBankAcc.Name = "cboBankAcc"
-        Me.cboBankAcc.Size = New System.Drawing.Size(121, 21)
+        Me.cboBankAcc.Size = New System.Drawing.Size(158, 21)
         Me.cboBankAcc.TabIndex = 2
         Me.cboBankAcc.ValueMember = "BAN_ACC_Name"
         '
@@ -116,7 +119,7 @@
         '
         Me.lblId.AutoSize = True
         Me.lblId.ForeColor = System.Drawing.Color.White
-        Me.lblId.Location = New System.Drawing.Point(197, 28)
+        Me.lblId.Location = New System.Drawing.Point(321, 30)
         Me.lblId.Name = "lblId"
         Me.lblId.Size = New System.Drawing.Size(13, 13)
         Me.lblId.TabIndex = 20
@@ -135,6 +138,7 @@
 #End Region
 
     Private oDataLayer As BancoDataLayer
+    Private FuntionCon As New CommonFunction
     Public Sub New()
         MyBase.New
 
@@ -177,16 +181,12 @@
         oDataLayer = New BancoDataLayer
 
         Try
-            'MessageBox.Show(txtId.Text)
-            If lblId.Text = Nothing Or lblId.Text = "" Then
-                lblId.Text = Nothing
-            End If
 
             oData = New BancoData With
                 {
                .BAN_Id = IIf(IsAddNew, 0, lblId.Text),
-               .BAN_Type = cboBankAcc.SelectedIndex + 1,
-               .BAN_Name = txtNombre.Text.Trim,
+               .BAN_Type = cboBankAcc.SelectedValue,
+               .BAN_Name = StrConv(txtNombre.Text.Trim, VbStrConv.ProperCase),
                .BAN_Prefix = txtPrefix.Text.Trim,
                .BAN_ModifiedBy = oApp.CurrentUser.USR_Id,
                .BAN_Active = IIf(chkActive.CheckState, 1, 0)
@@ -202,39 +202,43 @@
         End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        lblId.Enabled = True
+
     End Sub
-    'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
-    '    row("SOC_Id") = 0
-    '    'row("SOC_Name") = not
-    '    'row("SOC_Telefono") = ""
-    '    'row("SOC_Active") = True
-    'End Sub
+    Private Sub BancoABM_ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtNombre.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtNombre.Select()
+            Exit Sub
+        End If
+        If txtPrefix.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtPrefix.Select()
+            Exit Sub
+        End If
+    End Sub
     Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
         lblId.DataBindings.Add("Text", row, "BAN_Id")
         txtNombre.DataBindings.Add("Text", row, "BAN_Name")
         txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
-        chkActive.DataBindings.Add("Checked", row, "BAN_Active")
+        'chkActive.DataBindings.Add("Checked", row, "BAN_Active")
         cboBankAcc.DataBindings.Add("SelectedValue", row, "BAN_ACC_Name")
     End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-
-    End Sub
-
     Private Sub GetBancos()
         Dim oBancoData As BancoDataLayer = Nothing
 
         oBancoData = New BancoDataLayer
 
         cboBankAcc.DataSource = oBancoData.GetAcountType
+        cboBankAcc.ValueMember = "BAN_ACC_Id"
+        cboBankAcc.DisplayMember = "BAN_ACC_Name"
     End Sub
 
 
     Private Sub txtPrefix_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrefix.KeyPress
-        ValiText(sender, e)
+        FuntionCon.ValiNum(sender, e)
     End Sub
 End Class
