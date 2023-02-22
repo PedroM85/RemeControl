@@ -3,7 +3,6 @@
 
 #Region "Component"
     Private Sub InitializeComponent()
-        Me.txtId = New System.Windows.Forms.TextBox()
         Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.cboBanco = New System.Windows.Forms.ComboBox()
         Me.txtCuenta = New System.Windows.Forms.TextBox()
@@ -35,21 +34,12 @@
         Me.pnlControls0.Controls.Add(Me.txtCuenta)
         Me.pnlControls0.Controls.Add(Me.cboBanco)
         Me.pnlControls0.Controls.Add(Me.txtNombre)
-        Me.pnlControls0.Controls.Add(Me.txtId)
         Me.pnlControls0.Size = New System.Drawing.Size(524, 225)
-        '
-        'txtId
-        '
-        Me.txtId.Location = New System.Drawing.Point(138, 29)
-        Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(38, 20)
-        Me.txtId.TabIndex = 0
-        Me.txtId.Text = "0"
-        Me.txtId.Visible = False
         '
         'txtNombre
         '
         Me.txtNombre.Location = New System.Drawing.Point(138, 55)
+        Me.txtNombre.MaxLength = 50
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(169, 20)
         Me.txtNombre.TabIndex = 1
@@ -67,6 +57,7 @@
         'txtCuenta
         '
         Me.txtCuenta.Location = New System.Drawing.Point(138, 108)
+        Me.txtCuenta.MaxLength = 24
         Me.txtCuenta.Name = "txtCuenta"
         Me.txtCuenta.Size = New System.Drawing.Size(169, 20)
         Me.txtCuenta.TabIndex = 3
@@ -74,6 +65,7 @@
         'txtTitular
         '
         Me.txtTitular.Location = New System.Drawing.Point(138, 134)
+        Me.txtTitular.MaxLength = 50
         Me.txtTitular.Name = "txtTitular"
         Me.txtTitular.Size = New System.Drawing.Size(169, 20)
         Me.txtTitular.TabIndex = 4
@@ -81,6 +73,7 @@
         'txtCedula
         '
         Me.txtCedula.Location = New System.Drawing.Point(138, 160)
+        Me.txtCedula.MaxLength = 10
         Me.txtCedula.Name = "txtCedula"
         Me.txtCedula.Size = New System.Drawing.Size(169, 20)
         Me.txtCedula.TabIndex = 5
@@ -180,7 +173,6 @@
     Friend WithEvents txtCuenta As TextBox
     Friend WithEvents cboBanco As ComboBox
     Friend WithEvents txtNombre As TextBox
-    Friend WithEvents txtId As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
@@ -190,6 +182,8 @@
 #End Region
 
     Private oDataLayer As ClienteDataLayer
+    Private oBsource As BindingSource
+    Private FuntionCon As New CommonFunction
     Public Sub New()
         MyBase.New
 
@@ -225,18 +219,13 @@
         b.ForeColor = focusedForeColor
         b.BackColor = focusedBackColor
     End Sub
-    Private Sub ClienteABM_Save() Handles MyBase.Save
+    Private Sub ClientABM_Save() Handles MyBase.Save
         Dim oData As ClienteData
 
         oDataLayer = New ClienteDataLayer
 
         Try
 
-            '.SOC_Id = IIf(IsAddNew, 0, txtId.Text),
-            '.SOC_Name = txtName.Text.Trim,
-            '.SOC_Telefono = txtPhone.Text.Trim,
-            '.SOC_ModifiedBy = oApp.CurrentUser.USR_Id,
-            '.SOC_Active = IIf(chkActive.CheckState, 1, 0)
             oData = New ClienteData With
                 {
                 .CLI_Id = IIf(IsAddNew, 0, lblId.Text),
@@ -259,18 +248,39 @@
             Throw New Exception(ex.Message)
         End Try
     End Sub
-    Private Sub SocioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-
+    Private Sub ClientABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
         lblId.Visible = True
     End Sub
-    'Private Sub SocioABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
-    '    row("SOC_Id") = 0
-    '    'row("SOC_Name") = not
-    '    'row("SOC_Telefono") = ""
-    '    'row("SOC_Active") = True
-    'End Sub
-    Private Sub SocioABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        txtId.DataBindings.Add("Text", row, "CLI_Id")
+    Private Sub ClientABM_ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtNombre.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtNombre.Select()
+            Exit Sub
+        End If
+        If txtCuenta.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtCuenta.Select()
+            Exit Sub
+        End If
+        If txtTitular.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtTitular.Select()
+            Exit Sub
+        End If
+        If txtCedula.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtCedula.Select()
+            Exit Sub
+        End If
+    End Sub
+    Private Sub ClientABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
+
         lblId.DataBindings.Add("Text", row, "CLI_Id")
         txtNombre.DataBindings.Add("Text", row, "CLI_Nombre")
         txtCuenta.DataBindings.Add("Text", row, "CLI_Cuenta")
@@ -279,28 +289,26 @@
         chkActive.DataBindings.Add("Checked", row, "CLI_Active")
         cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
     End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-
-    End Sub
-
+   
     Private Sub GetBancos()
         Dim oBancoData As BancoDataLayer = Nothing
-
         oBancoData = New BancoDataLayer
 
-        cboBanco.DataSource = oBancoData.GetAcount
-        'cboBanco.ValueMember = "BAN_Name2"
-        Me.cboBanco.ValueMember = "BAN_Id"
-        Me.cboBanco.DisplayMember = "BAN_Name"
+        oBsource = New BindingSource
+
+        oBsource.DataSource = oBancoData.GetAcount
+
+        If oBsource.List.Item(0).Row.ItemArray(0) = -1 Then
+            cboBanco.Items.Add("No hay registros previos")
+        Else
+            cboBanco.DataSource = oBsource.DataSource
+            Me.cboBanco.ValueMember = "BAN_Id"
+            Me.cboBanco.DisplayMember = "BAN_Name"
+        End If
 
 
     End Sub
-
-
-
-
+    Private Sub txtCuenta_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCuenta.KeyPress
+        FuntionCon.ValiText(sender, e)
+    End Sub
 End Class
