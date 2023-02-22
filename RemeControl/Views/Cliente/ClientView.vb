@@ -1,8 +1,11 @@
-﻿Public Class ClientView
+﻿Imports System.Threading
+
+Public Class ClientView
     Inherits ViewBase
 
     Private WithEvents Label1 As Label
     Private WithEvents oClientABM As ClientABM
+    Private oBsourse As BindingSource
 
     Public Sub New()
         MyBase.New
@@ -16,20 +19,30 @@
     End Sub
 
     Public Sub LoadData()
-        Dim oClientData As ClienteDataLayer = Nothing
+        Dim oClientData As New ClienteDataLayer
 
-        oClientData = New ClienteDataLayer
+        oBsourse = New BindingSource
 
+        oBsourse.DataSource = oClientData.GetClientes
         dgvView.DataSource = Nothing
 
-        If oClientData.GetClientes Is Nothing Then
-            Label1.Visible = True
+        Try
+            If oBsourse.Item(0).Row.ItemArray(0) = -9999 Then
 
-        Else
-            'pnlVacio.Visible = False
-            dgvView.DataSource = oClientData.GetClientes
-        End If
+                Label1.Visible = True
+            Else
+                Label1.Visible = False
+                With dgvView
+                    .DataSource = Nothing
+                    .DataSource = oBsourse.DataSource
+                End With
 
+            End If
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
 
@@ -203,7 +216,7 @@
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 3
