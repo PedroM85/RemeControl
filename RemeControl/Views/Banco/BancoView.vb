@@ -149,7 +149,7 @@
 
     Public Sub LoadGlobalCaptions()
         dgvView.AutoGenerateColumns = False
-        dgvView.ColumnCount = 7
+        dgvView.ColumnCount = 8
 
         dgvView.Columns(0).Name = "BAN_Id"
         dgvView.Columns(0).HeaderText = "Codigo"
@@ -197,12 +197,17 @@
         dgvView.Columns(6).Width = 120
         dgvView.Columns(6).Visible = False
 
+        dgvView.Columns(7).Name = "BAN_ACC_Id"
+        dgvView.Columns(7).DataPropertyName = "BAN_ACC_Id"
+        dgvView.Columns(7).Visible = False
+
+
 
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "BAN_Active"
         Check.HeaderText = "Activo"
         Check.DataPropertyName = "BAN_Active"
-        dgvView.Columns.Insert(7, Check)
+        dgvView.Columns.Insert(8, Check)
 
     End Sub
 

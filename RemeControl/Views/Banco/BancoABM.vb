@@ -224,8 +224,8 @@
         lblId.DataBindings.Add("Text", row, "BAN_Id")
         txtNombre.DataBindings.Add("Text", row, "BAN_Name")
         txtPrefix.DataBindings.Add("Text", row, "BAN_Prefix")
-        'chkActive.DataBindings.Add("Checked", row, "BAN_Active")
-        cboBankAcc.DataBindings.Add("SelectedValue", row, "BAN_ACC_Name")
+        chkActive.DataBindings.Add("Checked", row, "BAN_Active")
+        cboBankAcc.DataBindings.Add("SelectedValue", row, "BAN_ACC_Id")
     End Sub
     Private Sub GetBancos()
         Dim oBancoData As BancoDataLayer = Nothing
