@@ -289,14 +289,7 @@
         chkActive.DataBindings.Add("Checked", row, "CLI_Active")
         cboBanco.DataBindings.Add("SelectedValue", row, "CLI_Banco")
     End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) Then
-            e.Handled = True
-        End If
-
-    End Sub
-
+   
     Private Sub GetBancos()
         Dim oBancoData As BancoDataLayer = Nothing
         oBancoData = New BancoDataLayer
