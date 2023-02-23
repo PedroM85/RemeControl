@@ -27,7 +27,7 @@ Public Class ClientView
         dgvView.DataSource = Nothing
 
         Try
-            If oBsourse.Item(0).Row.ItemArray(0) = -9999 Then
+            If oBsourse.Item(0).Row.ItemArray(0) = -1 Then
 
                 Label1.Visible = True
             Else

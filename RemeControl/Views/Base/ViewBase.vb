@@ -20,7 +20,9 @@
 
     Private Sub ExecEdit()
         If oApp.SessionActive Then
-            RaiseEvent Edit()
+            If dgvView.RowCount > 0 Then
+                RaiseEvent Edit()
+            End If
         Else
             MessageBox.Show("La session caduco", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Application.Exit()

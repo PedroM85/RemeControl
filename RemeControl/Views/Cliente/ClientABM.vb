@@ -297,14 +297,19 @@
         oBsource = New BindingSource
 
         oBsource.DataSource = oBancoData.GetAcount
+        Try
 
-        If oBsource.List.Item(0).Row.ItemArray(0) = -1 Then
-            cboBanco.Items.Add("No hay registros previos")
-        Else
-            cboBanco.DataSource = oBsource.DataSource
-            Me.cboBanco.ValueMember = "BAN_Id"
-            Me.cboBanco.DisplayMember = "BAN_Name"
-        End If
+            If oBsource.List.Item(0).Row.ItemArray(0) = -1 Then
+                cboBanco.Items.Add("No hay registros previos")
+            Else
+                cboBanco.DataSource = oBsource.DataSource
+                Me.cboBanco.ValueMember = "BAN_Id"
+                Me.cboBanco.DisplayMember = "BAN_Name"
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
 
     End Sub
