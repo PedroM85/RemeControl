@@ -95,8 +95,8 @@ Partial Class DashView
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.lblTotalMensual)
         Me.Panel3.Controls.Add(Me.Label3)
+        Me.Panel3.Controls.Add(Me.lblTotalMensual)
         Me.Panel3.Location = New System.Drawing.Point(16, 202)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(205, 58)
@@ -114,11 +114,10 @@ Partial Class DashView
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(3, 6)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(141, 24)
+        Me.Label3.Size = New System.Drawing.Size(155, 24)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Total mensual"
         '
