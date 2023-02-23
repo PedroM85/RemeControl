@@ -29,8 +29,8 @@ Partial Class DashView
         Me.lblTotalCambios = New System.Windows.Forms.Label()
         Me.lblNCambios = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.lblTotalMensual = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblTotalMensual = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.lblOrdenReady = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -102,6 +102,15 @@ Partial Class DashView
         Me.Panel3.Size = New System.Drawing.Size(205, 58)
         Me.Panel3.TabIndex = 3
         '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(3, 6)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(155, 24)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Total mensual"
+        '
         'lblTotalMensual
         '
         Me.lblTotalMensual.AutoSize = True
@@ -111,15 +120,6 @@ Partial Class DashView
         Me.lblTotalMensual.Size = New System.Drawing.Size(27, 20)
         Me.lblTotalMensual.TabIndex = 1
         Me.lblTotalMensual.Text = "??"
-        '
-        'Label3
-        '
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 6)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(155, 24)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Total mensual"
         '
         'Panel5
         '
@@ -169,7 +169,7 @@ Partial Class DashView
         Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(0, 0)
         Me.Chart1.Name = "Chart1"
-        Me.Chart1.Size = New System.Drawing.Size(612, 213)
+        Me.Chart1.Size = New System.Drawing.Size(536, 213)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
         '

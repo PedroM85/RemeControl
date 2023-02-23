@@ -5,7 +5,7 @@ Public Class ClientView
 
     Private WithEvents Label1 As Label
     Private WithEvents oClientABM As ClientABM
-    Private oBsourse As BindingSource
+    Private oBsource As BindingSource
 
     Public Sub New()
         MyBase.New
@@ -21,20 +21,20 @@ Public Class ClientView
     Public Sub LoadData()
         Dim oClientData As New ClienteDataLayer
 
-        oBsourse = New BindingSource
+        oBsource = New BindingSource
 
-        oBsourse.DataSource = oClientData.GetClientes
+        oBsource.DataSource = oClientData.GetClientes
         dgvView.DataSource = Nothing
 
         Try
-            If oBsourse.Item(0).Row.ItemArray(0) = -1 Then
+            If oBsource.Item(0).Row.ItemArray(0) = -1 Then
 
                 Label1.Visible = True
             Else
                 Label1.Visible = False
                 With dgvView
                     .DataSource = Nothing
-                    .DataSource = oBsourse.DataSource
+                    .DataSource = oBsource.DataSource
                 End With
 
             End If
