@@ -6,7 +6,7 @@ Public Class TasaView
 
     Private WithEvents oTasaABM As TasaABM
     Private WithEvents Label1 As Windows.Forms.Label
-    Private oBsourse As BindingSource
+    Private oBsource As BindingSource
 
     Public Sub New()
         MyBase.New
@@ -17,20 +17,26 @@ Public Class TasaView
     End Sub
     Public Sub LoadData()
         Dim oTasaData As New TasaDataLayer
-        oBsourse = New BindingSource
+        oBsource = New BindingSource
+        dgvView.DataSource = Nothing
         Try
 
-            oBsourse.DataSource = oTasaData.GetTasas
-            If oBsourse.List.Item(0).Row.ItemArray(0) = -9999 Then
-                Label1.Visible = True
+            oBsource.DataSource = oTasaData.GetTasas
+            Try
+                If oBsource.List.Item(0).Row.ItemArray(0) = -9999 Then
+                    Label1.Visible = True
 
-            Else
-                Label1.Visible = False
-                With dgvView
-                    .DataSource = Nothing
-                    .DataSource = oBsourse.DataSource
-                End With
-            End If
+                Else
+                    Label1.Visible = False
+                    With dgvView
+                        .DataSource = Nothing
+                        .DataSource = oBsource.DataSource
+                    End With
+                End If
+
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -191,7 +197,7 @@ Public Class TasaView
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 3

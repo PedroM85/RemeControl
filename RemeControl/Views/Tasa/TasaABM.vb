@@ -326,26 +326,35 @@ Public Class TasaABM
                 TasaFull = dolarpais / bina
             End If
 
-            TasaClien = TasaFull - ((TasaFull / (1 - comi)) - TasaFull)
+            If Not TasaFull = 0 Then
+                TasaClien = TasaFull - ((TasaFull / (1 - comi)) - TasaFull)
 
-            txtTasaFull.Text = TasaFull.ToString("n6")
-            txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
-            txtTasaVenta.Text = TasaClien.ToString("n4")
-            txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
+                txtTasaFull.Text = TasaFull.ToString("n6")
+                'txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
+                txtTasaVenta.Text = TasaClien.ToString("n4")
+                'txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
+            End If
+
 
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message)
         End Try
 
 
     End Sub
 
     Private Sub txtBina_TextChanged(sender As Object, e As EventArgs) Handles txtBina.TextChanged
-        CalcularTasa()
+        If txtComision.Text = String.Empty Then
+        Else
+            CalcularTasa()
+        End If
     End Sub
 
     Private Sub txtDolarInPais_TextChanged(sender As Object, e As EventArgs) Handles txtDolarInPais.TextChanged
-        CalcularTasa()
+        If txtComision.Text = String.Empty Then
+        Else
+            CalcularTasa()
+        End If
     End Sub
 
     Private Sub txtTasaVentaCustom_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTasaVentaCustom.KeyPress
@@ -380,7 +389,7 @@ Public Class TasaABM
 
 
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
 
     End Sub
@@ -434,9 +443,23 @@ Public Class TasaABM
     End Sub
 
     Private Sub CargaBOX()
+        Dim oBSource As New BindingSource
         oDataLayer = New TasaDataLayer
-        cboSocio.DataSource = oDataLayer.GetSocios
-        cboSocio.ValueMember = "SOC_Id"
-        cboSocio.DisplayMember = "SOC_Name"
+
+        oBSource.DataSource = oDataLayer.GetSocios
+
+        If oBSource.List.Item(0).Row.ItemArray(0) = -9999 Then
+            With cboSocio
+                .Items.Add("No hay socios")
+            End With
+            btnOk.Enabled = False
+        Else
+            With cboSocio
+                .DataSource = oBSource.DataSource
+                .ValueMember = "SOC_Id"
+                .DisplayMember = "SOC_Name"
+
+            End With
+        End If
     End Sub
 End Class
