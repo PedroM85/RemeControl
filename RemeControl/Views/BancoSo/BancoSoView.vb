@@ -1,8 +1,7 @@
 ﻿Public Class BancoSoView
     Inherits ViewBase
 
-    Private WithEvents Label1 As Label
-
+#Region "InitializeComponent"
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -12,7 +11,7 @@
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 5
@@ -30,7 +29,12 @@
 
     End Sub
 
+#End Region
+
+
+    Private WithEvents Label1 As Label
     Private WithEvents oBancoSoABM As BancoSoABM
+    Private oBsource As BindingSource
 
     Public Sub New()
         MyBase.New
@@ -44,19 +48,25 @@
     End Sub
 
     Public Sub LoadData()
-        Dim oBancoSoData As BancoSoDataLayer = Nothing
+        Dim oBancoSoData As New BancoSoDataLayer
 
-        oBancoSoData = New BancoSoDataLayer
+        oBsource = New BindingSource
 
+        oBsource.DataSource = oBancoSoData.GetBancoSo
         dgvView.DataSource = Nothing
 
-        If oBancoSoData.GetBancoSo Is Nothing Then
-            Label1.Visible = True
+        Try
 
-        Else
-            'pnlVacio.Visible = False
-            dgvView.DataSource = oBancoSoData.GetBancoSo
-        End If
+            If oBsource.List.Item(0).Row.ItemArray(0) = -1 Then
+                Label1.Visible = True
+
+            Else
+                Label1.Visible = False
+                dgvView.DataSource = oBancoSoData.GetBancoSo
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
 
     End Sub
