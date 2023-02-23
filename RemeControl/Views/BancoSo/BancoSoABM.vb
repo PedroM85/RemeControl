@@ -39,6 +39,7 @@
         'txtNombreAcc
         '
         Me.txtNombreAcc.Location = New System.Drawing.Point(131, 18)
+        Me.txtNombreAcc.MaxLength = 50
         Me.txtNombreAcc.Name = "txtNombreAcc"
         Me.txtNombreAcc.Size = New System.Drawing.Size(121, 20)
         Me.txtNombreAcc.TabIndex = 1
@@ -55,13 +56,14 @@
         'txtAccountNumber
         '
         Me.txtAccountNumber.Location = New System.Drawing.Point(130, 55)
+        Me.txtAccountNumber.MaxLength = 50
         Me.txtAccountNumber.Name = "txtAccountNumber"
         Me.txtAccountNumber.Size = New System.Drawing.Size(238, 20)
         Me.txtAccountNumber.TabIndex = 3
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.txtDescription)
         Me.Panel1.Controls.Add(Me.Label6)
@@ -85,6 +87,7 @@
         'txtDescription
         '
         Me.txtDescription.Location = New System.Drawing.Point(131, 67)
+        Me.txtDescription.MaxLength = 50
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(238, 20)
         Me.txtDescription.TabIndex = 3
@@ -118,6 +121,7 @@
         'txtInitialBalance
         '
         Me.txtInitialBalance.Location = New System.Drawing.Point(131, 25)
+        Me.txtInitialBalance.MaxLength = 20
         Me.txtInitialBalance.Name = "txtInitialBalance"
         Me.txtInitialBalance.Size = New System.Drawing.Size(121, 20)
         Me.txtInitialBalance.TabIndex = 1
@@ -196,6 +200,7 @@
 #End Region
 
     Private oDataLayer As BancoSoDataLayer
+    Private FuntionCon As New CommonFunction
     Public Sub New()
         MyBase.New
 
@@ -238,10 +243,6 @@
         oDataLayer = New BancoSoDataLayer
 
         Try
-            'MessageBox.Show(txtId.Text)
-            If lblId.Text = Nothing Or lblId.Text = "" Then
-                lblId.Text = Nothing
-            End If
 
             oData = New BancoSoData With
                 {
@@ -262,11 +263,40 @@
                 oDataLayer.UpdateBancoSo(oData)
             End If
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
     Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
         lblId.Enabled = True
+    End Sub
+
+    Private Sub BancoSoABM_ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtNombreAcc.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtNombreAcc.Select()
+            Exit Sub
+        End If
+        If txtAccountNumber.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtAccountNumber.Select()
+            Exit Sub
+        End If
+        If txtInitialBalance.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtInitialBalance.Select()
+            Exit Sub
+        End If
+        If txtDescription.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtDescription.Select()
+            Exit Sub
+        End If
     End Sub
 
     Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
@@ -277,13 +307,6 @@
         txtInitialBalance.DataBindings.Add("Text", row, "OSB_InitialBalance")
         dtpBeginninDate.DataBindings.Add("Text", row, "OSB_BeginninBalanceDate")
         txtDescription.DataBindings.Add("Text", row, "OSB_Description")
-
-    End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
 
     End Sub
 
@@ -303,6 +326,7 @@
         End Try
     End Sub
 
-
-
+    Private Sub txtInitialBalance_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInitialBalance.KeyPress
+        FuntionCon.ManejarDecimalEnTextBox(sender, e)
+    End Sub
 End Class
