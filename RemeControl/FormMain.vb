@@ -20,7 +20,8 @@
         ShowDash
         ShowBankSo
         ShowSession
-        showTurnos
+        ShowTurnos
+        ShowGastos
 
     End Enum
 
@@ -38,6 +39,8 @@
         btnHome.Select()
         SetDateMenuButtons(btnHome)
 
+        Dim oSessionVew As New SessionView
+
         mControllers(State.ShowTasa) = New ShowTasa(Me)
         mControllers(State.ShowSocio) = New ShowSocio(Me)
         mControllers(State.ShowClient) = New ShowClient(Me)
@@ -45,8 +48,9 @@
         mControllers(State.ShowDash) = New ShowDash(Me)
         mControllers(State.ShowBankSo) = New ShowBankSo(Me)
         mControllers(State.ShowSession) = New ShowSession(Me)
-        mControllers(State.showTurnos) = New ShowTurnos(Me)
+        mControllers(State.ShowTurnos) = New ShowTurnos(oSessionVew)
         mControllers(State.ShowCambio) = New ShowCambio(Me)
+        mControllers(State.ShowGastos) = New ShowGasto(Me)
 
     End Sub
 
@@ -192,6 +196,8 @@
 
             If e.KeyCode = Keys.Escape Then
 
+            ElseIf e.KeyCode = Keys.C AndAlso Keys.O AndAlso e.Alt Then
+                MessageBox.Show("algo va a pasar")
 
             Else
                 mControllers(mCurrStep).HandleKey(e)
@@ -273,13 +279,13 @@
         End If
 
     End Sub
-    <Obsolete("Mcurrstep compartido/ crear uno")>
+
     Private Sub btnGasto_Click(sender As Object, e As EventArgs) Handles btnGasto.Click
 
         If oApp.SessionActive() Then
             SetDateMenuButtons(sender)
             mTrMgr.DoMenuItem("GASTO")
-            mCurrStep = State.ShowBank
+            mCurrStep = State.ShowGastos
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Me.Close()

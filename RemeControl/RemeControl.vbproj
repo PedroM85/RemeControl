@@ -124,6 +124,7 @@
     <Compile Include="Controller\ShowCambio.vb" />
     <Compile Include="Controller\ShowClient.vb" />
     <Compile Include="Controller\ShowDash.vb" />
+    <Compile Include="Controller\ShowGasto.vb" />
     <Compile Include="Controller\ShowSession.vb" />
     <Compile Include="Controller\ShowSocio.vb" />
     <Compile Include="Controller\ShowTasa.vb" />

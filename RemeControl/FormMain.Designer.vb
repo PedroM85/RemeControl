@@ -278,7 +278,7 @@ Partial Class FormMain
         Me.MaximizeBox = False
         Me.Name = "FormMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Unelsoft - RemesaControl"
         Me.pnlBottom.ResumeLayout(False)
         Me.pnlBottom.PerformLayout()
         Me.pnlLeft.ResumeLayout(False)

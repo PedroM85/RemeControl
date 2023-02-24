@@ -216,6 +216,7 @@ Public Class SessionView
         InitializeComponent()
 
         LoadCaptions()
+        GoToToday()
     End Sub
     Public Sub LoadData()
         GoToToday()
@@ -314,11 +315,11 @@ Public Class SessionView
         GoToToday()
     End Sub
 
-    Private Sub btnNextDay_Click(sender As Object, e As EventArgs) Handles btnNextDay.Click
+    Public Sub btnNextDay_Click(sender As Object, e As EventArgs) Handles btnNextDay.Click
         GoToNextDay()
     End Sub
 
-    Private Sub btnPreviousDay_Click(sender As Object, e As EventArgs) Handles btnPreviousDay.Click
+    Public Sub btnPreviousDay_Click(sender As Object, e As EventArgs) Handles btnPreviousDay.Click
         GoToPreviousDay()
     End Sub
 
