@@ -1,8 +1,6 @@
 ﻿Public Class GastoView
     Inherits ViewBase
 
-    Private WithEvents Label1 As Label
-    Private WithEvents oGastoABM As GastoABM
 #Region "InitializeComponent"
 
 
@@ -15,18 +13,18 @@
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "No hay registros"
         Me.Label1.Visible = False
         '
-        'ClientView
+        'GastoView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "ClientView"
+        Me.Name = "GastoView"
         Me.Controls.SetChildIndex(Me.Label1, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -34,6 +32,10 @@
     End Sub
 
 #End Region
+    Private WithEvents Label1 As Label
+    Private WithEvents oGastoABM As GastoABM
+    Private oBsource As BindingSource
+
     Public Sub New()
         MyBase.New
 
@@ -46,18 +48,28 @@
     End Sub
 
     Public Sub LoadData()
-        Dim oGastoData As GastoDataLayer = Nothing
-        oGastoData = New GastoDataLayer
+        Dim oGastoData As New GastoDataLayer
+        oBsource = New BindingSource
 
-        dgvView.DataSource = Nothing
 
-        If oGastoData.GetGastos Is Nothing Then
-            Label1.Visible = True
-            dgvView.DataSource = oGastoData.GetGastos()
-        Else
-            dgvView.DataSource = oGastoData.GetGastos
-        End If
+        Try
+            dgvView.DataSource = Nothing
+            oBsource.DataSource = oGastoData.GetGastos
+            If oBsource.Item(0).Row.ItemArray(0) = -1 Then
+                Label1.Visible = True
 
+            Else
+                Label1.Visible = False
+                With dgvView
+                    .DataSource = Nothing
+                    .DataSource = oBsource.DataSource
+                End With
+
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
     End Sub
 
@@ -210,12 +222,12 @@
         Dim Check As New DataGridViewCheckBoxColumn
         Check.Name = "GAT_Active"
         Check.HeaderText = "Activo"
-        Check.DataPropertyName = "CLI_Active"
+        Check.DataPropertyName = "GAT_Active"
         dgvView.Columns.Insert(13, Check)
 
     End Sub
 
-    Private Sub dgvView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvView.CellFormatting
+    Private Sub dgvView_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
         If Me.dgvView.Columns(e.ColumnIndex).Name = "GAT_Date" And e.RowIndex <> dgvView.NewRowIndex Then
             Dim val1 As Date = Date.Parse(e.Value.ToString())
             e.Value = val1.ToString("d")

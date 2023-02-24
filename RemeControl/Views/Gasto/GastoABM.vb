@@ -1,10 +1,6 @@
 ﻿Public Class GastoABM
     Inherits ABMBase
 
-    Private oDataLayer As GastoDataLayer
-    Private focusedForeColor As Color = Color.Black
-    Private focusedBackColor As Color = Color.Gainsboro
-
 #Region "InitializeComponent"
 
 
@@ -58,6 +54,7 @@
         '
         'cboCuenta
         '
+        Me.cboCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCuenta.FormattingEnabled = True
         Me.cboCuenta.Location = New System.Drawing.Point(182, 80)
         Me.cboCuenta.Name = "cboCuenta"
@@ -66,6 +63,7 @@
         '
         'cboMetPago
         '
+        Me.cboMetPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboMetPago.FormattingEnabled = True
         Me.cboMetPago.Location = New System.Drawing.Point(182, 107)
         Me.cboMetPago.Name = "cboMetPago"
@@ -144,6 +142,7 @@
         '
         'cboNombre
         '
+        Me.cboNombre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboNombre.FormattingEnabled = True
         Me.cboNombre.Location = New System.Drawing.Point(182, 54)
         Me.cboNombre.Name = "cboNombre"
@@ -161,6 +160,7 @@
         'lblId
         '
         Me.lblId.AutoSize = True
+        Me.lblId.ForeColor = System.Drawing.Color.White
         Me.lblId.Location = New System.Drawing.Point(403, 64)
         Me.lblId.Name = "lblId"
         Me.lblId.Size = New System.Drawing.Size(13, 13)
@@ -178,14 +178,18 @@
 
     End Sub
 #End Region
+
+    Private FuntionCon As New CommonFunction
+    Private oDataLayer As GastoDataLayer
+    Private focusedForeColor As Color = Color.Black
+    Private focusedBackColor As Color = Color.Gainsboro
+
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
 
-        GetSocios()
-        GetBancoSo()
-        GetBancoType()
+        CargasBox()
 
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
          .ForEach(Sub(b)
@@ -241,8 +245,24 @@
                 oDataLayer.UpdateGasto(oData)
             End If
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
+    End Sub
+    Private Sub GastoABM_ValidateControls(ByRef Cancel As Boolean, IsAddNew As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtConcepto.Text = String.Empty Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtConcepto.Select()
+            Exit Sub
+        End If
+        If txtMonto.Text = String.Empty Or txtMonto.Text = "0.00" Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtMonto.Select()
+            Exit Sub
+        End If
     End Sub
     Private Sub GastoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
         'lblId.Visible = True
@@ -257,57 +277,64 @@
         txtConcepto.DataBindings.Add("Text", row, "GAT_Reason")
         txtMonto.DataBindings.Add("Text", row, "GAT_Amount")
     End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
 
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
+    Private Sub CargasBox()
+        Dim oGastoData As New GastoDataLayer
+        Dim oBancoSoData As New BancoSoDataLayer
+
+        Dim bSourceGast As New BindingSource
+        Dim bSourceBank As New BindingSource
+        Dim bSourceBank1 As New BindingSource
+
+        bSourceGast.DataSource = oGastoData.GetSocios
+
+        If bSourceGast.Item(0).Row.ItemArray(0) = -9999 Then
+            With cboNombre
+                .Items.Add("No hay registro")
+            End With
+            btnOk.Enabled = False
+        Else
+            With cboNombre
+                .DataSource = bSourceGast.DataSource
+                .ValueMember = "SOC_Id"
+                .DisplayMember = "SOC_Name"
+                .DropDownStyle = ComboBoxStyle.DropDownList
+            End With
         End If
 
-    End Sub
+        bSourceBank.DataSource = oBancoSoData.GetBancoSo
 
-    Private Sub GetSocios()
-        Dim oGastoData As GastoDataLayer = Nothing
+        If bSourceBank.Item(0).Row.ItemArray(0) = -1 Then
+            With cboCuenta
+                .Items.Add("No hay registro")
+            End With
+            btnOk.Enabled = False
+        Else
+            With cboCuenta
+                .DataSource = bSourceBank.DataSource
+                .ValueMember = "OSB_Id"
+                .DisplayMember = "OSB_Nombre"
+                .DropDownStyle = ComboBoxStyle.DropDownList
+            End With
+        End If
 
+        bSourceBank1.DataSource = oBancoSoData.GetAcountType
 
-        oGastoData = New GastoDataLayer
-
-        cboNombre.DataSource = oGastoData.GetSocios
-        Me.cboNombre.ValueMember = "SOC_Id"
-        Me.cboNombre.DisplayMember = "SOC_Name"
-        Me.cboNombre.DropDownStyle = ComboBoxStyle.DropDownList
-
-
-    End Sub
-    Private Sub GetBancoSo()
-        Dim oBancoSoData As BancoSoDataLayer = Nothing
-
-
-        oBancoSoData = New BancoSoDataLayer
-
-        cboCuenta.DataSource = oBancoSoData.GetBancoSo
-        Me.cboCuenta.ValueMember = "OSB_Id"
-        Me.cboCuenta.DisplayMember = "OSB_Nombre"
-        Me.cboCuenta.DropDownStyle = ComboBoxStyle.DropDownList
-
-
-    End Sub
-
-    Private Sub GetBancoType()
-        Dim oBancoSoData As BancoSoDataLayer = Nothing
-
-
-        oBancoSoData = New BancoSoDataLayer
-
-        cboMetPago.DataSource = oBancoSoData.GetAcountType
-
-        Me.cboMetPago.ValueMember = "OSBT_Id"
-        Me.cboMetPago.DisplayMember = "OSBT_Nombre"
-        Me.cboMetPago.DropDownStyle = ComboBoxStyle.DropDownList
-
-
+        If bSourceBank1.Item(0).Row.ItemArray(0) = -1 Then
+            With cboMetPago
+                .Items.Add("No hay registro")
+            End With
+        Else
+            With cboMetPago
+                .DataSource = bSourceBank1.DataSource
+                .ValueMember = "OSBT_Id"
+                .DisplayMember = "OSBT_Nombre"
+                .DropDownStyle = ComboBoxStyle.DropDownList
+            End With
+        End If
     End Sub
 
     Private Sub txtMonto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMonto.KeyPress
-        ValiText(sender, e)
+        FuntionCon.ValiText(sender, e)
     End Sub
 End Class

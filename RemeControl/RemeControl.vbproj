@@ -311,6 +311,9 @@
     <EmbeddedResource Include="Views\Gasto\GastoABM.resx">
       <DependentUpon>GastoABM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Gasto\GastoView.resx">
+      <DependentUpon>GastoView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Session\SessionDate.resx">
       <DependentUpon>SessionDate.vb</DependentUpon>
     </EmbeddedResource>
