@@ -8,6 +8,10 @@
         ' This call is required by the designer.
         InitializeComponent()
 
+
+        Dim ver() As String = Application.ProductVersion.Split(".")
+        lblVersion.Text = String.Format("Version: {0}.{1}   (build {2})", ver)
+
         ' Add any initialization after the InitializeComponent() call.
         mSec = New SecurityManager
     End Sub

@@ -27,6 +27,7 @@ Partial Class FrmLogin
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.lblVersion = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -36,7 +37,6 @@ Partial Class FrmLogin
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.Size = New System.Drawing.Size(163, 20)
         Me.txtUserName.TabIndex = 0
-        Me.txtUserName.Text = "Admin"
         '
         'txtPassword
         '
@@ -44,12 +44,11 @@ Partial Class FrmLogin
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(163, 20)
         Me.txtPassword.TabIndex = 1
-        Me.txtPassword.Text = "Admin"
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'btnAceptar
         '
-        Me.btnAceptar.Location = New System.Drawing.Point(188, 157)
+        Me.btnAceptar.Location = New System.Drawing.Point(188, 139)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(75, 23)
         Me.btnAceptar.TabIndex = 2
@@ -58,7 +57,7 @@ Partial Class FrmLogin
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(269, 157)
+        Me.btnCancel.Location = New System.Drawing.Point(269, 139)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 3
@@ -68,12 +67,22 @@ Partial Class FrmLogin
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.RemeControl.My.Resources.Resources.Login
-        Me.PictureBox1.Location = New System.Drawing.Point(-75, -77)
+        Me.PictureBox1.Location = New System.Drawing.Point(-76, -83)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(563, 317)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 4
         Me.PictureBox1.TabStop = False
+        '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.BackColor = System.Drawing.Color.White
+        Me.lblVersion.Location = New System.Drawing.Point(12, 172)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(25, 13)
+        Me.lblVersion.TabIndex = 5
+        Me.lblVersion.Text = "???"
         '
         'FrmLogin
         '
@@ -84,6 +93,7 @@ Partial Class FrmLogin
         Me.Controls.Add(Me.btnAceptar)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUserName)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FrmLogin"
@@ -100,4 +110,5 @@ Partial Class FrmLogin
     Friend WithEvents btnAceptar As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents lblVersion As Label
 End Class

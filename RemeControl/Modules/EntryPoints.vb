@@ -12,6 +12,8 @@
 
             oApp.SetupLocalizationInfo()
 
+            GetCommandLineArgs()
+
             oApp.LoginUser(mUserName, mPassword)
 
             If Not oApp.CurrentUser Is Nothing Then
@@ -40,6 +42,25 @@
 
     End Sub
 
+    Public Sub GetCommandLineArgs()
+        Dim Args() As String = Environment.GetCommandLineArgs
+        Dim KeyValue() As String
 
+        For Each Arg As String In Args
+            If Arg.IndexOf("="c) > -1 Then
+                KeyValue = Arg.Split("=")
+                Select Case KeyValue(0).ToLower
+                    Case "usr"
+                        If KeyValue(1).Trim.Length > 0 Then
+                            mUserName = KeyValue(1)
+                        End If
+                    Case "pwd"
+                        If KeyValue(1).Trim.Length > 0 Then
+                            mPassword = KeyValue(1)
+                        End If
+                End Select
+            End If
+        Next
+    End Sub
 
 End Module

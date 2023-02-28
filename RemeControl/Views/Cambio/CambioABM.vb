@@ -13,33 +13,33 @@
         Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
         .ForEach(Sub(b)
                      b.Tag = Tuple.Create(b.ForeColor, b.BackColor)
-                     AddHandler b.GotFocus, AddressOf b_GotFocus
-                     AddHandler b.LostFocus, AddressOf b_LostFocus
+                     AddHandler b.GotFocus, AddressOf B_GotFocus
+                     AddHandler b.LostFocus, AddressOf B_LostFocus
                  End Sub)
     End Sub
 
 
 
-    Private focusedForeColor As Color = Color.Black
+    Private ReadOnly focusedForeColor As Color = Color.Black
     Friend WithEvents lblId As Label
-    Private components As System.ComponentModel.IContainer
+    Private ReadOnly components As System.ComponentModel.IContainer
     Friend WithEvents Label8 As Label
     Friend WithEvents cboBanco As ComboBox
-    Private focusedBackColor As Color = Color.Gainsboro
+    Private ReadOnly focusedBackColor As Color = Color.Gainsboro
 
     Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
         Dim controls = control.Controls.Cast(Of Control)()
         Return controls.SelectMany(Function(ctrl) GetAllControls(ctrl)).Concat(controls)
     End Function
 
-    Private Sub b_LostFocus(sender As Object, e As EventArgs)
+    Private Sub B_LostFocus(sender As Object, e As EventArgs)
         Dim b = DirectCast(sender, TextBox)
         Dim colors = DirectCast(b.Tag, Tuple(Of Color, Color))
         b.ForeColor = colors.Item1
         b.BackColor = colors.Item2
     End Sub
 
-    Private Sub b_GotFocus(sender As Object, e As EventArgs)
+    Private Sub B_GotFocus(sender As Object, e As EventArgs)
         Dim b = DirectCast(sender, TextBox)
         b.SelectAll()
         b.ForeColor = focusedForeColor
