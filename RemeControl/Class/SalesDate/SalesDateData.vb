@@ -181,7 +181,6 @@ Public Class SalesDateData
 
 
         Catch ex As Exception
-
             Throw New Exception(ex.Message)
         End Try
 

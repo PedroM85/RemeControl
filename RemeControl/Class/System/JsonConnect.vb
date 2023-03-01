@@ -17,6 +17,7 @@ Public Class JsonConnect
             request = DirectCast(WebRequest.Create(url), HttpWebRequest)
             request.Method = method
             request.ContentType = "application/json"
+            request.Date = Now.ToString("yyyy-MM-dd 00:00:00")
             If oUser IsNot Nothing Then
                 request.Headers("Authorization") = "Bearer " & oUser.Token
             End If

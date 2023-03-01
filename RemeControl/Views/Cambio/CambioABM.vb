@@ -301,7 +301,7 @@ Public Class CambioABM
             oData = New CambioData With
                 {
                 .OP_Id = IIf(IsAddNew, 0, lblId.Text),
-                .OP_Date = Now.ToString("yyyy/MM/dd 00:00:00"),
+                .OP_Date = Now.ToString("yyyy-MM-dd 00:00:00"),
                 .OP_Socio = cboSocio.SelectedValue,
                 .OP_Cliente = cboCliente.SelectedValue,
                 .OP_Pesos = txtPesos.Text.Trim,
