@@ -74,7 +74,7 @@ Public Class MgrFramework
     Public Overridable Function Init() As Boolean
         Try
             mParams = New Parameters
-            mWebSite = mParams.GetUrl(WebDirection.Local).ToString
+            mWebSite = mParams.GetUrl(WebDirection.Internet).ToString
             mProcessUrl = New ProcesarUrl()
 
 
