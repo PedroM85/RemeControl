@@ -13,7 +13,7 @@
         lblVersion.Text = String.Format("Version: {0}.{1}   (build {2})", ver)
 
         ' Add any initialization after the InitializeComponent() call.
-        mSec = New SecurityManager
+        mSec = New SecurityManager()
     End Sub
 
     Public ReadOnly Property User As LoginIn
@@ -49,5 +49,19 @@
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub txtUserName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUserName.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.Handled = True
+            Me.SelectNextControl(txtPassword, True, True, True, True)
+        End If
+    End Sub
+
+    Private Sub txtPassword_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPassword.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.Handled = True
+            Me.SelectNextControl(btnAceptar, True, True, True, True)
+        End If
     End Sub
 End Class

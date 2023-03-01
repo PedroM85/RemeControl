@@ -97,7 +97,7 @@ Public Class BancoSoDataLayer
     Inherits JsonConnect
 
     Public Function GetBancoSo() As DataTable
-        Dim Url As String = ApiConstants.GetBancoSocio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetBancoSocio)
         Dim table As DataTable
         Try
             Dim result_Get = GetJson(Url, oApp.CurrentUser)
@@ -111,7 +111,7 @@ Public Class BancoSoDataLayer
     End Function
 
     Public Function GetAcountType() As DataTable
-        Dim Url As String = ApiConstants.GetBancoSoType
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetBancoSoType)
         Dim table As DataTable
 
         Try
@@ -126,7 +126,7 @@ Public Class BancoSoDataLayer
     End Function
     Public Sub CreateBancoSo(Data As BancoSoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.CreateBancoSo
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateBancoSo)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -143,7 +143,7 @@ Public Class BancoSoDataLayer
 
     Public Sub UpdateBancoSo(Data As BancoSoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.UpdateBancoSo
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateBancoSo)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -160,7 +160,7 @@ Public Class BancoSoDataLayer
 
     Public Sub DeleteBancoSo(Data As BancoSoData)
         Dim BancoSo As BancoSoData = Nothing
-        Dim Url As String = ApiConstants.DeleteBancoSocio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteBancoSocio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 

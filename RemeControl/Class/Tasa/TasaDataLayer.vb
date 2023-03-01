@@ -128,7 +128,7 @@ Public Class TasaDataLayer
 
     Public Function GetSocios() As DataTable
         Dim Socios As SocioData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable
         Try
             Socios = New SocioData
@@ -145,7 +145,7 @@ Public Class TasaDataLayer
     End Function
     Public Function GetTasas() As DataTable
         Dim Table As DataTable = Nothing
-        Dim url As String = ApiConstants.GetTasas
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetTasas)
         Try
 
             Dim result_Post = GetJson(url, oApp.CurrentUser)
@@ -161,7 +161,7 @@ Public Class TasaDataLayer
 
     Public Sub CreateTasa(Data As TasaData)
         Dim tasa As TasaData = Nothing
-        Dim Url As String = ApiConstants.CreateTasa
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateTasa)
 
 
         Dim result = JsonConvert.SerializeObject(Data)
@@ -176,7 +176,7 @@ Public Class TasaDataLayer
 
     Public Sub UpdateTasa(Data As TasaData)
         Dim tasa As TasaData = Nothing
-        Dim Url As String = ApiConstants.UpdateTasa
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateTasa)
 
 
         Dim result = JsonConvert.SerializeObject(Data)
@@ -190,7 +190,7 @@ Public Class TasaDataLayer
 
     Public Sub DeleteTasa(Data As TasaData)
         Dim tasa As TasaData = Nothing
-        Dim Url As String = ApiConstants.DeleteTasa
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteTasa)
 
 
         Dim result = JsonConvert.SerializeObject(Data)

@@ -168,7 +168,7 @@ Public Class CambioDataLayer
 
     Public Function GetSocios() As DataTable
         Dim Socios As SocioData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable
         Try
             Socios = New SocioData
@@ -185,7 +185,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetClientes() As DataTable
         Dim Clientes As ClienteData = Nothing
-        Dim Url As String = ApiConstants.GetCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
         Dim table As DataTable
         Try
             Clientes = New ClienteData
@@ -203,7 +203,7 @@ Public Class CambioDataLayer
 
     Public Function GetTasas() As DataTable
         Dim Tasa As TasaData = Nothing
-        Dim Url As String = ApiConstants.GetTasaCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetTasaCliente)
         Dim table As DataTable
         Try
             Tasa = New TasaData
@@ -220,7 +220,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetStatus() As DataTable
         Dim Status As StatusData = Nothing
-        Dim Url As String = ApiConstants.GetStatus
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetStatus)
         Dim table As DataTable
         Try
             Status = New StatusData
@@ -237,7 +237,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetCambios() As DataTable
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.GetCambios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCambios)
         Dim table As DataTable
         Try
             Cambio = New CambioData
@@ -255,7 +255,7 @@ Public Class CambioDataLayer
 
     Public Sub CreateCambio(Data As CambioData)
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.CreateCambio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateCambio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -272,7 +272,7 @@ Public Class CambioDataLayer
 
     Public Sub UpdateCambio(Data As CambioData)
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.UpdateCambio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateCambio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -289,7 +289,7 @@ Public Class CambioDataLayer
 
     Public Sub DeleteCambio(Data As CambioData)
         Dim Cambio As CambioData = Nothing
-        Dim Url As String = ApiConstants.DeleteCambio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteCambio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 

@@ -140,7 +140,7 @@ Public Class SalesDateData
         Dim dt As New DataTable
 
         Dim _SalesDate As New SalesDateInfo
-        Dim url As String = ApiConstants.GetSalesDateInfo
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetSalesDateInfo)
         nSessionId = 0
 
         Try
@@ -187,7 +187,7 @@ Public Class SalesDateData
     Public Function PostSessionsPerSalesDate(dDate As DateTime) As DataTable
         Dim dt As New DataTable
         Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.PostSessionPerSaleDate
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.PostSessionPerSaleDate)
 
         Try
             Dim OpenningDate As New SalesDateInfo With
@@ -213,7 +213,7 @@ Public Class SalesDateData
     Public Sub PostOpenSalesDate()
         Dim dt As New DataTable
         ' Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.PostOpenSalesDate
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.PostOpenSalesDate)
 
         Try
             Dim OpenningDate As New SalesDateInfo With
@@ -239,8 +239,8 @@ Public Class SalesDateData
     Public Sub postCloseSalesDate(dDate As DateTime)
         Dim dt As New DataTable
         'Dim Openning As SalesDateInfo = Nothing
-        Dim url As String = ApiConstants.CreateCloseSalesDate
-
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.CreateCloseSalesDate)
+        MessageBox.Show("Verifica antes de terminar el primer cierra para debug error")
         Try
             Dim OpenningDate As New SalesDateInfo With
            {
@@ -264,7 +264,7 @@ Public Class SalesDateData
 
     Public Sub PostCloseSession(nSessionId As Integer)
 
-        Dim Url As String = ApiConstants.PostCloseSession
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCloseSession)
 
         Try
             Dim Openning As New SalesDateInfo With
@@ -284,7 +284,7 @@ Public Class SalesDateData
     End Sub
 
     Public Sub PostSessionInfo(nSessionId As Integer, dCreated As DateTime, dClosed As DateTime)
-        Dim Url As String = ApiConstants.PostSessionInfo
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostSessionInfo)
 
         Try
             Dim Openning As New SalesDateInfo With
@@ -317,7 +317,7 @@ Public Class SalesDateData
     End Sub
 
     Public Sub PostReOpenSession(nSessionId As Integer)
-        Dim Url As String = ApiConstants.PostSessionInfo
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostSessionInfo)
 
         Try
             Dim Openning As New SalesDateInfo With
@@ -336,7 +336,7 @@ Public Class SalesDateData
     End Sub
 
     Public Function PostSessionPaymentType(nSessionId As Integer) As DataTable
-        Dim Url As String = ApiConstants.PostSessionPaymentType
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostSessionPaymentType)
         Dim dt As New DataTable
         Try
             Dim Openning As New SalesDateInfo With
@@ -358,7 +358,7 @@ Public Class SalesDateData
     End Function
 
     Public Function IsOpenning() As IsOpen
-        Dim Url As String = ApiConstants.GetIsOpenning
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetIsOpenning)
         Dim ValueDate As New DateTime(1999, 12, 31, 0, 0, 0, 0)
         Dim Hoy As Date = Date.Now.ToString("yyyy-MM-dd")
         Try
@@ -383,7 +383,7 @@ Public Class SalesDateData
     End Function
 
     Public Sub GetCounter()
-        Dim Url As String = ApiConstants.GetCounter
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCounter)
         Try
             Dim result_get = GetJson(Url, oApp.CurrentUser)
 

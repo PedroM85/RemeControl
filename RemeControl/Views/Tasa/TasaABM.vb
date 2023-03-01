@@ -141,6 +141,7 @@ Public Class TasaABM
         '
         'txtTasaFull
         '
+        Me.txtTasaFull.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtTasaFull.Location = New System.Drawing.Point(339, 66)
         Me.txtTasaFull.MaxLength = 9
         Me.txtTasaFull.Name = "txtTasaFull"
@@ -162,11 +163,12 @@ Public Class TasaABM
         '
         'txtTasaVenta
         '
+        Me.txtTasaVenta.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtTasaVenta.Location = New System.Drawing.Point(339, 95)
         Me.txtTasaVenta.MaxLength = 8
         Me.txtTasaVenta.Name = "txtTasaVenta"
         Me.txtTasaVenta.ReadOnly = True
-        Me.txtTasaVenta.Size = New System.Drawing.Size(129, 20)
+        Me.txtTasaVenta.Size = New System.Drawing.Size(129, 13)
         Me.txtTasaVenta.TabIndex = 4
         Me.txtTasaVenta.TabStop = False
         Me.txtTasaVenta.Text = "0.0000"
@@ -188,7 +190,7 @@ Public Class TasaABM
         Me.txtTasaVentaCustom.MaxLength = 8
         Me.txtTasaVentaCustom.Name = "txtTasaVentaCustom"
         Me.txtTasaVentaCustom.Size = New System.Drawing.Size(129, 20)
-        Me.txtTasaVentaCustom.TabIndex = 6
+        Me.txtTasaVentaCustom.TabIndex = 5
         Me.txtTasaVentaCustom.Text = "0.0000"
         Me.txtTasaVentaCustom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtTasaVentaCustom.Visible = False
@@ -316,23 +318,30 @@ Public Class TasaABM
     Private Sub CalcularTasa()
 
         Try
-            Dim bina As Decimal = 0
-            Dim dolarpais As Decimal = 0
-            Dim comi As Double = txtComision.Text
-
-            If Not txtBina.Text Is Nothing And Not txtDolarInPais.Text Is Nothing Then
-                bina = txtBina.Text
-                dolarpais = txtDolarInPais.Text
-                TasaFull = dolarpais / bina
+            If Not String.IsNullOrEmpty(txtBina.Text) OrElse Not Val(txtBina.Text) = 0 Then
+                If Not String.IsNullOrEmpty(txtDolarInPais.Text) OrElse Not Val(txtDolarInPais.Text) = 0 Then
+                    If Val(txtBina.Text) = 0 Then
+                        TasaFull = 0
+                    Else
+                        TasaFull = Val(txtDolarInPais.Text) / Val(txtBina.Text)
+                    End If
+                End If
             End If
 
             If Not TasaFull = 0 Then
-                TasaClien = TasaFull - ((TasaFull / (1 - comi)) - TasaFull)
+                TasaClien = TasaFull - ((TasaFull / (1 - Val(txtComision.Text))) - TasaFull)
 
                 txtTasaFull.Text = TasaFull.ToString("n6")
                 'txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
                 txtTasaVenta.Text = TasaClien.ToString("n4")
                 'txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
+            Else
+                'txtTasaFull.Text = "0.000000"
+                TasaFull = "0.000000"
+                txtTasaFull.ResetText()
+                'txtTasaVenta.Text = "0.0000"
+                TasaClien = "0.0000"
+                txtTasaVenta.ResetText()
             End If
 
 
@@ -344,21 +353,17 @@ Public Class TasaABM
     End Sub
 
     Private Sub txtBina_TextChanged(sender As Object, e As EventArgs) Handles txtBina.TextChanged
-        If txtComision.Text = String.Empty Then
-        Else
-            CalcularTasa()
-        End If
+
+        CalcularTasa()
+
     End Sub
 
     Private Sub txtDolarInPais_TextChanged(sender As Object, e As EventArgs) Handles txtDolarInPais.TextChanged
-        If txtComision.Text = String.Empty Then
-        Else
-            CalcularTasa()
-        End If
+        CalcularTasa()
     End Sub
 
     Private Sub txtTasaVentaCustom_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTasaVentaCustom.KeyPress
-        FuntionCon.ManejarDecimalEnTextBox(sender, e)
+        FuntionCon.ValiText(sender, e)
     End Sub
 
     Private Sub TasaABM_Save() Handles MyBase.Save

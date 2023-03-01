@@ -26,15 +26,12 @@ Public Class CambioView
         If Tasas.Item(0).Row.ItemArray(0) = -9999 Then
             MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
             btnNew.Enabled = False
-            'cboTasa.Items.Add("No hay registros")
-            Exit Sub
-
         End If
 
         If oCambioData.GetCambios Is Nothing Then
             Label1.Visible = True
         Else
-            'pnlVacio.Visible = False
+            Label1.Visible = False
             dgvView.DataSource = oCambioData.GetCambios
         End If
 
@@ -260,7 +257,7 @@ Public Class CambioView
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(207, 182)
+        Me.Label1.Location = New System.Drawing.Point(307, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(162, 24)
         Me.Label1.TabIndex = 5

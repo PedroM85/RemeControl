@@ -37,7 +37,7 @@ Public Class DashboardDataLayer
 
     Public Function GetCambios(Data As DashboardData) As DataTable
         Dim Dash As DashboardData = Nothing
-        Dim Url As String = ApiConstants.GetCambiosDiarios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCambiosDiarios)
         Dim table As DataTable
         Try
             Dash = New DashboardData
@@ -56,7 +56,7 @@ Public Class DashboardDataLayer
     End Function
 
     Public Function GetSocios() As DataTable
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable
         Try
 
@@ -72,7 +72,7 @@ Public Class DashboardDataLayer
     End Function
 
     Public Function GetTotalInfo() As DataTable
-        Dim Url As String = ApiConstants.GetTotalInfo
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetTotalInfo)
         Dim table As DataTable
         Try
 

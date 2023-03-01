@@ -1,87 +1,88 @@
-﻿Public Class ApiConstants
+﻿
+Public Class ApiConstants
 
 
 
-    Private Const Direc As String = "https://unelca.com/api/v1/"
-    Public Const LoginIn As String = Direc + "loginIn"
-    Public Const RegisterLogin As String = Direc + "RegisterLogin"
-    Public Const RegisterLogout As String = Direc + "RegisterLogout"
+
+    Public Const LoginIn As String = "loginIn"
+    Public Const RegisterLogin As String = "RegisterLogin"
+    Public Const RegisterLogout As String = "RegisterLogout"
 
     'Informacion de Online
-    Public Const ServiceOn As String = Direc + "ServiceOn"
+    Public Const ServiceOn As String = "ServiceOn"
 
 #Region "Informacion de ventas in Openning.controller"
 
-    Public Const GetSalesDateInfo As String = Direc + "GetSalesDateInfo"
+    Public Const GetSalesDateInfo As String = "GetSalesDateInfo"
 
-    Public Const PostSessionPerSaleDate As String = Direc + "PostSessionPerSalesDate"
+    Public Const PostSessionPerSaleDate As String = "PostSessionPerSalesDate"
 
-    Public Const PostOpenSalesDate As String = Direc + "PostOpenSalesDate"
+    Public Const PostOpenSalesDate As String = "PostOpenSalesDate"
 
-    Public Const PostCloseSession As String = Direc + "PostCloseSession"
+    Public Const PostCloseSession As String = "PostCloseSession"
 
-    Public Const PostSessionInfo As String = Direc + "PostSessionInfo"
+    Public Const PostSessionInfo As String = "PostSessionInfo"
 
-    Public Const GetIsOpenning As String = Direc + "isopen"
+    Public Const GetIsOpenning As String = "isopen"
 
 #End Region
 #Region "Informacion SalesSession in Salessession.controller"
 
-    Public Const CreateOpenSalesDate As String = Direc + "PostOpenSalesDate"
+    Public Const CreateOpenSalesDate As String = "PostOpenSalesDate"
 
-    Public Const CreateCloseSalesDate As String = Direc + "PostCloseSalesDate"
+    Public Const CreateCloseSalesDate As String = "PostCloseSalesDate"
 
-    Public Const PostSessionPaymentType As String = Direc + "PostPaymentTypePerSession"
+    Public Const PostSessionPaymentType As String = "PostPaymentTypePerSession"
 
-    Public Const GetCounter As String = Direc + "GetCounter"
+    Public Const GetCounter As String = "GetCounter"
 
 #End Region
     'Informacion de tasas
-    Public Const GetTasas As String = Direc + "GetTasas"
-    Public Const GetTasaCliente As String = Direc + "GetTasaCliente"
-    Public Const GetTasaMayo As String = Direc + "GetTasaMayo"
-    Public Const CreateTasa As String = Direc + "CreateTasa"
-    Public Const UpdateTasa As String = Direc + "UpdateTasa"
-    Public Const DeleteTasa As String = Direc + "DeleteTasa"
+    Public Const GetTasas As String = "GetTasas"
+    Public Const GetTasaCliente As String = "GetTasaCliente"
+    Public Const GetTasaMayo As String = "GetTasaMayo"
+    Public Const CreateTasa As String = "CreateTasa"
+    Public Const UpdateTasa As String = "UpdateTasa"
+    Public Const DeleteTasa As String = "DeleteTasa"
     'Informacion de Socios
-    Public Const GetSocios As String = Direc + "GetSocios"
-    Public Const CreateSocio As String = Direc + "CreateSocio"
-    Public Const UpdateSocio As String = Direc + "UpdateSocio"
-    Public Const DeleteSocio As String = Direc + "DeleteSocio"
+    Public Const GetSocios As String = "GetSocios"
+    Public Const CreateSocio As String = "CreateSocio"
+    Public Const UpdateSocio As String = "UpdateSocio"
+    Public Const DeleteSocio As String = "DeleteSocio"
     'Informacion de Cliente
-    Public Const GetCliente As String = Direc + "GetClientes"
-    Public Const GetClienteId As String = Direc + "GetCliente"
-    Public Const CreateCliente As String = Direc + "CreateCliente"
-    Public Const UpdateCliente As String = Direc + "UpdateCliente"
-    Public Const DeleteCliente As String = Direc + "DeleteCliente"
+    Public Const GetCliente As String = "GetClientes"
+    Public Const GetClienteId As String = "GetCliente"
+    Public Const CreateCliente As String = "CreateCliente"
+    Public Const UpdateCliente As String = "UpdateCliente"
+    Public Const DeleteCliente As String = "DeleteCliente"
     'Informacion de Bancos
-    Public Const GetBancos As String = Direc + "GetBancos"
-    Public Const GetBancoId As String = Direc + "GetBanco"
-    Public Const CreateBanco As String = Direc + "CreateBanco"
-    Public Const UpdateBanco As String = Direc + "UpdateBanco"
-    Public Const DeleteBanco As String = Direc + "DeleteBanco"
-    Public Const GetAccountType As String = Direc + "GetAccountType"
-    Public Const GetAccount As String = Direc + "GetAccount"
+    Public Const GetBancos As String = "GetBancos"
+    Public Const GetBancoId As String = "GetBanco"
+    Public Const CreateBanco As String = "CreateBanco"
+    Public Const UpdateBanco As String = "UpdateBanco"
+    Public Const DeleteBanco As String = "DeleteBanco"
+    Public Const GetAccountType As String = "GetAccountType"
+    Public Const GetAccount As String = "GetAccount"
     'Informacion de Cambios
-    Public Const GetCambios As String = Direc + "GetCambio"
-    Public Const GetStatus As String = Direc + "GetStatus"
-    Public Const CreateCambio As String = Direc + "CreateCambio"
-    Public Const UpdateCambio As String = Direc + "UpdateCambio"
-    Public Const DeleteCambio As String = Direc + "DeleteCambio"
+    Public Const GetCambios As String = "GetCambio"
+    Public Const GetStatus As String = "GetStatus"
+    Public Const CreateCambio As String = "CreateCambio"
+    Public Const UpdateCambio As String = "UpdateCambio"
+    Public Const DeleteCambio As String = "DeleteCambio"
     'Informacion de dashboard
-    Public Const GetCambiosDiarios As String = Direc + "PostDashboard"
-    Public Const GetTotalInfo As String = Direc + "TotalInfo"
+    Public Const GetCambiosDiarios As String = "PostDashboard"
+    Public Const GetTotalInfo As String = "TotalInfo"
     'Informacion de Gasto
-    Public Const GetGasto As String = Direc + "GetGasto"
-    Public Const CreateGasto As String = Direc + "CreateGasto"
-    Public Const UpdateGasto As String = Direc + "UpdateGasto"
-    Public Const DeleteGasto As String = Direc + "DeleteGasto"
+    Public Const GetGasto As String = "GetGasto"
+    Public Const CreateGasto As String = "CreateGasto"
+    Public Const UpdateGasto As String = "UpdateGasto"
+    Public Const DeleteGasto As String = "DeleteGasto"
     'Informacion BancoSocio
-    Public Const GetBancoSocio As String = Direc + "GetBancoSo"
-    Public Const GetBancoSoType As String = Direc + "GetBancoSoType"
-    Public Const CreateBancoSo As String = Direc + "CreateBancoSo"
-    Public Const UpdateBancoSo As String = Direc + "UpdateBancoSo"
-    Public Const DeleteBancoSocio As String = Direc + "DeleteBancoSo"
+    Public Const GetBancoSocio As String = "GetBancoSo"
+    Public Const GetBancoSoType As String = "GetBancoSoType"
+    Public Const CreateBancoSo As String = "CreateBancoSo"
+    Public Const UpdateBancoSo As String = "UpdateBancoSo"
+    Public Const DeleteBancoSocio As String = "DeleteBancoSo"
 
 
 End Class

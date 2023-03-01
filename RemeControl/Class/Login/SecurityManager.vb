@@ -2,10 +2,14 @@
 
 Public Class SecurityManager
     Inherits JsonConnect
+    Private WebSites As String
+    'Public Sub New(Value)
+    '    WebSites = Value
+    'End Sub
 
     Public Function Login(Username As String, Password As String) As LoginIn
         Dim user As LoginIn = Nothing
-        Dim url As String = ApiConstants.LoginIn
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.LoginIn)
         If Username.Trim.ToLower = "unelca" Then
 
         Else
@@ -31,8 +35,7 @@ Public Class SecurityManager
     End Function
 
     Public Sub RegisterLogin(oUser As LoginIn)
-        Dim url As String = ApiConstants.RegisterLogin
-
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.RegisterLogin)
         Dim UserData As New RegisterLogin With
             {
             .ULO_Id = oUser.USR_Id,
@@ -48,7 +51,7 @@ Public Class SecurityManager
     End Sub
 
     Public Sub RegisterLogout(oUser As LoginIn)
-        Dim url As String = ApiConstants.RegisterLogout
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.RegisterLogout)
 
         Dim UserData As New RegisterLogin With
             {

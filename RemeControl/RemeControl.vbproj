@@ -138,7 +138,7 @@
     <Compile Include="Class\Status\StatusDataLayer.vb" />
     <Compile Include="Class\System\ApiConstants.vb" />
     <Compile Include="Class\System\CommonFunction.vb" />
-    <Compile Include="Class\System\Connection.vb" />
+    <Compile Include="Class\System\ProcesarUrl.vb" />
     <Compile Include="Class\System\EnvironmentObjects.vb" />
     <Compile Include="Class\System\EWTransactionManager.vb" />
     <Compile Include="Class\System\JsonConnect.vb" />
@@ -146,6 +146,7 @@
     <Compile Include="Class\Login\RegisterLogin.vb" />
     <Compile Include="Class\SalesDate\SalesDateData.vb" />
     <Compile Include="Class\Login\SecurityManager.vb" />
+    <Compile Include="Class\System\Parameters.vb" />
     <Compile Include="Class\System\TransactionManager.vb" />
     <Compile Include="Class\Tasa\TasaDataLayer.vb" />
     <Compile Include="Controller\Controller.vb" />

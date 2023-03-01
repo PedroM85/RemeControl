@@ -87,7 +87,7 @@ Public Class ClienteDataLayer
 
     Public Function GetClientes() As DataTable
         Dim Cliente As ClienteData = Nothing
-        Dim Url As String = ApiConstants.GetCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
         Dim table As DataTable
         Try
             Cliente = New ClienteData
@@ -105,7 +105,7 @@ Public Class ClienteDataLayer
 
     Public Sub CreateCliente(Data As ClienteData)
         Dim Cliente As ClienteData = Nothing
-        Dim Url As String = ApiConstants.CreateCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateCliente)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -122,7 +122,7 @@ Public Class ClienteDataLayer
 
     Public Sub UpdateCliente(Data As ClienteData)
         Dim Cliente As ClienteData = Nothing
-        Dim Url As String = ApiConstants.UpdateCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateCliente)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -139,7 +139,7 @@ Public Class ClienteDataLayer
 
     Public Sub DeleteCliente(Data As ClienteData)
         Dim Cliente As ClienteData = Nothing
-        Dim Url As String = ApiConstants.DeleteCliente
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteCliente)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 

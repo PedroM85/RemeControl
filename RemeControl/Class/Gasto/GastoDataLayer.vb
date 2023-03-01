@@ -96,7 +96,7 @@ Public Class GastoDataLayer
     Inherits JsonConnect
 
     Public Function GetSocios() As DataTable
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable
         Try
             Dim result_Get = GetJson(Url, oApp.CurrentUser)
@@ -111,7 +111,7 @@ Public Class GastoDataLayer
     End Function
 
     Public Function GetGastos() As DataTable
-        Dim Url As String = ApiConstants.GetGasto
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetGasto)
         Dim table As DataTable
         Try
             Dim result_Get = GetJson(Url, oApp.CurrentUser)
@@ -127,7 +127,7 @@ Public Class GastoDataLayer
 
     Public Sub CreateGasto(Data As GastoData)
         Dim Gasto As GastoData = Nothing
-        Dim Url As String = ApiConstants.CreateGasto
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateGasto)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -144,7 +144,7 @@ Public Class GastoDataLayer
 
     Public Sub UpdateGasto(Data As GastoData)
         Dim Gasto As GastoData = Nothing
-        Dim Url As String = ApiConstants.UpdateGasto
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateGasto)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -161,7 +161,7 @@ Public Class GastoDataLayer
 
     Public Sub DeleteGasto(Data As GastoData)
         Dim Gasto As GastoData = Nothing
-        Dim Url As String = ApiConstants.DeleteGasto
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteGasto)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 

@@ -2,6 +2,8 @@
 
     Private mUserName As String
     Private mPassword As String
+
+
     Public Sub Main()
 
 
@@ -10,36 +12,43 @@
 
         If oApp.InitConnection() Then
 
-            oApp.SetupLocalizationInfo()
+            If oApp.Init Then
+                oApp.SetupLocalizationInfo()
 
-            GetCommandLineArgs()
 
-            oApp.LoginUser(mUserName, mPassword)
+                GetCommandLineArgs()
 
-            If Not oApp.CurrentUser Is Nothing Then
 
-                If oApp.RegisterLogin(oApp.CurrentUser) Then
+                oApp.LoginUser(mUserName, mPassword)
 
-                    oMainForm = New FormMain
-                    oMainForm.TransactionManager = TM
 
-                    oMainForm.Show()
 
-                    Application.Run(oMainForm)
+                If Not oApp.CurrentUser Is Nothing Then
 
-                    oApp.RegisterLogout()
+                    If oApp.RegisterLogin(oApp.CurrentUser) Then
 
+                        oMainForm = New FormMain
+                        oMainForm.TransactionManager = TM
+
+                        oMainForm.Show()
+
+                        Application.Run(oMainForm)
+
+                        oApp.RegisterLogout()
+
+                    End If
+                Else
+                    MessageBox.Show("El usuario o contraseña invalido" & vbCrLf & "Compruebe la información de conexión." & vbCrLf & "La ip publica es: " & oApp.IpPc & vbCrLf & " Error 0x00010615", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
-            Else
-                MessageBox.Show("Se produjeron errores al inicializar la aplicacion." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema." & vbCrLf & "La ip publica es: " & oApp.IpPc & " con error 0x00034404", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
 
+            End If
         Else
             MessageBox.Show("Se produjeron errores al inicializar la aplicacion." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
 
-
+        'Codigo de error
+        'Clave o contraseña invalido - >0x00010615
     End Sub
 
     Public Sub GetCommandLineArgs()

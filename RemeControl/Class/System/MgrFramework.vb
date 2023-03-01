@@ -13,11 +13,34 @@ Public Class MgrFramework
     Protected mUser As LoginIn
     Protected mSalesDateInfo As SalesDateInfo
     Protected mLastAction As Date
-
+    Protected mWebSite As String
+    Protected mParams As Parameters
+    Protected mProcessUrl As ProcesarUrl
+    Public Enum WebDirection
+        Internet
+        Local
+    End Enum
     Public Function Terminal() As String
         Return "1"
     End Function
-
+    Public ReadOnly Property Params() As Parameters
+        Get
+            Return mParams
+        End Get
+    End Property
+    Public Property WebSite() As String
+        Get
+            Return mWebSite
+        End Get
+        Set(value As String)
+            mWebSite = value
+        End Set
+    End Property
+    Public ReadOnly Property Url() As ProcesarUrl
+        Get
+            Return mProcessUrl
+        End Get
+    End Property
     Public Function GetSalesDateInfo() As SalesDateInfo
         'openning routes
         Dim oDataLayer As New SalesDateData
@@ -32,6 +55,7 @@ Public Class MgrFramework
     Public Function InitConnection() As Boolean
         Try
             If My.Computer.Network.Ping("8.8.8.8") Then
+
                 Return True
             Else
                 Return False
@@ -41,8 +65,22 @@ Public Class MgrFramework
             Return False
         End Try
     End Function
+
+    Public Overridable Function Init() As Boolean
+        Try
+            mParams = New Parameters
+            mWebSite = mParams.GetUrl(WebDirection.Local).ToString
+            mProcessUrl = New ProcesarUrl()
+
+            SetupLocalizationInfo()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
-        Dim sec As SecurityManager = New SecurityManager
+        Dim sec As SecurityManager = New SecurityManager()
         Dim loginDlg As FrmLogin
         If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
             mUser = sec.Login(UserName, Password)
@@ -82,9 +120,14 @@ Public Class MgrFramework
             Return GetMyExternalIP()
         End Get
     End Property
+    Public ReadOnly Property WebSites As String
+        Get
+            Return mWebSite
+        End Get
+    End Property
     Public Function RegisterLogin(oUser As LoginIn) As Boolean
         Try
-            Dim oSec As New SecurityManager
+            Dim oSec As New SecurityManager()
             oSec.RegisterLogin(oUser)
             Return True
         Catch ex As Exception
@@ -93,7 +136,7 @@ Public Class MgrFramework
     End Function
     Public Sub RegisterLogout()
         If Not mUser Is Nothing Then
-            Dim oSec As New SecurityManager
+            Dim oSec As New SecurityManager()
             oSec.RegisterLogout(mUser)
 
         End If
@@ -134,6 +177,7 @@ Public Class MgrFramework
         End Try
         Return Value
     End Function
+
     Private Function GetMyExternalIP()
         Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
         'Dim wq As HttpWebRequest = HttpWebRequest.Create("http://whatismyip.org/")

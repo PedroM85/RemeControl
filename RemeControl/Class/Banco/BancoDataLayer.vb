@@ -66,7 +66,7 @@ Public Class BancoDataLayer
 
     Public Function GetBancos() As DataTable
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.GetBancos
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetBancos)
         Dim table As DataTable
         Try
             Banco = New BancoData
@@ -84,7 +84,7 @@ Public Class BancoDataLayer
 
     Public Sub CreateBanco(Data As BancoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.CreateBanco
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateBanco)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -101,7 +101,7 @@ Public Class BancoDataLayer
 
     Public Sub UpdateBanco(Data As BancoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.UpdateBanco
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateBanco)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -118,7 +118,7 @@ Public Class BancoDataLayer
 
     Public Sub DeleteBanco(Data As BancoData)
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.DeleteBanco
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteBanco)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -135,7 +135,7 @@ Public Class BancoDataLayer
 
     Public Function GetAcountType() As DataTable
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.GetAccountType
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetAccountType)
         Dim table As DataTable
         Try
             Banco = New BancoData
@@ -153,7 +153,7 @@ Public Class BancoDataLayer
 
     Public Function GetAcount() As DataTable
         Dim Banco As BancoData = Nothing
-        Dim Url As String = ApiConstants.GetAccount
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetAccount)
         Dim table As DataTable
         Try
             Banco = New BancoData

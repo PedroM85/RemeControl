@@ -57,7 +57,7 @@ Public Class SocioDataLayer
 
     Public Function GetSocios() As DataTable
         Dim Socio As SocioData = Nothing
-        Dim Url As String = ApiConstants.GetSocios
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable
         Try
             Socio = New SocioData
@@ -75,7 +75,7 @@ Public Class SocioDataLayer
 
     Public Sub CreateSocios(Data As SocioData)
         Dim Socio As SocioData = Nothing
-        Dim Url As String = ApiConstants.CreateSocio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.CreateSocio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -92,7 +92,7 @@ Public Class SocioDataLayer
 
     Public Sub UpdateSocios(Data As SocioData)
         Dim Socio As SocioData = Nothing
-        Dim Url As String = ApiConstants.UpdateSocio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.UpdateSocio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 
@@ -109,7 +109,7 @@ Public Class SocioDataLayer
 
     Public Sub DeleteSocios(Data As SocioData)
         Dim Socio As SocioData = Nothing
-        Dim Url As String = ApiConstants.DeleteSocio
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.DeleteSocio)
         Try
             Dim result = JsonConvert.SerializeObject(Data)
 

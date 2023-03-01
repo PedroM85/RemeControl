@@ -87,7 +87,7 @@
 
     End Sub
     Private Function UserSignedOk() As Boolean
-        Dim oSec As New SecurityManager
+        Dim oSec As New SecurityManager()
         Dim Auth As New AuthorizationForm
 
         Auth.Title = "Firma del usuario"
