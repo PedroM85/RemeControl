@@ -1,39 +1,51 @@
-﻿Imports System.Windows.Forms.AxHost
-
-Public Class CambioView
+﻿Public Class CambioView
     Inherits ViewBase
 
     Private WithEvents Label1 As Label
     Private WithEvents oCambioABM As CambioABM
+    Private oBsource As BindingSource
     Public Sub New()
         MyBase.New
 
         InitializeComponent()
-
 
         LoadGlobalCaptions()
 
     End Sub
 
     Public Sub LoadData()
-        Dim oCambioData As CambioDataLayer = Nothing
-        oCambioData = New CambioDataLayer
+        Dim oCambioData As New CambioDataLayer
 
-        Dim Tasas As New BindingSource
-        Tasas.DataSource = oCambioData.GetTasas
+        oBsource = New BindingSource With {
+            .DataSource = oCambioData.GetTasas
+        }
+
+        Dim OBsource1 = New BindingSource With {
+            .DataSource = oCambioData.GetCambios
+        }
+
+
         dgvView.DataSource = Nothing
 
-        If Tasas.Item(0).Row.ItemArray(0) = -9999 Then
-            MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-            btnNew.Enabled = False
-        End If
+        Try
+            If oBsource.Item(0).Row.ItemArray(0) = -9999 Then
+                MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                btnNew.Enabled = False
+            End If
 
-        If oCambioData.GetCambios Is Nothing Then
-            Label1.Visible = True
-        Else
-            Label1.Visible = False
-            dgvView.DataSource = oCambioData.GetCambios
-        End If
+            If OBsource1.DataSource Is Nothing Then
+                Label1.Visible = True
+            Else
+                Label1.Visible = False
+                With dgvView
+                    .DataSource = Nothing
+                    .DataSource = OBsource1.DataSource
+                End With
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
 
     End Sub
@@ -42,10 +54,10 @@ Public Class CambioView
 
         Cursor = Cursors.WaitCursor
 
-        oCambioABM = New CambioABM
-
-        oCambioABM.Caption = "Agregar un cambio"
-        oCambioABM.Title = "Datos Generales"
+        oCambioABM = New CambioABM With {
+            .Caption = "Agregar un cambio",
+            .Title = "Datos Generales"
+        }
         'oClientABM.chkActive.Checked = True
         oCambioABM.Edit(Nothing)
 
@@ -60,13 +72,13 @@ Public Class CambioView
         Cursor = Cursors.Arrow
     End Sub
 
-    Public Sub SocioView_Edit() Handles MyBase.Edit
+    Public Sub CambioView_Edit() Handles MyBase.Edit
         Cursor = Cursors.WaitCursor
 
-        oCambioABM = New CambioABM
-
-        oCambioABM.Caption = "Editar una cambio"
-        oCambioABM.Title = "Datos Generales"
+        oCambioABM = New CambioABM With {
+            .Caption = "Editar una cambio",
+            .Title = "Datos Generales"
+        }
         Dim row As DataGridViewRow = dgvView.CurrentRow
         oCambioABM.Edit(DirectCast(row.DataBoundItem, DataRowView))
 
@@ -77,14 +89,11 @@ Public Class CambioView
 
         oCambioABM.Select()
 
-
-
-
         Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub oSocioABM_Delete() Handles MyBase.Delete
-        Dim oDataLayer As CambioDataLayer = New CambioDataLayer
+    Private Sub oCambioABM_Delete() Handles MyBase.Delete
+        Dim oDataLayer As New CambioDataLayer
         Cursor = Cursors.WaitCursor
         If dgvView.RowCount > 0 Then
             If MessageBox.Show("Desea eliminar " & " '" & Trim(dgvView.CurrentRow.Cells(1).Value) & "'?", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
@@ -238,9 +247,10 @@ Public Class CambioView
 
     End Sub
 
-    Private Sub Close_ABM() Handles oCambioABM.Close
+    Private Sub Close_ABM() 'Handles oCambioABM.Close
         oMainForm.ShowLeftPanel()
 
+        oMainForm.ExitView(oCambioABM)
         oCambioABM.Dispose()
         oCambioABM = Nothing
 

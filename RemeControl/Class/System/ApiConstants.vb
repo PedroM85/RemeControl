@@ -13,7 +13,7 @@ Public Class ApiConstants
 
 #Region "Informacion de ventas in Openning.controller"
 
-    Public Const GetSalesDateInfo As String = "GetSalesDateInfo"
+    Public Const PostSalesDateInfo As String = "PostSalesDateInfo"
 
     Public Const PostSessionPerSaleDate As String = "PostSessionPerSalesDate"
 
@@ -39,7 +39,7 @@ Public Class ApiConstants
 #End Region
     'Informacion de tasas
     Public Const GetTasas As String = "GetTasas"
-    Public Const GetTasaCliente As String = "GetTasaCliente"
+    Public Const PostTasaCliente As String = "PostTasaCliente"
     Public Const GetTasaMayo As String = "GetTasaMayo"
     Public Const CreateTasa As String = "CreateTasa"
     Public Const UpdateTasa As String = "UpdateTasa"
