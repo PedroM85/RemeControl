@@ -15,7 +15,7 @@
                 If oApp.Init Then
 
 
-                    oApp.SetupLocalizationInfo()
+                    'oApp.SetupLocalizationInfo()
 
 
                     GetCommandLineArgs()
@@ -49,7 +49,7 @@
             End If
 
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message)
         Finally
 
         End Try
