@@ -185,7 +185,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetClientes() As DataTable
         Dim Clientes As ClienteData = Nothing
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCliente)
         Dim table As DataTable
         Try
             Clientes = New ClienteData
@@ -202,16 +202,21 @@ Public Class CambioDataLayer
     End Function
 
     Public Function GetTasas() As DataTable
-        Dim Tasa As TasaData = Nothing
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetTasaCliente)
+        Dim Tasa As New TasaData
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostTasaCliente)
         Dim table As DataTable
         Try
-            Tasa = New TasaData
 
-            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+            Dim Datos = New With {
+            .Fecha = DateTime.Now
+            }
+
+            Dim result = JsonConvert.SerializeObject(Datos)
+
+            Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
 
 
-            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         Catch ex As Exception
             Return Nothing
         End Try

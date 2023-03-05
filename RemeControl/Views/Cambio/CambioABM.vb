@@ -1,25 +1,10 @@
-﻿Public Class CambioABM
+﻿Imports System.Text
+
+Public Class CambioABM
     Inherits ABMBase
 
 
     Private oDataLayer As CambioDataLayer
-    Public Sub New()
-        MyBase.New
-
-        InitializeComponent()
-
-        CargaCBO()
-
-        Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
-        .ForEach(Sub(b)
-                     b.Tag = Tuple.Create(b.ForeColor, b.BackColor)
-                     AddHandler b.GotFocus, AddressOf B_GotFocus
-                     AddHandler b.LostFocus, AddressOf B_LostFocus
-                 End Sub)
-    End Sub
-
-
-
     Private ReadOnly focusedForeColor As Color = Color.Black
     Friend WithEvents lblId As Label
     Private ReadOnly components As System.ComponentModel.IContainer
@@ -27,85 +12,16 @@
     Friend WithEvents cboBanco As ComboBox
     Private ReadOnly focusedBackColor As Color = Color.Gainsboro
 
-    Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
-        Dim controls = control.Controls.Cast(Of Control)()
-        Return controls.SelectMany(Function(ctrl) GetAllControls(ctrl)).Concat(controls)
-    End Function
 
-    Private Sub B_LostFocus(sender As Object, e As EventArgs)
-        Dim b = DirectCast(sender, TextBox)
-        Dim colors = DirectCast(b.Tag, Tuple(Of Color, Color))
-        b.ForeColor = colors.Item1
-        b.BackColor = colors.Item2
-    End Sub
+    Private tasa As String = "0"
+    Private Ope As Double
+    Private Banco As String
+    Private Titular As String
+    Private Cuenta As String
+    Private Cedula As String
 
-    Private Sub B_GotFocus(sender As Object, e As EventArgs)
-        Dim b = DirectCast(sender, TextBox)
-        b.SelectAll()
-        b.ForeColor = focusedForeColor
-        b.BackColor = focusedBackColor
-    End Sub
-    Private Sub BancoABM_Save() Handles MyBase.Save
-        Dim oData As CambioData
-        oDataLayer = New CambioDataLayer
 
-        Try
-            oData = New CambioData With
-                {
-                .OP_Id = IIf(IsAddNew, 0, lblId.Text),
-                .OP_Socio = cboSocio.SelectedValue,
-                .OP_Cliente = cboCliente.SelectedValue,
-                .OP_Pesos = txtPesos.Text.Trim,
-                .OP_Bank_Id = DirectCast(cboBanco.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
-                .OP_Tasa_id = DirectCast(cboTasa.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
-                .OP_USTDBuy = txtUSTDBuy.Text.Trim,
-                .OP_USTDSell = txtUSTDSell.Text.Trim,
-                .OP_Status_Id = cboStatus.SelectedValue,
-                .OP_Operation = lblOperacion.Text.Trim,
-                .OP_Session = oApp.GetSalesDateInfo.SSS_Id,
-                .OP_ModifiedBy = oApp.CurrentUser.USR_Id,
-                .OP_Active = 1
-                }
-
-            If IsAddNew Then
-                oDataLayer.CreateCambio(oData)
-            Else
-                oDataLayer.UpdateCambio(oData)
-            End If
-
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
-    End Sub
-    Private Sub BancoABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
-        lblId.Enabled = True
-    End Sub
-    'Private Sub BancoABM_SetDefaultValuesOnAdd(row As DataRowView) Handles MyBase.SetDefaultValuesOnNew
-    '    row("SOC_Id") = 0
-    '    'row("SOC_Name") = not
-    '    'row("SOC_Telefono") = ""
-    '    'row("SOC_Active") = True
-    'End Sub
-    Private Sub BancoABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
-        lblId.DataBindings.Add("Text", row, "OP_Id")
-        cboSocio.DataBindings.Add("SelectedValue", row, "OP_Socio")
-        cboCliente.DataBindings.Add("SelectedValue", row, "OP_Cliente")
-        cboTasa.DataBindings.Add("SelectedValue", row, "TAS_TasaCliente")
-        txtPesos.DataBindings.Add("Text", row, "OP_Pesos")
-        txtUSTDBuy.DataBindings.Add("Text", row, "OP_USTDBuy")
-        txtUSTDSell.DataBindings.Add("Text", row, "OP_USTDSell")
-        cboStatus.DataBindings.Add("SelectedValue", row, "OP_Status_Id")
-        lblOperacion.DataBindings.Add("Text", row, "OP_Operation")
-    End Sub
-    Private Sub ValiText(sender As Object, e As KeyPressEventArgs)
-
-        If Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar) And Not e.KeyChar = "." And Not e.KeyChar = "," Then
-            e.Handled = True
-        End If
-
-    End Sub
-
-#Region "Initialize"
+#Region "Initialize Component"
 
 
 
@@ -124,6 +40,8 @@
     Friend WithEvents cboCliente As ComboBox
     Friend WithEvents cboSocio As ComboBox
     Friend WithEvents lblOperacion As Label
+
+
     Private Sub InitializeComponent()
         Me.cboSocio = New System.Windows.Forms.ComboBox()
         Me.cboCliente = New System.Windows.Forms.ComboBox()
@@ -298,7 +216,6 @@
         'lblOperacion
         '
         Me.lblOperacion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblOperacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblOperacion.Location = New System.Drawing.Point(224, 137)
         Me.lblOperacion.Name = "lblOperacion"
         Me.lblOperacion.Size = New System.Drawing.Size(287, 105)
@@ -343,6 +260,86 @@
     End Sub
 #End Region
 
+    Public Sub New()
+        MyBase.New
+
+        InitializeComponent()
+
+        CargaCBO()
+
+        Me.GetAllControls(Me).OfType(Of TextBox)().ToList() _
+    .ForEach(Sub(b)
+                 b.Tag = Tuple.Create(b.ForeColor, b.BackColor)
+                 AddHandler b.GotFocus, AddressOf B_GotFocus
+                 AddHandler b.LostFocus, AddressOf B_LostFocus
+             End Sub)
+    End Sub
+
+    Private Function GetAllControls(control As Control) As IEnumerable(Of Control)
+        Dim controls = control.Controls.Cast(Of Control)()
+        Return controls.SelectMany(Function(ctrl) GetAllControls(ctrl)).Concat(controls)
+    End Function
+
+    Private Sub B_LostFocus(sender As Object, e As EventArgs)
+        Dim b = DirectCast(sender, TextBox)
+        Dim colors = DirectCast(b.Tag, Tuple(Of Color, Color))
+        b.ForeColor = colors.Item1
+        b.BackColor = colors.Item2
+    End Sub
+
+    Private Sub B_GotFocus(sender As Object, e As EventArgs)
+        Dim b = DirectCast(sender, TextBox)
+        b.SelectAll()
+        b.ForeColor = focusedForeColor
+        b.BackColor = focusedBackColor
+    End Sub
+    Private Sub CAmbioABM_Save() Handles MyBase.Save
+        Dim oData As CambioData
+        oDataLayer = New CambioDataLayer
+
+        Try
+            oData = New CambioData With
+                {
+                .OP_Id = IIf(IsAddNew, 0, lblId.Text),
+                .OP_Socio = cboSocio.SelectedValue,
+                .OP_Cliente = cboCliente.SelectedValue,
+                .OP_Pesos = txtPesos.Text.Trim,
+                .OP_Bank_Id = DirectCast(cboBanco.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
+                .OP_Tasa_id = DirectCast(cboTasa.SelectedItem, System.Data.DataRowView).Row.ItemArray(0),'cboTasa.SelectedValue,
+                .OP_USTDBuy = txtUSTDBuy.Text.Trim,
+                .OP_USTDSell = txtUSTDSell.Text.Trim,
+                .OP_Status_Id = cboStatus.SelectedValue,
+                .OP_Operation = lblOperacion.Text.Trim,
+                .OP_Session = oApp.GetSalesDateInfo.SSS_Id,
+                .OP_ModifiedBy = oApp.CurrentUser.USR_Id,
+                .OP_Active = 1
+                }
+
+            If IsAddNew Then
+                oDataLayer.CreateCambio(oData)
+            Else
+                oDataLayer.UpdateCambio(oData)
+            End If
+
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
+    Private Sub CambioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
+        lblId.Enabled = True
+    End Sub
+
+    Private Sub CambioABM_SetBindings(row As DataRowView) Handles MyBase.SetBindings
+        lblId.DataBindings.Add("Text", row, "OP_Id")
+        cboSocio.DataBindings.Add("SelectedValue", row, "OP_Socio")
+        cboCliente.DataBindings.Add("SelectedValue", row, "OP_Cliente")
+        cboTasa.DataBindings.Add("SelectedValue", row, "TAS_TasaCliente")
+        txtPesos.DataBindings.Add("Text", row, "OP_Pesos")
+        txtUSTDBuy.DataBindings.Add("Text", row, "OP_USTDBuy")
+        txtUSTDSell.DataBindings.Add("Text", row, "OP_USTDSell")
+        cboStatus.DataBindings.Add("SelectedValue", row, "OP_Status_Id")
+        lblOperacion.DataBindings.Add("Text", row, "OP_Operation")
+    End Sub
     Private Sub CargaCBO()
         Dim oCambioData As New CambioDataLayer
         Dim oBancosoData As New BancoSoDataLayer
@@ -382,35 +379,22 @@
     End Sub
 
     Private Sub txtPesos_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPesos.KeyPress
-        ValiText(sender, e)
+        BoxValidate.ValiText(sender, e)
     End Sub
 
-
-    Private tasa As String = "0"
     Private Sub GeneralText()
-        Dim Ope As Decimal = 0
+        Dim sb As New StringBuilder()
         Dim pesos As Decimal = 0
 
-        Dim Banco As String = "0"
-        Dim Titular As String = "0"
-        Dim Cuenta As String = "0"
-        Dim Cedula As String = "0"
-
-        If txtPesos.Text = "" Or txtPesos.Text = Nothing Then
-        Else
+        If Not String.IsNullOrEmpty(txtPesos.Text) Then
             pesos = txtPesos.Text
         End If
 
-        If cboTasa.SelectedItem Is Nothing Then
-
-        Else
+        If Not cboTasa.SelectedItem Is Nothing Then
             tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
         End If
 
-
         Ope = pesos * tasa
-
-
 
         If Not Ope = 0 Then
             Banco = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(3)
@@ -418,16 +402,25 @@
             Cuenta = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(4)
             Cedula = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(6)
             lblOperacion.BackColor = Color.White
-            lblOperacion.Text = String.Format("Pago movil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
+            'lblOperacion.Text = String.Format("Pagomovil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
+            sb.Append("Pago móvil o Transferencia").AppendLine() _
+            .Append(String.Format("Banco: {0}", Banco)).AppendLine() _
+            .Append(String.Format("Tipo de cuenta: {0}", 0)).AppendLine() _
+            .Append(String.Format("Número de cuenta: {0}", Cuenta)).AppendLine() _
+            .Append(String.Format("Titular: {0}", Titular)).AppendLine() _
+            .Append(String.Format("Cédula: {0}", Cedula)).AppendLine() _
+            .Append(String.Format("Monto a transferir: {0:n2}", Ope))
+
+            lblOperacion.Text = sb.ToString()
         End If
     End Sub
 
     Private Sub txtUSTDBuy_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSTDBuy.KeyPress
-        ValiText(sender, e)
+        BoxValidate.ValiText(sender, e)
     End Sub
 
     Private Sub txtUSTDSell_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSTDSell.KeyPress
-        ValiText(sender, e)
+        BoxValidate.ValiText(sender, e)
     End Sub
 
     Private Sub lblOperacion_Click(sender As Object, e As EventArgs) Handles lblOperacion.Click
@@ -452,5 +445,15 @@
 
     End Sub
 
+    Private Sub CambioABM_ValidateControls(ByRef Cancel As Boolean, IsNewAdd As Boolean) Handles MyBase.ValidateControls
+        Dim sErrorMsg As String = "Este campo es requerido"
+
+        If txtPesos.Text = String.Empty Or txtPesos.Text = 0 Or txtPesos.Text = 0.00 Then
+            MessageBox.Show(sErrorMsg, Me.Caption, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Cancel = True
+            txtPesos.Select()
+            Exit Sub
+        End If
+    End Sub
 
 End Class

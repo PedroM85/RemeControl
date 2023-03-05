@@ -2,6 +2,7 @@
     Inherits UserControl
 
     Private oDataRow As DataRowView
+    Private FuntionCon As New CommonFunction
     Private lAddNew As Boolean
 
 
@@ -29,6 +30,12 @@
     Public ReadOnly Property DataRow() As DataRowView
         Get
             Return oDataRow
+        End Get
+    End Property
+
+    Public ReadOnly Property BoxValidate As CommonFunction
+        Get
+            Return FuntionCon
         End Get
     End Property
 

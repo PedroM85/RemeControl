@@ -133,19 +133,23 @@ Public Class SalesDateData
     End Enum
 
 
-    Public Sub GetGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer, ByRef nSessionId As Int32)
+    Public Sub PostGeneralInfo(ByRef dOpenedSalesDate As DateTime, ByRef dOpeningDate As DateTime, ByRef nUsersLoggedOn As Integer, ByRef nSessionId As Int32)
         'Ver dia de ventas activo 
-
-
         Dim dt As New DataTable
 
         Dim _SalesDate As New SalesDateInfo
-        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetSalesDateInfo)
+        Dim url As String = oApp.Url.ProcessUrl(ApiConstants.PostSalesDateInfo)
         nSessionId = 0
 
         Try
 
-            Dim result_post = GetJson(url, oApp.CurrentUser)
+            Dim Datos = New With {
+            .Fecha = DateTime.Now
+            }
+
+            Dim result = JsonConvert.SerializeObject(Datos)
+
+            Dim result_post = PostJson(url, result, oApp.CurrentUser)
             'Dim tempPost = Message.
             'Dim results = JsonConvert.DeserializeAnonymousType(result_post, tempPost)
 
@@ -177,6 +181,7 @@ Public Class SalesDateData
 
 
         Catch ex As Exception
+
             Throw New Exception(ex.Message)
         End Try
 
