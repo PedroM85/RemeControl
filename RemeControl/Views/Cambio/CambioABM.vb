@@ -345,6 +345,7 @@ Public Class CambioABM
         Dim oBancosoData As New BancoSoDataLayer
 
         Dim Tasas As New BindingSource
+        Dim BancoSo As New BindingSource
 
         cboSocio.DataSource = oCambioData.GetSocios
         cboSocio.ValueMember = "SOC_Id"
@@ -372,9 +373,20 @@ Public Class CambioABM
         cboStatus.ValueMember = "STA_Id"
         cboStatus.DisplayMember = "STA_Name"
 
-        cboBanco.DataSource = oBancosoData.GetBancoSo
-        cboBanco.ValueMember = "OSB_Id"
-        cboBanco.DisplayMember = "OSB_Nombre"
+        BancoSo.DataSource = oBancosoData.GetBancoSo
+        If BancoSo.Item(0).Row.ItemArray(0) = -1 Then
+            With cboBanco
+                .Items.Add("No hay registro")
+            End With
+        Else
+            With cboBanco
+                .DataSource = BancoSo.DataSource
+                .ValueMember = "OSB_Id"
+                .DisplayMember = "OSB_Nombre"
+            End With
+        End If
+
+
 
     End Sub
 
