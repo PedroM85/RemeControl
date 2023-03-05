@@ -258,8 +258,10 @@ Public Class SalesDateData
 
             Dim result_post = PostJson(url, result, oApp.CurrentUser)
 
+            Dim objSalesDateList = JsonConvert.DeserializeObject(Of List(Of SalesDateInfo))(result_post)
+
             'dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
-            Dim dta As Object = JsonConvert.DeserializeObject(result_post)
+            'Dim dta As Object = JsonConvert.DeserializeObject(result_post)
 
 
             'Return Openning
