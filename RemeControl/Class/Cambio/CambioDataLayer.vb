@@ -240,17 +240,21 @@ Public Class CambioDataLayer
 
         Return table
     End Function
-    Public Function GetCambios() As DataTable
-        Dim Cambio As CambioData = Nothing
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCambios)
+    Public Function PostCambios() As DataTable
+        Dim Cambio As New CambioData
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCambios)
         Dim table As DataTable
         Try
-            Cambio = New CambioData
+            Dim Datos = New With {
+                .Fecha = DateTime.Now
+            }
 
-            Dim result_Get = GetJson(Url, oApp.CurrentUser)
+            Dim result = JsonConvert.SerializeObject(Datos)
+
+            Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
 
 
-            table = JsonConvert.DeserializeObject(Of DataTable)(result_Get)
+            table = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         Catch ex As Exception
             Return Nothing
         End Try

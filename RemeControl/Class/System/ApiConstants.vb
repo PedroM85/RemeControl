@@ -64,7 +64,7 @@ Public Class ApiConstants
     Public Const GetAccountType As String = "GetAccountType"
     Public Const GetAccount As String = "GetAccount"
     'Informacion de Cambios
-    Public Const GetCambios As String = "GetCambio"
+    Public Const PostCambios As String = "PostCambio"
     Public Const GetStatus As String = "GetStatus"
     Public Const CreateCambio As String = "CreateCambio"
     Public Const UpdateCambio As String = "UpdateCambio"
