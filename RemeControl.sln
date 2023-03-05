@@ -8,14 +8,11 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Directa|Any CPU = Directa|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Directa|Any CPU.ActiveCfg = Directa|Any CPU
-		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Directa|Any CPU.Build.0 = Directa|Any CPU
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

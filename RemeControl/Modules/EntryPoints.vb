@@ -6,45 +6,54 @@
 
     Public Sub Main()
 
+        Try
+            oApp = New MgrFramework
+            Dim TM As New TransactionManager
 
-        oApp = New MgrFramework
-        Dim TM As New TransactionManager
+            If oApp.InitConnection() Then
 
-        If oApp.InitConnection() Then
-
-            If oApp.Init Then
-                oApp.SetupLocalizationInfo()
-
-
-                GetCommandLineArgs()
+                If oApp.Init Then
 
 
-                oApp.LoginUser(mUserName, mPassword)
+                    'oApp.SetupLocalizationInfo()
+
+
+                    GetCommandLineArgs()
+
+
+                    oApp.LoginUser(mUserName, mPassword)
 
 
 
-                If Not oApp.CurrentUser Is Nothing Then
+                    If Not oApp.CurrentUser Is Nothing Then
 
-                    If oApp.RegisterLogin(oApp.CurrentUser) Then
+                        If oApp.RegisterLogin(oApp.CurrentUser) Then
 
-                        oMainForm = New FormMain
-                        oMainForm.TransactionManager = TM
+                            oMainForm = New FormMain
+                            oMainForm.TransactionManager = TM
 
-                        oMainForm.Show()
+                            oMainForm.Show()
 
-                        Application.Run(oMainForm)
+                            Application.Run(oMainForm)
 
-                        oApp.RegisterLogout()
+                            oApp.RegisterLogout()
 
+                        End If
+                    Else
+                        MessageBox.Show("El usuario o contraseña invalido" & vbCrLf & "Compruebe la información de conexión." & vbCrLf & "La ip publica es: " & oApp.IpPc & vbCrLf & " Error 0x00010615", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
-                Else
-                    MessageBox.Show("El usuario o contraseña invalido" & vbCrLf & "Compruebe la información de conexión." & vbCrLf & "La ip publica es: " & oApp.IpPc & vbCrLf & " Error 0x00010615", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
 
+                End If
+            Else
+                MessageBox.Show("Se produjeron errores al inicializar la aplicacion." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-        Else
-            MessageBox.Show("Se produjeron errores al inicializar la aplicacion." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+
+        End Try
+
 
 
         'Codigo de error

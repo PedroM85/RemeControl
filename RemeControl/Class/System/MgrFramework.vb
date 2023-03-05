@@ -16,6 +16,7 @@ Public Class MgrFramework
     Protected mWebSite As String
     Protected mParams As Parameters
     Protected mProcessUrl As ProcesarUrl
+
     Public Enum WebDirection
         Internet
         Local
@@ -28,6 +29,7 @@ Public Class MgrFramework
             Return mParams
         End Get
     End Property
+
     Public Property WebSite() As String
         Get
             Return mWebSite
@@ -44,10 +46,13 @@ Public Class MgrFramework
     Public Function GetSalesDateInfo() As SalesDateInfo
         'openning routes
         Dim oDataLayer As New SalesDateData
-        Dim _SalesDateInfo As New SalesDateInfo
-        _SalesDateInfo.SSS_Id = -9999
+
+        Dim _SalesDateInfo As New SalesDateInfo With {
+            .SSS_Id = -9999
+            }
+
         With _SalesDateInfo
-            oDataLayer.GetGeneralInfo(.SDT_Id, .SDT_DateOpened, .USersLoggedOn, .SSS_Id)
+            oDataLayer.PostGeneralInfo(.SDT_Id, .SDT_DateOpened, .USersLoggedOn, .SSS_Id)
         End With
 
         Return _SalesDateInfo
@@ -71,6 +76,7 @@ Public Class MgrFramework
             mParams = New Parameters
             mWebSite = mParams.GetUrl(WebDirection.Local).ToString
             mProcessUrl = New ProcesarUrl()
+
 
             SetupLocalizationInfo()
             Return True

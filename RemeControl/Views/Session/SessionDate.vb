@@ -383,7 +383,7 @@ Public Class SessionDate
         Dim nSessionId As Integer
 
         'oSalesDataLayer.GetGeneralInfo(dCurrSalesDate, dOpeningDate, nBOCSessions, nCOMSessions, nUsers)
-        oDataLayer.GetGeneralInfo(dCurrSalesDate, dOpeningDate, nUsers, nSessionId)
+        oDataLayer.PostGeneralInfo(dCurrSalesDate, dOpeningDate, nUsers, nSessionId)
 
         If dCurrSalesDate = New Date(9999, 12, 31) Then
             lblCurrSalesDateValue.Text = Msg_lblCurrSalesDateValue
