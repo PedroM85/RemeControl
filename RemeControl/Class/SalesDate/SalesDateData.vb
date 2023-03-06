@@ -359,8 +359,8 @@ Public Class SalesDateData
             Dim result_post = PostJson(Url, result, oApp.CurrentUser)
 
 
-            'dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
-            Dim respuesta As Object = JsonConvert.DeserializeObject(result_post)
+            dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+            'Dim respuesta As Object = JsonConvert.DeserializeObject(result_post)
 
 
 
@@ -372,13 +372,21 @@ Public Class SalesDateData
     End Function
 
     Public Function IsOpenning() As IsOpen
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetIsOpenning)
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostIsOpenning)
         Dim ValueDate As New DateTime(1999, 12, 31, 0, 0, 0, 0)
         Dim Hoy As Date = Date.Now.ToString("yyyy-MM-dd")
-        Try
-            Dim result_get = GetJson(Url, oApp.CurrentUser)
 
-            Dim varObj As MiClaseTest = JsonConvert.DeserializeObject(Of MiClaseTest)(result_get)
+        Try
+
+            Dim Datos = New With {
+                .Fecha = Hoy
+            }
+
+            Dim result = JsonConvert.SerializeObject(Datos)
+
+            Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
+
+            Dim varObj As MiClaseTest = JsonConvert.DeserializeObject(Of MiClaseTest)(result_Post)
 
             'MessageBox.Show(varObj.SDT_DateClosed.ToString)
             If varObj.SDT_DateClosed Is Nothing Then

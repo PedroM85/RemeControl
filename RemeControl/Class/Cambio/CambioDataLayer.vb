@@ -208,7 +208,7 @@ Public Class CambioDataLayer
         Try
 
             Dim Datos = New With {
-            .Fecha = DateTime.Now
+            .Fecha = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             }
 
             Dim result = JsonConvert.SerializeObject(Datos)
@@ -246,7 +246,7 @@ Public Class CambioDataLayer
         Dim table As DataTable
         Try
             Dim Datos = New With {
-                .Fecha = DateTime.Now
+                .Fecha = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             }
 
             Dim result = JsonConvert.SerializeObject(Datos)

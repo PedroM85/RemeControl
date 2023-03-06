@@ -23,7 +23,7 @@ Public Class ApiConstants
 
     Public Const PostSessionInfo As String = "PostSessionInfo"
 
-    Public Const GetIsOpenning As String = "isopen"
+    Public Const PostIsOpenning As String = "Postisopen"
 
 #End Region
 #Region "Informacion SalesSession in Salessession.controller"

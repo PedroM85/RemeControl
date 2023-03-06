@@ -2,7 +2,7 @@
 Imports Newtonsoft.Json
 Public Class TasaData
     Private iTAS_Id As Int32
-    Private dTAS_Date As Date
+    Private dTAS_Date As DateTime
     Private iTAS_Socio As Integer
     Private doTAS_Binance As Decimal
     Private doTAS_DolarPais As Decimal
@@ -24,11 +24,11 @@ Public Class TasaData
         End Set
     End Property
 
-    Public Property TAS_Date As Date
+    Public Property TAS_Date As DateTime
         Get
             Return dTAS_Date
         End Get
-        Set(value As Date)
+        Set(value As DateTime)
             dTAS_Date = value
         End Set
     End Property
