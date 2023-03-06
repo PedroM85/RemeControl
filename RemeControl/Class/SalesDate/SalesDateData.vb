@@ -17,7 +17,7 @@ End Class
 Public Class SalesDateInfo
     Public SDT_Id As DateTime
     Public SDT_DateOpened As DateTime
-
+    Public SDT_Fecha As DateTime
     Public SSS_Id As Integer?
 
     'Private sSDT_USR_OpenedBy As String
@@ -223,7 +223,8 @@ Public Class SalesDateData
         Try
             Dim OpenningDate As New SalesDateInfo With
            {
-           .SDT_ModifiedBy = oApp.CurrentUser.USR_Id
+           .SDT_ModifiedBy = oApp.CurrentUser.USR_Id,
+           .SDT_Fecha = DateTime.Now
            }
 
             Dim result = JsonConvert.SerializeObject(OpenningDate)
@@ -249,14 +250,18 @@ Public Class SalesDateData
         Try
             Dim OpenningDate As New SalesDateInfo With
            {
-           .SDT_ModifiedBy = oApp.CurrentUser.USR_Id
+           .SDT_ModifiedBy = oApp.CurrentUser.USR_Id,
+           .SDT_Fecha = DateTime.Now
            }
 
             Dim result = JsonConvert.SerializeObject(OpenningDate)
 
             Dim result_post = PostJson(url, result, oApp.CurrentUser)
 
-            dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+            Dim objSalesDateList = JsonConvert.DeserializeObject(Of List(Of SalesDateInfo))(result_post)
+
+            'dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+            'Dim dta As Object = JsonConvert.DeserializeObject(result_post)
 
 
             'Return Openning
@@ -353,7 +358,11 @@ Public Class SalesDateData
 
             Dim result_post = PostJson(Url, result, oApp.CurrentUser)
 
-            dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+
+            'dt = JsonConvert.DeserializeObject(Of DataTable)(result_post)
+            Dim respuesta As Object = JsonConvert.DeserializeObject(result_post)
+
+
 
         Catch ex As Exception
             dt = Nothing
@@ -387,10 +396,16 @@ Public Class SalesDateData
 
     End Function
 
-    Public Sub GetCounter()
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCounter)
+    Public Sub PostCounter()
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCounter)
         Try
-            Dim result_get = GetJson(Url, oApp.CurrentUser)
+            Dim Datos = New With {
+                .Fecha = DateTime.Now
+            }
+
+            Dim result = JsonConvert.SerializeObject(Datos)
+
+            Dim result_Post = PostJson(Url, result, oApp.CurrentUser)
 
         Catch ex As Exception
             Throw New Exception(ex.Message)

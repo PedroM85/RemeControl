@@ -185,7 +185,7 @@ Public Class CambioDataLayer
     End Function
     Public Function GetClientes() As DataTable
         Dim Clientes As ClienteData = Nothing
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCliente)
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
         Dim table As DataTable
         Try
             Clientes = New ClienteData

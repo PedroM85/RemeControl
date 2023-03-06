@@ -34,7 +34,7 @@ Public Class ApiConstants
 
     Public Const PostSessionPaymentType As String = "PostPaymentTypePerSession"
 
-    Public Const GetCounter As String = "GetCounter"
+    Public Const PostCounter As String = "PostCounter"
 
 #End Region
     'Informacion de tasas
@@ -50,7 +50,7 @@ Public Class ApiConstants
     Public Const UpdateSocio As String = "UpdateSocio"
     Public Const DeleteSocio As String = "DeleteSocio"
     'Informacion de Cliente
-    Public Const PostCliente As String = "GetClientes"
+    Public Const GetCliente As String = "GetClientes"
     Public Const GetClienteId As String = "GetCliente"
     Public Const CreateCliente As String = "CreateCliente"
     Public Const UpdateCliente As String = "UpdateCliente"

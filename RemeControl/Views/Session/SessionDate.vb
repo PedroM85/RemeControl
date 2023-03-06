@@ -140,6 +140,7 @@ Public Class SessionDate
         Me.pnlRestoreSales.Name = "pnlRestoreSales"
         Me.pnlRestoreSales.Size = New System.Drawing.Size(446, 46)
         Me.pnlRestoreSales.TabIndex = 31
+        Me.pnlRestoreSales.Visible = False
         '
         'Label7
         '
@@ -169,6 +170,7 @@ Public Class SessionDate
         Me.pnlCloseOpenSales.Name = "pnlCloseOpenSales"
         Me.pnlCloseOpenSales.Size = New System.Drawing.Size(446, 46)
         Me.pnlCloseOpenSales.TabIndex = 30
+        Me.pnlCloseOpenSales.Visible = False
         '
         'Label5
         '
@@ -343,7 +345,7 @@ Public Class SessionDate
 
             Me.Enabled = False
 
-            oDataLayer.GetCounter()
+            oDataLayer.PostCounter()
             WF.Hide()
         Catch ex As Exception
             MessageBox.Show(Me, ex.Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)

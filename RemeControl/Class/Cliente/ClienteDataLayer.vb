@@ -87,7 +87,7 @@ Public Class ClienteDataLayer
 
     Public Function GetClientes() As DataTable
         Dim Cliente As ClienteData = Nothing
-        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.PostCliente)
+        Dim Url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
         Dim table As DataTable
         Try
             Cliente = New ClienteData
