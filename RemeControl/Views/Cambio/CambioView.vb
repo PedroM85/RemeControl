@@ -21,7 +21,7 @@
         }
 
         Dim OBsource1 = New BindingSource With {
-            .DataSource = oCambioData.GetCambios
+            .DataSource = oCambioData.PostCambios
         }
 
 
