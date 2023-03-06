@@ -343,7 +343,7 @@ Public Class SessionDate
 
             Me.Enabled = False
 
-            oDataLayer.GetCounter()
+            oDataLayer.PostCounter()
             WF.Hide()
         Catch ex As Exception
             MessageBox.Show(Me, ex.Message, "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
