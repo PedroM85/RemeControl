@@ -53,21 +53,23 @@
     Private Sub CambioView_Addnew() Handles MyBase.AddNew
 
         Cursor = Cursors.WaitCursor
+        If oApp.IsSaleDateOpened Then
 
-        oCambioABM = New CambioABM With {
-            .Caption = "Agregar un cambio",
-            .Title = "Datos Generales"
+            oCambioABM = New CambioABM With {
+        .Caption = "Agregar un cambio",
+        .Title = "Datos Generales"
         }
-        'oClientABM.chkActive.Checked = True
-        oCambioABM.Edit(Nothing)
+            'oClientABM.chkActive.Checked = True
+            oCambioABM.Edit(Nothing)
 
-        Me.Visible = False
-        oCambioABM.Dock = DockStyle.Fill
-        oMainForm.ShowView(oCambioABM)
-        oMainForm.HideLeftPanel()
+            Me.Visible = False
+            oCambioABM.Dock = DockStyle.Fill
+            oMainForm.ShowView(oCambioABM)
+            oMainForm.HideLeftPanel()
 
 
-        oCambioABM.Select()
+            oCambioABM.Select()
+        End If
 
         Cursor = Cursors.Arrow
     End Sub
