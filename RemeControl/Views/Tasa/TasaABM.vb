@@ -375,7 +375,7 @@ Public Class TasaABM
 
             oData = New TasaData With {
             .TAS_Id = IIf(IsAddNew, 0, lblIdControl.Text),
-            .TAS_Date = DateTime.Now.ToString("yyyy/MM/dd 00:00:00"),
+            .TAS_Date = Now.ToString("yyyy/MM/dd 00:00:00"),
             .TAS_Binance = txtBina.Text,
             .TAS_Socio = cboSocio.SelectedValue,
             .TAS_DolarPais = txtDolarInPais.Text,
