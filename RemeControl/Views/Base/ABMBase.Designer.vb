@@ -62,7 +62,7 @@ Partial Class ABMBase
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(47, 12)
+        Me.lblDate.Location = New System.Drawing.Point(63, 12)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(40, 13)
         Me.lblDate.TabIndex = 5

@@ -62,7 +62,7 @@
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
-        lblDate.Text = Date.Now.ToShortTimeString
+        lblDate.Text = Now.ToString("dd-MM-yyyy HH:mm:ss")
 
 
     End Sub
