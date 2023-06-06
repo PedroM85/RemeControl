@@ -26,23 +26,23 @@ Partial Class FrmLogin
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblVersion = New System.Windows.Forms.Label()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtUserName
         '
+        Me.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtUserName.Location = New System.Drawing.Point(181, 73)
         Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(163, 20)
+        Me.txtUserName.Size = New System.Drawing.Size(163, 13)
         Me.txtUserName.TabIndex = 0
         '
         'txtPassword
         '
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtPassword.Location = New System.Drawing.Point(181, 99)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(163, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(163, 13)
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.UseSystemPasswordChar = True
         '
@@ -64,21 +64,11 @@ Partial Class FrmLogin
         Me.btnCancel.Text = "Cancelar"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.RemeControl.My.Resources.Resources.Login
-        Me.PictureBox1.Location = New System.Drawing.Point(-76, -83)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(563, 317)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox1.TabIndex = 4
-        Me.PictureBox1.TabStop = False
-        '
         'lblVersion
         '
         Me.lblVersion.AutoSize = True
-        Me.lblVersion.BackColor = System.Drawing.Color.White
-        Me.lblVersion.Location = New System.Drawing.Point(12, 172)
+        Me.lblVersion.BackColor = System.Drawing.Color.Transparent
+        Me.lblVersion.Location = New System.Drawing.Point(178, 174)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(25, 13)
         Me.lblVersion.TabIndex = 5
@@ -94,12 +84,10 @@ Partial Class FrmLogin
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUserName)
         Me.Controls.Add(Me.lblVersion)
-        Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FrmLogin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FrmLogin"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -109,6 +97,5 @@ Partial Class FrmLogin
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents btnAceptar As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lblVersion As Label
 End Class

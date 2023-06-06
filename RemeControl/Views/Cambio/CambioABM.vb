@@ -300,7 +300,7 @@ Public Class CambioABM
         Try
             oData = New CambioData With
                 {
-                .OP_Id = IIf(IsAddNew, 0, lblId.Text),
+                .OP_Id = If(IsAddNew, 0, lblId.Text),
                 .OP_Date = Now.ToString("yyyy-MM-dd 00:00:00"),
                 .OP_Socio = cboSocio.SelectedValue,
                 .OP_Cliente = cboCliente.SelectedValue,
@@ -319,11 +319,12 @@ Public Class CambioABM
             If IsAddNew Then
                 oDataLayer.CreateCambio(oData)
             Else
+
                 oDataLayer.UpdateCambio(oData)
             End If
 
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
     Private Sub CambioABM_SetDefaultValuesOnEdit(row As DataRowView) Handles MyBase.SetDefaultValuesOnEdit
@@ -395,38 +396,69 @@ Public Class CambioABM
         BoxValidate.ValiText(sender, e)
     End Sub
 
+    'Private Sub GeneralText()
+    '    Dim sb As New StringBuilder()
+    '    Dim pesos As Decimal = 0
+
+    '    If Not String.IsNullOrEmpty(txtPesos.Text) Then
+    '        pesos = txtPesos.Text
+    '    End If
+
+    '    If Not cboTasa.SelectedItem Is Nothing Then
+    '        tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
+    '    End If
+
+    '    Ope = pesos * tasa
+
+    '    If Not Ope = 0 Then
+    '        Banco = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(3)
+    '        Titular = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(5)
+    '        Cuenta = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(4)
+    '        Cedula = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(6)
+    '        lblOperacion.BackColor = Color.White
+    '        'lblOperacion.Text = String.Format("Pagomovil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
+    '        sb.Append("Pago móvil o Transferencia").AppendLine() _
+    '        .Append(String.Format("Banco: {0}", Banco)).AppendLine() _
+    '        .Append(String.Format("Tipo de cuenta: {0}", 0)).AppendLine() _
+    '        .Append(String.Format("Número de cuenta: {0}", Cuenta)).AppendLine() _
+    '        .Append(String.Format("Titular: {0}", Titular)).AppendLine() _
+    '        .Append(String.Format("Cédula: {0}", Cedula)).AppendLine() _
+    '        .Append(String.Format("Monto a transferir: {0:n2}", Ope))
+
+    '        lblOperacion.Text = sb.ToString()
+    '    End If
+    'End Sub
     Private Sub GeneralText()
         Dim sb As New StringBuilder()
         Dim pesos As Decimal = 0
 
-        If Not String.IsNullOrEmpty(txtPesos.Text) Then
-            pesos = txtPesos.Text
-        End If
+        If Decimal.TryParse(txtPesos.Text, pesos) Then
+            If Not cboTasa.SelectedItem Is Nothing Then
+                Dim tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
+                Dim Ope = pesos * tasa
 
-        If Not cboTasa.SelectedItem Is Nothing Then
-            tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
-        End If
+                If Not Ope = 0 Then
+                    Dim selectedRow = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row
 
-        Ope = pesos * tasa
+                    Dim Banco = selectedRow.ItemArray(3)
+                    Dim Titular = selectedRow.ItemArray(5)
+                    Dim Cuenta = selectedRow.ItemArray(4)
+                    Dim Cedula = selectedRow.ItemArray(6)
 
-        If Not Ope = 0 Then
-            Banco = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(3)
-            Titular = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(5)
-            Cuenta = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(4)
-            Cedula = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(6)
-            lblOperacion.BackColor = Color.White
-            'lblOperacion.Text = String.Format("Pagomovil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
-            sb.Append("Pago móvil o Transferencia").AppendLine() _
-            .Append(String.Format("Banco: {0}", Banco)).AppendLine() _
-            .Append(String.Format("Tipo de cuenta: {0}", 0)).AppendLine() _
-            .Append(String.Format("Número de cuenta: {0}", Cuenta)).AppendLine() _
-            .Append(String.Format("Titular: {0}", Titular)).AppendLine() _
-            .Append(String.Format("Cédula: {0}", Cedula)).AppendLine() _
-            .Append(String.Format("Monto a transferir: {0:n2}", Ope))
+                    sb.AppendFormat("Pago móvil o Transferencia{0}", Environment.NewLine) _
+                  .AppendFormat("Banco: {0}{1}", Banco, Environment.NewLine) _
+                  .AppendFormat("Tipo de cuenta: {0}{1}", 0, Environment.NewLine) _
+                  .AppendFormat("Número de cuenta: {0}{1}", Cuenta, Environment.NewLine) _
+                  .AppendFormat("Titular: {0}{1}", Titular, Environment.NewLine) _
+                  .AppendFormat("Cédula: {0}{1}", Cedula, Environment.NewLine) _
+                  .AppendFormat("Monto a transferir: {0:n2}", Ope)
 
-            lblOperacion.Text = sb.ToString()
+                    lblOperacion.Text = sb.ToString()
+                End If
+            End If
         End If
     End Sub
+
 
     Private Sub txtUSTDBuy_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUSTDBuy.KeyPress
         BoxValidate.ValiText(sender, e)
