@@ -207,6 +207,13 @@
             mControllers(mCurrStep).HandleKey(e)
         End If
     End Sub
+    Public Sub CallCalcule(View As UserControl)
+        Dim sender As Object = DirectCast(btnCalcular, Button)
+        Dim e As EventArgs = New EventArgs
+        ExitView(View)
+        btnCalcular_Click(sender, e)
+
+    End Sub
     Public Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
         If oApp.SessionActive() Then
             SetDateMenuButtons(sender)

@@ -3,13 +3,14 @@ Imports System.IO
 Imports System.Text
 Imports System.Net
 Public Class JsonConnect
+    Implements IDisposable
 
+    Private response As HttpWebResponse
     Public Function SendRequest(ByVal url As String, ByVal dataEncoding As String,
                                          ByVal method As String, Optional oUser As LoginIn = Nothing) As String
 
 
         Dim request As HttpWebRequest
-        Dim response As HttpWebResponse = Nothing
         Dim reader As StreamReader
         Dim retval As String = String.Empty
 
@@ -39,7 +40,7 @@ Public Class JsonConnect
             Return retval
         Catch ex As WebException
             If ex.Response IsNot Nothing Then
-                    Using myreader As New StreamReader(ex.Response.GetResponseStream)
+                Using myreader As New StreamReader(ex.Response.GetResponseStream)
                     'Throw New Exception(ex.Message + vbCrLf + myreader.ReadToEnd + vbCrLf + url)
                     Throw New Exception(myreader.ReadToEnd)
                     '    Dim weError As eWallet.eWalletError = eWallet.eWalletError.fromString(myreader.ReadToEnd)
@@ -50,15 +51,15 @@ Public Class JsonConnect
 
                     '    Throw New eWallet.eWalletException(msg, ex, weError)
                 End Using
-                Else
-                    Throw New Exception(ex.Message)
-                End If
+            Else
+                Throw New Exception(ex.Message)
+            End If
 
-            Finally
-                If Not response Is Nothing Then response.Close()
-
-            End Try
-            Return retval
+        Finally
+            If Not response Is Nothing Then response.Close()
+            response = Nothing
+        End Try
+        Return retval
 
     End Function
 
@@ -94,6 +95,11 @@ Public Class JsonConnect
     Public Function PostJson(ByVal Url As String, ByVal obj As Object, oUser As LoginIn) As String
         Return SendJson(Url, WebRequestMethods.Http.Post, obj, oApp.CurrentUser)
     End Function
-
+    Public Sub Dispose() Implements IDisposable.Dispose
+        If response IsNot Nothing Then
+            response.Close()
+            response = Nothing
+        End If
+    End Sub
 
 End Class

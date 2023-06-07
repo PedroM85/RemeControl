@@ -19,6 +19,7 @@ Public Class TasaView
         Dim oTasaData As New TasaDataLayer
         oBsource = New BindingSource
         dgvView.DataSource = Nothing
+
         Try
 
             oBsource.DataSource = oTasaData.GetTasas

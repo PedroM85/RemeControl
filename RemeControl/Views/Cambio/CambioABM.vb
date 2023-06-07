@@ -343,52 +343,61 @@ Public Class CambioABM
         lblOperacion.DataBindings.Add("Text", row, "OP_Operation")
     End Sub
     Private Sub CargaCBO()
-        Dim oCambioData As New CambioDataLayer
-        Dim oBancosoData As New BancoSoDataLayer
+        Dim oCambioData As CambioDataLayer = Nothing
+        Dim oBancosoData As BancoSoDataLayer = Nothing
 
-        Dim Tasas As New BindingSource
-        Dim BancoSo As New BindingSource
+        Try
+            oCambioData = New CambioDataLayer
 
-        cboSocio.DataSource = oCambioData.GetSocios
-        cboSocio.ValueMember = "SOC_Id"
-        cboSocio.DisplayMember = "SOC_Name"
+            Dim Socio = oCambioData.GetSocios
+            If Socio.Rows.Count > 0 AndAlso Socio.Rows(0).ItemArray(0) = -1 Then
+                cboSocio.Items.Add("No hay registro")
+            Else
+                cboSocio.DataSource = oCambioData.GetSocios
+                cboSocio.ValueMember = "SOC_Id"
+                cboSocio.DisplayMember = "SOC_Name"
+            End If
 
+            Dim Cliente = oCambioData.GetClientes
+            If Cliente.Rows.Count > 0 AndAlso Socio.Rows(0).ItemArray(0) = -1 Then
+                cboCliente.Items.Add("No hay registro")
+            Else
+                cboCliente.DataSource = oCambioData.GetClientes
+                cboCliente.ValueMember = "CLI_Id"
+                cboCliente.DisplayMember = "CLI_Nombre"
+            End If
 
-        cboCliente.DataSource = oCambioData.GetClientes
-        cboCliente.ValueMember = "CLI_Id"
-        cboCliente.DisplayMember = "CLI_Nombre"
+            Dim Tasas = oCambioData.GetTasas()
+            If Tasas.Rows.Count > 0 AndAlso Tasas.Rows(0).ItemArray(0) = -9999 Then
+                cboTasa.DataSource = Tasas
+                cboTasa.ValueMember = "TAS_TasaCliente"
+                cboTasa.DisplayMember = "TAS_TasaCli"
+                tasa = cboTasa.SelectedValue
+            End If
 
-
-        Tasas.DataSource = oCambioData.GetTasas
-
-        If Tasas.Item(0).Row.ItemArray(0) = -9999 Then
-
-        Else
-            cboTasa.DataSource = Tasas.DataSource
-            cboTasa.ValueMember = "TAS_TasaCliente"
-            cboTasa.DisplayMember = "TAS_TasaCli"
-            tasa = cboTasa.SelectedValue
-
-        End If
-
-        cboStatus.DataSource = oCambioData.GetStatus
-        cboStatus.ValueMember = "STA_Id"
-        cboStatus.DisplayMember = "STA_Name"
-
-        BancoSo.DataSource = oBancosoData.GetBancoSo
-        If BancoSo.Item(0).Row.ItemArray(0) = -1 Then
-            With cboBanco
-                .Items.Add("No hay registro")
-            End With
-        Else
-            With cboBanco
-                .DataSource = BancoSo.DataSource
-                .ValueMember = "OSB_Id"
-                .DisplayMember = "OSB_Nombre"
-            End With
-        End If
+            cboStatus.DataSource = oCambioData.GetStatus
+            cboStatus.ValueMember = "STA_Id"
+            cboStatus.DisplayMember = "STA_Name"
 
 
+            oBancosoData = New BancoSoDataLayer
+            Dim BancoSo = oBancosoData.GetBancoSo()
+            If BancoSo.Rows.Count > 0 AndAlso BancoSo.Rows(0).ItemArray(0) = -1 Then
+                cboBanco.Items.Add("No hay registro")
+            Else
+                With cboBanco
+                    .DataSource = BancoSo
+                    .ValueMember = "OSB_Id"
+                    .DisplayMember = "OSB_Nombre"
+                End With
+            End If
+
+        Catch ex As Exception
+        Finally
+            If oBancosoData IsNot Nothing Then
+                oBancosoData.Dispose
+            End If
+        End Try
 
     End Sub
 

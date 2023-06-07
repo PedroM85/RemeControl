@@ -458,6 +458,8 @@ Public Class TasaABM
             With cboSocio
                 .Items.Add("No hay socios")
             End With
+            cboSocio.Refresh()
+
             btnOk.Enabled = False
         Else
             With cboSocio
@@ -467,5 +469,9 @@ Public Class TasaABM
 
             End With
         End If
+    End Sub
+
+    Private Sub TasaABM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
