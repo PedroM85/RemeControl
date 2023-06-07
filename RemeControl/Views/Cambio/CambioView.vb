@@ -30,7 +30,7 @@
         Try
             If oBsource.Item(0).Row.ItemArray(0) = -9999 Then
                 MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                oMainForm.CallCalcule(oCambioABM)
+                oMainForm.CallCalcule(Me)
 
                 'btnNew.Enabled = False
             End If
