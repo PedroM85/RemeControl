@@ -21,7 +21,7 @@
         }
 
         Dim OBsource1 = New BindingSource With {
-            .DataSource = oCambioData.PostCambios
+            .DataSource = oCambioData.GetCambios
         }
 
 
@@ -30,9 +30,7 @@
         Try
             If oBsource.Item(0).Row.ItemArray(0) = -9999 Then
                 MessageBox.Show("Debe crear una tasa para continuar!", "Unelsoft", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                oMainForm.CallCalcule(Me)
-
-                'btnNew.Enabled = False
+                oMainForm.FlagRed = True
             End If
 
             If OBsource1.DataSource Is Nothing Then
@@ -103,7 +101,7 @@
             If MessageBox.Show("Desea eliminar " & " '" & Trim(dgvView.CurrentRow.Cells(1).Value) & "'?", Me.Caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
                 Try
 
-                    Dim Data As CambioData = New CambioData With
+                    Dim Data As CambioDataLayer = New CambioDataLayer With
                     {
                         .OP_Id = dgvView.CurrentRow.Cells(0).Value,
                         .OP_ModifiedBy = oApp.CurrentUser.USR_Id

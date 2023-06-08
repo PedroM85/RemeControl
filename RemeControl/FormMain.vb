@@ -9,6 +9,7 @@
     Private mControllers(15) As Controller
     Private WithEvents mTrMgr As EWTransactionManager
 
+    Public FlagRed As Boolean = False
 
 #Region "Keydown"
     Private Enum State
@@ -153,8 +154,10 @@
 
             oView = oTransView
             oView.Dock = DockStyle.Fill
+            oView.BringToFront()
             pnlFill.Controls.Clear()
             pnlFill.Controls.Add(oView)
+            pnlFill.BringToFront()
             oView.Focus()
 
         End If
@@ -207,11 +210,11 @@
             mControllers(mCurrStep).HandleKey(e)
         End If
     End Sub
-    Public Sub CallCalcule(View As UserControl)
+    Public Sub CallCalcule()
         Dim sender As Object = DirectCast(btnCalcular, Button)
-        Dim e As EventArgs = New EventArgs
-        ExitView(View)
-        btnCalcular_Click(sender, e)
+        SetDateMenuButtons(sender)
+        mTrMgr.DoMenuItem("TASA")
+
 
     End Sub
     Public Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
@@ -277,8 +280,11 @@
         If oApp.SessionActive() Then
             'If oApp.IsSaleDateOpened Then
             SetDateMenuButtons(sender)
-                mTrMgr.DoMenuItem("CAMBIO")
-                mCurrStep = State.ShowCambio
+            mTrMgr.DoMenuItem("CAMBIO")
+            If FlagRed Then
+                CallCalcule()
+            End If
+            mCurrStep = State.ShowCambio
             'End If
         Else
             MessageBox.Show("La session caduco", "Remesa Control", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)

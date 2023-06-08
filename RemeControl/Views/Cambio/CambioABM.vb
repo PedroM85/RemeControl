@@ -294,11 +294,11 @@ Public Class CambioABM
         b.BackColor = focusedBackColor
     End Sub
     Private Sub CAmbioABM_Save() Handles MyBase.Save
-        Dim oData As CambioData
+        Dim oData As CambioDataLayer
         oDataLayer = New CambioDataLayer
 
         Try
-            oData = New CambioData With
+            oData = New CambioDataLayer With
                 {
                 .OP_Id = If(IsAddNew, 0, lblId.Text),
                 .OP_Date = Now.ToString("yyyy-MM-dd 00:00:00"),
@@ -368,7 +368,9 @@ Public Class CambioABM
             End If
 
             Dim Tasas = oCambioData.GetTasas()
-            If Tasas.Rows.Count > 0 AndAlso Tasas.Rows(0).ItemArray(0) = -9999 Then
+            If Tasas.Rows.Count > 0 AndAlso Tasas.Rows(0).ItemArray(0) = -1 Then
+            Else
+
                 cboTasa.DataSource = Tasas
                 cboTasa.ValueMember = "TAS_TasaCliente"
                 cboTasa.DisplayMember = "TAS_TasaCli"
@@ -395,7 +397,7 @@ Public Class CambioABM
         Catch ex As Exception
         Finally
             If oBancosoData IsNot Nothing Then
-                oBancosoData.Dispose
+                oBancosoData.Dispose()
             End If
         End Try
 
