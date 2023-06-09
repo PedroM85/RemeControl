@@ -24,12 +24,6 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         pnlBottom = New Panel()
         pnlLeft = New Panel()
-        MenuStrip1 = New MenuStrip()
-        AguaToolStripMenuItem = New ToolStripMenuItem()
-        ArrorToolStripMenuItem = New ToolStripMenuItem()
-        PegaToolStripMenuItem = New ToolStripMenuItem()
-        pnlLeft.SuspendLayout()
-        MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' pnlBottom
@@ -44,41 +38,12 @@ Partial Class frmMain
         ' pnlLeft
         ' 
         pnlLeft.BackColor = Color.FromArgb(CByte(44), CByte(27), CByte(71))
-        pnlLeft.Controls.Add(MenuStrip1)
         pnlLeft.Dock = DockStyle.Left
         pnlLeft.Location = New Point(0, 0)
         pnlLeft.Name = "pnlLeft"
         pnlLeft.Size = New Size(184, 514)
         pnlLeft.TabIndex = 1
         ' 
-        ' MenuStrip1
-        ' 
-        MenuStrip1.Dock = DockStyle.Left
-        MenuStrip1.Items.AddRange(New ToolStripItem() {AguaToolStripMenuItem, PegaToolStripMenuItem})
-        MenuStrip1.Location = New Point(0, 0)
-        MenuStrip1.MdiWindowListItem = AguaToolStripMenuItem
-        MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.RenderMode = ToolStripRenderMode.System
-        MenuStrip1.Size = New Size(126, 514)
-        MenuStrip1.Stretch = False
-        MenuStrip1.TabIndex = 0
-        MenuStrip1.Text = "MenuStrip1"' 
-        ' AguaToolStripMenuItem
-        ' 
-        AguaToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ArrorToolStripMenuItem})
-        AguaToolStripMenuItem.Name = "AguaToolStripMenuItem"
-        AguaToolStripMenuItem.Size = New Size(113, 19)
-        AguaToolStripMenuItem.Text = "Agua"' 
-        ' ArrorToolStripMenuItem
-        ' 
-        ArrorToolStripMenuItem.Name = "ArrorToolStripMenuItem"
-        ArrorToolStripMenuItem.Size = New Size(180, 22)
-        ArrorToolStripMenuItem.Text = "Arror"' 
-        ' PegaToolStripMenuItem
-        ' 
-        PegaToolStripMenuItem.Name = "PegaToolStripMenuItem"
-        PegaToolStripMenuItem.Size = New Size(113, 19)
-        PegaToolStripMenuItem.Text = "Pega"' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -88,21 +53,12 @@ Partial Class frmMain
         Controls.Add(pnlBottom)
         Controls.Add(pnlLeft)
         Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point)
-        MainMenuStrip = MenuStrip1
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
         Text = "frmMain"
-        pnlLeft.ResumeLayout(False)
-        pnlLeft.PerformLayout()
-        MenuStrip1.ResumeLayout(False)
-        MenuStrip1.PerformLayout()
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents pnlBottom As Panel
     Friend WithEvents pnlLeft As Panel
-    Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents AguaToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ArrorToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PegaToolStripMenuItem As ToolStripMenuItem
 End Class
