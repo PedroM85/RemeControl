@@ -313,44 +313,69 @@ Public Class TasaABM
         'ValiText(sender, e)
         FuntionCon.ManejarDecimalEnTextBox(sender, e)
     End Sub
-
-
     Private Sub CalcularTasa()
+        Dim txtBinaValue As Decimal
+        Dim txtDolarInPaisValue As Decimal
+        Dim txtComisionValue As Decimal
+        Dim TasaFull As Decimal
+        Dim TasaClien As Decimal
 
-        Try
-            If Not String.IsNullOrEmpty(txtBina.Text) OrElse Not Val(txtBina.Text) = 0 Then
-                If Not String.IsNullOrEmpty(txtDolarInPais.Text) OrElse Not Val(txtDolarInPais.Text) = 0 Then
-                    If Val(txtBina.Text) = 0 Then
-                        TasaFull = 0
-                    Else
-                        TasaFull = Val(txtDolarInPais.Text) / Val(txtBina.Text)
-                    End If
-                End If
-            End If
+        If Decimal.TryParse(txtBina.Text, txtBinaValue) AndAlso txtBinaValue <> 0 AndAlso
+        Decimal.TryParse(txtDolarInPais.Text, txtDolarInPaisValue) AndAlso txtDolarInPaisValue <> 0 Then
 
-            If Not TasaFull = 0 Then
-                TasaClien = TasaFull - ((TasaFull / (1 - Val(txtComision.Text))) - TasaFull)
+            TasaFull = txtDolarInPaisValue / txtBinaValue
 
-                txtTasaFull.Text = TasaFull.ToString("n6")
-                'txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
-                txtTasaVenta.Text = TasaClien.ToString("n4")
-                'txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
+            If Decimal.TryParse(txtComision.Text, txtComisionValue) AndAlso txtComisionValue <> 0 Then
+                TasaClien = TasaFull - ((TasaFull / (1 - txtComisionValue)) - TasaFull)
             Else
-                'txtTasaFull.Text = "0.000000"
-                TasaFull = "0.000000"
-                txtTasaFull.ResetText()
-                'txtTasaVenta.Text = "0.0000"
-                TasaClien = "0.0000"
-                txtTasaVenta.ResetText()
+                TasaClien = TasaFull
             End If
 
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-
-
+            txtTasaFull.Text = TasaFull.ToString("n6")
+            txtTasaVenta.Text = TasaClien.ToString("n4")
+        Else
+            txtTasaFull.Text = "0.000000"
+            txtTasaVenta.Text = "0.0000"
+        End If
     End Sub
+
+
+    'Private Sub CalcularTasa()
+
+    '    Try
+    '        If Not String.IsNullOrEmpty(txtBina.Text) OrElse Not Val(txtBina.Text) = 0 Then
+    '            If Not String.IsNullOrEmpty(txtDolarInPais.Text) OrElse Not Val(txtDolarInPais.Text) = 0 Then
+    '                If Val(txtBina.Text) = 0 Then
+    '                    TasaFull = 0
+    '                Else
+    '                    TasaFull = Val(txtDolarInPais.Text) / Val(txtBina.Text)
+    '                End If
+    '            End If
+    '        End If
+
+    '        If Not TasaFull = 0 Then
+    '            TasaClien = TasaFull - ((TasaFull / (1 - Val(txtComision.Text))) - TasaFull)
+
+    '            txtTasaFull.Text = TasaFull.ToString("n6")
+    '            'txtTasaFull.DataBindings.Add("text", TasaFull.ToString("n6"), "")
+    '            txtTasaVenta.Text = TasaClien.ToString("n4")
+    '            'txtTasaVenta.DataBindings.Add("Text", TasaClien.ToString("n4"), "")
+    '        Else
+    '            'txtTasaFull.Text = "0.000000"
+    '            TasaFull = "0.000000"
+    '            txtTasaFull.ResetText()
+    '            'txtTasaVenta.Text = "0.0000"
+    '            TasaClien = "0.0000"
+    '            txtTasaVenta.ResetText()
+    '        End If
+
+
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.Message)
+    '    End Try
+
+
+    'End Sub
 
     Private Sub txtBina_TextChanged(sender As Object, e As EventArgs) Handles txtBina.TextChanged
 
@@ -438,15 +463,15 @@ Public Class TasaABM
 
     End Sub
 
-    Private Sub txtDolarInPais_LostFocus(sender As Object, e As EventArgs) Handles txtDolarInPais.LostFocus
-        txtTasaFull.Text = TasaFull.ToString("n6")
-        txtTasaVenta.Text = TasaClien.ToString("n4")
-    End Sub
+    'Private Sub txtDolarInPais_LostFocus(sender As Object, e As EventArgs) Handles txtDolarInPais.LostFocus
+    '    txtTasaFull.Text = TasaFull.ToString("n6")
+    '    txtTasaVenta.Text = TasaClien.ToString("n4")
+    'End Sub
 
-    Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
-        txtTasaFull.Text = TasaFull.ToString("n6")
-        txtTasaVenta.Text = TasaClien.ToString("n4")
-    End Sub
+    'Private Sub txtBina_LostFocus(sender As Object, e As EventArgs) Handles txtBina.LostFocus
+    '    txtTasaFull.Text = TasaFull.ToString("n6")
+    '    txtTasaVenta.Text = TasaClien.ToString("n4")
+    'End Sub
 
     Private Sub CargaBOX()
         Dim oBSource As New BindingSource

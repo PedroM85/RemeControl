@@ -33,7 +33,7 @@
                 oMainForm.FlagRed = True
             End If
 
-            If OBsource1.DataSource Is Nothing Then
+            If OBsource1.Item(0).Row.ItemArray(0) = -9999 Then
                 Label1.Visible = True
             Else
                 Label1.Visible = False

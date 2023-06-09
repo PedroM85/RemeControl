@@ -22,7 +22,7 @@ Public Class CambioDataLayer
         LoadClientes()
         LoadTasas()
         LoadStatus()
-        'LoadCambios()
+        LoadCambios()
     End Sub
 
     Public Function GetSocios() As DataTable
@@ -44,6 +44,7 @@ Public Class CambioDataLayer
         Dim result_Post = PostJson(url, result, oApp.CurrentUser)
         Dim table As DataTable = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         If table IsNot Nothing Then
+            dataset.Tables("Tasas").Rows.Clear()
             dataset.Tables("Tasas").Merge(table)
         End If
         Return dataset.Tables("Tasas")
@@ -63,6 +64,7 @@ Public Class CambioDataLayer
         Dim result_Post = PostJson(url, result, oApp.CurrentUser)
         Dim table As DataTable = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         If table IsNot Nothing Then
+            dataset.Tables("Cambios").Rows.Clear()
             dataset.Tables("Cambios").Merge(table)
         End If
         Return dataset.Tables("Cambios")
@@ -72,6 +74,7 @@ Public Class CambioDataLayer
         Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetSocios)
         Dim table As DataTable = GetData(url)
         If table IsNot Nothing Then
+            dataset.Tables("Socios").Rows.Clear()
             dataset.Tables("Socios").Merge(table)
         End If
     End Sub
@@ -80,6 +83,7 @@ Public Class CambioDataLayer
         Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetCliente)
         Dim table As DataTable = GetData(url)
         If table IsNot Nothing Then
+            dataset.Tables("Clientes").Rows.Clear()
             dataset.Tables("Clientes").Merge(table)
         End If
     End Sub
@@ -93,6 +97,7 @@ Public Class CambioDataLayer
         Dim result_Post = PostJson(url, result, oApp.CurrentUser)
         Dim table As DataTable = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         If table IsNot Nothing Then
+            dataset.Tables("Tasas").Rows.Clear()
             dataset.Tables("Tasas").Merge(table)
         End If
     End Sub
@@ -101,6 +106,7 @@ Public Class CambioDataLayer
         Dim url As String = oApp.Url.ProcessUrl(ApiConstants.GetStatus)
         Dim table As DataTable = GetData(url)
         If table IsNot Nothing Then
+            dataset.Tables("Status").Rows.Clear()
             dataset.Tables("Status").Merge(table)
         End If
     End Sub
@@ -114,6 +120,7 @@ Public Class CambioDataLayer
         Dim result_Post = PostJson(url, result, oApp.CurrentUser)
         Dim table As DataTable = JsonConvert.DeserializeObject(Of DataTable)(result_Post)
         If table IsNot Nothing Then
+            dataset.Tables("Cambios").Rows.Clear()
             dataset.Tables("Cambios").Merge(table)
         End If
     End Sub

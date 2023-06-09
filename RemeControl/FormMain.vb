@@ -283,6 +283,7 @@
             mTrMgr.DoMenuItem("CAMBIO")
             If FlagRed Then
                 CallCalcule()
+                FlagRed = False
             End If
             mCurrStep = State.ShowCambio
             'End If

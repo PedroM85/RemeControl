@@ -12,7 +12,6 @@ Public Class CambioABM
     Friend WithEvents cboBanco As ComboBox
     Private ReadOnly focusedBackColor As Color = Color.Gainsboro
 
-
     Private tasa As String = "0"
     Private Ope As Double
     Private Banco As String
@@ -407,38 +406,6 @@ Public Class CambioABM
         BoxValidate.ValiText(sender, e)
     End Sub
 
-    'Private Sub GeneralText()
-    '    Dim sb As New StringBuilder()
-    '    Dim pesos As Decimal = 0
-
-    '    If Not String.IsNullOrEmpty(txtPesos.Text) Then
-    '        pesos = txtPesos.Text
-    '    End If
-
-    '    If Not cboTasa.SelectedItem Is Nothing Then
-    '        tasa = DirectCast(cboTasa.Items(cboTasa.SelectedIndex), System.Data.DataRowView).Row.ItemArray(2)
-    '    End If
-
-    '    Ope = pesos * tasa
-
-    '    If Not Ope = 0 Then
-    '        Banco = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(3)
-    '        Titular = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(5)
-    '        Cuenta = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(4)
-    '        Cedula = DirectCast(cboCliente.Items(cboCliente.SelectedIndex), System.Data.DataRowView).Row.ItemArray(6)
-    '        lblOperacion.BackColor = Color.White
-    '        'lblOperacion.Text = String.Format("Pagomovil o Transferencia  " & vbCrLf & "Banco: {0} " & vbCrLf & "Tipo de cuenta: {1} " & vbCrLf & "Numero de cuenta: {2} " & vbCrLf & "Titular: {3} " & vbCrLf & "Cedula: {4} " & vbCrLf & "monto a transferir: {5}", Banco, 0, Cuenta, Titular, Cedula, Ope.ToString("n2"))
-    '        sb.Append("Pago móvil o Transferencia").AppendLine() _
-    '        .Append(String.Format("Banco: {0}", Banco)).AppendLine() _
-    '        .Append(String.Format("Tipo de cuenta: {0}", 0)).AppendLine() _
-    '        .Append(String.Format("Número de cuenta: {0}", Cuenta)).AppendLine() _
-    '        .Append(String.Format("Titular: {0}", Titular)).AppendLine() _
-    '        .Append(String.Format("Cédula: {0}", Cedula)).AppendLine() _
-    '        .Append(String.Format("Monto a transferir: {0:n2}", Ope))
-
-    '        lblOperacion.Text = sb.ToString()
-    '    End If
-    'End Sub
     Private Sub GeneralText()
         Dim sb As New StringBuilder()
         Dim pesos As Decimal = 0
@@ -486,19 +453,14 @@ Public Class CambioABM
     End Sub
 
     Private Sub txtPesos_TextChanged(sender As Object, e As EventArgs) Handles txtPesos.TextChanged
-
         GeneralText()
     End Sub
     Private Sub cboCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedIndexChanged
-
         GeneralText()
-
     End Sub
 
     Private Sub cboTasa_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTasa.SelectedIndexChanged
-
         GeneralText()
-
     End Sub
 
     Private Sub CambioABM_ValidateControls(ByRef Cancel As Boolean, IsNewAdd As Boolean) Handles MyBase.ValidateControls
