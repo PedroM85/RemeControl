@@ -7,8 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-    <AssemblyVersion>1.0.23160.7</AssemblyVersion>
-    <FileVersion>1.0.23160.7</FileVersion>
+    <AssemblyVersion>1.0.23160.9</AssemblyVersion>
+    <FileVersion>1.0.23160.9</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

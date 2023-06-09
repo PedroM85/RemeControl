@@ -23,17 +23,31 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         pnlBottom = New Panel()
+        Label1 = New Label()
         pnlLeft = New Panel()
+        pnlBottom.SuspendLayout()
         SuspendLayout()
         ' 
         ' pnlBottom
         ' 
         pnlBottom.BackColor = Color.FromArgb(CByte(44), CByte(27), CByte(71))
+        pnlBottom.Controls.Add(Label1)
         pnlBottom.Dock = DockStyle.Bottom
         pnlBottom.Location = New Point(184, 475)
         pnlBottom.Name = "pnlBottom"
         pnlBottom.Size = New Size(635, 39)
         pnlBottom.TabIndex = 0
+        ' 
+        ' Label1
+        ' 
+        Label1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Right
+        Label1.Location = New Point(383, 10)
+        Label1.Name = "Label1"
+        Label1.RightToLeft = RightToLeft.Yes
+        Label1.Size = New Size(240, 20)
+        Label1.TabIndex = 0
+        Label1.Text = "Label1"
+        Label1.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' pnlLeft
         ' 
@@ -53,12 +67,15 @@ Partial Class frmMain
         Controls.Add(pnlBottom)
         Controls.Add(pnlLeft)
         Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point)
+        ForeColor = Color.White
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
         Text = "frmMain"
+        pnlBottom.ResumeLayout(False)
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents pnlBottom As Panel
     Friend WithEvents pnlLeft As Panel
+    Friend WithEvents Label1 As Label
 End Class
