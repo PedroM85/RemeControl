@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33326.253
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RemeControl", "RemeControl\RemeControl.vbproj", "{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RemesaControl", "RemesaControl\RemesaControl.vbproj", "{D9862BAE-5E3F-4EDA-9506-659351DF055F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D585BAE-4883-4A7E-840B-A41AC55CD9F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9862BAE-5E3F-4EDA-9506-659351DF055F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9862BAE-5E3F-4EDA-9506-659351DF055F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9862BAE-5E3F-4EDA-9506-659351DF055F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9862BAE-5E3F-4EDA-9506-659351DF055F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
