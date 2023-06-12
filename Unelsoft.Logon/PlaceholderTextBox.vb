@@ -4,6 +4,8 @@
     Private placeholderText As String = String.Empty
     Private placeholderColor As Color = Color.Gray
     Private originalColor As Color
+    Private isPlaceholder As Boolean = False
+
     Public Sub New()
         originalColor = Me.ForeColor
         AddHandler Me.GotFocus, AddressOf TextBox_GotFocus
@@ -17,23 +19,36 @@
         Set(value As String)
             placeholderText = value
             If String.IsNullOrEmpty(Me.Text) Then
-                Me.Text = placeholderText
-                Me.ForeColor = placeholderColor
+                SetPlaceholderText()
             End If
         End Set
     End Property
+
     Private Sub TextBox_GotFocus(sender As Object, e As EventArgs)
-        If Me.Text = placeholderText Then
+        If isPlaceholder Then
             Me.Text = String.Empty
             Me.ForeColor = originalColor
+            isPlaceholder = False
         End If
     End Sub
 
     Private Sub TextBox_LostFocus(sender As Object, e As EventArgs)
         If String.IsNullOrEmpty(Me.Text) Then
-            Me.Text = placeholderText
-            Me.ForeColor = placeholderColor
+            SetPlaceholderText()
         End If
     End Sub
 
+    Private Sub SetPlaceholderText()
+        Me.Text = placeholderText
+        Me.ForeColor = placeholderColor
+        isPlaceholder = True
+    End Sub
+
+    Public Sub ResetPlaceholder()
+        If isPlaceholder Then
+            Me.Text = String.Empty
+            Me.ForeColor = originalColor
+            isPlaceholder = False
+        End If
+    End Sub
 End Class

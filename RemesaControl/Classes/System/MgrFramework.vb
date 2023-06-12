@@ -1,4 +1,8 @@
-﻿Imports Unelsoft.AccessController
+﻿Imports System.IO
+Imports System.Net
+Imports System.Net.NetworkInformation
+Imports Unelsoft
+Imports Unelsoft.AccessController
 
 Public Class SalesDate
     Public SalesDateId As Date
@@ -12,31 +16,20 @@ Public Class MgrFramework
     Protected mUser As LoginIn
     Protected mSalesDateInfo As SalesDateInfo
     Protected mLastAction As Date
-    Protected mWebSite As String
-    'Protected mParams As Parameters
-    'Protected mProcessUrl As ProcesarUrl
+    Protected mParams As Parameters
+    Protected mConnInfo As ConnectionInfo
+    Protected mConn As OleDb.OleDbConnection
 
-    Public Enum WebDirection
-        Internet
-        Local
-    End Enum
     Public Function Terminal() As String
         Return "1"
     End Function
-    'Public ReadOnly Property Params() As Parameters
-    '    Get
-    '        Return mParams
-    '    End Get
-    'End Property
-
-    Public Property WebSite() As String
+    Public ReadOnly Property Params() As Parameters
         Get
-            Return mWebSite
+            Return mParams
         End Get
-        Set(value As String)
-            mWebSite = value
-        End Set
     End Property
+
+
     'Public ReadOnly Property Url() As ProcesarUrl
     '    Get
     '        Return mProcessUrl
@@ -58,31 +51,76 @@ Public Class MgrFramework
     'End Function
     Public Function InitConnection() As Boolean
         Try
-            If My.Computer.Network.Ping("8.8.8.8") Then
+            mConn = New OleDb.OleDbConnection(mConnInfo.OLEDBConnectionString)
+            mConn.Open()
 
-                Return True
-            Else
-                Return False
+
+            Dim oCmd As OleDb.OleDbCommand = mConn.CreateCommand
+            oCmd.CommandType = CommandType.StoredProcedure
+            oCmd.CommandText = "SYS_SetupConnection"
+            oCmd.ExecuteNonQuery()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+        'Try
+        '    Dim activeInterfaces As New List(Of NetworkInterface)()
+
+        '    ' Obtener todas las tarjetas de red activas
+        '    For Each networkInterface As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
+        '        ' Verificar si la tarjeta está activa y tiene una dirección IP
+        '        If networkInterface.OperationalStatus = OperationalStatus.Up AndAlso networkInterface.NetworkInterfaceType <> NetworkInterfaceType.Loopback AndAlso networkInterface.GetIPProperties().UnicastAddresses.Count > 0 Then
+        '            activeInterfaces.Add(networkInterface)
+        '        End If
+        '    Next
+
+        '    ' Realizar pruebas de ping con cada tarjeta activa
+        '    For Each networkInterface As NetworkInterface In activeInterfaces
+        '        For Each unicastAddress As UnicastIPAddressInformation In networkInterface.GetIPProperties().UnicastAddresses
+        '            If unicastAddress.Address.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork AndAlso My.Computer.Network.Ping(unicastAddress.Address.ToString()) Then
+        '                ' La tarjeta está activa y responde al ping
+        '                Return True
+        '            End If
+        '        Next
+        '    Next
+
+        '    ' Ninguna tarjeta está activa o responde al ping
+        '    Return False
+        'Catch ex As Exception
+        '    Return False
+        'End Try
+    End Function
+    Public Function GetConnectionInfo() As Boolean
+        Dim sArgs As String()
+        Dim Sname As String = String.Empty
+        Dim nI As Integer
+
+        mConnInfo = New AccessController.ConnectionInfo
+        sArgs = Environment.GetCommandLineArgs
+
+        For nI = 0 To sArgs.Length - 1
+            If sArgs(nI).Substring(1, 2) = "ls" Then
+                Sname = sArgs(nI).Substring(4)
+                Exit For
             End If
+        Next
 
+        Return mConnInfo.GetConnectionInfo(Sname)
+    End Function
+    Public Overridable Function Init() As Boolean
+        Try
+            mParams = New Parameters(mConn)
+
+
+
+            SetupLocalizationInfo()
+            Return True
         Catch ex As Exception
             Return False
         End Try
     End Function
-
-    'Public Overridable Function Init() As Boolean
-    '    Try
-    '        mParams = New Parameters
-    '        mWebSite = mParams.GetUrl(WebDirection.Local).ToString
-    '        mProcessUrl = New ProcesarUrl()
-
-
-    '        SetupLocalizationInfo()
-    '        Return True
-    '    Catch ex As Exception
-    '        Return False
-    '    End Try
-    'End Function
 
     'Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
     '    Dim sec As SecurityManager = New SecurityManager()
@@ -125,11 +163,11 @@ Public Class MgrFramework
     '        Return GetMyExternalIP()
     '    End Get
     'End Property
-    Public ReadOnly Property WebSites As String
-        Get
-            Return mWebSite
-        End Get
-    End Property
+    'Public ReadOnly Property WebSites As String
+    '    Get
+    '        Return mWebSite
+    '    End Get
+    'End Property
     'Public Function RegisterLogin(oUser As LoginIn) As Boolean
     '    Try
     '        Dim oSec As New SecurityManager()
@@ -183,20 +221,15 @@ Public Class MgrFramework
     '    Return Value
     'End Function
 
-    'Private Function GetMyExternalIP()
-    '    Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
-    '    'Dim wq As HttpWebRequest = HttpWebRequest.Create("http://whatismyip.org/")
+    Private Function GetMyExternalIP()
+        Dim wq As HttpWebRequest = HttpWebRequest.Create("https://api.ipify.org/")
+        Dim wr As HttpWebResponse = wq.GetResponse()
+        Dim sr As New StreamReader(wr.GetResponseStream(), System.Text.Encoding.UTF8)
+        Dim ip As String = sr.ReadToEnd()
+        sr.Close()
 
-    '    Dim wr As HttpWebResponse = wq.GetResponse()
-    '    Dim sr As New StreamReader(wr.GetResponseStream(), System.Text.Encoding.UTF8)
-    '    Dim ipa As IPAddress = IPAddress.Parse(sr.ReadToEnd)
-    '    sr.Close()
-
-    '    Dim ip As String = ipa.ToString
-    '    ip = Replace(ip, "{}", "")
-
-    '    Return ip.ToString
-    'End Function
+        Return ip.Trim()
+    End Function
 
     Public Property LastAction() As Date
         Get

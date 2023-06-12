@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
+Imports Microsoft.Win32
 Imports MySql.Data.MySqlClient
 
 Public Class MainForm
@@ -9,7 +10,14 @@ Public Class MainForm
     Private port As Integer
     Private secretKey As String = "Ju8ddPkuDNnCahG8GRPKgXAAB6z9DF6V" ' Variable para almacenar la clave secreta
     Private flagUpdate As Boolean = False
+    Public Sub New()
 
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
@@ -134,8 +142,6 @@ Public Class MainForm
             UpdateConnectionString()
             LoadConnectionList()
             If flagUpdate Then
-                PlaceholderTextBox1.Visible = True
-                txtPassword.Visible = False
                 MessageBox.Show("La cadena de conexión se ha actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 'Else
                 '    MessageBox.Show("El/los campo(s) no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -250,7 +256,24 @@ Public Class MainForm
         txtUser.Text = String.Empty
         txtPassword.Text = String.Empty
         txtPort.Text = String.Empty
+
+        txtPassword.Visible = True
+        txtServer.Placeholder = "Servidor"
+        txtDatabase.Placeholder = "Base de Datos"
+        txtUser.Placeholder = "Usuario"
+        txtPassword.Placeholder = "Contraseña"
+        txtPort.Placeholder = "Puerto"
+
+        ' Restablecer el manejo del evento TextChanged para txtPassword
+        'RemoveHandler txtPassword.TextChanged, AddressOf txtPassword_TextChanged
+        'AddHandler txtPassword.TextChanged, AddressOf txtPassword_TextChanged
     End Sub
+    'Private Sub txtPassword_TextChanged(sender As Object, e As EventArgs)
+    '    ' Reemplazar el texto del campo por asteriscos
+    '    Dim passwordLength As Integer = txtPassword.Text.Length
+    '    Dim passwordMask As String = New String("*", passwordLength)
+    '    txtPassword.Text = passwordMask
+    'End Sub
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If lstConnections.SelectedItem IsNot Nothing Then
 
@@ -287,11 +310,68 @@ Public Class MainForm
 
     End Sub
 
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Application.Exit()
+    End Sub
 
+    Private Sub Get45PlusFromRegistry()
+        Const subkey As String = "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\"
 
-    Private Sub PlaceholderTextBox1_GotFocus(sender As Object, e As EventArgs) Handles PlaceholderTextBox1.GotFocus
-        PlaceholderTextBox1.Visible = False
-        txtPassword.Select()
+        Using ndpKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey)
+            If ndpKey IsNot Nothing AndAlso ndpKey.GetValue("Release") IsNot Nothing Then
+                Console.WriteLine($".NET Framework Version: {CheckFor45PlusVersion(ndpKey.GetValue("Release"))}")
+            Else
+                Console.WriteLine(".NET Framework Version 4.5 or later is not detected.")
+            End If
+        End Using
+    End Sub
 
+    ' Checking the version using >= enables forward compatibility.
+    Private Function CheckFor45PlusVersion(releaseKey As Integer) As String
+        If releaseKey >= 533320 Then
+            Return "4.8.1 or later"
+        ElseIf releaseKey >= 528040 Then
+            Return "4.8"
+        ElseIf releaseKey >= 461808 Then
+            Return "4.7.2"
+        ElseIf releaseKey >= 461308 Then
+            Return "4.7.1"
+        ElseIf releaseKey >= 460798 Then
+            Return "4.7"
+        ElseIf releaseKey >= 394802 Then
+            Return "4.6.2"
+        ElseIf releaseKey >= 394254 Then
+            Return "4.6.1"
+        ElseIf releaseKey >= 393295 Then
+            Return "4.6"
+        ElseIf releaseKey >= 379893 Then
+            Return "4.5.2"
+        ElseIf releaseKey >= 378675 Then
+            Return "4.5.1"
+        ElseIf releaseKey >= 378389 Then
+            Return "4.5"
+        End If
+        ' This code should never execute. A non-null release key should mean
+        ' that 4.5 or later is installed.
+        Return "No 4.5 or later version detected"
+    End Function
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Get45PlusFromRegistry()
+    End Sub
+    Private Sub ApplyNumericInputRestriction(textBox As TextBox)
+        AddHandler textBox.KeyPress, Sub(sender As Object, e As KeyPressEventArgs)
+                                         ' Permitir solo números y puntos
+                                         If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "." AndAlso e.KeyChar <> ControlChars.Back Then
+                                             e.Handled = True
+                                         End If
+                                     End Sub
+    End Sub
+    Private Sub txtServer_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtServer.KeyPress
+        ApplyNumericInputRestriction(txtServer)
+    End Sub
+
+    Private Sub txtPort_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPort.KeyPress
+        ApplyNumericInputRestriction(txtPort)
     End Sub
 End Class
