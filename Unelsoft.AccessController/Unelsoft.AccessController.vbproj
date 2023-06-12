@@ -4,35 +4,31 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F5D4A69-30FE-482E-A49F-10B6A246B937}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>RemesaControl.My.MyApplication</StartupObject>
-    <RootNamespace>RemesaControl</RootNamespace>
-    <AssemblyName>RemesaControl</AssemblyName>
+    <ProjectGuid>{8F4C2998-80D8-4FBC-B794-C8C642144298}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Unelsoft.AccessController</RootNamespace>
+    <AssemblyName>Unelsoft.AccessController</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\Code\</OutputPath>
-    <DocumentationFile>RemesaControl.xml</DocumentationFile>
+    <DocumentationFile>Unelsoft.AccessController.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>RemesaControl.xml</DocumentationFile>
+    <DocumentationFile>Unelsoft.AccessController.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -50,9 +46,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,27 +58,14 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
-    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
-    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\System\MgrFramework.vb" />
-    <Compile Include="Form\FrmMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainBase.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainBase.Designer.vb">
-      <DependentUpon>frmMainBase.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Module\EntryPoints.vb" />
-    <Compile Include="Module\Global.vb" />
+    <Compile Include="DAHelper.vb" />
+    <Compile Include="LoginIn.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -101,11 +81,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Parameters.vb" />
+    <Compile Include="SalesDateInfo.vb" />
+    <Compile Include="User.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmMainBase.resx">
-      <DependentUpon>frmMainBase.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -123,13 +103,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Unelsoft.AccessController\Unelsoft.AccessController.vbproj">
-      <Project>{8f4c2998-80d8-4fbc-b794-c8c642144298}</Project>
-      <Name>Unelsoft.AccessController</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
