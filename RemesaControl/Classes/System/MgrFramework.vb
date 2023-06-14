@@ -1,7 +1,8 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Net.NetworkInformation
-Imports MySql.Data.MySqlClient
+Imports MySqlConnector
+'Imports MySql.Data.MySqlClient
 Imports Unelsoft
 Imports Unelsoft.AccessController
 
@@ -53,11 +54,13 @@ Public Class MgrFramework
     Public Function InitConnection() As Boolean
         Try
             mConn = New MySqlConnection(mConnInfo.MySQLConnectionString)
-            'mConn.Open()
+            mConn.Open()
 
-            Dim oCmd As MySqlCommand = New MySqlCommand()
+            Dim procedureName As String = "SYS_SetupConnection"
+
+            Dim oCmd As MySqlCommand = New MySqlCommand(procedureName, mConn)
             oCmd.CommandType = CommandType.StoredProcedure
-            oCmd.CommandText = "SYS_SetupConnection"
+
             oCmd.ExecuteNonQuery()
 
             Return True
@@ -111,7 +114,7 @@ Public Class MgrFramework
     End Function
     Public Overridable Function Init() As Boolean
         Try
-            mParams = New Parameters(mConn)
+            ' mParams = New Parameters(mConn)
 
 
 

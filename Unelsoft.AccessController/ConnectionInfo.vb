@@ -5,7 +5,7 @@ Imports System.Text
 Imports MySql.Data.MySqlClient
 Imports System.Windows.Forms
 Imports Unelsoft.AccessController.My
-
+Imports MySqlConnector
 
 Public Class ConnectionInfo
 
@@ -15,7 +15,6 @@ Public Class ConnectionInfo
     Public Property UserId As String
     Public Property Password As String
     Public Property FileName As String
-    Public Property FileName2 As String
     Public Property SPID As Integer
     Public Property Provider As String
     Public Property Port As Integer
@@ -64,7 +63,8 @@ Public Class ConnectionInfo
             'Dim port As Integer = 3306 ' Puerto predeterminado de MySQL
 
             ' Cadena de conexión para MySQL
-            Dim connectionString As String = String.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", Server, Port, Database, UserId, Password)
+            Dim connectionString As String = String.Format("Server={0}; User ID={1}; password={2}; database={3}; port={4}; SslMode=Preferred", Server, UserId, Password, Database, Port)
+            'Dim connectionString As String = String.Format("Server={0};Port={1};Database={2};uid={3};password={4};", Server, Port, Database, UserId, Password)
 
             Return connectionString
         End Get
