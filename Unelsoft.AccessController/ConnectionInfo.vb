@@ -26,7 +26,7 @@ Public Class ConnectionInfo
     End Sub
     Public Sub New(LogonPath As String)
         FileName = LogonPath & "\Unelsoft.Logon.exe.Config"
-        FileName2 = LogonPath & "\RemesaControl.Logon.exe.Config"
+
     End Sub
     Public Overloads Function GetConnectionInfo(ByVal sName As String) As Boolean
         Return Connection(Server)
@@ -45,6 +45,31 @@ Public Class ConnectionInfo
             'Return String.Format("Provider=SQLOLEDB.1;Password={3};Persist Security Info=True;User ID={2};Initial Catalog={1};Data Source={0};Application Name={4}", New String() {sServer, AlternativeDB, sUserId, sPassword, AppName})
         End Get
     End Property
+    Public ReadOnly Property MySQLConnectionString(Optional ByVal AppName As String = Nothing, Optional ByVal AlternativeDB As String = Nothing) As String
+        Get
+            If AppName Is Nothing Then
+                AppName = "Unelsoft"
+            End If
+            If AlternativeDB Is Nothing Then
+                AlternativeDB = Database
+            End If
+
+            '' Parámetros de conexión para MySQL
+            'Dim server As String = "nombre_del_servidor"
+            'Dim database As String = AlternativeDB
+            'Dim username As String = "nombre_de_usuario"
+            'Dim password As String = "contraseña"
+
+            '' Opcionalmente, puedes ajustar más parámetros según tus necesidades
+            'Dim port As Integer = 3306 ' Puerto predeterminado de MySQL
+
+            ' Cadena de conexión para MySQL
+            Dim connectionString As String = String.Format("Server={0};Port={1};Database={2};Uid={3};Pwd={4};", Server, Port, Database, UserId, Password)
+
+            Return connectionString
+        End Get
+    End Property
+
     Private Function Connection(server1) As Boolean
         Dim selectedConnectionName As String = GetConnection()
 

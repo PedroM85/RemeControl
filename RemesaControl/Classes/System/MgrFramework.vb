@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Net.NetworkInformation
+Imports MySql.Data.MySqlClient
 Imports Unelsoft
 Imports Unelsoft.AccessController
 
@@ -18,7 +19,7 @@ Public Class MgrFramework
     Protected mLastAction As Date
     Protected mParams As Parameters
     Protected mConnInfo As ConnectionInfo
-    Protected mConn As OleDb.OleDbConnection
+    Protected mConn As MySqlConnection
 
     Public Function Terminal() As String
         Return "1"
@@ -51,11 +52,10 @@ Public Class MgrFramework
     'End Function
     Public Function InitConnection() As Boolean
         Try
-            mConn = New OleDb.OleDbConnection(mConnInfo.OLEDBConnectionString)
-            mConn.Open()
+            mConn = New MySqlConnection(mConnInfo.MySQLConnectionString)
+            'mConn.Open()
 
-
-            Dim oCmd As OleDb.OleDbCommand = mConn.CreateCommand
+            Dim oCmd As MySqlCommand = New MySqlCommand()
             oCmd.CommandType = CommandType.StoredProcedure
             oCmd.CommandText = "SYS_SetupConnection"
             oCmd.ExecuteNonQuery()

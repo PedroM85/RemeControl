@@ -35,7 +35,7 @@
                 '    MessageBox.Show("Se produjeron errores al inicializar la aplicación." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 'End If
             Else
-            MessageBox.Show("No se encontró la información de conexión de la aplicación.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("No se encontró la información de conexión de la aplicación.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
