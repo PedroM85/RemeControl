@@ -152,9 +152,9 @@ Public Class SecurityManager
         user.InitialChangePassword = False
         user.Expired = False
         user.Enabled = True
-        user.CanAccessEwave = True
-        user.CanAccessEboc = True
-        user.CanAccessEcom = True
+        'user.CanAccessEwave = True
+        'user.CanAccessEboc = True
+        'user.CanAccessEcom = True
 
         Dim oCmd As IDbCommand = mConn.CreateCommand
         oCmd.CommandType = CommandType.Text
@@ -272,25 +272,25 @@ Public Class SecurityManager
                     .GroupId = rd.GetString(rd.GetOrdinal("UGP_Id"))
                     '.LanguageId = oRd.GetString(9)
                     .MenuId = rd.GetInt32(rd.GetOrdinal("MNU_Id"))
-                    .MenuDescription = rd.GetString(rd.GetOrdinal("MNU_Description"))
+                    '.MenuDescription = rd.GetString(rd.GetOrdinal("MNU_Description"))
 
-                    If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEwave")) Then
-                        .CanAccessEwave = False
-                    Else
-                        .CanAccessEwave = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEwave"))
-                    End If
+                    'If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEwave")) Then
+                    '    .CanAccessEwave = False
+                    'Else
+                    '    .CanAccessEwave = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEwave"))
+                    'End If
 
-                    If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEboc")) Then
-                        .CanAccessEboc = False
-                    Else
-                        .CanAccessEboc = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEboc"))
-                    End If
+                    'If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEboc")) Then
+                    '    .CanAccessEboc = False
+                    'Else
+                    '    .CanAccessEboc = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEboc"))
+                    'End If
 
-                    If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEcom")) Then
-                        .CanAccessEcom = False
-                    Else
-                        .CanAccessEcom = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEcom"))
-                    End If
+                    'If rd.IsDBNull(rd.GetOrdinal("USR_CanAccessEcom")) Then
+                    '    .CanAccessEcom = False
+                    'Else
+                    '    .CanAccessEcom = rd.GetBoolean(rd.GetOrdinal("USR_CanAccessEcom"))
+                    'End If
 
                     '[AMI210405]
                     If rd.IsDBNull(rd.GetOrdinal("USR_PasswordExpiryDate")) Then

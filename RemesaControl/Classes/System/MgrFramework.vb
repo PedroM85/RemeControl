@@ -126,8 +126,9 @@ Public Class MgrFramework
     End Function
 
     Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
-        Dim sec As SecurityManager = New SecurityManager()
-        Dim loginDlg As FrmLogin
+        Dim sec As SecurityManager = New SecurityManager(mConn)
+        Dim loginDlg As FrmLogonBase
+
         If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
             mUser = sec.Login(UserName, Password)
         End If

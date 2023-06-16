@@ -140,5 +140,11 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Unelsoft.DataAccessFactory\Unelsoft.DataAccessFactory.vbproj">
+      <Project>{9a92fa94-8193-453d-a43e-041df35224b8}</Project>
+      <Name>Unelsoft.DataAccessFactory</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
