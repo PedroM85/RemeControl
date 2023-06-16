@@ -100,13 +100,20 @@
     <Compile Include="Classes\System\EWTransactionManager.vb" />
     <Compile Include="Classes\System\MgrFramework.vb" />
     <Compile Include="Classes\System\TransactionManager.vb" />
+    <Compile Include="DialogsBase\FrmLogonBase.Designer.vb">
+      <DependentUpon>FrmLogonBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DialogsBase\FrmLogonBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FrmLogin.vb" />
     <Compile Include="Form\FrmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainBase.vb">
+    <Compile Include="FormBase\frmMainBase.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMainBase.Designer.vb">
+    <Compile Include="FormBase\frmMainBase.Designer.vb">
       <DependentUpon>frmMainBase.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -130,8 +137,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmMainBase.resx">
+    <EmbeddedResource Include="FormBase\frmMainBase.resx">
       <DependentUpon>frmMainBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogsBase\FrmLogonBase.resx">
+      <DependentUpon>FrmLogonBase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

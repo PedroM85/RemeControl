@@ -13,6 +13,8 @@
                 If oApp.InitConnection Then
                     If oApp.Init Then
 
+                        oApp.loginUser(userName, password)
+
                     End If
                 Else
                     MessageBox.Show("Se produjeron errores al inicializar la aplicación." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)

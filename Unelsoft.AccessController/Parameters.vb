@@ -29,7 +29,7 @@ Public Class Parameters
             Clear()
 
             oCmd.CommandType = CommandType.StoredProcedure
-            oCmd.CommandText = "Mgr_PAR_GetCacheableParameters"
+            oCmd.CommandText = "PAR_GetCacheableParameters"
 
             oRd = oCmd.ExecuteReader()
             Try

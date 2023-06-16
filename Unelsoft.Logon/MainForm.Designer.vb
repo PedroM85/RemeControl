@@ -171,54 +171,60 @@ Partial Class MainForm
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(315, 127)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(66, 14)
+        Me.Label1.Size = New System.Drawing.Size(74, 14)
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Contraseña:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(443, 127)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(41, 14)
+        Me.Label2.Size = New System.Drawing.Size(47, 14)
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "Puerto:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(443, 75)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(47, 14)
+        Me.Label3.Size = New System.Drawing.Size(52, 14)
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "Usuario:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(313, 26)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(47, 14)
+        Me.Label4.Size = New System.Drawing.Size(54, 14)
         Me.Label4.TabIndex = 17
         Me.Label4.Text = "Nombre:"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(443, 26)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(18, 14)
+        Me.Label5.Size = New System.Drawing.Size(20, 14)
         Me.Label5.TabIndex = 18
         Me.Label5.Text = "Ip:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(313, 75)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 14)
+        Me.Label6.Size = New System.Drawing.Size(88, 14)
         Me.Label6.TabIndex = 10
         Me.Label6.Text = "Base de datos:"
         '
@@ -303,7 +309,8 @@ Partial Class MainForm
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
-        Me.lblStatus.Location = New System.Drawing.Point(186, 215)
+        Me.lblStatus.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.Location = New System.Drawing.Point(118, 215)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(0, 14)
         Me.lblStatus.TabIndex = 27

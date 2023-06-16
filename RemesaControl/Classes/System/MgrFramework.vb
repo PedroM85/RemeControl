@@ -114,7 +114,7 @@ Public Class MgrFramework
     End Function
     Public Overridable Function Init() As Boolean
         Try
-            ' mParams = New Parameters(mConn)
+            mParams = New Parameters(mConn)
 
 
 
@@ -125,32 +125,32 @@ Public Class MgrFramework
         End Try
     End Function
 
-    'Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
-    '    Dim sec As SecurityManager = New SecurityManager()
-    '    Dim loginDlg As FrmLogin
-    '    If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
-    '        mUser = sec.Login(UserName, Password)
-    '    End If
-    '    Try
+    Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
+        Dim sec As SecurityManager = New SecurityManager()
+        Dim loginDlg As FrmLogin
+        If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
+            mUser = sec.Login(UserName, Password)
+        End If
+        Try
 
-    '        If mUser Is Nothing Then
-    '            loginDlg = New FrmLogin()
+            If mUser Is Nothing Then
+                loginDlg = New FrmLogin()
 
-    '            If Not UserName Is Nothing Then
-    '                loginDlg.txtUserName.Text = UserName
+                If Not UserName Is Nothing Then
+                    loginDlg.txtUserName.Text = UserName
 
-    '            End If
+                End If
 
-    '            loginDlg.ShowDialog()
-    '            mUser = loginDlg.User
+                loginDlg.ShowDialog()
+                mUser = loginDlg.User
 
-    '        End If
-    '    Catch ex As Exception
-    '        mUser = Nothing
-    '        'Throw New Exception(ex.Message)
-    '    End Try
+            End If
+        Catch ex As Exception
+            mUser = Nothing
+            'Throw New Exception(ex.Message)
+        End Try
 
-    'End Sub
+    End Sub
     Public ReadOnly Property CurrentUser() As LoginIn
         Get
             Return mUser
