@@ -1,4 +1,6 @@
 ﻿
+Imports Unelsoft.DataAccessFactory
+
 <CLSCompliant(True)>
 Public Class User
 

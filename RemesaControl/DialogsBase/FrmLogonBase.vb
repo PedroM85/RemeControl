@@ -57,19 +57,19 @@ Public Class FrmLogonBase
         mUser = mSecMgr.Login(sUserName, sPassword)
 
         If mUser Is Nothing Then
-            mAudit.AddEntry(AccessController.AuditLogWriter.EventType.LoginFailed, txtUser.Text, mTerminalId, "")
+            'mAudit.AddEntry(AccessController.AuditLogWriter.EventType.LoginFailed, txtUser.Text, mTerminalId, "")
 
             bDisabled = mSecMgr.SetUnsuccessfulAttempt(sUserName)
 
             If bDisabled Then
-                EWMessageBox.Show("Ha superado la cantidad máxima de intentos permitidos. La cuenta ha sido bloqueada.", "e-wave", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'EWMessageBox.Show("Ha superado la cantidad máxima de intentos permitidos. La cuenta ha sido bloqueada.", "e-wave", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
             Else
-                EWMessageBox.Show("El nombre de usuario y la contraseña no coinciden con un perfil válido. Por favor intentelo nuevamente.", "e-wave", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                ' EWMessageBox.Show("El nombre de usuario y la contraseña no coinciden con un perfil válido. Por favor intentelo nuevamente.", "e-wave", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 txtPassword.Focus()
             End If
         Else
-            mAudit.AddEntry(AccessController.AuditLogWriter.EventType.LoginSucceded, mUser.Id, mTerminalId, "")
+            ' mAudit.AddEntry(AccessController.AuditLogWriter.EventType.LoginSucceded, mUser.Id, mTerminalId, "")
             mUser.Password = txtPassword.Text '[AMI220405]
             Close()
         End If
@@ -82,11 +82,11 @@ Public Class FrmLogonBase
 #Region " GlobalResourcesLoader "
 
     Private Sub LoadGlobalCaptions()
-        Me.Text = EnvironmentObjects.Framework.GlobalResources.GetString("FormText", Me.Text)
-        lblUser.Text = EnvironmentObjects.Framework.GlobalResources.GetString("lblUser", Me.lblUser.Text)
-        lblPassword.Text = EnvironmentObjects.Framework.GlobalResources.GetString("lblPassword", Me.lblPassword.Text)
-        btnOk.Text = EnvironmentObjects.Framework.GlobalResources.GetString("btnOk", Me.btnOk.Text)
-        btnCancel.Text = EnvironmentObjects.Framework.GlobalResources.GetString("btnCancel", Me.btnCancel.Text)
+        'Me.Text = EnvironmentObjects.Framework.GlobalResources.GetString("FormText", Me.Text)
+        'lblUser.Text = EnvironmentObjects.Framework.GlobalResources.GetString("lblUser", Me.lblUser.Text)
+        'lblPassword.Text = EnvironmentObjects.Framework.GlobalResources.GetString("lblPassword", Me.lblPassword.Text)
+        'btnOk.Text = EnvironmentObjects.Framework.GlobalResources.GetString("btnOk", Me.btnOk.Text)
+        'btnCancel.Text = EnvironmentObjects.Framework.GlobalResources.GetString("btnCancel", Me.btnCancel.Text)
     End Sub
 #End Region
 End Class

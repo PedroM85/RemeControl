@@ -1,4 +1,6 @@
-﻿<CLSCompliant(True)>
+﻿Imports Unelsoft.DataAccessFactory
+
+<CLSCompliant(True)>
 Public Class Parameters
     Inherits Hashtable
 

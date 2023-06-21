@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("RemesaControl")>
+<Assembly: AssemblyTitle("Unelsoft.Tools")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("RemesaControl")>
+<Assembly: AssemblyProduct("Unelsoft.Tools")>
 <Assembly: AssemblyCopyright("Copyright ©  2023")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-<Assembly: Guid("3037e564-4f2d-4239-9d66-3e6374550fce")>
+<Assembly: Guid("6e562411-63fc-4708-a82a-03f8c71bc861")>
 
 ' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '
@@ -29,9 +29,6 @@ Imports System.Runtime.InteropServices
 '
 ' Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión
 ' utilizando el carácter "*", como se muestra a continuación:
-' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.23171.66")>
-<Assembly: AssemblyFileVersion("1.0.23171.66")>
-
-<assembly: AssemblyInformationalVersion("0.0.23171.66")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>

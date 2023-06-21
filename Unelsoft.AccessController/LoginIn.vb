@@ -1,4 +1,5 @@
-﻿Public Class LoginIn
+﻿<CLSCompliant(True)>
+Public Class LoginIn
     Public Property USR_Id As String
     Public Property USR_Name As String
     Public Property USR_Password As String

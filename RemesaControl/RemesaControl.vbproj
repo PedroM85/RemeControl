@@ -117,6 +117,12 @@
       <DependentUpon>frmMainBase.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\Splash.Designer.vb">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Splash.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module\EntryPoints.vb" />
     <Compile Include="Module\Global.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -143,6 +149,9 @@
     <EmbeddedResource Include="DialogsBase\FrmLogonBase.resx">
       <DependentUpon>FrmLogonBase.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\Splash.resx">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -167,6 +176,14 @@
     <ProjectReference Include="..\Unelsoft.AccessController\Unelsoft.AccessController.vbproj">
       <Project>{8f4c2998-80d8-4fbc-b794-c8c642144298}</Project>
       <Name>Unelsoft.AccessController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\unelsoft.Common\Unelsoft.Common.vbproj">
+      <Project>{56354a40-cd9f-46ae-95f7-5cd65d844a57}</Project>
+      <Name>Unelsoft.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Unelsoft.DataLayer\Unelsoft.DataLayer.vbproj">
+      <Project>{36f87274-1065-4bc9-8d2b-e45bd60a3057}</Project>
+      <Name>Unelsoft.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

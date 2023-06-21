@@ -15,12 +15,14 @@ Public Class SalesDate
 End Class
 Public Class MgrFramework
 
-    Protected mUser As LoginIn
+    Protected mUser As User
     Protected mSalesDateInfo As SalesDateInfo
     Protected mLastAction As Date
     Protected mParams As Parameters
     Protected mConnInfo As ConnectionInfo
     Protected mConn As MySqlConnection
+
+    Protected mTerminalId As String
 
     Public Function Terminal() As String
         Return "1"
@@ -135,10 +137,10 @@ Public Class MgrFramework
         Try
 
             If mUser Is Nothing Then
-                loginDlg = New FrmLogin()
+                loginDlg = New FrmLogonBase(Terminal, sec, mConn)
 
                 If Not UserName Is Nothing Then
-                    loginDlg.txtUserName.Text = UserName
+                    loginDlg.txtUser.Text = UserName
 
                 End If
 
@@ -152,7 +154,7 @@ Public Class MgrFramework
         End Try
 
     End Sub
-    Public ReadOnly Property CurrentUser() As LoginIn
+    Public ReadOnly Property CurrentUser() As User
         Get
             Return mUser
         End Get
@@ -188,20 +190,20 @@ Public Class MgrFramework
 
     '    End If
     'End Sub
-    Public Function SessionActive() As Boolean
-        Dim a As DateTime = oApp.CurrentUser.USR_SessionEnd
-        Dim b As DateTime = DateTime.Now
-        Try
-            If a > b Then
-                Return True
-            Else
-                Return False
-            End If
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
+    'Public Function SessionActive() As Boolean
+    '    Dim a As DateTime = oApp.CurrentUser.USR_SessionEnd
+    '    Dim b As DateTime = DateTime.Now
+    '    Try
+    '        If a > b Then
+    '            Return True
+    '        Else
+    '            Return False
+    '        End If
+    '    Catch ex As Exception
+    '        Throw New Exception(ex.Message)
 
-        End Try
-    End Function
+    '    End Try
+    'End Function
     'Public Function IsSaleDateOpened() As SalesDateData.IsOpen
     '    Dim oDataLayer As New SalesDateData
     '    Dim Value As Boolean = False
@@ -287,4 +289,9 @@ Public Class MgrFramework
         System.Threading.Thread.CurrentThread.CurrentCulture = oCulture
     End Sub
 
+    Public ReadOnly Property TerminalId() As String
+        Get
+            Return mTerminalId
+        End Get
+    End Property
 End Class

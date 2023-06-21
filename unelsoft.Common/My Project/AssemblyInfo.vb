@@ -1,24 +1,24 @@
-Imports System
+﻿Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' La información general de un ensamblado se controla mediante el siguiente 
 ' conjunto de atributos. Cambie estos valores de atributo para modificar la información
-' asociada con un ensamblado.
+' asociada a un ensamblado.
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("RemesaControl")>
+<Assembly: AssemblyTitle("unelsoft.Common")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("RemesaControl")>
+<Assembly: AssemblyProduct("unelsoft.Common")>
 <Assembly: AssemblyCopyright("Copyright ©  2023")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
-<Assembly: Guid("3037e564-4f2d-4239-9d66-3e6374550fce")>
+<Assembly: Guid("fdc8d4ee-114d-4bb5-80cb-86f0783e7092")>
 
 ' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '
@@ -31,7 +31,5 @@ Imports System.Runtime.InteropServices
 ' utilizando el carácter "*", como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.23171.66")>
-<Assembly: AssemblyFileVersion("1.0.23171.66")>
-
-<assembly: AssemblyInformationalVersion("0.0.23171.66")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>

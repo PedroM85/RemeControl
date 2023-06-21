@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionInfo.vb" />
-    <Compile Include="DAHelper.vb" />
     <Compile Include="LoginIn.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

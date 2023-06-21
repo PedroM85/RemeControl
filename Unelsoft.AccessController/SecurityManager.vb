@@ -702,16 +702,16 @@ Public Class SecurityManager
         cmd.CommandText = "SELECT COUNT(*) as UsedLics FROM SYS_UserLoggedOn WHERE ULO_MOD_Id = " + CType(moduleId, String)
         Try
             Dim usedLics As Integer = CType(cmd.ExecuteScalar, Integer)
-            Dim lic As ewaveLicense = ewaveLicense.fromXmlEncripted(encstring)
-            If lic.SiteId <> siteId Then
-                Return False
-            Else
-                If lic.ExpiryDate < Now Then
-                    Return False
-                Else
-                    Return usedLics < lic.MaxLics(moduleId)
-                End If
-            End If
+            'Dim lic As ewaveLicense = ewaveLicense.fromXmlEncripted(encstring)
+            'If lic.SiteId <> siteId Then
+            '    Return False
+            'Else
+            '    If lic.ExpiryDate < Now Then
+            '        Return False
+            '    Else
+            '        Return usedLics < lic.MaxLics(moduleId)
+            '    End If
+            'End If
 
         Catch ex As Exception
             Return False

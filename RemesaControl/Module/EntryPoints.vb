@@ -1,19 +1,37 @@
 ﻿Module EntryPoints
+
     Public Sub Main(args As String())
         Try
             Dim userName As String = GetCommandLineArgValue(args, "usr")
             Dim password As String = GetCommandLineArgValue(args, "pwd")
 
+            Dim oSplash As Splash
             Dim oApp As New MgrFramework()
             Dim TM As New TransactionManager()
 
             If oApp.GetConnectionInfo() Then
-
+                oSplash = New Splash
+                oSplash.Show()
+                oSplash.Update()
+                Application.DoEvents()
 
                 If oApp.InitConnection Then
                     If oApp.Init Then
+                        Unelsoft.Common.EnvironmentObjects.Framework = oApp
 
-                        oApp.loginUser(userName, password)
+                        oSplash.Hide()
+                        oApp.LoginUser(userName, password)
+
+                        If Not oApp.CurrentUser Is Nothing Then
+                            If oApp.CurrentUser.CanEnterApplication Then
+                                oApp.CleanOldLogins()
+                                If oApp.HasLicensesFree Then
+                                    oSplash.Show()
+                                    oSplash.Update()
+                                End If
+
+                            End If
+                        End If
 
                     End If
                 Else

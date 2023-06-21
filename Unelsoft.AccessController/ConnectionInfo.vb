@@ -86,7 +86,7 @@ Public Class ConnectionInfo
             Dim encryptedConnectionString As String = selectedConnection.ConnectionString
             Dim decryptedConnectionString As String = DecryptConnectionString(encryptedConnectionString)
 
-            Dim builder As New MySqlConnectionStringBuilder(decryptedConnectionString)
+            Dim builder As New MySql.Data.MySqlClient.MySqlConnectionStringBuilder(decryptedConnectionString)
 
             Server = builder.Server
             Database = builder.Database
