@@ -46,6 +46,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.vb" />
+    <Compile Include="Classes\EWFramework.vb" />
+    <Compile Include="Dialogs\EWLogin.Designer.vb">
+      <DependentUpon>EWLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EWLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnvironmentObjects.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -83,6 +93,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialogs\EWLogin.resx">
+      <DependentUpon>EWLogin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -100,6 +113,16 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Unelsoft.AccessController\Unelsoft.AccessController.vbproj">
+      <Project>{8f4c2998-80d8-4fbc-b794-c8c642144298}</Project>
+      <Name>Unelsoft.AccessController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Unelsoft.Tools\Unelsoft.Tools.vbproj">
+      <Project>{5335f4b8-7d5f-48af-b235-a1e89f1aa1ba}</Project>
+      <Name>Unelsoft.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
