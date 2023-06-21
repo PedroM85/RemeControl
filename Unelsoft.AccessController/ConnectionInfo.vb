@@ -2,10 +2,8 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
-Imports MySql.Data.MySqlClient
 Imports System.Windows.Forms
 Imports Unelsoft.AccessController.My
-Imports MySqlConnector
 
 Public Class ConnectionInfo
 
@@ -71,7 +69,7 @@ Public Class ConnectionInfo
     End Property
 
     Private Function Connection(server1) As Boolean
-        Dim selectedConnectionName As String = GetConnection()
+        ' Dim selectedConnectionName As String = GetConnection()
 
         ' Ruta al archivo Unelsoft.Logon.exe.config
         Dim pathToConfigFile As String = FileName
@@ -80,13 +78,14 @@ Public Class ConnectionInfo
         configFileMap.ExeConfigFilename = pathToConfigFile
         Dim configFile As Configuration = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None)
 
-        Dim selectedConnection As ConnectionStringSettings = configFile.ConnectionStrings.ConnectionStrings(selectedConnectionName)
+        'Dim selectedConnection As ConnectionStringSettings = configFile.ConnectionStrings.ConnectionStrings(selectedConnectionName)
+        Dim selectedConnection As ConnectionStringSettings = configFile.ConnectionStrings.ConnectionStrings(0)
 
         If selectedConnection IsNot Nothing Then
             Dim encryptedConnectionString As String = selectedConnection.ConnectionString
             Dim decryptedConnectionString As String = DecryptConnectionString(encryptedConnectionString)
 
-            Dim builder As New MySql.Data.MySqlClient.MySqlConnectionStringBuilder(decryptedConnectionString)
+            Dim builder As New MySqlConnector.MySqlConnectionStringBuilder(decryptedConnectionString)
 
             Server = builder.Server
             Database = builder.Database

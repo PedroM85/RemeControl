@@ -1,9 +1,10 @@
-﻿Public Class EnvironmentObjects
+﻿Imports Unelsoft.AccessController
+Public Class EnvironmentObjects
 
 
     Private Shared mConnection As IDbConnection
-    Private Shared mUser As AccessController.User
-    Private Shared mParam As AccessController.Parameters
+    Private Shared mUser As Unelsoft.AccessController.User
+    Private Shared mParam As Unelsoft.AccessController.Parameters
     'Private Shared mPublisher As ewave.Publisher.PublishEngine
     Private Shared mSiteId As String
     Private Shared mTerminalId As String
@@ -20,20 +21,20 @@
         End Set
     End Property
 
-    Public Shared Property User() As AccessController.User
+    Public Shared Property User() As Unelsoft.AccessController.User
         Get
             Return mUser
         End Get
-        Set(ByVal Value As AccessController.User)
+        Set(ByVal Value As Unelsoft.AccessController.User)
             mUser = Value
         End Set
     End Property
 
-    Public Shared Property Parameters() As AccessController.Parameters
+    Public Shared Property Parameters() As Unelsoft.AccessController.Parameters
         Get
             Return mParam
         End Get
-        Set(ByVal Value As AccessController.Parameters)
+        Set(ByVal Value As Unelsoft.AccessController.Parameters)
             mParam = Value
         End Set
     End Property

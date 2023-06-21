@@ -54,12 +54,12 @@ Partial Class MainForm
         '
         'btnSave
         '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Location = New System.Drawing.Point(368, 186)
+        Me.btnSave.Location = New System.Drawing.Point(368, 182)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 26)
         Me.btnSave.TabIndex = 7
@@ -68,20 +68,23 @@ Partial Class MainForm
         '
         'lstConnections
         '
+        Me.lstConnections.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
+        Me.lstConnections.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lstConnections.ForeColor = System.Drawing.Color.White
         Me.lstConnections.FormattingEnabled = True
         Me.lstConnections.ItemHeight = 14
         Me.lstConnections.Location = New System.Drawing.Point(121, 26)
         Me.lstConnections.Name = "lstConnections"
-        Me.lstConnections.Size = New System.Drawing.Size(169, 186)
+        Me.lstConnections.Size = New System.Drawing.Size(169, 182)
         Me.lstConnections.TabIndex = 8
         Me.lstConnections.TabStop = False
         '
         'btnDelete
         '
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Location = New System.Drawing.Point(12, 122)
         Me.btnDelete.Name = "btnDelete"
@@ -92,10 +95,10 @@ Partial Class MainForm
         '
         'btnNew
         '
-        Me.btnNew.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnNew.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNew.Location = New System.Drawing.Point(12, 26)
         Me.btnNew.Name = "btnNew"
@@ -106,10 +109,10 @@ Partial Class MainForm
         '
         'btnCancel
         '
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Location = New System.Drawing.Point(12, 158)
         Me.btnCancel.Name = "btnCancel"
@@ -130,40 +133,40 @@ Partial Class MainForm
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel1.Location = New System.Drawing.Point(446, 158)
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel1.Location = New System.Drawing.Point(446, 154)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(100, 5)
         Me.Panel1.TabIndex = 12
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel2.Location = New System.Drawing.Point(446, 107)
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel2.Location = New System.Drawing.Point(446, 103)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(100, 5)
         Me.Panel2.TabIndex = 13
         '
         'Panel3
         '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel3.Location = New System.Drawing.Point(446, 58)
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel3.Location = New System.Drawing.Point(446, 54)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(100, 5)
         Me.Panel3.TabIndex = 13
         '
         'Panel4
         '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel4.Location = New System.Drawing.Point(316, 58)
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel4.Location = New System.Drawing.Point(316, 54)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(100, 5)
         Me.Panel4.TabIndex = 13
         '
         'Panel5
         '
-        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel5.Location = New System.Drawing.Point(316, 107)
+        Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel5.Location = New System.Drawing.Point(316, 103)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(100, 5)
         Me.Panel5.TabIndex = 13
@@ -172,7 +175,7 @@ Partial Class MainForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(315, 127)
+        Me.Label1.Location = New System.Drawing.Point(315, 123)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(74, 14)
         Me.Label1.TabIndex = 14
@@ -182,7 +185,7 @@ Partial Class MainForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(443, 127)
+        Me.Label2.Location = New System.Drawing.Point(443, 123)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(47, 14)
         Me.Label2.TabIndex = 15
@@ -192,7 +195,7 @@ Partial Class MainForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(443, 75)
+        Me.Label3.Location = New System.Drawing.Point(443, 71)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(52, 14)
         Me.Label3.TabIndex = 16
@@ -202,7 +205,7 @@ Partial Class MainForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(313, 26)
+        Me.Label4.Location = New System.Drawing.Point(313, 22)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(54, 14)
         Me.Label4.TabIndex = 17
@@ -212,7 +215,7 @@ Partial Class MainForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(443, 26)
+        Me.Label5.Location = New System.Drawing.Point(443, 22)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(20, 14)
         Me.Label5.TabIndex = 18
@@ -222,7 +225,7 @@ Partial Class MainForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(313, 75)
+        Me.Label6.Location = New System.Drawing.Point(313, 71)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(88, 14)
         Me.Label6.TabIndex = 10
@@ -230,45 +233,50 @@ Partial Class MainForm
         '
         'TxtName
         '
-        Me.TxtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.TxtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.TxtName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TxtName.Location = New System.Drawing.Point(316, 44)
+        Me.TxtName.ForeColor = System.Drawing.Color.White
+        Me.TxtName.Location = New System.Drawing.Point(316, 40)
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(100, 13)
         Me.TxtName.TabIndex = 1
         '
         'txtServer
         '
-        Me.txtServer.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.txtServer.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.txtServer.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtServer.Location = New System.Drawing.Point(446, 44)
+        Me.txtServer.ForeColor = System.Drawing.Color.White
+        Me.txtServer.Location = New System.Drawing.Point(446, 40)
         Me.txtServer.Name = "txtServer"
         Me.txtServer.Size = New System.Drawing.Size(100, 13)
         Me.txtServer.TabIndex = 2
         '
         'txtDatabase
         '
-        Me.txtDatabase.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.txtDatabase.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.txtDatabase.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDatabase.Location = New System.Drawing.Point(316, 93)
+        Me.txtDatabase.ForeColor = System.Drawing.Color.White
+        Me.txtDatabase.Location = New System.Drawing.Point(316, 89)
         Me.txtDatabase.Name = "txtDatabase"
         Me.txtDatabase.Size = New System.Drawing.Size(100, 13)
         Me.txtDatabase.TabIndex = 3
         '
         'txtUser
         '
-        Me.txtUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.txtUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtUser.Location = New System.Drawing.Point(446, 93)
+        Me.txtUser.ForeColor = System.Drawing.Color.White
+        Me.txtUser.Location = New System.Drawing.Point(446, 89)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(100, 13)
         Me.txtUser.TabIndex = 4
         '
         'txtPassword
         '
-        Me.txtPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.txtPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPassword.Location = New System.Drawing.Point(316, 144)
+        Me.txtPassword.ForeColor = System.Drawing.Color.White
+        Me.txtPassword.Location = New System.Drawing.Point(316, 140)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(100, 13)
@@ -276,9 +284,10 @@ Partial Class MainForm
         '
         'txtPort
         '
-        Me.txtPort.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.txtPort.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPort.Location = New System.Drawing.Point(446, 144)
+        Me.txtPort.ForeColor = System.Drawing.Color.White
+        Me.txtPort.Location = New System.Drawing.Point(446, 140)
         Me.txtPort.Name = "txtPort"
         Me.txtPort.Size = New System.Drawing.Size(100, 13)
         Me.txtPort.TabIndex = 6
@@ -286,18 +295,18 @@ Partial Class MainForm
         '
         'Panel6
         '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.Panel6.Location = New System.Drawing.Point(316, 158)
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.Panel6.Location = New System.Drawing.Point(316, 154)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(100, 5)
         Me.Panel6.TabIndex = 13
         '
         'btnTester
         '
-        Me.btnTester.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnTester.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnTester.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnTester.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnTester.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnTester.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnTester.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnTester.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnTester.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTester.Location = New System.Drawing.Point(12, 90)
         Me.btnTester.Name = "btnTester"
@@ -317,10 +326,10 @@ Partial Class MainForm
         '
         'btnEdit
         '
-        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnEdit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Location = New System.Drawing.Point(12, 58)
         Me.btnEdit.Name = "btnEdit"
@@ -331,12 +340,12 @@ Partial Class MainForm
         '
         'btnClose
         '
-        Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(71, Byte), Integer))
-        Me.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
-        Me.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(119, Byte), Integer), CType(CType(184, Byte), Integer))
+        Me.btnClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(143, Byte), Integer), CType(CType(225, Byte), Integer), CType(CType(239, Byte), Integer))
+        Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClose.Location = New System.Drawing.Point(446, 186)
+        Me.btnClose.Location = New System.Drawing.Point(446, 182)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 26)
         Me.btnClose.TabIndex = 29
@@ -347,7 +356,7 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(76, Byte), Integer), CType(CType(157, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(61, Byte), Integer), CType(CType(88, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(577, 263)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnEdit)

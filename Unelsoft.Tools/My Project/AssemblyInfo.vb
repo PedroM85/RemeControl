@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -30,5 +30,7 @@ Imports System.Runtime.InteropServices
 ' Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión
 ' utilizando el carácter "*", como se muestra a continuación:
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.0.23172.10")>
+<Assembly: AssemblyFileVersion("1.0.23172.10")>
+
+<assembly: AssemblyInformationalVersion("0.0.23172.10")>

@@ -1,4 +1,6 @@
-﻿Imports Microsoft.VisualBasic.Devices
+﻿Imports System.Windows.Forms
+Imports MySql.Data.MySqlClient
+Imports MySqlConnector
 
 Public Enum UneSysModule As Integer
     none
@@ -42,7 +44,7 @@ Public Class EWFramework
     End Class
 
     Protected mConnInfo As Unelsoft.AccessController.ConnectionInfo
-    Protected mConn As OleDb.OleDbConnection
+    Protected mConn As MySqlConnection
     Protected mParams As AccessController.Parameters
     Protected mTerminalId As String
     Protected mConnectionName As String
@@ -56,7 +58,7 @@ Public Class EWFramework
 
 
     Public Sub New()
-        Me.New("")
+
     End Sub
     Public Overridable Function MainModuleId() As Integer
         Return UneSysModule.mgr_gral
@@ -70,23 +72,40 @@ Public Class EWFramework
         Return oSecMgr.HasLicensesFree(MainModuleId(), SiteId)
     End Function
     Public Function InitConnection() As Boolean
+
         Try
-            'mConn = New OleDb.OleDbConnection(GetConnectionString)
-            mConn = New OleDb.OleDbConnection(mConnInfo.OLEDBConnectionString)
+            mConn = New MySqlConnection(mConnInfo.MySQLConnectionString)
             mConn.Open()
 
-            Dim oSecMgr As New AccessController.SecurityManager(mConn)
-            'mConnInfo.SPID = oSecMgr.GetSPID
+            Dim procedureName As String = "MNT_SetupConnection"
 
-            Dim oCmd As OleDb.OleDbCommand = mConn.CreateCommand
+            Dim oCmd As MySqlCommand = New MySqlCommand(procedureName, mConn)
             oCmd.CommandType = CommandType.StoredProcedure
-            oCmd.CommandText = "MNT_SetupConnection"
+
             oCmd.ExecuteNonQuery()
 
             Return True
         Catch ex As Exception
             Return False
         End Try
+
+        'Try
+        '    'mConn = New OleDb.OleDbConnection(GetConnectionString)
+        '    mConn = New OleDb.OleDbConnection(mConnInfo.MySQLConnectionString)
+        '    mConn.Open()
+
+        '    Dim oSecMgr As New AccessController.SecurityManager(mConn)
+        '    'mConnInfo.SPID = oSecMgr.GetSPID
+
+        '    Dim oCmd As OleDb.OleDbCommand = mConn.CreateCommand
+        '    oCmd.CommandType = CommandType.StoredProcedure
+        '    oCmd.CommandText = "MNT_SetupConnection"
+        '    oCmd.ExecuteNonQuery()
+
+        '    Return True
+        'Catch ex As Exception
+        '    Return False
+        'End Try
     End Function
 
     Public Overridable Function Init() As Boolean
@@ -110,6 +129,25 @@ Public Class EWFramework
             Return False
         End Try
     End Function
+    Public Sub LoadUserSites()
+        Dim cmd As MySqlCommand = mConn.CreateCommand
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "USI_GetSitesByUser"
+        cmd.Parameters.Add("UserId", OleDb.OleDbType.Char, 20).Value = mUser.Id
+        cmd.Parameters.Add("TerminalId", OleDb.OleDbType.Char, 10).Value = mTerminalId
+
+        Dim dr As MySqlDataReader
+        dr = cmd.ExecuteReader
+
+        mUserSites = New List(Of Site)()
+
+        Do While dr.Read()
+            mUserSites.Add(New Site(dr.GetString(dr.GetOrdinal("SIT_Id")).TrimEnd().ToUpper(), dr.GetString(dr.GetOrdinal("SIT_Name")).TrimEnd()))
+        Loop
+
+        dr.Close()
+    End Sub
 
     Private Sub SetupLocalizationInfo()
         Dim oCulture As New System.Globalization.CultureInfo("")
@@ -152,7 +190,16 @@ Public Class EWFramework
 
         System.Threading.Thread.CurrentThread.CurrentCulture = oCulture
     End Sub
-
+    Public Function RegisterLogin(ByVal oUser As AccessController.User, ByVal loadUserSites As Boolean) As Boolean
+        Try
+            Dim oSec As New AccessController.SecurityManager(mConn)
+            oSec.RegisterLogin(oUser, mTerminalId, MainModuleId(), mSiteId)
+            If loadUserSites Then Me.LoadUserSites()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Public Function GetConnectionInfo() As Boolean
         Dim sArgs As String()
         Dim sName As String = String.Empty
@@ -190,7 +237,51 @@ Public Class EWFramework
             mUser = loginDlg.User
         End If
     End Sub
+    Public Function CheckIfPasswordMustBeChanged() As Boolean
 
+        Dim oCmd As MySqlCommand = Me.Connection.CreateCommand
+
+        If mUser.PasswordExpired = True OrElse mUser.InitialChangePassword = True Then
+            Try
+
+                Dim oPassword As New Unelsoft.Common.EWChangePassword(mTerminalId, mUser)
+                oPassword.UserId = mUser.Id
+
+                If oPassword.ShowDialog = DialogResult.Cancel Then
+                    Return False
+                End If
+
+                oCmd.CommandType = CommandType.StoredProcedure
+                oCmd.CommandText = "USR_UpdatePasswordExpiryDate"
+
+                oCmd.Parameters.Add("@USR_Id", OleDb.OleDbType.Char, 20).Value = mUser.Id
+                oCmd.Parameters.Add("@USR_PasswordExpiryDate", CType(OleDb.OleDbType.Date, MySqlDbType)).Value = Today.AddDays(Me.Parameters.GetValue("PWDEXPIRE"))
+                oCmd.Parameters.Add("@USR_InitialChange", CType(OleDb.OleDbType.Boolean, MySqlDbType)).Value = False
+
+                oCmd.ExecuteNonQuery()
+
+                Return True
+            Catch oEx As Exception
+                EWMessageBox.Show(oEx.Message, , MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            Finally
+                oCmd.Dispose()
+            End Try
+        Else
+            Return True
+        End If
+
+    End Function
+    Public ReadOnly Property Connection() As MySqlConnection
+        Get
+            Return mConn
+        End Get
+    End Property
+    Public ReadOnly Property Parameters() As AccessController.Parameters
+        Get
+            Return mParams
+        End Get
+    End Property
     Public ReadOnly Property CurrentUser() As Unelsoft.AccessController.User
         Get
             Return mUser

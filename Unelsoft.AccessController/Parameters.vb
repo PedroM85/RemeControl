@@ -200,7 +200,7 @@ Public Class Parameters
             Dim oPrm As IDataParameter
 
             oCmd.CommandType = CommandType.StoredProcedure
-            oCmd.CommandText = "Mgr_PAR_GetParameter"
+            oCmd.CommandText = "PAR_GetParameter"
 
             oPrm = DAHelper.CreateParameter(oCmd, "ParameterId", DbType.StringFixedLength, 10)
             oPrm.Value = sParameterId

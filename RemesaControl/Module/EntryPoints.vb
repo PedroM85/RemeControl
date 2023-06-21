@@ -28,9 +28,19 @@
                                 If oApp.HasLicensesFree Then
                                     oSplash.Show()
                                     oSplash.Update()
-                                End If
 
-                            End If
+                                    If oApp.RegisterLogin(oApp.CurrentUser, True) Then
+                                        If oApp.CheckIfPasswordMustBeChanged Then
+                                            If oApp.CurrentUser.CanAccessManager Then
+
+                                                'Datalayer
+
+                                            End If
+                                        End If
+                                        End If
+                                    End If
+
+                                End If
                         End If
 
                     End If

@@ -19,8 +19,8 @@ Partial Class EWLogin
     Friend WithEvents PasswordLabel As System.Windows.Forms.Label
     Friend WithEvents txtUser As System.Windows.Forms.TextBox
     Friend WithEvents txtPassword As System.Windows.Forms.TextBox
-    Friend WithEvents OK As System.Windows.Forms.Button
-    Friend WithEvents Cancel As System.Windows.Forms.Button
+    Friend WithEvents btnOk As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
 
     'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
@@ -36,8 +36,8 @@ Partial Class EWLogin
         Me.PasswordLabel = New System.Windows.Forms.Label()
         Me.txtUser = New System.Windows.Forms.TextBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.OK = New System.Windows.Forms.Button()
-        Me.Cancel = New System.Windows.Forms.Button()
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -83,32 +83,32 @@ Partial Class EWLogin
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
         Me.txtPassword.TabIndex = 3
         '
-        'OK
+        'btnOk
         '
-        Me.OK.Location = New System.Drawing.Point(197, 161)
-        Me.OK.Name = "OK"
-        Me.OK.Size = New System.Drawing.Size(94, 23)
-        Me.OK.TabIndex = 4
-        Me.OK.Text = "&Aceptar"
+        Me.btnOk.Location = New System.Drawing.Point(197, 161)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.Size = New System.Drawing.Size(94, 23)
+        Me.btnOk.TabIndex = 4
+        Me.btnOk.Text = "&Aceptar"
         '
-        'Cancel
+        'btnCancel
         '
-        Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(300, 161)
-        Me.Cancel.Name = "Cancel"
-        Me.Cancel.Size = New System.Drawing.Size(94, 23)
-        Me.Cancel.TabIndex = 5
-        Me.Cancel.Text = "&Cancelar"
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(300, 161)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(94, 23)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "&Cancelar"
         '
         'EWLogin
         '
-        Me.AcceptButton = Me.OK
+        Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.Cancel
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(401, 192)
-        Me.Controls.Add(Me.Cancel)
-        Me.Controls.Add(Me.OK)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUser)
         Me.Controls.Add(Me.PasswordLabel)

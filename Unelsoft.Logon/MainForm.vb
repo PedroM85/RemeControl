@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Data.Common
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Runtime.Remoting.Contexts
@@ -141,10 +142,13 @@ Public Class MainForm
     Private Sub UpdateConnectionString()
         Dim configFile As Configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
 
+
         Dim server As String = txtServer.Text
         Dim database As String = txtDatabase.Text
         Dim user As String = txtUser.Text
         Dim password As String = txtPassword.Text
+
+
 
         If IsTextBoxEmpty(txtServer) Then
             MessageBox.Show("El campo 'Servidor' no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -237,6 +241,7 @@ Public Class MainForm
 
     End Sub
     Private Sub ClearFields()
+
         TxtName.Text = String.Empty
         TxtName.Enabled = True
         txtServer.Text = String.Empty
@@ -399,6 +404,7 @@ Public Class MainForm
             If selectedConnection IsNot Nothing Then
                 Dim encryptedConnectionString As String = selectedConnection.ConnectionString
                 Dim decryptedConnectionString As String = DecryptConnectionString(encryptedConnectionString)
+
 
                 Dim builder As New MySqlConnectionStringBuilder(decryptedConnectionString)
                 TxtName.Text = selectedConnectionName
