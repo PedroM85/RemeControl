@@ -65,6 +65,10 @@ Public Class EWFramework
         Dim oSecMgr As New AccessController.SecurityManager(mConn)
         oSecMgr.CleanOldLogins(MainModuleId(), mTerminalId, mSiteId, mUser.Id)
     End Sub
+    Public Overridable Function HasLicensesFree() As Boolean
+        Dim oSecMgr As New AccessController.SecurityManager(mConn)
+        Return oSecMgr.HasLicensesFree(MainModuleId(), SiteId)
+    End Function
     Public Function InitConnection() As Boolean
         Try
             'mConn = New OleDb.OleDbConnection(GetConnectionString)
@@ -148,4 +152,65 @@ Public Class EWFramework
 
         System.Threading.Thread.CurrentThread.CurrentCulture = oCulture
     End Sub
+
+    Public Function GetConnectionInfo() As Boolean
+        Dim sArgs As String()
+        Dim sName As String = String.Empty
+        Dim nI As Integer
+
+        mConnInfo = New AccessController.ConnectionInfo
+        sArgs = Environment.GetCommandLineArgs
+
+        For nI = 0 To sArgs.Length - 1
+            If sArgs(nI).Substring(1, 2) = "ls" Then
+                sName = sArgs(nI).Substring(4)
+                Exit For
+            End If
+        Next
+
+        Return mConnInfo.GetConnectionInfo(sName)
+    End Function
+
+    Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
+        Dim sec As AccessController.SecurityManager = New AccessController.SecurityManager(mConn)
+        Dim loginDlg As Unelsoft.Common.EWLogin
+
+        If Not UserName Is Nothing AndAlso Not Password Is Nothing Then
+            mUser = sec.Login(UserName, Password)
+        End If
+
+        If mUser Is Nothing Then
+            loginDlg = New Unelsoft.Common.EWLogin(mTerminalId, sec, mConn)
+
+            If Not UserName Is Nothing Then
+                loginDlg.txtUser.Text = UserName
+            End If
+
+            loginDlg.ShowDialog()
+            mUser = loginDlg.User
+        End If
+    End Sub
+
+    Public ReadOnly Property CurrentUser() As Unelsoft.AccessController.User
+        Get
+            Return mUser
+        End Get
+    End Property
+    Public Property LastAction As Date
+        Get
+            Return mLastAction
+        End Get
+        Set(value As Date)
+            mLastAction = value
+        End Set
+    End Property
+    Public Property SiteId() As String
+        Get
+            Return mSiteId
+        End Get
+        Set(value As String)
+            mSiteId = value.TrimEnd().ToUpper
+        End Set
+    End Property
+
 End Class
