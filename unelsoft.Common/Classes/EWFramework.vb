@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Forms
-Imports MySql.Data.MySqlClient
 Imports MySqlConnector
 
 Public Enum UneSysModule As Integer
@@ -217,7 +216,27 @@ Public Class EWFramework
 
         Return mConnInfo.GetConnectionInfo(sName)
     End Function
+    Public Overridable Function CheckIfTerminalRegistered() As Boolean
+        Dim bTermOk As Boolean
 
+        mTerminalId = Unelsoft.TerminalConfig.DataLayer.GetTerminalInRegistry()
+
+        If mTerminalId = "" Then
+            Dim oTermConfig As New Unelsoft.Common.EWTerminalConfigDialog
+
+            If oTermConfig.ShowDialog() = DialogResult.OK Then
+                mTerminalId = Unelsoft.TerminalConfig.DataLayer.GetTerminalInRegistry()
+                bTermOk = True
+            Else
+                bTermOk = False
+            End If
+
+        Else
+            bTermOk = True
+        End If
+
+        Return bTermOk
+    End Function
     Public Overridable Sub LoginUser(Optional UserName As String = Nothing, Optional Password As String = Nothing)
         Dim sec As AccessController.SecurityManager = New AccessController.SecurityManager(mConn)
         Dim loginDlg As Unelsoft.Common.EWLogin

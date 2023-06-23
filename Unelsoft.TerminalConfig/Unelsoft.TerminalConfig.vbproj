@@ -4,31 +4,36 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56354A40-CD9F-46AE-95F7-5CD65D844A57}</ProjectGuid>
+    <ProjectGuid>{8E194AD5-8856-4122-83D9-1D0F5825C3B6}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Unelsoft.Common</RootNamespace>
-    <AssemblyName>Unelsoft.Common</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>Unelsoft.TerminalConfig</RootNamespace>
+    <AssemblyName>Unelsoft.TerminalConfig</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\Code\</OutputPath>
-    <DocumentationFile>Unelsoft.Common.xml</DocumentationFile>
+    <DocumentationFile>Unelsoft.TerminalConfig.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Unelsoft.Common.xml</DocumentationFile>
+    <DocumentationFile>Unelsoft.TerminalConfig.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -51,10 +56,8 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -62,7 +65,6 @@
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -70,8 +72,6 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -82,11 +82,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Unelsoft.TerminalConfig, Version=1.0.23174.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Code\Unelsoft.TerminalConfig.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -94,37 +89,21 @@
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\EWFramework.vb" />
-    <Compile Include="Dialogs\EWLogin.Designer.vb">
-      <DependentUpon>EWLogin.vb</DependentUpon>
+    <Compile Include="ConfigControl.Designer.vb">
+      <DependentUpon>ConfigControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\EWLogin.vb">
-      <SubType>Form</SubType>
+    <Compile Include="ConfigControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialogs\EWChangePassword.Designer.vb">
-      <DependentUpon>EWChangePassword.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EWChangePassword.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\EWMessageBox.Designer.vb">
-      <DependentUpon>EWMessageBox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EWMessageBox.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\EWTerminalConfigDialog.Designer.vb">
-      <DependentUpon>EWTerminalConfigDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EWTerminalConfigDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DataLayer.vb" />
     <Compile Include="EnvironmentObjects.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -144,17 +123,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dialogs\EWLogin.resx">
-      <DependentUpon>EWLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EWChangePassword.resx">
-      <DependentUpon>EWChangePassword.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EWMessageBox.resx">
-      <DependentUpon>EWMessageBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EWTerminalConfigDialog.resx">
-      <DependentUpon>EWTerminalConfigDialog.vb</DependentUpon>
+    <EmbeddedResource Include="ConfigControl.resx">
+      <DependentUpon>ConfigControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -177,13 +147,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Unelsoft.AccessController\Unelsoft.AccessController.vbproj">
-      <Project>{8f4c2998-80d8-4fbc-b794-c8c642144298}</Project>
-      <Name>Unelsoft.AccessController</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Unelsoft.Tools\Unelsoft.Tools.vbproj">
-      <Project>{5335f4b8-7d5f-48af-b235-a1e89f1aa1ba}</Project>
-      <Name>Unelsoft.Tools</Name>
+    <ProjectReference Include="..\Unelsoft.DataAccessFactory\Unelsoft.DataAccessFactory.vbproj">
+      <Project>{9a92fa94-8193-453d-a43e-041df35224b8}</Project>
+      <Name>Unelsoft.DataAccessFactory</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

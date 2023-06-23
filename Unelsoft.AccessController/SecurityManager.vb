@@ -198,7 +198,7 @@ Public Class SecurityManager
 
         Dim user As User = Nothing
 
-        If userName.Trim.ToLower = "ewave" Then
+        If userName.Trim.ToLower = "unelsoft" Then
 
             user = New User(userName.Trim)
             LoadSuperUser(user)

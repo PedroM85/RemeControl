@@ -28,7 +28,7 @@ Public Class EWChangePassword
         'Dim sErrorMsg As String = GlobalCaptions.MESSAGE_EmptyField
 
         If txtPassword.Text <> txtConfirmPassword.Text Then
-            EWMessageBox.Show(Me, btnAcceptMsg1, "e-wave", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            EWMessageBox.Show(Me, btnAcceptMsg1, "unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
 

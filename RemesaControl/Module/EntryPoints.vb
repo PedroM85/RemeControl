@@ -16,33 +16,38 @@
                 Application.DoEvents()
 
                 If oApp.InitConnection Then
-                    If oApp.Init Then
-                        Unelsoft.Common.EnvironmentObjects.Framework = oApp
+                    Unelsoft.Common.EnvironmentObjects.Framework = oApp
+                    If oApp.CheckIfTerminalRegistered() Then
+                        If oApp.Init Then
 
-                        oSplash.Hide()
-                        oApp.LoginUser(userName, password)
+                            oSplash.Hide()
+                            oApp.LoginUser(userName, password)
 
-                        If Not oApp.CurrentUser Is Nothing Then
-                            If oApp.CurrentUser.CanEnterApplication Then
-                                oApp.CleanOldLogins()
-                                If oApp.HasLicensesFree Then
-                                    oSplash.Show()
-                                    oSplash.Update()
+                            If Not oApp.CurrentUser Is Nothing Then
+                                If oApp.CurrentUser.CanEnterApplication Then
+                                    oApp.CleanOldLogins()
+                                    If oApp.HasLicensesFree Then
+                                        oSplash.Show()
+                                        oSplash.Update()
 
-                                    If oApp.RegisterLogin(oApp.CurrentUser, True) Then
-                                        If oApp.CheckIfPasswordMustBeChanged Then
-                                            If oApp.CurrentUser.CanAccessManager Then
+                                        If oApp.RegisterLogin(oApp.CurrentUser, True) Then
+                                            If oApp.CheckIfPasswordMustBeChanged Then
+                                                If oApp.CurrentUser.CanAccessManager Then
 
-                                                'Datalayer
+                                                    'Datalayer
 
+                                                End If
                                             End If
-                                        End If
                                         End If
                                     End If
 
                                 End If
+                            End If
+
                         End If
 
+                    Else
+                        Unelsoft.Common.EWMessageBox.Show("No se encuentra la información correspondiente a la terminal en la Registry de Windows.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
                 Else
                     MessageBox.Show("Se produjeron errores al inicializar la aplicación." & vbCrLf & "Compruebe la información de conexión o contáctese con el administrador del sistema.", "Unelsoft", MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("RemeControl")>
-<Assembly: AssemblyDescription("Administracion de remesas")>
-<Assembly: AssemblyCompany("Universo Electronico 3000")>
-<Assembly: AssemblyProduct("RemeControl")>
+<Assembly: AssemblyTitle("Unelsoft.TerminalConfig")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("Unelsoft.TerminalConfig")>
 <Assembly: AssemblyCopyright("Copyright ©  2023")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("d063ab1f-4160-4550-87b7-e53ce86eb6a0")>
+<Assembly: Guid("6c49fd0f-dc1a-4067-a2a5-d2c850bcf214")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,6 +31,7 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.1.23174.137")>
-<Assembly: AssemblyFileVersion("1.1.23174.137")>
-<Assembly: AssemblyInformationalVersion("1.1.23174")>
+<Assembly: AssemblyVersion("1.0.23174.5")>
+<Assembly: AssemblyFileVersion("1.0.23174.5")>
+
+<assembly: AssemblyInformationalVersion("0.0.23174.5")>
